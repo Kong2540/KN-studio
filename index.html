@@ -148,6 +148,17 @@ textarea{width:100%;min-height:90px;background:var(--p2);border:1px solid var(--
 .sg.keep{background:#3A3D42}.sg.keep span{color:#C8C5BE}.sg.scrap{background:#5A2E27}.sg.scrap span{color:#E3A497}
 .ptd{display:flex;gap:12px;flex-wrap:wrap;margin-top:5px;font-size:12px;color:var(--tx)}.ptd i,.dot{display:inline-block;width:9px;height:9px;margin-right:4px;vertical-align:0}.ptd .k{color:var(--mu)}.ptd .s{color:var(--bad)}
 .empty{padding:40px 10px;text-align:center}.empty .eh{font:500 15px Cinzel,'IBM Plex Sans Thai',serif;letter-spacing:3px;color:var(--au2);margin-bottom:6px}
+.pl{display:grid;grid-template-columns:330px 1fr;gap:12px;padding:12px;height:calc(100vh - 54px)}
+.plp{overflow:auto;padding-right:4px}.plc{display:flex;flex-direction:column;min-width:0;border:1px solid var(--ln);background:#0D0E11}
+.plt{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:8px;border-bottom:1px solid var(--ln)}
+#plSvg{flex:1;width:100%;min-height:360px;touch-action:none;cursor:crosshair;user-select:none}
+.plt .sep{width:1px;height:22px;background:var(--ln2);margin:0 4px}
+.lvt{width:100%;border-collapse:collapse}.lvt td{padding:2px}.lvt input,.lvt select{width:100%;background:var(--p2);border:1px solid var(--ln2);padding:4px 6px;font-size:13px}
+.lvt select{min-width:68px;padding:4px 2px}.top .ib{white-space:nowrap}@media(max-width:560px){.top .brand{display:none}.top{gap:6px;padding:10px}}.lvt input:focus,.lvt select:focus{border-color:var(--au);outline:0}
+.lnk{border:1px solid var(--au);background:var(--aud);padding:8px;margin-bottom:8px;font-size:12.5px;color:var(--au2)}
+#fileMenu{position:absolute;right:16px;top:50px;z-index:30;background:#131418;border:1px solid var(--ln2);border-top:1px solid var(--au);display:none;flex-direction:column;min-width:220px}
+#fileMenu button{background:none;border:0;border-bottom:1px solid var(--ln);text-align:left;padding:10px 14px;cursor:pointer}#fileMenu button:hover{color:var(--au2)}
+@media(max-width:860px){.pl{grid-template-columns:1fr;height:auto}.plc{height:70vh}.plp{order:2}}
 </style>
 <meta name="theme-color" content="#0B0B0D">
 <link rel="manifest" href="manifest.json">
@@ -163,8 +174,10 @@ textarea{width:100%;min-height:90px;background:var(--p2);border:1px solid var(--
   <div class="mark"><span>KN</span></div>
   <div class="brand">KN STUDIO</div>
   <div class="crumb" id="crumb"></div>
+  <button class="ib" id="saveBtn" title="บันทึก (Ctrl+S)">บันทึก</button><button class="ib" id="fileBtn" aria-haspopup="true">ไฟล์ ▾</button>
   <button class="ib" id="homeBtn" style="display:none">หน้าหลัก</button>
   <button class="ib" id="knUser" style="display:none" aria-label="บัญชีและโครงการ"></button>
+  <div id="fileMenu" role="menu"><button data-fm="save">บันทึกเป็นไฟล์ (.knp)</button><button data-fm="open">เปิดไฟล์ (.knp)</button><input type="file" id="fileIn" accept=".knp,.json,application/json" hidden></div>
 </div>
 
 <section class="view" id="v-home">
@@ -184,6 +197,7 @@ textarea{width:100%;min-height:90px;background:var(--p2);border:1px solid var(--
   <div class="home">
     <div class="hero"><h1 style="font-size:26px">KN-DETAIL</h1><div class="rule"></div><div class="sub">REINFORCEMENT DETAILING · ACI 318 · มยผ.</div></div>
     <div class="apps">
+      <button class="app live" data-go="plan"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#E2C584" stroke-width="1.5"><g stroke-dasharray="3 2" stroke="#8A8E95" stroke-width="1"><line x1="9" y1="2" x2="9" y2="32"/><line x1="25" y1="2" x2="25" y2="32"/><line x1="2" y1="9" x2="32" y2="9"/><line x1="2" y1="25" x2="32" y2="25"/></g><line x1="9" y1="9" x2="25" y2="9" stroke-width="3"/><line x1="9" y1="25" x2="25" y2="25" stroke-width="3"/><rect x="6" y="6" width="6" height="6" fill="#C9A55C"/><rect x="22" y="6" width="6" height="6" fill="#C9A55C"/><rect x="6" y="22" width="6" height="6" fill="#C9A55C"/><rect x="22" y="22" width="6" height="6" fill="#C9A55C"/></svg></div><div class="lb">แปลน · กริด</div><div class="tag">Grid · เสา · คาน</div></button>
       <button class="app live" data-go="beam"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#E2C584" stroke-width="1.5"><rect x="3" y="11" width="28" height="12"/><line x1="6" y1="14" x2="28" y2="14" stroke="#C9A55C"/><line x1="6" y1="20" x2="28" y2="20" stroke="#C9A55C"/></svg></div><div class="lb">คาน</div><div class="tag">Beam · Section · Profile</div></button>
       <button class="app soon"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#8A8E95" stroke-width="1.5"><rect x="11" y="3" width="12" height="28"/><line x1="14" y1="6" x2="14" y2="28"/><line x1="20" y1="6" x2="20" y2="28"/></svg></div><div class="lb">เสา</div><div class="tag">Column · เร็ว ๆ นี้</div></button>
       <button class="app soon"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#8A8E95" stroke-width="1.5"><path d="M3 20 L13 12 L31 12 L21 20 Z"/><line x1="8" y1="16" x2="26" y2="16"/></svg></div><div class="lb">พื้น</div><div class="tag">Slab · เร็ว ๆ นี้</div></button>
@@ -194,6 +208,11 @@ textarea{width:100%;min-height:90px;background:var(--p2);border:1px solid var(--
     <div class="note" style="text-align:center;margin-top:40px">ทุกชิ้นส่วนใช้มาตรฐานระยะงอ ขอปลอก และระยะทาบชุดเดียวกัน · เหล็กทั้งหมดส่งเข้า Bar Cut อัตโนมัติ</div>
   </div>
 </section>
+
+<section class="view" id="v-plan"><div class="pl">
+  <div class="plp" id="plPanel"></div>
+  <div class="plc"><div class="plt" id="plTools"></div><svg id="plSvg" xmlns="http://www.w3.org/2000/svg"></svg><div class="note" id="plHint" style="padding:6px 10px;margin:0"></div></div>
+</div></section>
 
 <section class="view" id="v-beam">
   <div class="kn">
@@ -275,10 +294,10 @@ let S={settings:Object.assign(defSettings(),{lapMode:'mult',lapMult:41}),beams:[
 try{const raw=localStorage.getItem('kgstudio.v3');if(raw){const o=JSON.parse(raw);if(o&&o.beams&&o.beams.length&&o.beams[0].spans&&o.beams[0].spans[0].st){S=Object.assign(S,o);S.settings=Object.assign(defSettings(),o.settings);S.settings.col=Object.assign(defSettings().col,S.settings.col||{});S.settings.sheet=Object.assign(defSettings().sheet,S.settings.sheet||{})}}}catch(e){}
 S.beams.forEach(b=>normBeam(b));
 function save(){if(window.KN&&KN.ready){KN.dirty();return}try{localStorage.setItem('kgstudio.v3',JSON.stringify(S))}catch(e){}}
-function knSnapshot(){return{settings:S.settings,beams:S.beams,stock:S.stock,cutCfg:S.cutCfg,manual:S.manual}}
+function knSnapshot(){return{settings:S.settings,beams:S.beams,stock:S.stock,cutCfg:S.cutCfg,manual:S.manual,plan:S.plan}}
 function knApply(d){d=d||{};const st=Object.assign(defSettings(),{lapMode:'mult',lapMult:41},d.settings||{});st.col=Object.assign(defSettings().col,st.col||{});st.sheet=Object.assign(defSettings().sheet,st.sheet||{});
- S.settings=st;S.beams=(d.beams&&d.beams.length?d.beams:[newBeam('B1')]).map(normBeam);S.cur=0;S.stock=d.stock;S.cutCfg=d.cutCfg;S.manual=d.manual||[];
- SEL=null;CUT.x=null;UI={t:'span',i:S.beams[0].grids[0].free?1:0};try{RES=null}catch(e){}route()}
+ S.settings=st;S.beams=(d.beams&&d.beams.length?d.beams:[newBeam('B1')]).map(normBeam);S.cur=0;S.stock=d.stock;S.cutCfg=d.cutCfg;S.manual=d.manual||[];S.plan=d.plan||defPlan();
+ SEL=null;CUT.x=null;PSEL=null;PBEAM=null;PV=null;UI={t:'span',i:S.beams[0].grids[0].free?1:0};try{RES=null}catch(e){}route()}
 const B=()=>S.beams[Math.min(S.cur,S.beams.length-1)];
 let FROZ=null,M2=null,DR=null,DRAGGED=0,PS=false,SEL=null,FIL={floor:'',beam:'',layer:'',bar:'',shape:''},UI={t:'span',i:1},ROWS=[];
 const V={th:-0.5,ph:0.45,zoom:1,pan:0.5,conc:true,stir:true};
@@ -641,7 +660,7 @@ function renderPanel(){const bm=B();let h='';
    <div style="margin-top:6px">${fld('ท่อนกำหนดเอง (ม.) เช่น 2.50,12,12 · เว้นว่าง = จัดอัตโนมัติ',p+'man',r.man)}</div></details>`});
   h+=`<div class="note">ปลาย "งอในเสา" วัดจากหน้านอกเสาหักระยะหุ้มปลาย · "ตรง" และ "ยื่นแล้วงอ" วัดจากศูนย์กลางกริด (+ ไปทางขวา)</div>`}
  else h+=`<div class="chips" style="margin-top:4px"><button class="chip" data-a="toManual">กำหนดแนวเหล็กเองทีละเส้น (ขั้นสูง)</button></div>`;
- $('#panel').innerHTML=h}
+ $('#panel').innerHTML=(bm.link?linkNote(bm):'')+h;if(bm.link)lockLinked()}
 let tOut=null;
 function onField(e,final){const el=e.target;if(el.dataset.o){onBar(el,final);return}const p=el.dataset.p;if(!p)return;const bm=B();if(el.type==='checkbox'&&!final)return;
  if(!final&&(el.value===''||/[.,-]$/.test(el.value)))return;
@@ -650,6 +669,9 @@ function onField(e,final){const el=e.target;if(el.dataset.o){onBar(el,final);ret
  if(full){if(el.closest('#top'))renderTop();renderPanel()}renderAll(!final)}
 ['#top','#panel'].forEach(q=>{$(q).addEventListener('input',e=>{if(e.target.tagName==='INPUT'&&e.target.type==='number')onField(e,false)});$(q).addEventListener('change',e=>onField(e,true))});
 function act(e){const t=e.target.closest('[data-a]');if(!t)return;if(t.tagName==='BUTTON'&&t.closest('summary'))e.preventDefault();const parts=t.dataset.a.split(':'),[a,v]=parts,bm=B(),k=+v,nG=bm.grids.length,fl=bm.grids[0].free,fr=bm.grids[nG-1].free;
+ if(['addSp','delSp'].includes(a)&&bm.link){toast('คานนี้ผูกกับแปลน เพิ่ม/ลดช่วงที่หน้าแปลน (ลากคานใหม่หรือแก้กริด)');return}
+ if(a==='goPlan'){location.hash='plan';return}
+ if(a==='unlink'){confirmBox('ยกเลิกการผูกคาน <b>'+esc(bm.id)+'</b> กับแปลน?<br>ระยะช่วงและขนาดเสาจะคงค่าปัจจุบัน และแก้เองได้ในหน้านี้',()=>{delete bm.link;save();renderTop();renderPanel();renderAll()});return}
  const struct=['addSp','delSp','cantL','cantR'].includes(a);if(struct&&bm.manual){toast('คานนี้ใช้แนวเหล็กกำหนดเอง กด "กลับไปแบบง่าย" ก่อนเปลี่ยนจำนวนช่วง');return}
  if(a==='sel'){S.cur=k;SEL=null;SELIT.clear();CUT.x=null;UI={t:'span',i:S.beams[k].grids[0].free?1:0}}
  else if(a==='addB'){S.beams.push(newBeam('B'+(S.beams.length+1)));S.cur=S.beams.length-1;SEL=null;UI={t:'span',i:0}}
@@ -1345,10 +1367,183 @@ function cutSheetHTML(){const css='body{font-family:Tahoma,Arial,sans-serif;marg
   else if(d.lf){const[k,i]=d.lf.split(':');st.left[+i][k]=k==='L'?Math.round((parseFloat(t.value)||0)*1000):Math.max(0,parseInt(t.value)||0)}else return;
   save();RES=null;renderCut()})})();
 
+
+/* ===== Plan: grid lines, levels, column types, columns, beams linked to plan ===== */
+function defPlan(){return{gx:{n:['1','2','3','4'],sp:[4000,4000,4000]},gy:{n:['A','B','C'],sp:[5000,5000]},
+ levels:[{id:'L1',n:'ชั้น 1',z:0},{id:'L2',n:'ชั้น 2',z:3.5},{id:'L3',n:'หลังคา',z:7}],lv:'L2',
+ ctypes:[{id:'C1',shape:'rect',bx:300,by:300},{id:'C2',shape:'rect',bx:400,by:400},{id:'C3',shape:'rect',bx:250,by:500},{id:'CR1',shape:'round',bx:400,by:400}],ct:'C1',cols:{}}}
+let PV=null,PT='sel',PSEL=null,PBEAM=null,PDR=null,PMOV=0;
+function P(){if(!S.plan)S.plan=defPlan();const p=S.plan;if(!p.levels.some(l=>l.id===p.lv))p.lv=p.levels[0].id;return p}
+const gpos=a=>{const o=[0];P()[a].sp.forEach(v=>o.push(o[o.length-1]+v));return o};
+const ctOf=id=>P().ctypes.find(t=>t.id===id);
+const colKey=(lv,i,j)=>lv+'|'+i+'|'+j;
+const lvOf=id=>P().levels.find(l=>l.id===id);
+function colDim(c){const t=ctOf(c.t),sh=t?t.shape:(c.shape||'rect');let bx=t?t.bx:(c.bx||300),by=sh==='round'?bx:(t?t.by:(c.by||300));if(c.rot&&sh!=='round'){const q=bx;bx=by;by=q}return{bx,by,round:sh==='round',name:t?t.id:'กำหนดเอง'}}
+const ixName=(i,j)=>P().gy.n[j]+'-'+P().gx.n[i];
+const inner=b=>b.spans.filter((_,q)=>!b.grids[q].free&&!b.grids[q+1].free);
+function crossW(L,i){for(const b of S.beams){const K=b.link;if(!K||b.linkBad||K.lv!==L.lv||K.dir===L.dir||K.k!==i||L.k<K.a||L.k>K.b)continue;const sp=inner(b),q=Math.max(0,Math.min(sp.length-1,L.k-K.a-(L.k===K.b?1:0)));return sp[q]?sp[q].b:200}return 200}
+function linkPts(L){const p=P(),X=L.dir==='x',ax=X?'gx':'gy',pos=gpos(ax),out=[];
+ for(let i=L.a;i<=L.b;i++){const c=X?p.cols[colKey(L.lv,i,L.k)]:p.cols[colKey(L.lv,L.k,i)];let w,off=0;
+  if(c){const d=colDim(c);w=X?d.bx:d.by;off=X?(+c.ex||0):(+c.ey||0)}else w=crossW(L,i);out.push({n:p[ax].n[i],x:pos[i]+off,w,col:!!c})}return out}
+function syncBeam(bm){const L=bm.link;if(!L)return false;const p=P(),X=L.dir==='x',ax=X?'gx':'gy',ox=X?'gy':'gx';
+ if(!lvOf(L.lv)||L.b>=p[ax].n.length||L.k>=p[ox].n.length||L.a>=L.b){bm.linkBad=true;return false}bm.linkBad=false;
+ const pts=linkPts(L),nG=bm.grids.length,fl=bm.grids[0].free,fr=bm.grids[nG-1].free,og=bm.grids.filter(g=>!g.free),os=bm.spans.slice(fl?1:0,bm.spans.length-(fr?1:0)),used=new Set();
+ const ng=pts.map((q,i)=>{let o=og.find(g=>g.n===q.n&&!used.has(g));if(!o)o=og.find(g=>!used.has(g)&&og.indexOf(g)===i);if(!o)o={ex:defEx(),jt:defJt()};used.add(o);return Object.assign(o,{n:q.n,w:Math.max(100,Math.round(q.w)),free:false,nocol:!q.col})});
+ const ns=[];for(let i=0;i<pts.length-1;i++){const s=os[i]||cl(os[os.length-1]||defSpan(4));s.L=Math.round(pts[i+1].x-pts[i].x)/1000;ns.push(normSpan(s))}
+ bm.grids=(fl?[bm.grids[0]]:[]).concat(ng,fr?[bm.grids[nG-1]]:[]);bm.spans=(fl?[bm.spans[0]]:[]).concat(ns,fr?[bm.spans[bm.spans.length-1]]:[]);
+ bm.floor=lvOf(L.lv).n;bm.line='แนว '+p[ox].n[L.k];return true}
+function syncAll(){if(S.plan)S.beams.forEach(syncBeam)}
+function linkNote(bm){const L=bm.link,p=P(),X=L.dir==='x',ax=X?'gx':'gy',ox=X?'gy':'gx';
+ return`<div class="lnk">${bm.linkBad?'⚠ การผูกกับแปลนใช้ไม่ได้ (กริดหรือชั้นถูกลบ) · ข้อมูลคงค่าล่าสุด':`ผูกกับแปลน · ${esc((lvOf(L.lv)||{}).n||'')} · แนว ${esc(p[ox].n[L.k])} · ${esc(p[ax].n[L.a])} → ${esc(p[ax].n[L.b])}<br><span style="color:var(--mu)">ความยาวช่วง ชื่อกริด และขนาดเสา ดึงจากแปลน · แก้ที่หน้าแปลน</span>`}
+ <div class="chips" style="margin-top:6px"><button class="chip" data-a="goPlan">ไปที่แปลน</button><button class="chip" data-a="unlink">ยกเลิกการผูก</button></div></div>`}
+function lockLinked(){document.querySelectorAll('#panel [data-p]').forEach(el=>{if(/^spans\.\d+\.L$|^grids\.\d+\.(w|n)$/.test(el.dataset.p)){el.disabled=true;el.title='ดึงจากแปลน'}})}
+function nextBeamId(){let n=0;S.beams.forEach(b=>{const m=/^B(\d+)$/.exec(b.id);if(m)n=Math.max(n,+m[1])});return'B'+(n+1)}
+function makeBeam(dir,k,a,b){const p=P(),lv=p.lv;
+ const hit=S.beams.findIndex(x=>x.link&&x.link.lv===lv&&x.link.dir===dir&&x.link.k===k&&!(b<=x.link.a||a>=x.link.b));
+ if(hit>=0){PSEL={t:'beam',i:hit};toast('มีคาน '+S.beams[hit].id+' อยู่บนแนวนี้แล้ว');return}
+ const ref=S.beams.find(x=>x.link&&x.link.lv===lv)||null,bm=newBeam(nextBeamId());bm.link={lv,dir,k,a,b};
+ if(ref){const s0=inner(ref)[0];if(s0)bm.spans=bm.spans.map(()=>Object.assign(cl(s0),{L:4,lvl:0,hg:[]}));bm.cov=cl(ref.cov);bm.fc=ref.fc;bm.grade=ref.grade}
+ syncBeam(bm);S.beams.push(bm);PSEL={t:'beam',i:S.beams.length-1};save();toast('สร้างคาน '+bm.id+' แล้ว · '+(bm.spans.length)+' ช่วง')}
+// ----- panel -----
+function renderPlanPanel(){const p=P(),lv=p.lv,used={};Object.entries(p.cols).forEach(([k,c])=>{if(k.split('|')[0]===lv)used[c.t]=(used[c.t]||0)+1});
+ const m=v=>+(v/1000).toFixed(3),csv=a=>a.join(', ');
+ let h=`<div class="box"><div class="sh" style="margin-top:0"><span>ชั้น (Level)</span><button class="chip" data-pa="addLv">+ ชั้น</button></div>
+ <div class="chips" style="margin-bottom:6px">${p.levels.map(l=>`<button class="chip${l.id===lv?' on':''}" data-pa="lv:${l.id}">${esc(l.n)}</button>`).join('')}</div>
+ <table class="lvt">${p.levels.map((l,i)=>`<tr><td><input data-pp="levels.${i}.n" value="${esc(l.n)}" aria-label="ชื่อชั้น"></td><td style="width:92px"><input data-pp="levels.${i}.z" type="number" step="any" value="${l.z}" aria-label="ระดับ ม."></td><td style="width:30px">${p.levels.length>1?`<button class="x" data-pa="delLv:${l.id}" aria-label="ลบชั้น">✕</button>`:''}</td></tr>`).join('')}</table>
+ <div class="note">ระดับเป็นเมตร · ทุกชั้นใช้กริดชุดเดียวกัน</div>
+ <div class="chips" style="margin-top:6px"><span class="note" style="margin:0">คัดลอกเสาจาก</span><select id="plCpFrom" class="chip">${p.levels.filter(l=>l.id!==lv).map(l=>`<option value="${l.id}">${esc(l.n)}</option>`).join('')}</select><button class="chip" data-pa="cpCols">มาชั้นนี้</button></div></div>
+ <div class="box"><div class="sh" style="margin-top:0">กริดไลน์</div>
+ ${[['gx','แนวตั้ง (ซ้าย → ขวา)'],['gy','แนวนอน (บน → ล่าง)']].map(([a,t])=>`<div class="note" style="color:var(--mu);margin:6px 0 3px">${t} · ${p[a].n.length} เส้น · รวม ${m(gpos(a).slice(-1)[0]).toFixed(2)} ม.</div>
+  <div class="f"><label>ชื่อกริด (คั่นด้วย ,)</label><input data-gn="${a}" value="${esc(csv(p[a].n))}"></div>
+  <div class="f" style="margin-top:4px"><label>ระยะห่าง ม. (คั่นด้วย ,) · ${p[a].n.length-1} ช่วง</label><input data-gs="${a}" value="${esc(csv(p[a].sp.map(m)))}"></div>
+  <div class="chips" style="margin-top:4px"><button class="chip" data-pa="gAdd:${a}">+ เส้น</button><button class="chip" data-pa="gDel:${a}">− เส้นสุดท้าย</button></div>`).join('')}
+ <div class="note">ระยะห่างวัดศูนย์กริดถึงศูนย์กริด · เส้นสุดท้ายใช้ระยะเท่าช่วงก่อนหน้า</div></div>
+ <div class="box"><div class="sh" style="margin-top:0"><span>ชนิดเสา</span><button class="chip" data-pa="addCt">+ ชนิดเสา</button></div>
+ <table class="lvt"><tr><td class="note">ชื่อ</td><td class="note">รูปทรง</td><td class="note">X มม.</td><td class="note">Y มม.</td><td></td></tr>
+ ${p.ctypes.map((t,i)=>`<tr><td><input data-pp="ctypes.${i}.id" value="${esc(t.id)}" aria-label="ชื่อชนิดเสา"></td><td><select data-pp="ctypes.${i}.shape"><option value="rect"${t.shape==='rect'?' selected':''}>สี่เหลี่ยม</option><option value="round"${t.shape==='round'?' selected':''}>กลม</option></select></td>
+  <td><input data-pp="ctypes.${i}.bx" type="number" value="${t.bx}" aria-label="X"></td><td>${t.shape==='round'?'<span class="note">Ø</span>':`<input data-pp="ctypes.${i}.by" type="number" value="${t.by}" aria-label="Y">`}</td><td style="width:44px">${used[t.id]?`<span class="note">${used[t.id]}</span>`:`<button class="x" data-pa="delCt:${i}" aria-label="ลบชนิดเสา">✕</button>`}</td></tr>`).join('')}</table>
+ <div class="note">แก้ขนาดชนิดเสา → เสาทุกต้นที่ใช้ชนิดนั้นและคานที่ผูกแปลนเปลี่ยนตาม · ตัวเลขด้านขวา = จำนวนต้นในชั้นนี้</div></div>`;
+ h+=selPanel();$('#plPanel').innerHTML=h}
+function selPanel(){const p=P();if(!PSEL)return`<div class="note" style="padding:4px">แตะเสาหรือคานบนแปลนเพื่อแก้ไข · เครื่องมือ "วางเสา" แตะจุดตัดกริดเพื่อวาง/เอาออก · "วาดคาน" แตะจุดเริ่มแล้วจุดจบบนแนวเดียวกัน</div>`;
+ if(PSEL.t==='col'){const c=p.cols[PSEL.k];if(!c){PSEL=null;return''}const[,i,j]=PSEL.k.split('|').map((v,q)=>q?+v:v),d=colDim(c),pp='cols.'+PSEL.k.replace(/\./g,'\\.');
+  return`<div class="box sel"><div class="t"><span>เสา ${esc(d.name)} · กริด ${esc(ixName(i,j))}</span><button class="chip" data-pa="delCol">ลบเสา</button></div>
+  <div class="g2"><div class="f"><label>ชนิดเสา</label><select data-pc="t">${p.ctypes.map(t=>`<option value="${esc(t.id)}"${c.t===t.id?' selected':''}>${esc(t.id)} · ${t.shape==='round'?'Ø'+m2(t.bx):m2(t.bx)+'×'+m2(t.by)}</option>`).join('')}<option value=""${!ctOf(c.t)?' selected':''}>กำหนดเอง</option></select></div>
+  <div class="f"><label>หมุน</label><select data-pc="rot"><option value="0"${c.rot?'':' selected'}>0°</option><option value="1"${c.rot?' selected':''}>90°</option></select></div></div>
+  ${!ctOf(c.t)?`<div class="g2" style="margin-top:6px"><div class="f"><label>X มม.</label><input data-pc="bx" type="number" value="${c.bx||300}"></div><div class="f"><label>Y มม.</label><input data-pc="by" type="number" value="${c.by||300}"></div></div>`:''}
+  <div class="g2" style="margin-top:6px"><div class="f"><label>เยื้องแนว X มม. (+ ขวา)</label><input data-pc="ex" type="number" value="${c.ex||0}"></div><div class="f"><label>เยื้องแนว Y มม. (+ ลง)</label><input data-pc="ey" type="number" value="${c.ey||0}"></div></div>
+  <div class="chips" style="margin-top:6px"><span class="note" style="margin:0">เยื้องลัด</span>${[['L','ชิดซ้าย'],['C','กลาง'],['R','ชิดขวา'],['T','ชิดบน'],['B','ชิดล่าง']].map(([k,t])=>`<button class="chip" data-pa="snap:${k}">${t}</button>`).join('')}</div>
+  <div class="note">ขนาดใช้จริง ${m2(d.bx)} × ${m2(d.by)} ม. · ชิดซ้าย = ผิวเสาด้านซ้ายอยู่บนแนวกริด</div></div>`}
+ if(PSEL.t==='beam'){const bm=S.beams[PSEL.i];if(!bm||!bm.link){PSEL=null;return''}const L=bm.link,X=L.dir==='x',ax=X?'gx':'gy',ox=X?'gy':'gx',sp=inner(bm);
+  return`<div class="box sel"><div class="t"><span>คาน ${esc(bm.id)} · แนว ${esc(p[ox].n[L.k])} · ${esc(p[ax].n[L.a])} → ${esc(p[ax].n[L.b])}</span></div>
+  <div class="g2"><div class="f"><label>ชื่อคาน</label><input data-pb="id" value="${esc(bm.id)}"></div><div class="f"><label>จำนวนคานแบบนี้</label><input data-pb="qty" type="number" value="${bm.qty}"></div></div>
+  <div class="pl" style="margin-top:6px">${sp.map((s,q)=>`<div>ช่วง ${q+1} · ยาว ${s.L.toFixed(2)} ม. · ${m2(s.b)}×${m2(s.h)} · บน ${s.top.n}-${s.top.bar} · ล่าง ${s.bot.n}-${s.bot.bar}</div>`).join('')}</div>
+  <div class="chips" style="margin-top:8px"><button class="gold" data-pa="openBm">เปิดรายละเอียดคาน</button><button class="chip" data-pa="delBm">ลบคาน</button></div></div>`}
+ return''}
+// ----- tools + drawing -----
+function renderPlanTools(){const T=[['sel','เลือก'],['col','วางเสา'],['beam','วาดคาน']];
+ $('#plTools').innerHTML=T.map(([k,t])=>`<button class="ib${PT===k?' on':''}" data-pt="${k}">${t}</button>`).join('')+`<span class="sep"></span>
+ ${PT==='col'?`<select class="chip" id="plCt">${P().ctypes.map(t=>`<option value="${esc(t.id)}"${P().ct===t.id?' selected':''}>${esc(t.id)}</option>`).join('')}</select><button class="chip" data-pa="allCols">วางทุกจุดตัด</button><button class="chip" data-pa="clrCols">ลบเสาทั้งชั้น</button><span class="sep"></span>`:''}
+ <button class="chip" data-pa="zin" aria-label="ซูมเข้า">＋</button><button class="chip" data-pa="zout" aria-label="ซูมออก">－</button><button class="chip" data-pa="fit">พอดีจอ</button>`;
+ $('#plHint').textContent=PT==='beam'?(PBEAM?'แตะจุดจบบนแนวเดียวกับ '+ixName(PBEAM.i,PBEAM.j)+' · แตะจุดเดิมเพื่อยกเลิก':'แตะจุดตัดกริดจุดเริ่มของคาน'):PT==='col'?'แตะจุดตัดกริดเพื่อวางเสา '+P().ct+' · แตะเสาเดิมเพื่อเอาออก':'แตะเสาหรือคานเพื่อแก้ไข · ลากพื้นที่ว่างเพื่อเลื่อน · ล้อเมาส์เพื่อซูม'}
+function planExt(){const X=gpos('gx'),Y=gpos('gy');return{w:X[X.length-1],h:Y[Y.length-1],X,Y}}
+function fitPV(){const e=planExt(),m=Math.max(e.w,e.h)*0.14+1600;PV={x:-m,y:-m,w:e.w+2*m,h:e.h+2*m}}
+function drawPlan(){const p=P(),e=planExt(),lv=p.lv,svg=$('#plSvg');if(!PV)fitPV();
+ const r=Math.max(e.w,e.h)/38+180,fs=r*0.95,X=e.X,Y=e.Y,ext=r*3.2;let o='';
+ const dim=(x1,y1,x2,y2,t,v)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#D9705E" stroke-width="${r*0.05}"/><text x="${(x1+x2)/2+(v?-r*0.35:0)}" y="${(y1+y2)/2-(v?0:r*0.3)}" fill="#D9705E" font-size="${fs*0.62}" text-anchor="middle"${v?` transform="rotate(-90 ${(x1+x2)/2-r*0.35} ${(y1+y2)/2})"`:''}>${t}</text>`;
+ X.forEach((x,i)=>{o+=`<line x1="${x}" y1="${-ext}" x2="${x}" y2="${e.h+r*1.5}" stroke="#55585E" stroke-width="${r*0.04}" stroke-dasharray="${r*0.5} ${r*0.25}"/><circle cx="${x}" cy="${-ext-r}" r="${r}" fill="#0E0F12" stroke="#C9A55C" stroke-width="${r*0.08}"/><text x="${x}" y="${-ext-r+fs*0.36}" fill="#E2C584" font-size="${fs}" text-anchor="middle">${esc(p.gx.n[i])}</text>`;
+  if(i<X.length-1)o+=dim(x,-ext*0.45,X[i+1],-ext*0.45,(p.gx.sp[i]/1000).toFixed(2))});
+ Y.forEach((y,j)=>{o+=`<line x1="${-ext}" y1="${y}" x2="${e.w+r*1.5}" y2="${y}" stroke="#55585E" stroke-width="${r*0.04}" stroke-dasharray="${r*0.5} ${r*0.25}"/><circle cx="${-ext-r}" cy="${y}" r="${r}" fill="#0E0F12" stroke="#C9A55C" stroke-width="${r*0.08}"/><text x="${-ext-r}" y="${y+fs*0.36}" fill="#E2C584" font-size="${fs}" text-anchor="middle">${esc(p.gy.n[j])}</text>`;
+  if(j<Y.length-1)o+=dim(-ext*0.45,y,-ext*0.45,Y[j+1],(p.gy.sp[j]/1000).toFixed(2),1)});
+ if(X.length>1)o+=dim(X[0],-ext*0.8,X[X.length-1],-ext*0.8,(e.w/1000).toFixed(2));
+ // beams of this level
+ S.beams.forEach((bm,bi)=>{const L=bm.link;if(!L||L.lv!==lv||bm.linkBad)return;const pts=linkPts(L),sp=inner(bm),on=PSEL&&PSEL.t==='beam'&&PSEL.i===bi,c=on?'#FFE08A':'#C9A55C';
+  for(let q=0;q<pts.length-1;q++){const s=sp[q]||sp[0],w=s?s.b:200,a=pts[q].x,b=pts[q+1].x;
+   const R=L.dir==='x'?{x:Math.min(a,b),y:Y[L.k]-w/2,w:Math.abs(b-a),h:w}:{x:X[L.k]-w/2,y:Math.min(a,b),w:w,h:Math.abs(b-a)};
+   o+=`<rect data-bm="${bi}" x="${R.x}" y="${R.y}" width="${R.w}" height="${R.h}" fill="${c}" fill-opacity="${on?0.45:0.22}" stroke="${c}" stroke-width="${r*0.06}" style="cursor:pointer"/>`}
+  const mid=(pts[0].x+pts[1].x)/2,w0=(sp[0]?sp[0].b:200)/2,tx=L.dir==='x'?mid:X[L.k]+w0+r*0.9,ty=L.dir==='x'?Y[L.k]+w0+fs*0.95:mid,rot=L.dir==='y'?` transform="rotate(-90 ${tx} ${ty})"`:'';
+  o+=`<text x="${tx}" y="${ty}" fill="${c}" font-size="${fs*0.8}" text-anchor="middle" font-weight="600" pointer-events="none"${rot}>${esc(bm.id)} (${m2(sp[0]?sp[0].b:0)}×${m2(sp[0]?sp[0].h:0)})</text>`});
+ // columns
+ Object.entries(p.cols).forEach(([k,c])=>{const[l,i,j]=k.split('|');if(l!==lv||X[+i]==null||Y[+j]==null)return;const d=colDim(c),cx=X[+i]+(+c.ex||0),cy=Y[+j]+(+c.ey||0),on=PSEL&&PSEL.t==='col'&&PSEL.k===k;
+  const st=`fill="${on?'#3A2F18':'#22252B'}" stroke="${on?'#FFE08A':'#E6E3DC'}" stroke-width="${r*(on?0.12:0.07)}"`;
+  o+=`<g data-col="${esc(k)}" data-ix="${i},${j}" style="cursor:pointer">${d.round?`<circle cx="${cx}" cy="${cy}" r="${d.bx/2}" ${st}/>`:`<rect x="${cx-d.bx/2}" y="${cy-d.by/2}" width="${d.bx}" height="${d.by}" ${st}/><line x1="${cx-d.bx/2}" y1="${cy-d.by/2}" x2="${cx+d.bx/2}" y2="${cy+d.by/2}" stroke="#55585E" stroke-width="${r*0.03}"/><line x1="${cx+d.bx/2}" y1="${cy-d.by/2}" x2="${cx-d.bx/2}" y2="${cy+d.by/2}" stroke="#55585E" stroke-width="${r*0.03}"/>`}
+  <text x="${cx+Math.max(d.bx,d.by)/2+r*0.25}" y="${cy-Math.max(d.bx,d.by)/2-r*0.15}" fill="#C8C5BE" font-size="${fs*0.6}">${esc(d.name)}</text></g>`});
+ // intersections (targets)
+ if(PT!=='sel')X.forEach((x,i)=>Y.forEach((y,j)=>{const st=PBEAM&&PBEAM.i===i&&PBEAM.j===j;o+=`<circle data-ix="${i},${j}" cx="${x}" cy="${y}" r="${r*0.75}" fill="${st?'#E8963A':'#C9A55C'}" fill-opacity="${st?0.55:0.08}" stroke="${st?'#E8963A':'none'}" stroke-width="${r*0.06}" style="cursor:pointer"/>`}));
+ const lvN=(lvOf(lv)||{}).n||'';o+=`<text x="${e.w/2}" y="${e.h+r*3.2}" fill="#8A8E95" font-size="${fs*0.9}" text-anchor="middle" pointer-events="none">แปลน ${esc(lvN)} · ระดับ +${(+(lvOf(lv)||{}).z||0).toFixed(2)} ม.</text>`;
+ svg.setAttribute('viewBox',`${PV.x} ${PV.y} ${PV.w} ${PV.h}`);svg.innerHTML=o}
+function renderPlan(){P();syncAll();renderPlanTools();renderPlanPanel();drawPlan()}
+function planChanged(full){syncAll();save();if(full)renderPlanPanel();drawPlan()}
+function parseList(t){return String(t).split(/[,\s]+/).map(v=>v.trim()).filter(Boolean)}
+// ----- events -----
+(function(){const pan=$('#plPanel'),tools=$('#plTools'),svg=$('#plSvg');
+ pan.addEventListener('change',e=>{const el=e.target,p=P();
+  if(el.dataset.gn){const a=el.dataset.gn,n=parseList(el.value);if(n.length<2){toast('ต้องมีกริดอย่างน้อย 2 เส้น');renderPlanPanel();return}if(new Set(n).size!==n.length){toast('ชื่อกริดซ้ำกัน');renderPlanPanel();return}
+   const sp=p[a].sp.slice(0,n.length-1);while(sp.length<n.length-1)sp.push(sp[sp.length-1]||4000);p[a].n=n;p[a].sp=sp;planChanged(true);return}
+  if(el.dataset.gs){const a=el.dataset.gs,v=parseList(el.value).map(parseFloat);if(v.some(x=>!(x>0))){toast('ระยะห่างต้องเป็นตัวเลขมากกว่า 0');renderPlanPanel();return}
+   const sp=v.map(x=>Math.round(x*1000)).slice(0,p[a].n.length-1);while(sp.length<p[a].n.length-1)sp.push(sp[sp.length-1]||4000);p[a].sp=sp;planChanged(true);return}
+  if(el.dataset.pp){const k=el.dataset.pp.split('.');let o=p;for(let i=0;i<k.length-1;i++)o=o[k[i]];const last=k[k.length-1],old=o[last];let v=el.value;
+   if(typeof old==='number'||el.type==='number'){v=parseFloat(v);if(!isFinite(v)){renderPlanPanel();return}if(/bx|by/.test(last))v=Math.max(100,Math.round(v))}
+   if(k[0]==='ctypes'&&last==='id'){v=String(v).trim();if(!v||p.ctypes.some((t,q)=>q!==+k[1]&&t.id===v)){toast('ชื่อชนิดเสาว่างหรือซ้ำ');renderPlanPanel();return}Object.values(p.cols).forEach(c=>{if(c.t===old)c.t=v});if(p.ct===old)p.ct=v}
+   o[last]=v;planChanged(true);return}
+  if(el.dataset.pc){const c=p.cols[PSEL.k];if(!c)return;const k=el.dataset.pc;let v=el.value;if(k==='rot')v=+v;else if(k!=='t')v=parseFloat(v)||0;if(k==='bx'||k==='by')v=Math.max(100,v);c[k]=v;planChanged(true);return}
+  if(el.dataset.pb){const bm=S.beams[PSEL.i];if(!bm)return;const k=el.dataset.pb;if(k==='qty')bm.qty=Math.max(1,Math.round(+el.value||1));else{const v=el.value.trim();if(!v||S.beams.some(b=>b!==bm&&b.id===v)){toast('ชื่อคานว่างหรือซ้ำ');renderPlanPanel();return}bm.id=v}planChanged(true)}});
+ const act2=async e=>{const b=e.target.closest('[data-pa],[data-pt]');if(!b)return;const p=P();
+  if(b.dataset.pt){PT=b.dataset.pt;PBEAM=null;renderPlanTools();drawPlan();return}
+  const[a,v]=b.dataset.pa.split(/:(.*)/s);
+  if(a==='lv'){p.lv=v;PSEL=null;PBEAM=null}
+  else if(a==='addLv'){const last=p.levels[p.levels.length-1],id='L'+Date.now().toString(36);p.levels.push({id,n:'ชั้น '+(p.levels.length+1),z:+((+last.z||0)+3.5).toFixed(2)});p.lv=id}
+  else if(a==='delLv'){const used=S.beams.filter(x=>x.link&&x.link.lv===v).length;confirmBox('ลบชั้น <b>'+esc(lvOf(v).n)+'</b>?'+(used?'<br>คานที่ผูกกับชั้นนี้ '+used+' คานจะเลิกผูกแปลน (ข้อมูลคานยังอยู่)':'')+'<br>เสาในชั้นนี้จะถูกลบ',()=>{p.levels=p.levels.filter(l=>l.id!==v);Object.keys(p.cols).forEach(k=>{if(k.split('|')[0]===v)delete p.cols[k]});S.beams.forEach(x=>{if(x.link&&x.link.lv===v)delete x.link});PSEL=null;planChanged(true);renderPlanTools()});return}
+  else if(a==='cpCols'){const f=$('#plCpFrom')&&$('#plCpFrom').value;if(!f)return;let n=0;Object.entries(p.cols).forEach(([k,c])=>{const q=k.split('|');if(q[0]===f){p.cols[colKey(p.lv,q[1],q[2])]=cl(c);n++}});toast('คัดลอกเสา '+n+' ต้นมาชั้นนี้แล้ว')}
+  else if(a==='gAdd'){p[v].sp.push(p[v].sp[p[v].sp.length-1]||4000);const n=p[v].n,last=n[n.length-1];let nm=/^\d+$/.test(last)?String(+last+1):/^[A-Z]$/.test(last)?String.fromCharCode(last.charCodeAt(0)+1):last+"'";while(n.includes(nm))nm+="'";n.push(nm)}
+  else if(a==='gDel'){if(p[v].n.length<=2){toast('ต้องมีกริดอย่างน้อย 2 เส้น');return}p[v].n.pop();p[v].sp.pop()}
+  else if(a==='addCt'){let i=p.ctypes.length+1;while(p.ctypes.some(t=>t.id==='C'+i))i++;p.ctypes.push({id:'C'+i,shape:'rect',bx:300,by:300})}
+  else if(a==='delCt'){p.ctypes.splice(+v,1);if(!ctOf(p.ct))p.ct=p.ctypes[0]&&p.ctypes[0].id}
+  else if(a==='delCol'){delete p.cols[PSEL.k];PSEL=null}
+  else if(a==='snap'){const c=p.cols[PSEL.k],d=colDim(Object.assign({},c,{ex:0,ey:0}));if(v==='L')c.ex=d.bx/2;else if(v==='R')c.ex=-d.bx/2;else if(v==='T')c.ey=d.by/2;else if(v==='B')c.ey=-d.by/2;else{c.ex=0;c.ey=0}}
+  else if(a==='openBm'){S.cur=PSEL.i;SEL=null;CUT.x=null;UI={t:'span',i:S.beams[S.cur].grids[0].free?1:0};save();location.hash='beam';return}
+  else if(a==='delBm'){const bm=S.beams[PSEL.i];if(S.beams.length<=1){toast('ต้องมีคานอย่างน้อย 1 คาน');return}confirmBox('ลบคาน <b>'+esc(bm.id)+'</b> และรายละเอียดเหล็กทั้งหมดของคานนี้?',()=>{S.beams.splice(PSEL.i,1);S.cur=0;PSEL=null;planChanged(true)});return}
+  else if(a==='allCols'){const e2=planExt();let n=0;e2.X.forEach((_,i)=>e2.Y.forEach((_,j)=>{const k=colKey(p.lv,i,j);if(!p.cols[k]){p.cols[k]={t:p.ct,rot:0,ex:0,ey:0};n++}}));toast('วางเสา '+p.ct+' เพิ่ม '+n+' ต้น')}
+  else if(a==='clrCols'){confirmBox('ลบเสาทั้งหมดในชั้นนี้?',()=>{Object.keys(p.cols).forEach(k=>{if(k.split('|')[0]===p.lv)delete p.cols[k]});PSEL=null;planChanged(true)});return}
+  else if(a==='zin'||a==='zout'){const f=a==='zin'?0.8:1.25,cx=PV.x+PV.w/2,cy=PV.y+PV.h/2;PV={x:cx-PV.w*f/2,y:cy-PV.h*f/2,w:PV.w*f,h:PV.h*f};drawPlan();return}
+  else if(a==='fit'){fitPV();drawPlan();return}
+  planChanged(true);renderPlanTools()};
+ pan.addEventListener('click',act2);tools.addEventListener('click',act2);
+ tools.addEventListener('change',e=>{if(e.target.id==='plCt'){P().ct=e.target.value;save();renderPlanTools()}});
+ const pt=ev=>{const q=svg.createSVGPoint();q.x=ev.clientX;q.y=ev.clientY;return q.matrixTransform(svg.getScreenCTM().inverse())};
+ svg.addEventListener('wheel',e=>{e.preventDefault();const q=pt(e),f=e.deltaY>0?1.15:1/1.15;PV={x:q.x-(q.x-PV.x)*f,y:q.y-(q.y-PV.y)*f,w:PV.w*f,h:PV.h*f};svg.setAttribute('viewBox',`${PV.x} ${PV.y} ${PV.w} ${PV.h}`)},{passive:false});
+ svg.addEventListener('pointerdown',e=>{PDR={sx:e.clientX,sy:e.clientY,v:Object.assign({},PV),k:svg.getBoundingClientRect()};PMOV=0});
+ svg.addEventListener('pointermove',e=>{if(!PDR)return;const dx=e.clientX-PDR.sx,dy=e.clientY-PDR.sy;if(Math.abs(dx)+Math.abs(dy)>5)PMOV=1;if(!PMOV)return;
+  const s=Math.max(PDR.v.w/PDR.k.width,PDR.v.h/PDR.k.height);PV={x:PDR.v.x-dx*s,y:PDR.v.y-dy*s,w:PDR.v.w,h:PDR.v.h};svg.setAttribute('viewBox',`${PV.x} ${PV.y} ${PV.w} ${PV.h}`)});
+ const up=()=>{PDR=null};svg.addEventListener('pointerup',up);svg.addEventListener('pointercancel',up);svg.addEventListener('pointerleave',up);
+ svg.addEventListener('click',e=>{if(PMOV){PMOV=0;return}const p=P(),ix=e.target.closest('[data-ix]'),cg=e.target.closest('[data-col]'),bg=e.target.closest('[data-bm]');
+  if(PT==='sel'){PSEL=cg?{t:'col',k:cg.dataset.col}:bg?{t:'beam',i:+bg.dataset.bm}:null;renderPlanPanel();drawPlan();return}
+  if(!ix)return;const[i,j]=ix.dataset.ix.split(',').map(Number);
+  if(PT==='col'){const k=colKey(p.lv,i,j);if(p.cols[k]){delete p.cols[k];if(PSEL&&PSEL.k===k)PSEL=null}else{p.cols[k]={t:p.ct,rot:0,ex:0,ey:0};PSEL={t:'col',k}}planChanged(true);return}
+  if(PT==='beam'){if(!PBEAM){PBEAM={i,j};renderPlanTools();drawPlan();return}const a=PBEAM;PBEAM=null;
+   if(a.i===i&&a.j===j){renderPlanTools();drawPlan();return}
+   if(a.j===j)makeBeam('x',j,Math.min(a.i,i),Math.max(a.i,i));else if(a.i===i)makeBeam('y',i,Math.min(a.j,j),Math.max(a.j,j));else toast('จุดเริ่มและจุดจบต้องอยู่บนแนวกริดเดียวกัน');
+   renderPlanTools();planChanged(true)}});
+})();
+// ----- save button + file -----
+(function(){const fm=$('#fileMenu'),fi=$('#fileIn');
+ const saveNow=()=>{if(window.KN&&KN.ready&&KN.saveNow){KN.saveNow();return}try{localStorage.setItem('kgstudio.v3',JSON.stringify(S));toast('บันทึกแล้ว · '+new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'}))}catch(e){toast('บันทึกไม่ได้ · พื้นที่เก็บข้อมูลของเบราว์เซอร์เต็มหรือถูกปิด')}};
+ $('#saveBtn').onclick=saveNow;
+ document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();saveNow()}});
+ $('#fileBtn').onclick=e=>{e.stopPropagation();fm.style.display=fm.style.display==='flex'?'none':'flex'};
+ document.addEventListener('click',e=>{if(!e.target.closest('#fileMenu')&&e.target.id!=='fileBtn')fm.style.display='none'});
+ fm.addEventListener('click',e=>{const b=e.target.closest('[data-fm]');if(!b)return;fm.style.display='none';
+  if(b.dataset.fm==='save'){const nm=((window.KN&&KN.proj&&KN.proj.name)||'KN-Studio').replace(/[\\/:*?"<>|]+/g,'_'),d=new Date(),ts=d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');
+   saveFile(nm+'-'+ts+'.knp',JSON.stringify({app:'KN Studio',format:1,saved:d.toISOString(),data:knSnapshot()}),'application/json')}
+  else fi.click()});
+ fi.addEventListener('change',()=>{const f=fi.files[0];fi.value='';if(!f)return;const rd=new FileReader();rd.onload=()=>{let o=null;try{o=JSON.parse(rd.result)}catch(e){}
+   const d=o&&(o.data||o);if(!d||!Array.isArray(d.beams)){toast('ไฟล์นี้ไม่ใช่ไฟล์ KN Studio');return}
+   confirmBox('เปิดไฟล์ <b>'+esc(f.name)+'</b> ('+d.beams.length+' คาน)<br>ข้อมูลปัจจุบันในโครงการนี้จะถูกแทนที่ทั้งหมด',()=>{knApply(d);save();toast('เปิดไฟล์แล้ว')})};rd.readAsText(f)});
+})();
+
 /* ===== Router ===== */
-function route(){if(window.KN&&!KN.ready)return;const v=(location.hash||'#home').slice(1);let name=['beam','settings','cut','detail'].includes(v)?v:'home';if(window.KN){const g=KN.guard(name);if(g&&g!==name){name=g;history.replaceState(null,'','#home')}}
+function route(){if(window.KN&&!KN.ready)return;const v=(location.hash||'#home').slice(1);let name=['beam','settings','cut','detail','plan'].includes(v)?v:'home';if(window.KN){const g=KN.guard(name);if(g&&g!==name){name=g;history.replaceState(null,'','#home')}}
  document.querySelectorAll('.view').forEach(e=>e.classList.toggle('on',e.id==='v-'+name));$('#homeBtn').style.display=name==='home'?'none':'';
- if(name==='beam'){$('#crumb').textContent='KN-Detail · คาน';renderTop();renderPanel();renderAll()}else if(name==='settings'){$('#crumb').textContent='ตั้งค่า';renderSet()}else if(name==='cut'){$('#crumb').textContent='Bar Cut · ตัดเหล็กเศษน้อยสุด';renderCut()}else if(name==='detail'){$('#crumb').textContent='KN-Detail'}else $('#crumb').textContent='';window.scrollTo(0,0)}
+ if(name==='plan'){$('#crumb').textContent='KN-Detail · แปลน';renderPlan()}else if(name==='beam'){$('#crumb').textContent='KN-Detail · คาน';syncAll();renderTop();renderPanel();renderAll()}else if(name==='settings'){$('#crumb').textContent='ตั้งค่า';renderSet()}else if(name==='cut'){$('#crumb').textContent='Bar Cut · ตัดเหล็กเศษน้อยสุด';renderCut()}else if(name==='detail'){$('#crumb').textContent='KN-Detail'}else $('#crumb').textContent='';window.scrollTo(0,0)}
 document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{location.hash=b.dataset.go});
 $('#homeBtn').onclick=()=>{location.hash='home'};
 window.addEventListener('hashchange',route);if(window.KN)KN.boot();else route();

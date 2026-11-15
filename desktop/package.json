@@ -1,7 +1,7 @@
 {
   "name": "kn-studio",
   "productName": "KN Studio",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "KN Studio · KN-Detail และ Bar Cut สำหรับงานเหล็กเสริม",
   "author": "KTY Construction",
   "main": "main.js",

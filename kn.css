@@ -84,4 +84,4 @@ select.kin{background:#0B0B0D url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 #knOff.full{inset:0;transform:none;left:0;bottom:0;background:rgba(11,11,13,.94);border:0;align-items:center;justify-content:center;text-align:center;padding:30px}
 #knOff.full div{max-width:380px;color:var(--mu)}#knOff.full b{display:block;color:var(--au2);font-size:19px;font-weight:500;margin-bottom:8px}
 /* view-only */
-body.ro-beam #v-beam #panel,body.ro-beam #v-beam #top .chips button:not([data-a^="sel"]),body.ro-beam #v-beam #top input,body.ro-cut #v-cut .bc input,body.ro-cut #v-cut .bc select,body.ro-settings #v-settings input,body.ro-settings #v-settings select{pointer-events:none;opacity:.6}
+body.ro-beam #v-plan #plPanel,body.ro-beam #v-plan #plTools [data-pt=col],body.ro-beam #v-plan #plTools [data-pt=beam],body.ro-beam #v-beam #panel,body.ro-beam #v-beam #top .chips button:not([data-a^="sel"]),body.ro-beam #v-beam #top input,body.ro-cut #v-cut .bc input,body.ro-cut #v-cut .bc select,body.ro-settings #v-settings input,body.ro-settings #v-settings select{pointer-events:none;opacity:.6}

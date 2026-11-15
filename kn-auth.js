@@ -41,7 +41,7 @@ function permOf(p){const R=K.set.roles||{},base=Object.assign({},R[p.role]||R.vi
  if(p.role==='admin')PK.forEach(([k,,t])=>{out[k]=t==='lvl'?'edit':true});return out}
 K.can=(k,lv)=>{const v=K.perm[k];if(v===true||v===false)return v;return lv==='edit'?v==='edit':v==='edit'||v==='view'};
 K.isAdmin=()=>!!(K.prof&&K.prof.role==='admin'&&!K.offline);
-K.guard=name=>{if(!K.ready)return null;const m={beam:'beam',detail:'beam',cut:'cut',settings:'settings'}[name];if(m&&!K.can(m))return'home';return name};
+K.guard=name=>{if(!K.ready)return null;const m={beam:'beam',detail:'beam',plan:'beam',cut:'cut',settings:'settings'}[name];if(m&&!K.can(m))return'home';return name};
 function applyPerms(){const b=document.body;['beam','cut','settings'].forEach(k=>{b.classList.toggle('ro-'+k,K.can(k)&&!K.can(k,'edit'))});
  const hideGo=(sel,k)=>document.querySelectorAll(sel).forEach(el=>{el.style.display=K.can(k)?'':'none'});
  hideGo('[data-go="detail"],[data-go="beam"]','beam');hideGo('[data-go="cut"]','cut');hideGo('[data-go="settings"]','settings');renderUserBtn()}
@@ -145,6 +145,8 @@ async function push(){if(!K.proj||!K.proj.can_edit||SAVING)return;if(!navigator.
  try{const{error}=await K.sb.from('projects').update({data:window.knSnapshot(),name:K.proj.name}).eq('id',id);if(error)throw error;if(K.proj&&K.proj.id===id){localSave(false);setState('saved')}}
  catch(e){setState(netErr(e)?'dirty':'err');if(!netErr(e))toast('บันทึกขึ้นเซิร์ฟเวอร์ไม่ได้: '+errT(e))}finally{SAVING=false}}
 window.addEventListener('online',()=>{if(K.state==='dirty')push()});
+K.saveNow=async()=>{if(!K.proj){toast('ยังไม่ได้เปิดโครงการ');return}if(!K.proj.can_edit){toast('โครงการนี้ดูอย่างเดียว บันทึกไม่ได้');return}clearTimeout(T);localSave(true);
+ if(!navigator.onLine||K.offline){setState('dirty');toast('บันทึกในเครื่องแล้ว · จะซิงก์ขึ้นเซิร์ฟเวอร์เมื่อออนไลน์');return}await push();if(K.state==='saved')toast('บันทึกแล้ว · '+new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'}))};
 window.addEventListener('beforeunload',e=>{if(K.state==='dirty'&&!DESK&&navigator.onLine){push()}});
 async function loadDir(){try{const{data}=await K.sb.rpc('kn_directory');K.dir=data||[]}catch(e){K.dir=[]}}
 const nameOf=id=>{const u=K.dir.find(x=>x.id===id);return u?(u.display_name||u.email):'—'};
