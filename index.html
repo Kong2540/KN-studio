@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KN Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B0B0D;--p1:#111215;--p2:#16171B;--ln:#23252A;--ln2:#33363C;--tx:#E6E3DC;--mu:#8A8E95;--dim:#5C6066;--au:#C9A55C;--au2:#E2C584;--aud:#1C1810;--bad:#E3A497;--badbg:#2A1714;--badln:#5A2E27;--ok:#8FB58F}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.5 'IBM Plex Sans Thai',system-ui,sans-serif}
+button,input,select{font:inherit;color:inherit}
+.top{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--ln);position:sticky;top:0;background:var(--bg);z-index:5}
+.mark{width:28px;height:28px;border:1px solid var(--au);display:flex;align-items:center;justify-content:center;transform:rotate(45deg);flex:none}
+.mark span{transform:rotate(-45deg);font:600 10px Cinzel,serif;color:var(--au2);letter-spacing:1px}
+.brand{font:600 14px Cinzel,serif;letter-spacing:5px;white-space:nowrap}
+.crumb{color:var(--mu);font-size:13px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ib{background:none;border:1px solid var(--ln2);padding:5px 11px;cursor:pointer}
+.ib:hover{border-color:var(--au);color:var(--au2)}
+.gold{background:var(--au);color:#0B0B0D;border:1px solid var(--au);font-weight:500;padding:6px 12px;cursor:pointer}
+.gold:hover{background:var(--au2)}
+.view{display:none}.view.on{display:block}
+.home{max-width:760px;margin:0 auto;padding:40px 20px 60px;text-align:center}
+.hero .mark{width:56px;height:56px;margin:0 auto}.hero .mark span{font-size:17px}
+.hero h1{font:600 24px Cinzel,serif;letter-spacing:9px;margin:26px 0 6px}
+.rule{width:56px;height:1px;background:var(--au);margin:10px auto}
+.sub{color:var(--dim);letter-spacing:3px;font-size:12px}
+.apps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 14px;margin-top:48px}
+@media(min-width:640px){.apps{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:1000px){.home{max-width:980px}.apps{grid-template-columns:repeat(6,1fr)}}
+.app{background:none;border:0;cursor:pointer;padding:0}
+.app .ic{width:74px;height:74px;margin:0 auto;background:var(--p2);border:1px solid var(--ln2);display:flex;align-items:center;justify-content:center}
+.app.live .ic{border-color:var(--au)}.app.live:hover .ic{background:var(--aud)}
+.app .lb{margin-top:8px;font-size:13px}.app.soon{opacity:.38;cursor:default}.app .tag{font-size:11px;color:var(--dim)}
+.ws{display:grid;grid-template-columns:380px minmax(0,1fr);min-height:calc(100vh - 51px)}
+@media(max-width:980px){.ws{grid-template-columns:1fr}}
+aside{border-right:1px solid var(--ln);padding:14px;background:var(--p1)}
+@media(min-width:981px){aside{max-height:calc(100vh - 51px);overflow:auto;position:sticky;top:51px}}
+main{padding:14px 16px;min-width:0}
+.h{letter-spacing:2.5px;color:var(--mu);font-size:12px;margin:16px 0 7px;display:flex;justify-content:space-between;align-items:center}
+.h:first-child{margin-top:0}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:6px}.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.f{border:1px solid var(--ln2);padding:3px 7px;background:var(--p2);min-width:0}
+.f label{display:block;color:var(--dim);font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.f input,.f select{width:100%;background:transparent;border:0;outline:0;padding:0;font-weight:500;font-size:13px}
+.f select option{background:#16171B}.f:focus-within{border-color:var(--au)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.chip{border:1px solid var(--ln2);background:none;padding:3px 9px;cursor:pointer;font-size:12px;color:var(--mu)}
+.chip.on{border-color:var(--au);background:var(--aud);color:var(--au2)}
+.box{border:1px solid var(--ln);padding:8px;margin-bottom:8px;background:#0E0F12}
+.box .t{display:flex;justify-content:space-between;align-items:center;color:var(--au2);font-size:12px;margin-bottom:6px}
+.x{background:none;border:0;color:var(--dim);cursor:pointer;font-size:14px;padding:0 4px}.x:hover{color:var(--bad)}
+.tabs{display:flex;border-bottom:1px solid var(--ln);margin:12px 0}
+.tab{background:none;border:0;border-bottom:1px solid transparent;padding:8px 14px;cursor:pointer;color:var(--mu)}
+.tab.on{color:var(--au2);border-bottom-color:var(--au)}
+.card{border:1px solid var(--ln);background:var(--p1);padding:10px}
+.warn{background:var(--badbg);border:1px solid var(--badln);color:var(--bad);padding:6px 10px;margin:6px 0;font-size:13px}
+.okm{border:1px solid #2C3A2C;color:var(--ok);padding:6px 10px;margin:6px 0;font-size:13px}
+.note{color:var(--dim);font-size:12px;margin-top:6px}
+svg{display:block;width:100%;height:auto}
+#v3{background:#0E0F12;border:1px solid var(--ln);touch-action:none;cursor:grab;height:300px}
+.vc{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:6px;color:var(--mu);font-size:12px}
+.vc input[type=range]{accent-color:#C9A55C;width:130px}
+.selinfo{border:1px solid var(--au);background:var(--aud);color:var(--au2);padding:6px 10px;margin-top:8px;font-size:13px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.paper{background:#fff;color:#111;overflow-x:auto;border:1px solid var(--ln2)}
+.paper>svg{min-width:900px}
+.bt svg{width:230px;min-width:0;margin:0 auto}
+.bt{width:100%;border-collapse:collapse;font-size:13px;color:#111;min-width:820px}
+.bt th,.bt td{border:1px solid #111;padding:4px 8px;text-align:center;vertical-align:middle}
+.bt th{font-weight:500}.bt td.l{text-align:left;white-space:nowrap}.bt td{white-space:nowrap}.bt td.loc{white-space:normal;min-width:150px}
+.bt tr.gh td{font-size:16px;font-weight:500;padding:8px;background:#f4f1ea}
+.bt tr.r{cursor:pointer}.bt tr.r:hover td{background:#faf5e6}.bt tr.sel td{background:#fde9b8}
+.bt .loc{font-size:11.5px;color:#444;text-align:left}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--aud);border:1px solid var(--au);color:var(--au2);padding:8px 16px;display:none;z-index:9}
+.set{max-width:720px;margin:0 auto;padding:20px}
+textarea{width:100%;min-height:90px;background:var(--p2);border:1px solid var(--ln2);color:var(--tx);font:12px ui-monospace,monospace;padding:8px}
+.wsn{padding:12px 16px;max-width:1500px;margin:0 auto}
+.ed{background:#0E0F12;border:1px solid var(--ln);overflow-x:auto}
+.cols{display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);gap:14px;align-items:start}
+@media(max-width:980px){.cols{grid-template-columns:1fr}}
+.box.sel{border-color:var(--au)}
+.sh{color:var(--mu);font-size:12px;margin:10px 0 5px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.ck{display:inline-flex;align-items:center;gap:5px;color:var(--au2);cursor:pointer;font-size:12px}
+.ck input{accent-color:#C9A55C;width:15px;height:15px}
+#v3{height:auto}
+#filt{margin:12px 0 0}
+.fl{margin:0;min-width:58px}
+.sw2{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--ln2);padding:3px 8px 3px 4px;font-size:12px;color:var(--tx);cursor:pointer}
+.sw2 input,.cpick{width:22px;height:22px;border:0;padding:0;background:none;cursor:pointer}
+.dot{display:inline-block;width:14px;height:14px;border:1px solid #999}
+.bt svg{width:230px;min-width:0;margin:0 auto}
+.pl{font-size:12px;border:1px solid var(--ln);padding:6px 8px;display:grid;gap:2px;background:#0E0F12}
+.ib.on{border-color:var(--au);color:var(--au2)}
+.f input:disabled{color:var(--mu)}
+.paper>svg{width:100%;height:auto}
+@media(max-width:560px){.g4{grid-template-columns:1fr 1fr}.wsn{padding:10px}}
+.kn{display:grid;grid-template-columns:52px minmax(0,1fr) 410px;min-height:calc(100vh - 80px)}
+.rail{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 0;border-right:1px solid var(--ln);background:#08080A;position:sticky;top:51px;height:calc(100vh - 51px);z-index:3}
+.rt{width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:none;border:1px solid transparent;color:var(--mu);cursor:pointer}
+.rt:hover{color:var(--au2);border-color:var(--ln2)}.rt.on{color:var(--au2);border-color:var(--au);background:var(--aud)}
+.rsep{width:20px;height:1px;background:var(--ln2);margin:6px 0}
+.cen{padding:14px 16px;min-width:0}
+.side{border-left:1px solid var(--ln);background:#0C0D10;padding:14px;min-width:0}
+@media(min-width:1101px){.side{position:sticky;top:51px;max-height:calc(100vh - 80px);overflow:auto}}
+.pnl{border:1px solid var(--ln);background:var(--p1);margin-bottom:14px}
+.ph{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 12px;border-bottom:1px solid var(--ln);color:var(--au2);font:500 11px/1.4 Cinzel,'IBM Plex Sans Thai',serif;letter-spacing:3px;text-transform:uppercase;background:linear-gradient(#131418,#111215)}
+.ph .phr{font:400 11.5px 'IBM Plex Sans Thai',sans-serif;letter-spacing:0;text-transform:none;color:var(--dim);display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.ph .vc{margin:0}
+.pb{padding:12px}
+.pnl .ed{border:0}.pnl #v3{border:0}
+#panel>.box.sel{border:0;padding:0;background:none;margin:0}
+#panel>.box.sel>.t{font:500 13px 'IBM Plex Sans Thai';color:var(--au2);padding-bottom:8px;border-bottom:1px solid var(--ln);margin-bottom:10px}
+#v2.cutm{cursor:crosshair}
+.kv{display:grid;gap:0;margin-top:8px;border-top:1px solid var(--ln)}
+.kv>div{display:flex;justify-content:space-between;gap:10px;padding:5px 2px;border-bottom:1px solid var(--ln);font-size:12.5px}
+.kv>div>span:first-child{color:var(--mu)}.kv .ok{color:var(--ok)}.kv .bad{color:var(--bad)}
+.cchip{display:inline-flex;align-items:center;gap:0}
+.docs{padding:6px 16px 60px 68px}
+.status{position:sticky;bottom:0;z-index:4;display:flex;gap:22px;flex-wrap:wrap;padding:6px 16px;border-top:1px solid var(--ln);background:#08080A;color:var(--dim);font-size:11.5px}
+.status b{color:var(--au2);font-weight:500}.status .ok{color:var(--ok)}.status .bad{color:var(--bad)}
+.lay{margin-bottom:10px;border-color:var(--au)}
+.nud{display:inline-flex;gap:4px}.nud .ib{width:34px;padding:5px 0}
+.paper.laym [data-it]{cursor:move}.paper.laym [data-it]:hover{opacity:.72}
+.paper .itsel text{fill:#d07800!important}.paper .itsel rect,.paper .itsel circle,.paper .itsel line,.paper .itsel path,.paper .itsel polyline{stroke:#d07800!important}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:60;padding:16px}
+.mbox{background:var(--p1);border:1px solid var(--au);padding:20px 22px;max-width:440px;width:100%}
+.mbox .mt{font:600 13px Cinzel,'IBM Plex Sans Thai',serif;letter-spacing:3px;color:var(--au2);margin-bottom:10px}
+.mbox .mm{font-size:14px;line-height:1.7}
+@media(max-width:1100px){.kn{display:flex;flex-direction:column;padding:10px}.cen,.side{display:contents}.rail{position:static;height:auto;flex-direction:row;justify-content:center;border:1px solid var(--ln);margin-bottom:12px;padding:6px}.rsep{width:1px;height:20px;margin:0 6px}
+ .o1{order:1}.o2{order:2}.o3{order:3}.o4{order:4}.o5{order:5}.o6{order:6}.o7{order:7}.docs{padding:6px 10px 60px}}
+.bc{display:grid;grid-template-columns:440px minmax(0,1fr);gap:16px;padding:16px;max-width:1700px;margin:0 auto}
+@media(min-width:1101px){.bcr{position:sticky;top:67px;align-self:start;max-height:calc(100vh - 80px);overflow:auto}}
+@media(max-width:1100px){.bc{grid-template-columns:1fr;padding:10px}}
+.bcg{border:1px solid var(--ln);margin-top:10px;background:#0E0F12}
+.bcgh{display:flex;justify-content:space-between;gap:8px;padding:6px 10px;border-bottom:1px solid var(--ln);font-size:12.5px;color:var(--mu)}.bcgh span:first-child{color:var(--au2);font-weight:500}
+.bct{width:100%;border-collapse:collapse;font-size:12.5px}.bct th{color:var(--dim);font-weight:400;text-align:left;padding:5px 8px;border-bottom:1px solid var(--ln2)}.bct td{padding:5px 8px;border-bottom:1px solid var(--ln);vertical-align:top}
+.bct .src{color:var(--mu);font-size:11.5px}.bct .ti{width:70px;background:var(--p2);border:1px solid var(--ln2);padding:2px 5px;color:var(--tx)}
+.mrow{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;flex-wrap:wrap}.mrow>span:first-child{flex:1}
+.chip.big{padding:9px 10px;font-size:13px}.gold.wide{width:100%;margin-top:14px;padding:11px;font-size:14px;letter-spacing:1px}
+.eq{margin-top:12px;border:1px solid var(--ln);padding:8px 10px;font-size:12.5px;color:var(--mu)}.eq summary{cursor:pointer;color:var(--au2)}.eq p{margin:8px 0;line-height:1.7}.eq b{color:var(--tx);font-weight:500}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}.kpi>div{background:var(--p2);border:1px solid var(--ln);padding:9px 11px;display:flex;flex-direction:column}
+.kpi span{color:var(--dim);font-size:11.5px}.kpi b{font-size:17px;font-weight:500;margin-top:2px}.kpi b.g{color:var(--au2)}.kpi em{font-style:normal;color:var(--mu);font-size:11.5px}
+.bcres{border:1px solid var(--ln);margin-bottom:14px;background:#0E0F12}.bcrh{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;padding:8px 12px;border-bottom:1px solid var(--ln)}
+.bcrh .sz{font:600 15px Cinzel,serif;color:var(--au2);letter-spacing:2px}.bcrh .st{margin-left:auto;color:var(--mu);font-size:12px}
+.pat{padding:9px 12px;border-bottom:1px solid var(--ln)}.pth{display:flex;justify-content:space-between;font-size:12.5px;color:var(--mu);margin-bottom:5px}.pth b{color:var(--au2);font-size:14px;font-weight:500}
+.bar{display:flex;height:24px;gap:1px;background:#08080A;border:1px solid var(--ln2)}.sg{display:flex;align-items:center;justify-content:center;overflow:hidden;min-width:2px}.sg span{font-size:10.5px;color:#0B0B0D;white-space:nowrap}
+.sg.keep{background:#3A3D42}.sg.keep span{color:#C8C5BE}.sg.scrap{background:#5A2E27}.sg.scrap span{color:#E3A497}
+.ptd{display:flex;gap:12px;flex-wrap:wrap;margin-top:5px;font-size:12px;color:var(--tx)}.ptd i,.dot{display:inline-block;width:9px;height:9px;margin-right:4px;vertical-align:0}.ptd .k{color:var(--mu)}.ptd .s{color:var(--bad)}
+.empty{padding:40px 10px;text-align:center}.empty .eh{font:500 15px Cinzel,'IBM Plex Sans Thai',serif;letter-spacing:3px;color:var(--au2);margin-bottom:6px}
+</style>
+<meta name="theme-color" content="#0B0B0D">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="KN Studio">
+<link rel="stylesheet" href="kn.css?v=090">
+</head>
+<body>
+<div class="top">
+  <div class="mark"><span>KN</span></div>
+  <div class="brand">KN STUDIO</div>
+  <div class="crumb" id="crumb"></div>
+  <button class="ib" id="homeBtn" style="display:none">หน้าหลัก</button>
+  <button class="ib" id="knUser" style="display:none" aria-label="บัญชีและโครงการ"></button>
+</div>
+
+<section class="view" id="v-home">
+  <div class="home">
+    <div class="hero"><div class="mark"><span>KN</span></div><h1>KN STUDIO</h1><div class="rule"></div><div class="sub">ENGINEERING SUITE</div></div>
+    <div class="apps">
+      <button class="app live" data-go="detail"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34"><rect x="3" y="18" width="28" height="9" fill="none" stroke="#E2C584" stroke-width="1.5"/><rect x="12" y="4" width="10" height="14" fill="none" stroke="#C9A55C" stroke-width="1.5"/><g stroke="#8A8E95"><line x1="8" y1="18" x2="8" y2="27"/><line x1="14" y1="18" x2="14" y2="27"/><line x1="20" y1="18" x2="20" y2="27"/><line x1="26" y1="18" x2="26" y2="27"/></g></svg></div><div class="lb">KN-Detail</div><div class="tag">คาน · เสา · พื้น · ผนัง</div></button>
+      <button class="app live" data-go="cut"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34"><g fill="#C9A55C"><rect x="3" y="8" width="18" height="5"/><rect x="22" y="8" width="9" height="5" opacity=".5"/><rect x="3" y="16" width="12" height="5"/><rect x="16" y="16" width="12" height="5"/><rect x="3" y="24" width="26" height="5"/></g></svg></div><div class="lb">Bar Cut</div><div class="tag">ตัดเหล็กเศษน้อยสุด</div></button>
+      <button class="app soon"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34"><rect x="7" y="4" width="20" height="26" fill="none" stroke="#8A8E95" stroke-width="1.5"/><g stroke="#8A8E95"><line x1="11" y1="11" x2="23" y2="11"/><line x1="11" y1="16" x2="23" y2="16"/><line x1="11" y1="21" x2="19" y2="21"/></g></svg></div><div class="lb">BOQ</div><div class="tag">เร็ว ๆ นี้</div></button>
+      <button class="app live" data-go="settings"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34"><circle cx="17" cy="17" r="5" fill="none" stroke="#E2C584" stroke-width="1.5"/><g stroke="#C9A55C" stroke-width="1.5"><line x1="17" y1="3" x2="17" y2="8"/><line x1="17" y1="26" x2="17" y2="31"/><line x1="3" y1="17" x2="8" y2="17"/><line x1="26" y1="17" x2="31" y2="17"/><line x1="7" y1="7" x2="10.5" y2="10.5"/><line x1="23.5" y1="23.5" x2="27" y2="27"/><line x1="27" y1="7" x2="23.5" y2="10.5"/><line x1="10.5" y1="23.5" x2="7" y2="27"/></g></svg></div><div class="lb">ตั้งค่า</div><div class="tag">มาตรฐาน · สต็อก</div></button>
+    </div>
+    <div class="sub" style="margin-top:56px;font-size:11px">KTY CONSTRUCTION · v0.9</div>
+  </div>
+</section>
+
+<section class="view" id="v-detail">
+  <div class="home">
+    <div class="hero"><h1 style="font-size:26px">KN-DETAIL</h1><div class="rule"></div><div class="sub">REINFORCEMENT DETAILING · ACI 318 · มยผ.</div></div>
+    <div class="apps">
+      <button class="app live" data-go="beam"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#E2C584" stroke-width="1.5"><rect x="3" y="11" width="28" height="12"/><line x1="6" y1="14" x2="28" y2="14" stroke="#C9A55C"/><line x1="6" y1="20" x2="28" y2="20" stroke="#C9A55C"/></svg></div><div class="lb">คาน</div><div class="tag">Beam · Section · Profile</div></button>
+      <button class="app soon"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#8A8E95" stroke-width="1.5"><rect x="11" y="3" width="12" height="28"/><line x1="14" y1="6" x2="14" y2="28"/><line x1="20" y1="6" x2="20" y2="28"/></svg></div><div class="lb">เสา</div><div class="tag">Column · เร็ว ๆ นี้</div></button>
+      <button class="app soon"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#8A8E95" stroke-width="1.5"><path d="M3 20 L13 12 L31 12 L21 20 Z"/><line x1="8" y1="16" x2="26" y2="16"/></svg></div><div class="lb">พื้น</div><div class="tag">Slab · เร็ว ๆ นี้</div></button>
+      <button class="app soon"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#8A8E95" stroke-width="1.5"><rect x="8" y="3" width="18" height="28"/><line x1="12" y1="6" x2="12" y2="28"/><line x1="17" y1="6" x2="17" y2="28"/><line x1="22" y1="6" x2="22" y2="28"/></svg></div><div class="lb">ผนังรับแรงเฉือน</div><div class="tag">Shear wall · เร็ว ๆ นี้</div></button>
+      <button class="app soon"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#8A8E95" stroke-width="1.5"><rect x="2" y="14" width="30" height="7"/><line x1="5" y1="17.5" x2="29" y2="17.5"/></svg></div><div class="lb">คานแบน</div><div class="tag">Band beam · เร็ว ๆ นี้</div></button>
+      <button class="app soon"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#8A8E95" stroke-width="1.5"><rect x="5" y="4" width="24" height="26"/><line x1="8" y1="8" x2="26" y2="8"/><line x1="8" y1="26" x2="26" y2="26"/><line x1="8" y1="17" x2="26" y2="17"/></svg></div><div class="lb">คานลึก</div><div class="tag">Deep beam · เร็ว ๆ นี้</div></button>
+    </div>
+    <div class="note" style="text-align:center;margin-top:40px">ทุกชิ้นส่วนใช้มาตรฐานระยะงอ ขอปลอก และระยะทาบชุดเดียวกัน · เหล็กทั้งหมดส่งเข้า Bar Cut อัตโนมัติ</div>
+  </div>
+</section>
+
+<section class="view" id="v-beam">
+  <div class="kn">
+    <nav class="rail" aria-label="เครื่องมือ">
+      <button class="rt on" data-tool="sel" aria-label="เลือกและแก้ไข" title="เลือกและแก้ไข"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 3l12 8-6 1.5L8.5 19z"/></svg></button>
+      <button class="rt" data-tool="cut" aria-label="ตัดหน้าตัด" title="ตัดหน้าตัด"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v20"/><path d="M8 4h8M8 20h8"/><rect x="5" y="9" width="14" height="6"/></svg></button>
+      <span class="rsep"></span>
+      <button class="rt" data-jump="sheet" aria-label="แผ่นแบบ" title="แผ่นแบบ"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14"/><path d="M3 15h18M14 15v4"/></svg></button>
+      <button class="rt" data-jump="bend" aria-label="ตาราง Bending" title="ตาราง Bending"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16"/><path d="M3 9h18M3 14h18M9 4v16"/></svg></button>
+      <button class="rt" data-go="cut" aria-label="Bar Cut" title="Bar Cut"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="11" height="4"/><rect x="15" y="5" width="6" height="4" stroke-dasharray="2 2"/><rect x="3" y="11" width="8" height="4"/><rect x="12" y="11" width="9" height="4"/><rect x="3" y="17" width="18" height="3"/></svg></button>
+      <button class="rt" data-jump="io" aria-label="ส่งออก" title="ส่งออก"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg></button>
+    </nav>
+    <div class="cen">
+      <div id="top" class="o1"></div>
+      <div class="pnl o2"><div class="ph"><span>Profile</span><span class="phr">แตะช่วง เสา หรือเหล็กเพื่อแก้ไข · แตะตำแหน่งใดก็ได้เพื่อดูหน้าตัด · ลากวงกลมเพื่อย้าย</span></div><div class="ed"><svg id="v2" role="img" aria-label="รูปด้านคานสำหรับกรอกข้อมูล"></svg></div></div>
+      <div id="selinfo" class="o3"></div>
+      <div class="pnl o6"><div class="ph"><span>3D</span><span class="phr vc"><label>ซูม <input type="range" id="zoom" min="1" max="14" step="0.1" value="1"></label><label>เลื่อน <input type="range" id="pan" min="0" max="1" step="0.002" value="0.5"></label><button class="chip" id="vfit">ทั้งคาน</button><button class="chip on" id="vconc">คอนกรีต</button><button class="chip on" id="vstir">ปลอก</button></span></div>
+        <svg id="v3" viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="โมเดลสามมิติเหล็กเสริมคาน"></svg></div>
+      <div id="filt" class="o7"></div>
+    </div>
+    <aside class="side">
+      <div class="pnl o4"><div class="ph"><span id="secT">Section</span><span class="phr">อัปเดตตามจุดที่เลือก</span></div><div id="secv" class="pb"></div></div>
+      <div class="pnl o5"><div class="ph"><span>คุณสมบัติ</span></div><div id="panel" class="pb"></div></div>
+      <div id="warns" class="o5"></div>
+    </aside>
+  </div>
+  <div class="docs">
+    <div class="tabs" id="tabs">
+      <button class="tab on" data-t="sheet">แผ่นแบบ</button>
+      <button class="tab" data-t="bend">ตาราง Bending</button>
+      <button class="tab" data-t="io">ส่งออก</button>
+    </div>
+    <div id="out"></div>
+  </div>
+  <div class="status" id="status"></div>
+</section>
+
+<section class="view" id="v-cut"><div class="bc">
+  <div class="bcl">
+    <div class="pnl"><div class="ph"><span>1 · รายการตัด</span><span class="phr" id="bcSum"></span></div><div class="pb" id="bcItems"></div></div>
+    <div class="pnl"><div class="ph"><span>2 · สต็อกเหล็ก</span></div><div class="pb" id="bcStock"></div></div>
+    <div class="pnl"><div class="ph"><span>3 · การคำนวณ</span></div><div class="pb" id="bcCfg"></div></div>
+  </div>
+  <div class="bcr"><div class="pnl"><div class="ph"><span>ผลการตัด</span><span class="phr" id="bcInfo"></span></div><div class="pb" id="bcRes"></div></div></div>
+</div></section>
+<section class="view" id="v-settings"><div class="set" id="setForm"></div></section>
+<div class="toast" id="toast"></div>
+
+<script src="vendor/supabase.js"></script>
+<script src="config.js"></script>
+<script src="kn-auth.js?v=090"></script>
+<script>
+/* ===== Data ===== */
+const BARS={RB6:6,RB9:9,DB10:10,DB12:12,DB16:16,DB20:20,DB25:25,DB28:28,DB32:32};
+const MAIN=['DB10','DB12','DB16','DB20','DB25','DB28','DB32'],STIR=['RB6','RB9','DB10','DB12'];
+const GR={SR24:235,SD30:295,SD40:390,SD50:490},LAY=['T1','T2','T3','B1','B2','B3'];
+function defSettings(){return{agg:19,stock:12000,round:50,minLap:300,lapMode:'aci',lapMult:40,vclear:25,exTop:0.25,exBot:0.125,bend:{stir:4,m25:6,m36:8,big:10},col:{mode:'type',preset:'gold',over:{}},sheet:{paper:'A3',scale:'auto',secScale:20,sec:true,stirShape:true,grid:true,dims:true,elev:true,stir:true,main:true,extra:true,rows:true,labels:true,inElev:false,table:true,color:true,dxf3d:false,title:'',by:'',sheetNo:'',date:''}}}
+function run(layer,bar,n,a,b,o){return Object.assign({layer,bar,n,a,ea:'hook',oa:0,b,eb:'hook',ob:0,leg:0,man:'',bdl:1},o||{})}
+const defEx=bar=>({on:false,bar:bar||'DB16',n:2,rl:0.25,rr:0.25,layer:1});
+const defJt=()=>({mode:'auto',eT:0,eB:0,end:'hook'});
+const jtOf=g=>g.jt||(g.jt=defJt());
+function defSpan(L,o){return Object.assign({L,b:200,h:500,lvl:0,top:{bar:'DB16',n:2},bot:{bar:'DB16',n:2},st:{bar:'RB9',two:false,s1:200,s2:200,zone:0},bm:{on:false,bar:'DB16',n:2,gap:0.5,layer:1}},o||{})}
+const cl=o=>JSON.parse(JSON.stringify(o));
+function sampleB6(){return normBeam(sampleB6_())}
+function sampleB6_(){const g=(n,on)=>({n,w:200,ex:Object.assign(defEx('DB16'),{on,layer:2}),jt:defJt()}),ex={on:true,bar:'DB16',n:2,gap:0.5,layer:2};
+ const b=newBeam('B6');b.line='Grid Line 2';b.cov={t:40,b:40,s:40,e:40};
+ b.grids=[{n:'',w:0,free:true,ex:defEx(),jt:defJt()},g('C',true),g('B',true),g('A',true),{n:'',w:0,free:true,ex:defEx(),jt:defJt()}];b.grids[1].ex.rl=1;b.grids[3].ex.rr=1;
+ b.spans=[defSpan(0.95,{lvl:0.45}),defSpan(4.5,{lvl:0.45,bm:cl(ex)}),defSpan(4.5,{lvl:0.5,bm:cl(ex)}),defSpan(0.55,{lvl:0.5})];return b}
+function sampleB57(){return normBeam(sampleB57_())}
+function sampleB57_(){const b=newBeam('B5-B7');b.line='แนว 2';b.cov={t:30,b:30,s:25,e:25};
+ b.grids=[['F',300],['E',300],['D',300],['C',200],['B',200],['A',300]].map(([n,w])=>({n,w,ex:defEx('DB20'),jt:defJt()}));
+ const s1={b:300,top:{bar:'DB20',n:3},bot:{bar:'DB20',n:3},st:{bar:'RB9',two:false,s1:100,s2:100,zone:0}},s2={b:200,top:{bar:'DB20',n:3},bot:{bar:'DB20',n:3},st:{bar:'RB6',two:false,s1:150,s2:150,zone:0}};
+ b.spans=[defSpan(5,cl(s1)),defSpan(6,cl(s1)),defSpan(4,cl(s2)),defSpan(6,cl(s2)),defSpan(5,cl(s2))];b.manual=true;
+ b.runs=[run('T1','DB20',3,0,5,{leg:200,man:'2.50,12.00,12.00'}),run('T1','DB20',1,0,2,{leg:180}),run('T2','DB20',2,0,2,{leg:180,oa:50,ob:50}),
+  run('B2','DB20',2,0,2,{leg:180,oa:50,ob:50}),run('B1','DB20',2,0,5,{leg:160,man:'10.00,6.20'}),run('B1','DB20',2,0,2,{leg:180}),run('B1','DB20',2,2,5,{leg:160,man:'4.30'})];return b}
+function newBeam(id){return normBeam({id,floor:'ชั้น 2',line:'',qty:1,fc:240,grade:'SD40',cov:{t:40,b:40,s:40,e:40},lap:{top:4,bot:4,seis:false},leg:0,stagger:false,manual:false,runs:[],
+ grids:['1','2','3'].map(n=>({n,w:200,ex:defEx(),jt:defJt()})),spans:[defSpan(4),defSpan(4)]})}
+let S={settings:Object.assign(defSettings(),{lapMode:'mult',lapMult:41}),beams:[sampleB6(),sampleB57()],cur:0,tab:'sheet'};
+try{const raw=localStorage.getItem('kgstudio.v3');if(raw){const o=JSON.parse(raw);if(o&&o.beams&&o.beams.length&&o.beams[0].spans&&o.beams[0].spans[0].st){S=Object.assign(S,o);S.settings=Object.assign(defSettings(),o.settings);S.settings.col=Object.assign(defSettings().col,S.settings.col||{});S.settings.sheet=Object.assign(defSettings().sheet,S.settings.sheet||{})}}}catch(e){}
+S.beams.forEach(b=>normBeam(b));
+function save(){if(window.KN&&KN.ready){KN.dirty();return}try{localStorage.setItem('kgstudio.v3',JSON.stringify(S))}catch(e){}}
+function knSnapshot(){return{settings:S.settings,beams:S.beams,stock:S.stock,cutCfg:S.cutCfg,manual:S.manual}}
+function knApply(d){d=d||{};const st=Object.assign(defSettings(),{lapMode:'mult',lapMult:41},d.settings||{});st.col=Object.assign(defSettings().col,st.col||{});st.sheet=Object.assign(defSettings().sheet,st.sheet||{});
+ S.settings=st;S.beams=(d.beams&&d.beams.length?d.beams:[newBeam('B1')]).map(normBeam);S.cur=0;S.stock=d.stock;S.cutCfg=d.cutCfg;S.manual=d.manual||[];
+ SEL=null;CUT.x=null;UI={t:'span',i:S.beams[0].grids[0].free?1:0};try{RES=null}catch(e){}route()}
+const B=()=>S.beams[Math.min(S.cur,S.beams.length-1)];
+let FROZ=null,M2=null,DR=null,DRAGGED=0,PS=false,SEL=null,FIL={floor:'',beam:'',layer:'',bar:'',shape:''},UI={t:'span',i:1},ROWS=[];
+const V={th:-0.5,ph:0.45,zoom:1,pan:0.5,conc:true,stir:true};
+
+/* ===== Colours ===== */
+const PAL={gold:{type:{mt:'#C9A55C',mb:'#A8884A',xt:'#F0D58C',xb:'#D9A27E',jt:'#E8963A',st:'#8C7444',sk:'#7FA8D8',hg:'#E07A5F'},shape:{I:'#C9A55C',L:'#F0D58C',U:'#D9A27E',S:'#8C7444'}},
+ plan:{type:{mt:'#3D7FE0',mb:'#2F6BC8',xt:'#D452C0',xb:'#B848A8',jt:'#E8963A',st:'#4CAF60',sk:'#2E9E8E',hg:'#E05252'},shape:{I:'#3D7FE0',L:'#D452C0',U:'#E8963A',S:'#4CAF60'}},
+ mono:{type:{mt:'#D8D8D8',mb:'#B4B4B4',xt:'#F5F5F5',xb:'#9A9A9A',jt:'#C8C8C8',st:'#6E6E6E',sk:'#A0A0A0',hg:'#888888'},shape:{I:'#D8D8D8',L:'#F5F5F5',U:'#A8A8A8',S:'#6E6E6E'}}};
+const SIZEPAL={gold:{RB6:'#8C7444',RB9:'#A99060',DB10:'#8FB58F',DB12:'#7FA8D8',DB16:'#C9A55C',DB20:'#E8963A',DB25:'#D9706A',DB28:'#C27AD0',DB32:'#E6E3DC'},
+ plan:{RB6:'#4CAF60',RB9:'#2E9E8E',DB10:'#8C7AE6',DB12:'#3D7FE0',DB16:'#D452C0',DB20:'#E8963A',DB25:'#E05252',DB28:'#B58A2A',DB32:'#7A7A7A'},
+ mono:{RB6:'#6E6E6E',RB9:'#7E7E7E',DB10:'#9A9A9A',DB12:'#AAAAAA',DB16:'#C0C0C0',DB20:'#D4D4D4',DB25:'#E4E4E4',DB28:'#F0F0F0',DB32:'#FFFFFF'}};
+const CATN={mt:'เหล็กหลักบน',mb:'เหล็กหลักล่าง',xt:'เหล็กเสริมบน',xb:'เหล็กเสริมล่าง',jt:'เหล็กฝากจุดต่อ',st:'ปลอก',sk:'เหล็กเสริมข้าง',hg:'ปลอกแขวน'};
+const SHN={I:'ตรง',L:'ขอ 1 ข้าง',U:'ขอ 2 ข้าง',S:'ปลอก'};
+const shCls=s=>s==='K'?'I':(s&&s[0]==='S'?'S':s);
+function colorOf(o){if(o.col)return o.col;const C=S.settings.col,pre=PAL[C.preset]||PAL.gold,ov=C.over||{};
+ if(C.mode==='size')return ov['size:'+o.bar]||(SIZEPAL[C.preset]||SIZEPAL.gold)[o.bar]||'#C9A55C';
+ if(C.mode==='shape'){const k=shCls(o.shape);return ov['shape:'+k]||pre.shape[k]}
+ if(C.mode==='mark'&&ov['mark:'+o.key])return ov['mark:'+o.key];
+ return ov['type:'+o.cat]||pre.type[o.cat]}
+function mix(a,b,t){const p=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)),A=p(a),C=p(b);return'#'+A.map((v,i)=>Math.round(v*(1-t)+C[i]*t).toString(16).padStart(2,'0')).join('')}
+const lum=h=>{const v=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255);return .2126*v[0]+.7152*v[1]+.0722*v[2]};
+const paper=c=>lum(c)>0.5?mix(c,'#000000',0.42):c;
+const HI='#FFE08A',BG='#0E0F12';
+
+/* ===== Engineering ===== */
+const fcMPa=k=>k*0.0980665,kgm=d=>d*d/162.2,c10=v=>Math.ceil(v/10-1e-9)*10;
+function bendD(d,st){const m=S.settings.bend;if(st&&d<=16)return m.stir*d;if(d<=25)return m.m25*d;if(d<=36)return m.m36*d;return m.big*d}
+function delta90(d,st){const r=bendD(d,st)/2;return 2*(r+d)-Math.PI/2*(r+d/2)}
+function ldACI(bm,d,top){const fy=GR[bm.grade],fc=fcMPa(bm.fc);return Math.max(300,fy*(top?1.3:1)*(fy<=420?1:1.15)/((d<20?2.1:1.7)*Math.min(Math.sqrt(fc),8.3))*d)}
+function ldhACI(bm,d){return Math.max(8*d,150,0.24*GR[bm.grade]*d/Math.min(Math.sqrt(fcMPa(bm.fc)),8.3))}
+function lapLen(bm,d,top){const st=S.settings,v=st.lapMode==='mult'?st.lapMult*d:1.3*ldACI(bm,d,top);return c10(Math.max(v,st.minLap))}
+function geom(bm){const X=[0];bm.spans.forEach(s=>X.push(X[X.length-1]+s*1000));const w=bm.grids.map(g=>g.w),fa=[],fb=[],Ln=[];
+ for(let i=0;i<bm.spans.length;i++){fa.push(X[i]+w[i]/2);fb.push(X[i+1]-w[i+1]/2);Ln.push(fb[i]-fa[i])}
+ return{X,w,fa,fb,Ln,xl:X[0]-w[0]/2,xr:X[X.length-1]+w[w.length-1]/2}}
+function spanAt(g,x){for(let i=0;i<g.X.length-1;i++)if(x<g.X[i+1])return i;return g.X.length-2}
+const secOf=(bm,si)=>bm.sections[bm.spanSec[si]]||bm.sections[0];
+function gridNear(bm,g,x){let b=0;g.X.forEach((v,i)=>{if(Math.abs(v-x)<Math.abs(g.X[b]-x))b=i});return bm.grids[b].n}
+function layerZ(sec,layer,d){const k=(parseInt(layer.slice(1))||1)-1,ds=BARS[sec.sb],vc=Math.max(S.settings.vclear,d);
+ return layer[0]==='T'?sec.h-sec.ct-ds-d/2-k*(d+vc):sec.cb+ds+d/2+k*(d+vc)}
+const zLayer=(bm,si,layer,d)=>(bm.zb?bm.zb[si]:0)+layerZ(secOf(bm,si),layer,d);
+function runExt(bm,g,r){const ce=bm.coverEnd,pos=(gi,e,o,start)=>e==='hook'?(start?g.X[gi]-g.w[gi]/2+ce+o:g.X[gi]+g.w[gi]/2-ce-o):g.X[gi]+o;
+ return{xs:pos(r.a,r.ea,r.oa,true),xe:pos(r.b,r.eb,r.ob,false)}}
+function homeOf(bm,r){if(r.home)return r.home;const nS=bm.spans.length;
+ const lo=Math.max(0,Math.min(nS-1,r.a===r.b?(r.ea==='hook'?r.a:r.a-1):(r.ea!=='hook'&&r.oa<0?r.a-1:r.a)));
+ const hi=Math.max(lo,Math.min(nS-1,r.a===r.b?(r.eb==='hook'?r.a-1:r.a):(r.eb!=='hook'&&r.ob>0?r.b:r.b-1)));return[lo,hi]}
+function slots(bm,g,si,layer){const sec=secOf(bm,si),ds=BARS[sec.sb],list=[],used=[];let dmax=0,wmax=0,N=0;
+ bm.runs.forEach((r,ri)=>{if(r.layer!==layer||!bm.grids[r.a]||!bm.grids[r.b])return;const h=homeOf(bm,r);if(r._host!=null?si!==r._host:(si<h[0]||si>h[1]))return;const e=runExt(bm,g,r);
+  if(e.xs<g.fb[si]-1&&e.xe>g.fa[si]+1){const bd=Math.max(1,Math.min(4,+r.bdl||1)),db=BARS[r.bar];dmax=Math.max(dmax,db);wmax=Math.max(wmax,db*Math.min(bd,r.n));let k=0;
+   for(let i=0;i<r.n;i++){const j=i%bd;if(j===0){k=0;while(used[k]&&used[k].some(u=>u[0]<e.xe+50&&u[1]>e.xs-50))k++;(used[k]=used[k]||[]).push([e.xs,e.xe])}const m=Math.min(bd,r.n-(i-j));list.push([ri,i,k,(j-(m-1)/2)*db]);N=Math.max(N,k+1)}}});
+ const half=sec.b/2-sec.cs-ds-wmax/2,order=[];for(let i=0,j=N-1;i<=j;i++,j--){order.push(i);if(j!==i)order.push(j)}
+ const map={};list.forEach(([ri,i,k,off])=>{const p=order[k];map[ri+':'+i]=(N===1?0:-half+2*half*p/(N-1))+off});
+ const inner=sec.b-2*sec.cs-2*ds,clear=N>1?(inner-N*wmax)/(N-1):inner-wmax,smin=Math.max(25,dmax,4/3*S.settings.agg);
+ return{map,N,clear,smin,ok:N<2||clear>=smin-0.01,sec,dmax}}
+function lapZones(bm,g,top){const Z=[];for(let i=0;i<g.Ln.length;i++){const n=top?bm.lap.top:bm.lap.bot,e=bm.lap.seis?Math.max(g.Ln[i]/n,2*secOf(bm,i).h):g.Ln[i]/n;
+  if(top||bm.lap.seis){if(g.fb[i]-e>g.fa[i]+e)Z.push([g.fa[i]+e,g.fb[i]-e])}}
+ if(!top&&!bm.lap.seis)for(let j=1;j<g.Ln.length;j++)Z.push([g.fb[j-1]-g.Ln[j-1]/bm.lap.bot,g.fa[j]+g.Ln[j]/bm.lap.bot]);return Z}
+function stirXs(sec,fa,fb){const Ln=fb-fa,xs=[];if(Ln<=100)return xs;
+ if(!sec.two){const n=Math.floor(Ln/sec.s1)+1,x0=fa+(Ln-(n-1)*sec.s1)/2;for(let i=0;i<n;i++)xs.push(x0+i*sec.s1);return xs}
+ const z=Math.min(sec.zone>0?sec.zone:2*sec.h,Ln/2),ne=Math.floor(Math.max(0,z-50)/sec.s1)+1;
+ for(let i=0;i<ne;i++)xs.push(fa+50+i*sec.s1);const a=fa+50+(ne-1)*sec.s1,b=fb-50-(ne-1)*sec.s1,nm=Math.max(0,Math.ceil((b-a)/sec.s2)-1);
+ for(let i=1;i<=nm;i++)xs.push(a+(b-a)*i/(nm+1));for(let i=ne-1;i>=0;i--)xs.push(fb-50-i*sec.s1);return xs}
+const m2=v=>(v/1000).toFixed(2);
+const stLabel=s=>(s.two?`ป-${s.sb} mm @${m2(s.s1)}/${m2(s.s2)} m`:`ป-${s.sb} mm @${m2(s.s1)} m`)+(s.hk?` · ขอ ${s.hk}°`:'')+((+s.legs||2)>2?` · ${s.legs} ขา`:'');
+const JMN={lap:'ต่อทาบ (ระดับเท่ากัน)',ext:'แบบ 1 ยื่นฝากเข้าคานถัดไป',hook:'แบบ 2 งอฝังในเสา',haunch:'แบบ 3 ท้องเว้า ดัด 1:6'};
+
+// simple per-span input -> sections + bar runs
+function derive(bm){const st=S.settings,sp=bm.spans,n=sp.length,W=[];
+ const D={id:bm.id,floor:bm.floor,line:bm.line,qty:bm.qty,fc:bm.fc,grade:bm.grade,coverEnd:bm.cov.e,lap:bm.lap,W,stagger:!!bm.stagger,joints:{},
+  grids:bm.grids.map(g=>({n:g.free?'ปลาย':g.n,w:g.free?0:g.w,free:!!g.free})),spans:sp.map(s=>s.L),sections:[],spanSec:[],zb:sp.map(s=>Math.round(s.lvl*1000-s.h)),runs:[]};
+ D.hg=sp.map(s=>(s.hg||[]).map(h=>Object.assign({},h)));
+ sp.forEach(s=>{normSpan(s);const t=s.st,seis=!!bm.lap.seis,tor=!!t.tor,hk=seis||tor?135:(+t.hook===135?135:90),shp=tor&&t.shape!=='closed'?'closed':t.shape,sk=skinOf(bm,s,GR[bm.grade]);
+  const key=[s.b,s.h,t.bar,t.two,t.s1,t.s2,t.zone,shp,t.legs,t.inner,hk,t.ext,t.corner,t.alt,sk.on?[sk.bar,sk.n,sk.emb].join(','):'',s.top.bar,s.bot.bar].join('|');let k=D.sections.findIndex(x=>x.key===key);
+  if(k<0){const base=(s.b/10)+'x'+(s.h/10),dup=D.sections.filter(x=>x.base===base).length;k=D.sections.length;
+   D.sections.push({key,base:base+(dup?'-'+(dup+1):''),id:base+(dup?'/'+(dup+1):''),b:s.b,h:s.h,ct:bm.cov.t,cb:bm.cov.b,cs:bm.cov.s,sb:s.st.bar,two:!!s.st.two,s1:s.st.s1,s2:s.st.s2,zone:s.st.zone,ss:s.st.s1,shp,hk,legs:+t.legs||2,inner:t.inner,ext0:+t.ext||0,corner:t.corner,alt:!!t.alt,tor,forced:seis?'seis':tor?'tor':'',sk})}
+  D.spanSec.push(k)});
+ const g=geom(D),gn=j=>D.grids[j].n;
+ sp.forEach((s,i)=>{const ds=BARS[s.st.bar],d=s.h-bm.cov.b-ds-BARS[s.bot.bar]/2,mx=Math.min(d/2,600),nm=gn(i)+'–'+gn(i+1),sm=s.st.two?s.st.s2:s.st.s1;
+  if(sm>mx+0.5)W.push('ปลอกช่วง '+nm+': ระยะเรียง '+sm+' มม. เกิน d/2 = '+Math.floor(mx)+' มม. (ACI 318)');
+  if(bm.lap.seis&&!s.st.two)W.push('ปลอกช่วง '+nm+': โหมดแผ่นดินไหวควรใช้ปลอก 2 โซน (ถี่ในระยะ 2h จากหน้าเสา)');
+  const dbm=Math.min(BARS[s.top.bar],BARS[s.bot.bar]),so=Math.min(d/4,6*dbm,150);
+  if(bm.lap.seis&&s.st.two&&s.st.s1>so+0.5)W.push('ปลอกช่วง '+nm+': ระยะเรียงโซนปลาย '+s.st.s1+' มม. เกิน min(d/4, 6db, 150) = '+Math.floor(so)+' มม. (ACI 18.6.4.4)');
+  if(bm.lap.seis&&s.st.shape==='uopen'&&!s.st.tor)W.push('ปลอกช่วง '+nm+': โหมดแผ่นดินไหวต้องใช้ปลอกปิด (hoop) ในโซน 2h · ตัว U เปิดบนใช้ไม่ได้ (ACI 18.6.4) ควรเปลี่ยนเป็นปลอกปิดหรือตัว U + เหล็กปิดบน');
+  if(s.st.tor&&s.st.shape!=='closed')W.push('ปลอกช่วง '+nm+': รับแรงบิด ระบบบังคับเป็นปลอกปิด ขอ 135° (ACI 25.7.1.6)');
+  {const hk=bm.lap.seis||s.st.tor?135:(+s.st.hook===135?135:90),e=+s.st.ext>0?+s.st.ext:hookExt(ds,hk),inner=s.b-2*bm.cov.s-2*ds;
+   if(+s.st.ext>0&&+s.st.ext<hookExt(ds,hk)-0.5)W.push('ปลอกช่วง '+nm+': ระยะปลายขอ '+s.st.ext+' มม. น้อยกว่ามาตรฐาน '+hookRule(ds,hk)+' = '+hookExt(ds,hk)+' มม. (ACI 25.3.2)');
+   if(e>inner)W.push('ปลอกช่วง '+nm+': ปลายขอยาว '+e+' มม. เกินความกว้างภายในปลอก '+inner+' มม.')}
+  {const sk=skinOf(bm,s,GR[bm.grade]);if(sk.need&&!sk.on)W.push('ช่วง '+nm+': คานลึก '+s.h+' มม. เกิน 900 มม. ต้องมีเหล็กเสริมข้าง (ACI 9.7.2.3)');
+   if(sk.on&&sk.sp>sk.smax+0.5)W.push('เหล็กเสริมข้างช่วง '+nm+': ระยะห่าง '+Math.round(sk.sp)+' มม. เกิน '+sk.smax+' มม. (ACI 24.3.2) เพิ่มจำนวนแถว')}
+  (s.hg||[]).forEach((h,q)=>{const L=s.L*1000;if(!(h.x>0)||h.x*1000>=L)W.push('คานรองฝากช่วง '+nm+' จุดที่ '+(q+1)+': ตำแหน่ง '+h.x+' ม. อยู่นอกช่วงคาน');
+   if(h.hs>s.h)W.push('คานรองฝากช่วง '+nm+' จุดที่ '+(q+1)+': คานรองลึก '+h.hs+' มม. มากกว่าคานหลัก '+s.h+' มม. ควรตรวจรายละเอียดการฝาก')})});
+ // cantilever rules (STR detail 2.32-2.33)
+ [0,n-1].forEach(c=>{if(n<2||!(c===0?D.grids[0].free:D.grids[n].free))return;const s=sp[c],nm='คานยื่น'+(c===0?'ซ้าย':'ขวา');
+  if(s.bot.n<2)W.push(nm+': เหล็กล่างควรมีอย่างน้อย 2 เส้น');
+  else if(s.bot.n*BARS[s.bot.bar]**2<0.25*s.top.n*BARS[s.top.bar]**2-1e-6)W.push(nm+': เหล็กล่างน้อยกว่า 0.25 เท่าของพื้นที่เหล็กบน')});
+ if(bm.manual){D.runs=bm.runs.map((r,k)=>Object.assign({},r,{id:'R'+k}));return D}
+ const topZ=i=>Math.round(sp[i].lvl*1000),botZ=i=>D.zb[i];
+ const jres=(j,top)=>{const jt=jtOf(bm.grids[j]),dT=Math.abs(topZ(j-1)-topZ(j)),dB=Math.abs(botZ(j-1)-botZ(j)),hmin=Math.min(sp[j-1].h,sp[j].h),dd=top?dT:dB;
+  let m=jt.mode;if(m==='auto')m=dd===0?'lap':(!top&&dT===0?'haunch':(Math.max(dT,dB)<hmin?'ext':'hook'));
+  else if(m==='haunch'&&top)m=dd===0?'lap':'ext';else if(m==='ext'&&dd===0)m='lap';else if(m==='haunch'&&dd===0)m='lap';
+  return{m,dT,dB,hmin,e:top?jt.eT:jt.eB,auto:jt.mode==='auto'}};
+ const defE=(m,d,top)=>m==='ext'?c10(35*d):m==='lap'?lapLen(bm,d,top):c10(ldACI(bm,d,top));
+ const endSpec=(j,side,c,top)=>{const gr=D.grids[j],d=BARS[c.bar],w=g.w[j],lay=top?'บน':'ล่าง';
+  if(gr.free)return{e:'hook',o:0};
+  if(j===0||j===n){const jt=jtOf(bm.grids[j]);if(jt.end==='ext'){const need=ldACI(bm,d,top),e=(top?jt.eT:jt.eB)||c10(need);
+    if(e<need-1)W.push('เสาริม '+gr.n+' เหล็ก'+lay+': ยื่นจากหน้าเสา '+m2(e)+' ม. น้อยกว่า ℓd = '+m2(need)+' ม.');
+    return{e:'straight',o:side==='a'?w/2-e:-(w/2-e),j:true}}
+   if(w-bm.cov.e<ldhACI(bm,d))W.push('เสาริม '+gr.n+' เหล็ก'+lay+': กว้าง '+w+' มม. ฝังเหล็กงอได้ '+(w-bm.cov.e)+' มม. น้อยกว่า ℓdh = '+Math.ceil(ldhACI(bm,d))+' มม. (ACI 318)');
+   return{e:'hook',o:0}}
+  const R=jres(j,top),min=defE(R.m,d,top),e=R.e||min,key=top?'t':'b';
+  D.joints[j]=D.joints[j]||{};D.joints[j][key]=Object.assign(D.joints[j][key]||{},R,{eUsed:e,def:min,d});
+  if(R.m==='hook'){if(w-bm.cov.e<ldhACI(bm,d)&&!(D.joints[j].wh))W.push('จุดต่อเสา '+gr.n+' (แบบ 2): ฝังเหล็กงอได้ '+(w-bm.cov.e)+' มม. น้อยกว่า ℓdh = '+Math.ceil(ldhACI(bm,d))+' มม.');D.joints[j].wh=1;return{e:'hook',o:0}}
+  if(R.e&&R.e<min-1)W.push('จุดต่อเสา '+gr.n+' เหล็ก'+lay+': ยื่น '+m2(R.e)+' ม. น้อยกว่าเกณฑ์ '+(R.m==='ext'?'35D':R.m==='lap'?'ระยะทาบ':'ℓd')+' = '+m2(min)+' ม.');
+  const nb=side==='b'?j:j-1,hs=side==='b'?j-1:j,lay2=top?'T1':'B1',zH=zLayer(D,hs,lay2,d),sN=D.sections[D.spanSec[nb]],ds2=BARS[sN.sb];
+  const fits=zH>=D.zb[nb]+sN.cb+ds2+d/2-1&&zH<=D.zb[nb]+sN.h-sN.ct-ds2-d/2+1,sd=side==='b'?'คานซ้าย':'คานขวา';
+  if(R.m==='ext'&&!fits){D.joints[j][key][side]='hook';if(!R.auto)W.push('จุดต่อเสา '+gr.n+' เหล็ก'+lay+' '+sd+': อยู่นอกความลึกคานถัดไป ยื่นฝากไม่ได้ จึงงอฝังในเสาแทน');return{e:'hook',o:0}}
+  D.joints[j][key][side]=R.m;
+  if(R.m==='lap')return{e:'straight',o:side==='b'?w/2+e:-(w/2+e),j:true};
+  if(R.m==='ext')return{e:'xhook',o:side==='b'?w/2+e:-(w/2+e),j:true,nb};
+  const dz=Math.abs(zLayer(D,nb,lay2,d)-zH),run=6*dz;
+  return{e:'straight',o:side==='b'?w/2+run+e:-(w/2+run+e),j:true,crank:{x0:side==='b'?g.X[j]+w/2:g.X[j]-w/2,dir:side==='b'?1:-1,nb}}};
+ const mains=(layer,keyf,get,top)=>{let i=0;while(i<n){let j=i;while(j+1<n&&keyf(j+1)===keyf(i))j++;const c=get(i);
+  if(c.n>0){const A=endSpec(i,'a',c,top),Z=endSpec(j+1,'b',c,top);
+   D.runs.push({id:'M'+layer+':'+i,layer,bar:c.bar,n:c.n,a:i,b:j+1,ea:A.e,oa:A.o,eb:Z.e,ob:Z.o,leg:bm.leg||0,man:'',home:[i,j],ja:!!A.j,jb:!!Z.j,cranks:[A.crank,Z.crank].filter(Boolean),nba:A.nb,nbb:Z.nb})}i=j+1}};
+ mains('T1',i=>[sp[i].top.bar,sp[i].top.n,topZ(i)].join(),i=>sp[i].top,true);
+ mains('B1',i=>[sp[i].bot.bar,sp[i].bot.n,botZ(i)].join(),i=>sp[i].bot,false);
+ const mk=(o)=>D.runs.push(Object.assign({leg:bm.leg||0,man:'',x:true},o));
+ bm.grids.forEach((gr,j)=>{const ex=gr.ex;if(gr.free||!ex||!ex.on||!(ex.n>0))return;const L=j>0,R=j<n,d=BARS[ex.bar],ld=ldACI(bm,d,true),lay='T'+(ex.layer||1),hw=g.w[j]/2;
+  const eL=L?ex.rl*g.Ln[j-1]:0,eR=R?ex.rr*g.Ln[j]:0;
+  [[L,ex.rl,eL,'ซ้าย',j-1],[R,ex.rr,eR,'ขวา',j]].forEach(([has,r,e,side,si])=>{if(!has||D.grids[si===j?j+1:si].free)return;
+   if(r<st.exTop-1e-9)W.push('เหล็กเสริมบนหัวเสา '+gr.n+' ด้าน'+side+': ยื่น '+r+'L น้อยกว่าเกณฑ์ '+st.exTop+'L');
+   if(e<ld)W.push('เหล็กเสริมบนหัวเสา '+gr.n+' ด้าน'+side+': ยื่น '+m2(e)+' ม. สั้นกว่าระยะฝัง ℓd = '+m2(ld)+' ม. (ACI 318)')});
+  if(L&&R&&sp[j-1].lvl===sp[j].lvl)mk({id:'XT'+j+'C',layer:lay,bar:ex.bar,n:ex.n,a:j,b:j,ea:'straight',oa:-(hw+eL),eb:'straight',ob:hw+eR,home:[j-1,j]});
+  else{if(L)mk({id:'XT'+j+'L',layer:lay,bar:ex.bar,n:ex.n,a:j,b:j,ea:'straight',oa:-(hw+eL),eb:'hook',ob:0,home:[j-1,j-1]});if(R)mk({id:'XT'+j+'R',layer:lay,bar:ex.bar,n:ex.n,a:j,b:j,ea:'hook',oa:0,eb:'straight',ob:hw+eR,home:[j,j]})}});
+ sp.forEach((s,i)=>{const e=s.bm;if(!e||!e.on||!(e.n>0)||D.grids[i].free||D.grids[i+1].free)return;const gap=e.gap*1000,nm=gn(i)+'–'+gn(i+1);
+  if(g.Ln[i]-2*gap<300){W.push('เหล็กเสริมล่างช่วง '+nm+': ระยะหยุดห่างหน้าเสามากเกินจนไม่เหลือความยาวเหล็ก');return}
+  if(gap>st.exBot*g.Ln[i]+0.5)W.push('เหล็กเสริมล่างช่วง '+nm+': หยุดห่างหน้าเสา '+e.gap+' ม. เกินเกณฑ์ '+st.exBot+'L = '+m2(st.exBot*g.Ln[i])+' ม.');
+  mk({id:'XB'+i,layer:'B'+(e.layer||1),bar:e.bar,n:e.n,a:i,b:i+1,ea:'straight',oa:g.w[i]/2+gap,eb:'straight',ob:-(g.w[i+1]/2+gap),home:[i,i]})});
+ const ov=bm.ovr||{};
+ D.runs=D.runs.filter(r=>!(ov[r.id]&&ov[r.id].del)).map(r=>{const o=ov[r.id];if(!o)return r;const q=Object.assign({},r,o);if(['a','b','ea','eb','oa','ob'].some(k=>k in o)){delete q.home;delete q.cranks;delete q.nba;delete q.nbb}q.ovr=true;return q});
+ (bm.add||[]).forEach((r,k)=>D.runs.push(Object.assign({leg:bm.leg||0,man:''},r,{id:'U'+k,user:true,x:!(r.layer==='T1'||r.layer==='B1')})));
+ // cantilever: top bars must run into the back span >= max(L cantilever, ld)
+ [0,n-1].forEach(c=>{if(n<2||!(c===0?D.grids[0].free:D.grids[n].free))return;const sj=c===0?1:n-1,face=c===0?g.X[sj]+g.w[sj]/2:g.X[sj]-g.w[sj]/2,Lc=g.Ln[c];
+  D.runs.filter(r=>{if(r.layer!=='T1'||r.x||!D.grids[r.a]||!D.grids[r.b])return false;const h=homeOf(D,r);return h[0]<=c&&h[1]>=c}).forEach(r=>{const e=runExt(D,g,r),reach=c===0?e.xe-face:face-e.xs,need=Math.max(Lc,ldACI(bm,BARS[r.bar],true));
+   if(reach<need-1)W.push('คานยื่น'+(c===0?'ซ้าย':'ขวา')+': เหล็กบนต้องยื่นเข้าช่วงใน ≥ max(L, ℓd) = '+m2(need)+' ม. ตอนนี้ยื่น '+m2(Math.max(0,reach))+' ม.')})});
+ return D}
+
+function build(src){const D0=src.sections?src:derive(src),bm=Object.assign({},D0,{runs:[]}),W=(D0.W||[]).slice(),LG=[],P=[],st=S.settings,R=st.round,rN=v=>Math.round(v/R)*R;let stagW=false;
+ D0.runs.forEach(r=>{if(D0.stagger&&r.n>=2&&!r.man){const a=Math.ceil(r.n/2);bm.runs.push(Object.assign({},r,{n:a,_g:0}),Object.assign({},r,{n:r.n-a,_g:1}))}else bm.runs.push(r)});
+ const g=geom(bm);
+ bm.runs.forEach((r,ri)=>{const d=BARS[r.bar],top=r.layer[0]==='T',bdl=Math.max(1,Math.min(4,+r.bdl||1)),Ls=c10(lapLen(bm,d,top)*(bdl===3?1.2:bdl===4?1.33:1)),tag=r.layer+' '+r.n+'-'+r.bar+(bdl>1?' (มัด '+bdl+')':'');
+  if(!bm.grids[r.a]||!bm.grids[r.b]||(r.b<r.a)){W.push(tag+': จุดเริ่มต้องอยู่ก่อนจุดจบ');return}
+  const{xs,xe}=runExt(bm,g,r);if(!(xe-xs>100)){W.push(tag+': ความยาวแนวเหล็กไม่ถูกต้อง');return}
+  const[lo,hi]=homeOf(bm,r),nS=bm.spans.length;
+  const nbA=r.ea==='xhook'?(r.nba!==undefined?r.nba:Math.max(0,lo-1)):lo,nbB=r.eb==='xhook'?(r.nbb!==undefined?r.nbb:Math.min(nS-1,hi+1)):hi;
+  const legOf=s=>r.leg>0?r.leg:Math.min(c10(12*d),Math.floor((s.h-s.ct-s.cb-2*BARS[s.sb])/10)*10);
+  const hl=r.ea!=='straight',hr=r.eb!=='straight',la=hl?legOf(secOf(bm,nbA)):0,lb=hr?legOf(secOf(bm,nbB)):0,dl=delta90(d),aA=hl?la-dl:0,aB=hr?lb-dl:0;
+  if((hl&&la<12*d)||(hr&&lb<12*d))LG.push(r.layer+' '+r.bar+' ขา '+Math.min(hl?la:1e9,hr?lb:1e9)+' (12d = '+12*d+')');
+  [[r.ea==='xhook',nbA,lo],[r.eb==='xhook',nbB,hi]].forEach(([on,nb,hs])=>{if(!on)return;const z=zLayer(bm,hs,r.layer,d),s2=secOf(bm,nb),z0=bm.zb[nb]+s2.cb+BARS[s2.sb],z1=bm.zb[nb]+s2.h-s2.ct-BARS[s2.sb];
+   if(z<z0+d/2-1||z>z1-d/2+1)W.push(tag+': เหล็กที่ยื่นฝากอยู่นอกความลึกคานถัดไป ควรใช้แบบ 2 งอฝังในเสา')});
+  const ck=(r.cranks||[]).map(c=>{const hs=c.dir>0?hi:lo,dz=zLayer(bm,c.nb,r.layer,d)-zLayer(bm,hs,r.layer,d);return Object.assign({},c,{dz,x1:c.x0+c.dir*6*Math.abs(dz)})}).filter(c=>Math.abs(c.dz)>1);
+  const edited=r.ovr||r.user||(r.id&&r.id[0]==='R');let host=null;
+  if(r.host!==''&&r.host!=null&&bm.spans[+r.host]!=null)host=+r.host;else if(edited){let bl=0;for(let si=0;si<nS;si++){const a=Math.max(xs,si===0?g.xl:g.X[si]),b2=Math.min(xe,si===nS-1?g.xr:g.X[si+1]);if(b2-a>bl){bl=b2-a;host=si}}}
+  r._host=host;if(host!=null){ck.length=0;const z=zLayer(bm,host,r.layer,d),hn=bm.grids[host].n+'–'+bm.grids[host+1].n;
+   for(let si=0;si<nS;si++){if(si===host)continue;const a=Math.max(xs,g.fa[si]),b2=Math.min(xe,g.fb[si]);if(b2-a<=1)continue;const s2=secOf(bm,si),ds2=BARS[s2.sb],zb2=bm.zb[si],lo2=zb2+s2.cb+ds2+d/2,hi2=zb2+s2.h-s2.ct-ds2-d/2,nm=bm.grids[si].n+'–'+bm.grids[si+1].n;
+    if(z<lo2-1){r._bad=true;W.push(tag+' (Host ช่วง '+hn+'): ในช่วง '+nm+' ต่ำกว่าแนวเหล็กล่าง '+Math.round(lo2-z)+' มม. · '+(z-d/2<zb2?'ทะลุท้องคาน':'ระยะหุ้มไม่พอ'))}
+    else if(z>hi2+1){r._bad=true;W.push(tag+' (Host ช่วง '+hn+'): ในช่วง '+nm+' สูงกว่าแนวเหล็กบน '+Math.round(z-hi2)+' มม. · '+(z+d/2>zb2+s2.h?'ทะลุหลังคาน':'ระยะหุ้มไม่พอ'))}}}
+  r._ck=ck;
+  const man=String(r.man||'').split(/[,\s]+/).map(parseFloat).filter(v=>v>0),ps=[];let s=xs;
+  if(man.length){for(const c of man){const len=c*1000-(ps.length?0:aA);if(len<=Ls||s+len>=xe-Ls){W.push(tag+': ท่อนกำหนดเอง '+c+' ม. ใช้ไม่ได้ (สั้นหรือยาวเกินแนวเหล็ก)');break}ps.push({x0:s,x1:s+len,cut:c*1000});s=s+len-Ls}}
+  else{const Z=lapZones(bm,g,top);let guard=0;
+   while(guard++<40){const first=ps.length===0,rem=xe-s+(first?aA:0)+aB;if(rN(rem)<=st.stock)break;
+    const maxEnd=s+st.stock-(first?aA:0),sh=r._g?1.3*Ls:0;let p=null;
+    for(const[z0,z1]of Z){const q=Math.min(z1,maxEnd)-Ls-sh;if(q>=z0&&q>s+Ls)p=p===null?q:Math.max(p,q)}
+    if(p===null&&sh){stagW=true;for(const[z0,z1]of Z){const q=Math.min(z1,maxEnd)-Ls;if(q>=z0&&q>s+Ls)p=p===null?q:Math.max(p,q)}}
+    if(p===null){p=maxEnd-Ls;W.push(tag+': ไม่มีโซนทาบที่วางได้ภายในความยาวสต็อก จึงทาบนอกโซน L/n')}
+    const c=p+Ls-s+(first?aA:0),cr=Math.floor(c/R+1e-9)*R;p-=c-cr;ps.push({x0:s,x1:p+Ls,cut:cr});s=p}}
+  ps.push({x0:s,x1:xe,last:true});
+  ps.forEach((p,i)=>{p.hl=hl&&i===0;p.hr=hr&&!!p.last;
+   const kz=ck.filter(c=>Math.min(c.x0,c.x1)>=p.x0-1&&Math.max(c.x0,c.x1)<=p.x1+1),add=kz.reduce((a,c)=>a+Math.abs(c.dz)*(Math.sqrt(37)-6),0);
+   if(p.last)p.cut=rN(p.x1-p.x0+(p.hl?aA:0)+aB+add);else if(add)p.cut=rN(p.cut+add);
+   p.kz=kz.length?Math.round(kz[0].dz):0;
+   p.ri=ri;p.r=r;p.rid=r.id;p.host=r._host;p.bad=!!r._bad;p.col=r.col||'';p.i=i;p.lo=lo;p.hi=hi;p.layer=r.layer;p.bar=r.bar;p.d=d;p.n=r.n;p.top=top;p.la=la;p.lb=lb;p.Ls=Ls;
+   p.j=(i===0&&r.ja)||(!!p.last&&r.jb);p.cat=top?(r.x?'xt':(p.j?'jt':'mt')):(r.x?'xb':(p.j?'jt':'mb'));
+   p.shape=p.hl&&p.hr?'U':(p.hl||p.hr?'L':(p.kz?'K':'I'));p.dims={a:p.hl?la:0,b:Math.round((p.x1-p.x0)/10)*10,c:p.hr?lb:0};
+   const ga=gridNear(bm,g,p.x0),gb=gridNear(bm,g,p.x1),gm=gridNear(bm,g,(p.x0+p.x1)/2);p.span=ga===gb?(gm===ga?'ใกล้ '+ga:ga+'–'+gm+'–'+gb):ga+'–'+gb;
+   if(p.cut>st.stock)W.push(tag+' ช่วง '+p.span+': ยาวตัด '+(p.cut/1000).toFixed(2)+' ม. เกินเหล็กสต็อก '+st.stock/1000+' ม.');
+   if(p.last&&ps.length>1&&p.x1-p.x0<=Ls)W.push(tag+': ท่อนสุดท้ายสั้นกว่าระยะทาบ');P.push(p)})});
+ if(LG.length)W.push('ขางอสั้นกว่ามาตรฐาน 12d ตาม ACI 318 (มม.): '+[...new Set(LG)].join(' · '));
+ if(stagW)W.push('ทาบสลับ: บางแนววางจุดทาบให้ห่าง ≥ 0.3 เท่าระยะทาบไม่ได้ในโซนทาบ จึงทาบตำแหน่งเดียวกัน');
+ const cnt={},sig={};P.forEach(p=>{const k=[p.layer,p.bar,p.shape,p.dims.a,p.dims.b,p.dims.c,p.cut,p.kz,p.cat].join('|');if(!sig[k]){cnt[p.layer]=(cnt[p.layer]||0)+1;sig[k]=p.layer+'/'+String(cnt[p.layer]).padStart(2,'0')}p.mark0=sig[k];p.mark=(src.names||{})[sig[k]]||sig[k];p.key=bm.id+'|'+p.mark});
+ const seen={};for(let si=0;si<bm.spans.length;si++)LAY.forEach(L=>{const sl=slots(bm,g,si,L);if(sl.N>1&&!sl.ok){const k=sl.sec.id+L+sl.N;if(!seen[k]){seen[k]=1;W.push('หน้าตัด '+sl.sec.id+' ชั้น '+L+' ช่วง '+bm.grids[si].n+'–'+bm.grids[si+1].n+': '+sl.N+' เส้น ช่องว่าง '+sl.clear.toFixed(1)+' มม. น้อยกว่า '+sl.smin.toFixed(1)+' มม. (หิน '+S.settings.agg+' มม. ผ่านไม่ได้)')}}});
+ const ST=bm.spans.map((_,si)=>{const sec=secOf(bm,si),xs=stirXs(sec,g.fa[si]+(bm.grids[si].free?bm.coverEnd:0),g.fb[si]-(bm.grids[si+1].free?bm.coverEnd:0));return{si,sec,xs,extra:0}});
+ Object.entries(bm.joints||{}).forEach(([j,J])=>{j=+j;if(!((J.t&&J.t.m==='ext')||(J.b&&J.b.m==='ext')))return;
+  [[j-1,1],[j,0]].forEach(([si,right])=>{const t=ST[si];if(!t||t.xs.length<2)return;const xs=t.xs,face=right?g.fb[si]:g.fa[si],a=right?xs[xs.length-1]:xs[0],b=right?xs[xs.length-2]:xs[1];
+   xs.push((a+face)/2,(a+b)/2);xs.sort((p,q)=>p-q);t.extra+=2})});
+ ST.forEach(t=>{t.n=t.xs.length;t.hx=[];t.hgs=[];((bm.hg||[])[t.si]||[]).forEach(h=>{const xc=g.X[t.si]+(+h.x||0)*1000,n=Math.max(0,Math.round(+h.n||0)),sp=Math.max(25,+h.s||50),bs=Math.max(0,+h.bs||0),xs=[];
+   for(let i=0;i<n;i++)[-1,1].forEach(sg=>{const x=xc+sg*(bs/2+50+i*sp);if(x>g.fa[t.si]+25&&x<g.fb[t.si]-25)xs.push(x)});t.hx.push(...xs);t.hgs.push({xc,bs,hs:+h.hs||0,bar:STIR.includes(h.bar)?h.bar:t.sec.sb,xs})});
+  t.label=t.n+'-ป-'+t.sec.sb+'mm @'+m2(t.sec.s1)+(t.sec.two?'/'+m2(t.sec.s2):'')+'m'+(t.extra?' (+'+t.extra+' จุดต่อ)':'')+(t.hx.length?' + ปลอกแขวน '+t.hx.length:'')});
+ return{D:bm,g,P,W,ST,raw:src}}
+
+/* ===== Stirrups, skin bars, hangers (ACI 318-19 · 25.3.2 hooks · 9.7.2.3 skin · 25.6.1.5 bundles) ===== */
+const STSH={closed:'ปลอกปิด',ucap:'ตัว U + เหล็กปิดบน',uopen:'ตัว U เปิดบน'};
+function normSpan(s){const t=s.st;const d={shape:'closed',legs:2,inner:'tie',hook:90,ext:0,corner:'tl',alt:true,tor:false};Object.keys(d).forEach(k=>{if(t[k]==null)t[k]=d[k]});
+ if(!s.sk)s.sk={mode:'auto',bar:'DB12',n:0,emb:150};if(!s.hg)s.hg=[];return s}
+function normBeam(bm){bm.spans.forEach(normSpan);return bm}
+function hookExt(d,ang){return ang>=135?Math.max(6*d,75):(d<=16?Math.max(6*d,75):Math.max(12*d,75))}
+const hookRule=(d,ang)=>ang>=135||d<=16?'6d ≥ 75':'12d ≥ 75';
+const c5=v=>Math.ceil(v/5-1e-6)*5;
+function skinSmax(fy,cc){const fs=2/3*fy;return Math.floor(Math.min(380*280/fs-2.5*cc,300*280/fs))}
+function skinOf(bm,s,fy){const sk=s.sk||{mode:'auto'},on=sk.mode==='on'||(sk.mode==='auto'&&s.h>900);if(!on)return{on:false,need:s.h>900};
+ const ds=BARS[s.st.bar],d=BARS[sk.bar]||12,zLo=bm.cov.b+ds+BARS[s.bot.bar]/2,zHi=s.h-bm.cov.t-ds-BARS[s.top.bar]/2,cc=bm.cov.s+ds,smax=skinSmax(fy,cc);
+ const auto=Math.max(1,Math.ceil((zHi-zLo)/smax-1e-9)-1),n=sk.n>0?Math.round(sk.n):auto,zs=[];for(let i=1;i<=n;i++)zs.push(Math.round(zLo+(zHi-zLo)*i/(n+1)));
+ return{on:true,need:s.h>900,bar:sk.bar,d,n,auto,smax,sp:(zHi-zLo)/(n+1),zs,emb:Math.max(0,+sk.emb||0),mode:sk.mode}}
+function stirPieces(sec,bar){const sb=bar||sec.sb,ds=BARS[sb],r=bendD(ds,true)/2,Rr=r+ds,rc=r+ds/2,A=sec.b-2*sec.cs,Bv=sec.h-sec.ct-sec.cb,hk=sec.hk||135;
+ const E=a=>sec.ext0>0?sec.ext0:hookExt(ds,a),arc=g=>g*Math.PI/180*rc,P=[];
+ const add=(role,shape,mk,n,a,b,h1,h2,str,deg)=>{const e1=h1?E(h1):0,e2=h2?E(h2):0;P.push({role,shape,mk,n,a,b,h1,h2,e1,e2,bar:sb,d:ds,bend:2*r,str:Math.round(str),arc:Math.round(arc(deg)),deg,cut:c5(str+arc(deg)+e1+e2)})};
+ if(sec.shp!=='ucap'&&sec.shp!=='uopen')add('hoop','S','',1,A,Bv,hk,hk,2*(A+Bv)-8*Rr,270+2*hk);
+ else{add('u','SU','',1,A,Bv,hk,hk,A+2*Bv-4*Rr,180+2*hk);if(sec.shp==='ucap')add('cap','SC','ค',1,A,0,135,90,A-2*Rr,225)}
+ const legs=Math.max(2,Math.min(4,+sec.legs||2));
+ if(legs===3)add('tie','ST','ย',1,0,Bv,135,90,Bv-2*Rr,225);
+ if(legs===4){if(sec.inner==='hoop'){const Ai=c10((A-ds)/3+ds);add('inner','S','ใ',1,Ai,Bv,hk,hk,2*(Ai+Bv)-8*Rr,270+2*hk)}else add('tie','ST','ย',2,0,Bv,135,90,Bv-2*Rr,225)}
+ return P}
+function stirCut(sec){const p=stirPieces(sec)[0];return{A:p.a,B:p.b,ext:p.e1,cut:p.cut}}
+const PNM={hoop:'ปลอกปิด',u:'ปลอกตัว U',cap:'เหล็กปิดบน (cap tie)',tie:'เหล็กยึดขวาง (crosstie)',inner:'ปลอกใน'};
+// draw every stirrup piece of a section; X(y),Y(z) map mm -> px, k = px/mm
+function stirDraw(sec,X,Y,zb,k,col,dark){const ds=BARS[sec.sb],a=sec.b/2-sec.cs-ds/2,z0=zb+sec.cb+ds/2,z1=zb+sec.h-sec.ct-ds/2,r=(bendD(ds,true)/2+ds/2)*k,sw=Math.max(1,ds*k),hk=sec.hk||135;
+ const E=ang=>(sec.ext0>0?sec.ext0:hookExt(ds,ang))*k,L=(x1,y1,x2,y2)=>`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${col}" stroke-width="${sw}" stroke-linecap="round"/>`;
+ let o='';const right=sec.corner==='tr',sg=right?-1:1,cx=right?X(a):X(-a),cy=Y(z1);
+ const hookPair=(cx,cy,sg,ang)=>{const e=E(ang);if(ang>=135){const q=e*0.62,hx=cx+sg*r*0.35,hy=cy+r*0.35;return L(hx,hy,hx+sg*q,hy+q)+L(hx+sg*sw*1.6,hy-sw*0.4,hx+sg*(sw*1.6+q),hy-sw*0.4+q)}
+  return L(cx+sg*sw*1.3,cy+r*0.6,cx+sg*sw*1.3,cy+r*0.6+e*0.8)+L(cx+sg*r*0.6,cy+sw*1.3,cx+sg*(r*0.6+e*0.8),cy+sw*1.3)};
+ if(sec.shp==='ucap'||sec.shp==='uopen'){const xl=X(-a),xr=X(a),yb=Y(z0),yt=Y(z1);
+  o+=`<path d="M${xl} ${yt} L${xl} ${yb-r} Q${xl} ${yb} ${xl+r} ${yb} L${xr-r} ${yb} Q${xr} ${yb} ${xr} ${yb-r} L${xr} ${yt}" fill="none" stroke="${col}" stroke-width="${sw}"/>`;
+  [[xl,1],[xr,-1]].forEach(([x,g])=>{const e=E(hk);o+=hk>=135?L(x,yt,x+g*e*0.6,yt+e*0.6):L(x,yt,x+g*e*0.85,yt)});
+  if(sec.shp==='ucap'){const y=yt-sw*0.9,e1=E(135),e2=E(90);o+=L(xl,y,xr,y)+L(xl,y,xl+e1*0.6,y+e1*0.6)+L(xr,y,xr,y+e2*0.85)}}
+ else{o+=`<rect x="${X(-a)}" y="${Y(z1)}" width="${2*a*k}" height="${(z1-z0)*k}" rx="${r}" fill="none" stroke="${col}" stroke-width="${sw}"/>`+hookPair(cx,cy,sg,hk)}
+ const legs=Math.max(2,Math.min(4,+sec.legs||2));
+ if(legs===3||(legs===4&&sec.inner!=='hoop')){const ys=legs===3?[0]:[-a/3,a/3];ys.forEach((y,i)=>{const x=X(y),e1=E(135),e2=E(90),up=i%2===0;
+   o+=L(x,Y(z1)+sw*0.2,x,Y(z0)-sw*0.2)+(up?L(x,Y(z1),x+e1*0.55,Y(z1)+e1*0.55)+L(x,Y(z0),x+e2*0.8,Y(z0)):L(x,Y(z0),x+e1*0.55,Y(z0)-e1*0.55)+L(x,Y(z1),x+e2*0.8,Y(z1)))})}
+ if(legs===4&&sec.inner==='hoop'){const ai=a/3;o+=`<rect x="${X(-ai)}" y="${Y(z1)+sw*0.9}" width="${2*ai*k}" height="${(z1-z0)*k-sw*1.8}" rx="${r}" fill="none" stroke="${col}" stroke-width="${sw}"/>`+hookPair(right?X(ai):X(-ai),Y(z1)+sw*0.9,sg,hk)}
+ return o}
+function skinDraw(sec,X,Y,zb,k,col){const sk=sec.sk;if(!sk||!sk.on)return'';const ds=BARS[sec.sb],y=sec.b/2-sec.cs-ds-sk.d/2;let o='';
+ sk.zs.forEach(z=>[-y,y].forEach(v=>{o+=`<circle cx="${X(v).toFixed(2)}" cy="${Y(zb+z).toFixed(2)}" r="${Math.max(1.4,sk.d/2*k).toFixed(2)}" fill="${col}"/>`}));return o}
+// small stand-alone drawing of one piece (sheet / bending table)
+function pieceMini(pc,x,y,w,h,col,sw){const L=(x1,y1,x2,y2)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="${sw}" stroke-linecap="round"/>`,hk=(px,py,sx,ang,e)=>ang>=135?L(px,py,px+sx*e*0.7,py+e*0.7):L(px,py,px+sx*e,py);let o='';const e=Math.max(6,Math.min(w,h)*0.32);
+ if(pc.shape==='S'){o+=`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="none" stroke="${col}" stroke-width="${sw}"/>`;
+  o+=pc.h1>=135?L(x+2,y+2,x+2+e*0.7,y+2+e*0.7)+L(x+5,y+1,x+5+e*0.7,y+1+e*0.7):L(x+3,y+3,x+3,y+3+e)+L(x+3,y+3,x+3+e,y+3)}
+ else if(pc.shape==='SU'){o+=`<path d="M${x} ${y} L${x} ${y+h-3} Q${x} ${y+h} ${x+3} ${y+h} L${x+w-3} ${y+h} Q${x+w} ${y+h} ${x+w} ${y+h-3} L${x+w} ${y}" fill="none" stroke="${col}" stroke-width="${sw}"/>`+hk(x,y,1,pc.h1,e)+hk(x+w,y,-1,pc.h2,e)}
+ else if(pc.shape==='SC'){const yy=y+h/2;o+=L(x,yy,x+w,yy)+L(x,yy,x+e*0.7,yy+e*0.7)+L(x+w,yy,x+w,yy+e)}
+ else{const xx=x+w/2;o+=L(xx,y,xx,y+h)+L(xx,y,xx+e*0.7,y+e*0.7)+L(xx,y+h,xx+e,y+h)}
+ return o}
+const stirKey=(bm,sec)=>bm.id+'|ป/'+sec.base;
+function rowsOf(src){const m=build(src),bm=m.D,map={},rows=[];
+ m.P.forEach(p=>{let r=map[p.key];if(!r){r=map[p.key]={key:p.key,col:p.col,beam:bm.id,floor:bm.floor,line:bm.line,mark:p.mark,layer:p.layer,bar:p.bar,d:p.d,shape:p.shape,cat:p.cat,kz:p.kz,dims:p.dims,cut:p.cut,qty:0,places:[]};rows.push(r)}
+  r.qty+=p.n*bm.qty;r.places.push(p.span+' ×'+p.n*bm.qty)});
+ const byCut={},sn=si=>bm.grids[si].n+'–'+bm.grids[si+1].n,put=(key,mark,cat,pc,qty,place)=>{const k=[cat,pc.bar,pc.shape,pc.a,pc.b,pc.h1,pc.h2,pc.cut].join('|');let r=byCut[k];
+  if(!r){r=byCut[k]={key,beam:bm.id,floor:bm.floor,line:bm.line,mark,layer:cat==='hg'?'แขวน':'ปลอก',bar:pc.bar,d:BARS[pc.bar],shape:pc.shape,cat,dims:{a:pc.a,b:pc.b,c:pc.e1,h1:pc.h1,h2:pc.h2,e2:pc.e2},pc,cut:pc.cut,qty:0,places:[]};rows.push(r)}
+  r.qty+=qty;r.places.push(place)};
+ bm.sections.forEach(sec=>{const sp=m.ST.filter(s=>s.sec===sec&&s.n);if(!sp.length)return;stirPieces(sec).forEach(pc=>{sp.forEach(s=>put(stirKey(bm,sec)+(pc.mk?':'+pc.mk:''),'ป'+pc.mk+'/'+sec.base,'st',pc,s.n*pc.n*bm.qty,sn(s.si)+' ×'+s.n*pc.n*bm.qty))})});
+ m.ST.forEach(t=>t.hgs.forEach(h=>{if(!h.xs.length)return;const pc=stirPieces(Object.assign({},t.sec,{shp:'closed',legs:2}),h.bar)[0];put(stirKey(bm,t.sec)+':ข','ปข/'+t.sec.base,'hg',pc,h.xs.length*bm.qty,sn(t.si)+' @'+m2(h.xc-m.g.X[t.si])+' ×'+h.xs.length*bm.qty)}));
+ const skc={};m.ST.forEach(t=>{const sk=t.sec.sk;if(!sk||!sk.on)return;const g=m.g,si=t.si,fr=bm.grids[si].free,fr2=bm.grids[si+1].free,L=g.fb[si]-g.fa[si]+(fr?-bm.coverEnd:Math.min(sk.emb,g.w[si]-bm.coverEnd))+(fr2?-bm.coverEnd:Math.min(sk.emb,g.w[si+1]-bm.coverEnd));
+  const st=S.settings.stock,Ls=lapLen(bm,sk.d,false),np=L<=st?1:Math.ceil((L-Ls)/(st-Ls)),cut=Math.ceil((L+(np-1)*Ls)/np/S.settings.round-1e-9)*S.settings.round,k=sk.bar+'|'+cut;
+  if(!skc[k]){skc[k]={key:bm.id+'|ข/'+(Object.keys(skc).length+1),beam:bm.id,floor:bm.floor,line:bm.line,mark:'ข/'+String(Object.keys(skc).length+1).padStart(2,'0'),layer:'ข้าง',bar:sk.bar,d:sk.d,shape:'I',cat:'sk',dims:{a:0,b:cut,c:0},cut,qty:0,places:[]};rows.push(skc[k])}
+  const q=2*sk.n*np*bm.qty;skc[k].qty+=q;skc[k].places.push(sn(si)+' ข้างละ '+sk.n+' แถว'+(np>1?' · '+np+' ท่อนทาบ':'')+' ×'+q)});
+ return rows}
+const allRows=()=>S.beams.flatMap(rowsOf);
+const passF=r=>(!FIL.floor||r.floor===FIL.floor)&&(!FIL.beam||r.beam===FIL.beam)&&(!FIL.layer||r.layer===FIL.layer)&&(!FIL.bar||r.bar===FIL.bar)&&(!FIL.shape||SHN[shCls(r.shape)]===FIL.shape);
+const anyF=()=>!!(FIL.floor||FIL.beam||FIL.layer||FIL.bar||FIL.shape);
+const visK=k=>{if(!anyF())return true;const r=ROWS.find(x=>x.key===k);return!!r&&passF(r)};
+const info=r=>r.shape&&r.shape[0]==='S'?`${r.mark}-${m2(r.cut)}m-(${r.shape==='SC'?m2(r.dims.a):r.shape==='ST'?m2(r.dims.b):m2(r.dims.a)+'×'+m2(r.dims.b)}) ขอ ${r.dims.h1}°/${r.dims.h2}°`:`${r.mark}-${m2(r.cut)}m-(${r.shape==='I'?'':r.shape==='K'?'คอม้า':r.shape}-${m2(r.dims.b)}m)`;
+function pieceCol(p,dark){if(p.bad&&SEL!==p.key)return dark?'#E8604E':'#d01010';if(!dark&&SH&&!SH.color)return SEL===p.key?'#e08a00':(visK(p.key)?'#111':'#bbb');const c=colorOf(p);if(SEL===p.key)return dark?HI:'#e08a00';const dim=(SEL&&SEL!==p.key)||!visK(p.key);return dark?(dim?mix(c,BG,0.72):c):(dim?mix(paper(c),'#ffffff',0.7):paper(c))}
+
+/* ===== helpers ===== */
+const $=s=>document.querySelector(s);
+function toast(t){const e=$('#toast');e.textContent=t;e.style.display='block';clearTimeout(e._t);e._t=setTimeout(()=>e.style.display='none',2000)}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function fld(l,p,v){return`<div class="f"><label>${l}</label><input data-p="${p}" type="${typeof v==='number'?'number':'text'}" step="any" value="${esc(v)}"></div>`}
+function sel(l,p,v,opts){return`<div class="f"><label>${l}</label><select data-p="${p}">${opts.map(o=>{const[a,b]=Array.isArray(o)?o:[o,o];return`<option value="${esc(a)}"${a==v?' selected':''}>${esc(b)}</option>`}).join('')}</select></div>`}
+function chk(l,p,v){return`<label class="ck"><input type="checkbox" data-p="${p}"${v?' checked':''}> ${l}</label>`}
+function setP(o,path,v){const k=path.split('.');for(let i=0;i<k.length-1;i++)o=o[k[i]];const last=k[k.length-1],old=o[last];o[last]=typeof old==='boolean'?!!v:typeof old==='number'?(parseFloat(v)||0):v}
+function clean(bm){bm.spans.forEach(s=>{s.L=Math.max(0.2,s.L);s.b=Math.max(100,s.b);s.h=Math.max(150,s.h);s.st.s1=Math.max(25,s.st.s1);s.st.s2=Math.max(25,s.st.s2);s.st.ext=Math.max(0,s.st.ext||0);if(s.sk){s.sk.n=Math.max(0,Math.round(s.sk.n||0));s.sk.emb=Math.max(0,s.sk.emb||0)}(s.hg||[]).forEach(h=>{h.n=Math.max(0,Math.round(h.n||0));h.s=Math.max(25,h.s||50);h.bs=Math.max(0,h.bs||0)});
+  [s.top,s.bot,s.bm].forEach(x=>{x.n=Math.max(0,Math.round(x.n))});s.bm.gap=Math.max(0,s.bm.gap)});
+ bm.grids.forEach(g=>{if(!g.free)g.w=Math.max(100,g.w);if(g.ex)g.ex.n=Math.max(0,Math.round(g.ex.n));const j=jtOf(g);j.eT=Math.max(0,j.eT);j.eB=Math.max(0,j.eB)});bm.runs.forEach(r=>{r.n=Math.max(1,Math.round(r.n))});(bm.add||[]).forEach(r=>{r.n=Math.max(1,Math.round(r.n))});bm.qty=Math.max(1,Math.round(bm.qty))}
+
+/* ===== Top bar + panel ===== */
+function renderTop(){const bm=B(),fl=bm.grids[0].free,fr=bm.grids[bm.grids.length-1].free;
+ $('#top').innerHTML=`<div class="chips" style="margin-bottom:8px">${S.beams.map((b,i)=>`<button class="chip${i===S.cur?' on':''}" data-a="sel:${i}">${esc(b.id)}</button>`).join('')}<button class="chip" data-a="addB">+ คานใหม่</button><button class="chip" data-a="dupB">คัดลอก</button>${S.beams.length>1?'<button class="chip" data-a="delB">ลบ</button>':''}</div>
+ <div class="g4" style="margin-bottom:8px">${fld('ชื่อคาน','id',bm.id)}${fld('ชั้น','floor',bm.floor)}${fld('แนวกริด','line',bm.line)}${fld('จำนวนคานแบบนี้','qty',bm.qty)}</div>
+ <div class="chips" style="margin-bottom:8px"><button class="chip" data-a="addSp">+ ช่วง</button><button class="chip" data-a="delSp">− ช่วง</button><button class="chip${fl?' on':''}" data-a="cantL">คานยื่นซ้าย</button><button class="chip${fr?' on':''}" data-a="cantR">คานยื่นขวา</button><button class="chip${UI.t==='beam'?' on':''}" data-a="beamSet">ตั้งค่าคาน</button><button class="chip" data-a="addBar">+ เพิ่มเหล็ก</button></div>`}
+function quick(side,lay,d,L){const q=[['ld','ℓd'],['35','35D'],['40','40db'],['L4','0.25L']];return`<div class="chips" style="margin-top:4px"><span class="note" style="margin:0">ค่าลัด</span>${q.map(([k,t])=>`<button class="chip" data-a="qe:${side}:${lay}:${k}">${t}</button>`).join('')}</div>`}
+function jointPanel(bm,j){const g=bm.grids[j],p='grids.'+j+'.jt.',jt=jtOf(g),nG=bm.grids.length,D=derive(bm),n=bm.spans.length;
+ if(bm.manual)return'<div class="note">คานนี้ใช้แนวเหล็กกำหนดเอง ปลายเหล็กกำหนดในแต่ละแนวเหล็ก</div>';
+ if(j===0||j===nG-1){const sp=bm.spans[j===0?0:n-1];
+  let h=`<div class="sh">ปลายเหล็กหลักที่เสาริม</div><div class="chips"><button class="chip${jt.end!=='ext'?' on':''}" data-a="je:hook">งอฝังในเสา</button><button class="chip${jt.end==='ext'?' on':''}" data-a="je:ext">ยื่นเลยเข้าคานอีกแนว</button></div>`;
+  if(jt.end==='ext')h+=`<div class="g2" style="margin-top:8px">${fld('เหล็กบน ยื่นจากหน้าเสา มม. (0=ℓd)',p+'eT',jt.eT)}${fld('เหล็กล่าง ยื่นจากหน้าเสา มม. (0=ℓd)',p+'eB',jt.eB)}</div>${quick('T','e',BARS[sp.top.bar])}${quick('B','e',BARS[sp.bot.bar])}<div class="note">ส่วนที่ยื่นออกนอกคานนี้วาดเป็นเส้นประ แต่คิดความยาวตัดเต็ม</div>`;
+  return h}
+ const J=D.joints[j];if(!J)return'<div class="sh">จุดต่อ</div><div class="note">เหล็กหลักวิ่งต่อเนื่องผ่านเสานี้ (ระดับและเหล็กเท่ากันทั้งสองฝั่ง)</div>';
+ const any=J.t||J.b,auto=jt.mode==='auto';
+ let h=`<div class="sh">จุดต่อ · ต่างระดับ บน ${m2(any.dT)} / ล่าง ${m2(any.dB)} ม. · h ${m2(any.hmin)} ม.</div>
+ <div class="chips"><button class="chip${auto?' on':''}" data-a="jm:auto">อัตโนมัติ</button><button class="chip${jt.mode==='ext'?' on':''}" data-a="jm:ext">แบบ 1 ยื่นฝาก</button><button class="chip${jt.mode==='hook'?' on':''}" data-a="jm:hook">แบบ 2 งอในเสา</button><button class="chip${jt.mode==='haunch'?' on':''}" data-a="jm:haunch">แบบ 3 ท้องเว้า</button></div>`;
+ [['t','T','บน'],['b','B','ล่าง']].forEach(([k,K,nm])=>{const R=J[k];if(!R)return;
+  const sd=R.m==='ext'&&(R.a==='hook'||R.b==='hook')?` (${R.b==='hook'?'คานซ้ายงอในเสา':'คานซ้ายยื่นเข้าคานขวา'} · ${R.a==='hook'?'คานขวางอในเสา':'คานขวายื่นเข้าคานซ้าย'})`:'';
+  h+=`<div class="note" style="color:var(--au2);margin-top:8px">เหล็ก${nm}: ${JMN[R.m]}${sd}${R.m==='hook'?'':' · ยื่น '+m2(R.eUsed)+' ม. (เกณฑ์ '+m2(R.def)+')'}${R.m==='haunch'?' นับต่อจากช่วงดัด':''}</div>`;
+  if(R.m!=='hook')h+=`<div class="g2" style="margin-top:4px">${fld('ระยะยื่นเลยหน้าเสาเข้าคานถัดไป มม. (0=อัตโนมัติ)',p+'e'+K,jt['e'+K])}<div></div></div>${quick(K,'j',R.d)}`});
+ return h}
+
+function stirPanel(bm,i,s,p){const t=s.st,seis=!!bm.lap.seis,tor=!!t.tor,forced=seis||tor,D=derive(bm),sec=secOf(D,i),P=stirPieces(sec),ds=BARS[t.bar],dd=s.h-bm.cov.b-ds-BARS[s.bot.bar]/2;
+ const hk=sec.hk,why=seis?'โหมดแผ่นดินไหวเปิด → บังคับขอ 135° (Seismic hook)':tor?'รับแรงบิด → บังคับปลอกปิด ขอ 135°':'';
+ return`<div class="sh">เหล็กปลอก ${chk('แบ่ง 2 โซน (ถี่ที่ปลาย)',p+'st.two',t.two)} ${chk('รับแรงบิด',p+'st.tor',t.tor)}</div>
+ <div class="g4">${sel('ขนาด',p+'st.bar',t.bar,STIR)}${fld(t.two?'ระยะโซนปลาย s₁':'ระยะเรียง @',p+'st.s1',t.s1)}${t.two?fld('ระยะช่วงกลาง s₂',p+'st.s2',t.s2)+fld('ยาวโซนปลาย (0=2h)',p+'st.zone',t.zone):'<div></div><div></div>'}</div>
+ <div class="g4" style="margin-top:6px">${tor?`<div class="f"><label>รูปแบบ</label><input disabled value="ปลอกปิด (บังคับ)"></div>`:sel('รูปแบบ',p+'st.shape',t.shape,Object.entries(STSH))}${sel('จำนวนขา',p+'st.legs',t.legs,[[2,'2 ขา'],[3,'3 ขา (+เหล็กยึด 1)'],[4,'4 ขา']])}${+t.legs===4?sel('ขาใน',p+'st.inner',t.inner,[['tie','เหล็กยึดขวาง 2 ตัว'],['hoop','ปลอกในซ้อน']]):'<div></div>'}${forced?`<div class="f"><label>มุมขอ</label><input disabled value="135° (บังคับ)"></div>`:sel('มุมขอ (Hook)',p+'st.hook',t.hook,[[90,'90°'],[135,'135°']])}</div>
+ <div class="g4" style="margin-top:6px">${fld('ปลายขอ มม. (0=ตามมาตรฐาน)',p+'st.ext',t.ext)}${sel('ตำแหน่งขอ',p+'st.corner',t.corner,[['tl','มุมบนซ้าย'],['tr','มุมบนขวา']])}<div class="f"><label>&nbsp;</label>${chk('สลับมุมขอทุกตัว',p+'st.alt',t.alt)}</div><div></div></div><div class="chips" style="margin-top:6px"><button class="chip" data-a="stStd">ตั้งระยะเรียงตามมาตรฐาน (d/2 · d/4 · แผ่นดินไหว)</button></div>
+ ${why?`<div class="note" style="color:var(--au2)">${why}</div>`:''}
+ <div class="pl" style="margin-top:6px">${P.map(pc=>`<div>${esc('ป'+pc.mk+'/'+sec.base)} · ${PNM[pc.role]}${pc.n>1?' ×'+pc.n:''} · ขอ ${pc.h1}°${pc.h2!==pc.h1?'/'+pc.h2+'°':''} ปลาย ${pc.e1}${pc.e2!==pc.e1?'/'+pc.e2:''} มม. (${t.ext>0?'กำหนดเอง':hookRule(ds,pc.h1)}) · ดัด Ø${pc.bend} · ยาวตัด ${m2(pc.cut)} ม.</div>`).join('')}
+ <div style="color:var(--mu)">ยาวตัด = ช่วงตรง ${P[0].str} + โค้ง ${P[0].deg}° × (r+d/2) = ${P[0].arc} + ปลายขอ ${P[0].e1}+${P[0].e2} → ปัดขึ้นทุก 5 มม. · d = ${Math.round(dd)} มม.</div></div>`}
+function skinPanel(bm,i,s,p){const sk=skinOf(bm,s,GR[bm.grade]),m=s.sk.mode;
+ return`<div class="sh">เหล็กเสริมข้าง (Skin) <span class="chips">${[['auto','อัตโนมัติ (h>900)'],['on','ใส่'],['off','ไม่ใส่']].map(([k,tx])=>`<button class="chip${m===k?' on':''}" data-a="skm:${k}">${tx}</button>`).join('')}</span></div>
+ ${sk.on?`<div class="g4">${sel('ขนาด',p+'sk.bar',s.sk.bar,['DB10','DB12','DB16','DB20'])}${fld('แถวต่อข้าง (0=อัตโนมัติ)',p+'sk.n',s.sk.n)}${fld('ยื่นเข้าเสา มม.',p+'sk.emb',s.sk.emb)}<div class="f"><label>ใช้จริง</label><input disabled value="2×${sk.n} เส้น @${Math.round(sk.sp)} มม."></div></div>
+ <div class="note">ระยะห่างสูงสุด ${sk.smax} มม. (ACI 24.3.2 · fs = ⅔fy) · อัตโนมัติ ${sk.auto} แถวต่อข้าง · กระจายเต็มความลึกระหว่างเหล็กบนและล่าง</div>`:`<div class="note">${s.h>900?'คานลึกเกิน 900 มม. ควรใส่เหล็กเสริมข้าง (ACI 9.7.2.3)':'คานลึกไม่เกิน 900 มม. มาตรฐานไม่บังคับ'}</div>`}`}
+function hangPanel(bm,i,s,p){const hg=s.hg||[];
+ return`<div class="sh">คานรองฝาก · ปลอกแขวน <span class="chips"><button class="chip" data-a="hgAdd">+ จุดคานรอง</button></span></div>
+ ${hg.map((h,q)=>{const pq=p+'hg.'+q+'.';return`<div class="box" style="margin:6px 0;padding:8px"><div class="t"><span>จุดที่ ${q+1}</span><button class="x" data-a="hgDel:${q}" aria-label="ลบจุดคานรอง">✕</button></div>
+  <div class="g4">${fld('ห่างจากกริดซ้าย (ม.)',pq+'x',h.x)}${fld('คานรองกว้าง มม.',pq+'bs',h.bs)}${fld('คานรองลึก มม.',pq+'hs',h.hs)}${sel('ขนาดปลอกแขวน',pq+'bar',h.bar,STIR)}</div>
+  <div class="g4" style="margin-top:6px">${fld('จำนวนข้างละ',pq+'n',h.n)}${fld('ระยะเรียง มม.',pq+'s',h.s)}<div></div><div></div></div></div>`}).join('')||'<div class="note">ไม่มีคานรองฝากในช่วงนี้</div>'}
+ ${hg.length?'<div class="note">ปลอกแขวนเป็นปลอกปิดเพิ่มจากปลอกปกติ วางเริ่ม 50 มม. จากผิวคานรองทั้งสองข้าง · จำนวนให้ตรวจจากแรงปฏิกิริยาคานรอง (As = R / fy)</div>':''}`}
+function renderPanel(){const bm=B();let h='';
+ if(UI.t==='bar'){const hb=barPanel(bm);if(hb){$('#panel').innerHTML=hb;return}UI={t:'span',i:UI.si||0}}
+ if(UI.t==='span'&&!bm.spans[UI.i])UI={t:'span',i:bm.grids[0].free&&bm.spans.length>1?1:0};
+ if(UI.t==='grid'&&!bm.grids[UI.i])UI={t:'span',i:0};
+ if(UI.t==='span'){const i=UI.i,s=bm.spans[i],p='spans.'+i+'.',nm=(bm.grids[i].free?'ปลายยื่น':bm.grids[i].n)+' – '+(bm.grids[i+1].free?'ปลายยื่น':bm.grids[i+1].n);
+  h=`<div class="box sel"><div class="t"><span>ช่วง ${esc(nm)}</span><span class="chips">${i>0?'<button class="chip" data-a="cpPrev">คัดลอกจากช่วงก่อน</button>':''}<button class="chip" data-a="toAll">ใช้กับทุกช่วง</button></span></div>
+  <div class="g4">${fld('ยาว (ม.)',p+'L',s.L)}${fld('ระดับหลังคาน (ม.)',p+'lvl',s.lvl)}${fld('กว้าง b (มม.)',p+'b',s.b)}${fld('ลึก h (มม.)',p+'h',s.h)}</div>
+  ${bm.manual?'<div class="note">คานนี้ใช้แนวเหล็กกำหนดเอง เหล็กหลักแก้ที่หัวข้อ "แนวเหล็ก" ด้านล่าง</div>':`<div class="sh">เหล็กหลัก</div>
+  <div class="g4">${sel('เหล็กบน',p+'top.bar',s.top.bar,MAIN)}${fld('จำนวน',p+'top.n',s.top.n)}${sel('เหล็กล่าง',p+'bot.bar',s.bot.bar,MAIN)}${fld('จำนวน',p+'bot.n',s.bot.n)}</div>`}
+  ${stirPanel(bm,i,s,p)}
+  ${bm.manual||bm.grids[i].free||bm.grids[i+1].free?'':`<div class="sh">เหล็กเสริมล่างกลางช่วง ${chk('ใช้',p+'bm.on',s.bm.on)}</div>
+  ${s.bm.on?`<div class="g4">${sel('ขนาด',p+'bm.bar',s.bm.bar,MAIN)}${fld('จำนวน',p+'bm.n',s.bm.n)}${fld('หยุดห่างหน้าเสา (ม.)',p+'bm.gap',s.bm.gap)}${sel('ชั้น',p+'bm.layer',s.bm.layer,[[1,'ชั้น 1'],[2,'ชั้น 2']])}</div>`:''}`}
+  ${skinPanel(bm,i,s,p)}${hangPanel(bm,i,s,p)}</div>`}
+ else if(UI.t==='grid'){const j=UI.i,g=bm.grids[j],p='grids.'+j+'.';
+  h=g.free?`<div class="box sel"><div class="t"><span>ปลายคานยื่น</span></div><div class="note">ปลายอิสระ ไม่มีเสา แตะช่วงคานยื่นเพื่อแก้ความยาวและเหล็ก</div></div>`:
+  `<div class="box sel"><div class="t"><span>เสา / กริด ${esc(g.n)}</span></div><div class="g4">${fld('ชื่อกริด',p+'n',g.n)}${fld('เสากว้าง (มม.)',p+'w',g.w)}<div></div><div></div></div>
+  ${jointPanel(bm,j)}
+  ${bm.manual?'':`<div class="sh">เหล็กเสริมบนหัวเสา ${chk('ใช้',p+'ex.on',g.ex.on)}</div>
+  ${g.ex.on?`<div class="g3">${sel('ขนาด',p+'ex.bar',g.ex.bar,MAIN)}${fld('จำนวน',p+'ex.n',g.ex.n)}${sel('ชั้น',p+'ex.layer',g.ex.layer,[[1,'ชั้น 1'],[2,'ชั้น 2']])}</div>
+  <div class="g2" style="margin-top:6px">${fld('ยื่นซ้าย (× L ช่วงซ้าย)',p+'ex.rl',g.ex.rl)}${fld('ยื่นขวา (× L ช่วงขวา)',p+'ex.rr',g.ex.rr)}</div><div class="note">วัดจากหน้าเสา · ถ้าสองฝั่งต่างระดับ เหล็กจะแยกเป็นสองท่อนและงอฝังเข้าเสา</div>`:''}`}</div>`}
+ else{h=`<div class="box sel"><div class="t"><span>ตั้งค่าคาน ${esc(bm.id)}</span></div>
+  <div class="g4">${fld("fc' กก./ตร.ซม.",'fc',bm.fc)}${sel('ชั้นเหล็ก','grade',bm.grade,Object.keys(GR))}${fld('ขางอ มม. (0=12d)','leg',bm.leg)}<div></div></div>
+  <div class="sh">ระยะหุ้ม (มม.)</div><div class="g4">${fld('บน','cov.t',bm.cov.t)}${fld('ล่าง','cov.b',bm.cov.b)}${fld('ข้าง','cov.s',bm.cov.s)}${fld('ปลายคาน','cov.e',bm.cov.e)}</div>
+  <div class="sh">การต่อทาบ ${chk('ทาบสลับ (จุดทาบห่างกัน ≥ 0.3 เท่าระยะทาบ)','stagger',bm.stagger)}</div>
+  <div class="chips"><span class="note" style="margin:0">โซนทาบบน กลางช่วง</span>${[3,4,5,6].map(n=>`<button class="chip${bm.lap.top===n?' on':''}" data-a="lapT:${n}">L/${n}</button>`).join('')}</div>
+  <div class="chips" style="margin-top:6px"><span class="note" style="margin:0">โซนทาบล่าง ใกล้เสา</span>${[3,4,5,6].map(n=>`<button class="chip${bm.lap.bot===n?' on':''}" data-a="lapB:${n}">L/${n}</button>`).join('')}</div>
+  <div class="chips" style="margin-top:6px"><button class="chip${bm.lap.seis?' on':''}" data-a="seis">โหมดแผ่นดินไหว ${bm.lap.seis?'เปิด':'ปิด'}</button></div><div class="note">เปิดแล้ว: ปลอกทุกช่วงเปลี่ยนเป็นขอ 135° (Seismic hook 6d ≥ 75 มม.) · ตรวจระยะปลอกปลาย min(d/4, 6db, 150) · ทาบนอกโซน 2h</div>
+  <div class="chips" style="margin-top:8px">${Object.values(bm.ovr||{}).some(o=>o.del)?'<button class="chip" data-a="restoreDel">กู้คืนเหล็กอัตโนมัติที่ลบไว้</button>':''}${Object.keys(bm.ovr||{}).length||(bm.add||[]).length?'<button class="chip" data-a="clearOvr">ล้างการแก้ไขเหล็กทั้งหมดของคานนี้</button>':''}</div>
+  <div class="note">จุดต่อต่างระดับและปลายเหล็กที่เสาริม ตั้งได้โดยแตะวงกลมกริดบนรูป 2D · แตะเหล็กเส้นใดก็ได้เพื่อแก้ไขเส้นนั้น</div></div>`}
+ if(bm.manual){const go=bm.grids.map((g,i)=>[i,g.free?'ปลายยื่น':g.n]),en=[['hook','งอในเสา'],['straight','ตรง'],['xhook','ยื่นแล้วงอ']];
+  h+=`<div class="h"><span>แนวเหล็ก (กำหนดเอง)</span><span class="chips"><button class="chip" data-a="addRun">+ แนวเหล็ก</button><button class="chip" data-a="toSimple">กลับไปแบบง่าย</button></span></div>`;
+  bm.runs.forEach((r,k)=>{const p='runs.'+k+'.';h+=`<details class="box"${bm.runs.length<3?' open':''}><summary class="t" style="cursor:pointer"><span>${r.layer} · ${r.n}-${r.bar} · ${esc(go[r.a]?.[1])} → ${esc(go[r.b]?.[1])}</span><span><button class="x" data-a="cpRun:${k}" aria-label="คัดลอกแนวเหล็ก">⧉</button><button class="x" data-a="delRun:${k}" aria-label="ลบแนวเหล็ก">✕</button></span></summary>
+   <div class="g4">${sel('ชั้น',p+'layer',r.layer,LAY)}${sel('ขนาด',p+'bar',r.bar,MAIN)}${fld('จำนวน',p+'n',r.n)}${fld('ขางอ (0=12d)',p+'leg',r.leg)}</div><div class="g4" style="margin-top:6px">${sel('มัดรวม',p+'bdl',r.bdl||1,[[1,'ไม่มัด'],[2,'2 เส้น'],[3,'3 เส้น +20%'],[4,'4 เส้น +33%']])}<div></div><div></div><div></div></div>
+   <div class="g3" style="margin-top:6px">${sel('เริ่มที่กริด',p+'a',r.a,go)}${sel('ปลายเริ่ม',p+'ea',r.ea,en)}${fld('ระยะเยื้อง มม.',p+'oa',r.oa)}</div>
+   <div class="g3" style="margin-top:6px">${sel('จบที่กริด',p+'b',r.b,go)}${sel('ปลายจบ',p+'eb',r.eb,en)}${fld('ระยะเยื้อง มม.',p+'ob',r.ob)}</div>
+   <div style="margin-top:6px">${fld('ท่อนกำหนดเอง (ม.) เช่น 2.50,12,12 · เว้นว่าง = จัดอัตโนมัติ',p+'man',r.man)}</div></details>`});
+  h+=`<div class="note">ปลาย "งอในเสา" วัดจากหน้านอกเสาหักระยะหุ้มปลาย · "ตรง" และ "ยื่นแล้วงอ" วัดจากศูนย์กลางกริด (+ ไปทางขวา)</div>`}
+ else h+=`<div class="chips" style="margin-top:4px"><button class="chip" data-a="toManual">กำหนดแนวเหล็กเองทีละเส้น (ขั้นสูง)</button></div>`;
+ $('#panel').innerHTML=h}
+let tOut=null;
+function onField(e,final){const el=e.target;if(el.dataset.o){onBar(el,final);return}const p=el.dataset.p;if(!p)return;const bm=B();if(el.type==='checkbox'&&!final)return;
+ if(!final&&(el.value===''||/[.,-]$/.test(el.value)))return;
+ setP(bm,p,el.type==='checkbox'?el.checked:el.value);if(final)clean(bm);save();
+ const full=final&&(el.tagName==='SELECT'||el.type==='checkbox'||/(^id$|\.n$|\.L$|\.b$|\.h$|\.lvl$|\.w$|\.e[TB]$|st\.(ext|legs)$|sk\.n$)/.test(p));
+ if(full){if(el.closest('#top'))renderTop();renderPanel()}renderAll(!final)}
+['#top','#panel'].forEach(q=>{$(q).addEventListener('input',e=>{if(e.target.tagName==='INPUT'&&e.target.type==='number')onField(e,false)});$(q).addEventListener('change',e=>onField(e,true))});
+function act(e){const t=e.target.closest('[data-a]');if(!t)return;if(t.tagName==='BUTTON'&&t.closest('summary'))e.preventDefault();const parts=t.dataset.a.split(':'),[a,v]=parts,bm=B(),k=+v,nG=bm.grids.length,fl=bm.grids[0].free,fr=bm.grids[nG-1].free;
+ const struct=['addSp','delSp','cantL','cantR'].includes(a);if(struct&&bm.manual){toast('คานนี้ใช้แนวเหล็กกำหนดเอง กด "กลับไปแบบง่าย" ก่อนเปลี่ยนจำนวนช่วง');return}
+ if(a==='sel'){S.cur=k;SEL=null;SELIT.clear();CUT.x=null;UI={t:'span',i:S.beams[k].grids[0].free?1:0}}
+ else if(a==='addB'){S.beams.push(newBeam('B'+(S.beams.length+1)));S.cur=S.beams.length-1;SEL=null;UI={t:'span',i:0}}
+ else if(a==='dupB'){const c=cl(bm);c.id=bm.id+'-2';S.beams.push(c);S.cur=S.beams.length-1;SEL=null}
+ else if(a==='delB'){S.beams.splice(S.cur,1);S.cur=Math.max(0,S.cur-1);SEL=null;UI={t:'span',i:0}}
+ else if(a==='addSp'){const idx=bm.spans.length-(fr?1:0),src=bm.spans[Math.max(0,idx-1)],used=bm.grids.map(g=>g.n);let nm=String(nG+1);for(let c=1;c<60;c++){if(!used.includes(String(c))){nm=String(c);break}}
+  bm.spans.splice(idx,0,cl(src));bm.grids.splice(idx+1,0,{n:nm,w:bm.grids[idx].free?200:bm.grids[idx].w,ex:defEx(src.top.bar),jt:defJt()});UI={t:'span',i:idx}}
+ else if(a==='delSp'){const real=bm.spans.length-(fl?1:0)-(fr?1:0);if(real<=1){toast('ต้องมีอย่างน้อย 1 ช่วง');return}const idx=bm.spans.length-1-(fr?1:0);bm.spans.splice(idx,1);bm.grids.splice(idx+1,1);UI={t:'span',i:Math.max(0,idx-1)}}
+ else if(a==='cantL'){if(fl){bm.spans.shift();bm.grids.shift();UI={t:'span',i:0}}else{bm.spans.unshift(Object.assign(cl(bm.spans[0]),{L:1,bm:Object.assign(cl(bm.spans[0].bm),{on:false})}));bm.grids.unshift({n:'',w:0,free:true,ex:defEx(),jt:defJt()});UI={t:'span',i:0}}}
+ else if(a==='cantR'){if(fr){bm.spans.pop();bm.grids.pop();UI={t:'span',i:bm.spans.length-1}}else{const s=bm.spans[bm.spans.length-1];bm.spans.push(Object.assign(cl(s),{L:1,bm:Object.assign(cl(s.bm),{on:false})}));bm.grids.push({n:'',w:0,free:true,ex:defEx(),jt:defJt()});UI={t:'span',i:bm.spans.length-1}}}
+ else if(a==='beamSet')UI=UI.t==='beam'?{t:'span',i:fl?1:0}:{t:'beam'};
+ else if(a==='cpPrev'||a==='toAll'){const i=UI.i,cp=(dst,src)=>{['b','h'].forEach(f=>dst[f]=src[f]);if(a==='cpPrev')dst.lvl=src.lvl;dst.top=cl(src.top);dst.bot=cl(src.bot);dst.st=cl(src.st);dst.sk=cl(src.sk)},inner=x=>!bm.grids[x].free&&!bm.grids[x+1].free;
+  if(a==='cpPrev'){cp(bm.spans[i],bm.spans[i-1]);if(inner(i)&&inner(i-1))bm.spans[i].bm=cl(bm.spans[i-1].bm)}
+  else{bm.spans.forEach((s,x)=>{if(x!==i){cp(s,bm.spans[i]);if(inner(x)&&inner(i))s.bm=cl(bm.spans[i].bm)}});toast('ใช้ค่าช่วงนี้กับทุกช่วงแล้ว (คงระดับเดิมไว้)')}}
+ else if(a==='jm'){jtOf(bm.grids[UI.i]).mode=v}
+ else if(a==='je'){jtOf(bm.grids[UI.i]).end=v}
+ else if(a==='qe'){const[,K,where,q]=parts,j=UI.i,jt=jtOf(bm.grids[j]),n=bm.spans.length,top=K==='T';let d,L;
+  if(where==='e'){const sp=bm.spans[j===0?0:n-1];d=BARS[top?sp.top.bar:sp.bot.bar];L=geom(derive(bm)).Ln[j===0?0:n-1]}
+  else{const J=derive(bm).joints[j]||{},R=J[top?'t':'b'];d=R?R.d:16;const g=geom(derive(bm));L=Math.min(g.Ln[j-1],g.Ln[j])}
+  const val=q==='ld'?ldACI(bm,d,top):q==='35'?35*d:q==='40'?40*d:0.25*L;jt['e'+K]=c10(val);toast('ตั้งระยะยื่น '+m2(c10(val))+' ม.')}
+ else if(a==='addBar'){const D=derive(bm),gi=D.grids.map((q,i)=>q.free?-1:i).filter(i=>i>=0),nr={layer:'T1',bar:bm.spans[0].top.bar||'DB16',n:2,a:gi[0],ea:'hook',oa:0,b:gi[gi.length-1],eb:'hook',ob:0,leg:0,man:''};
+  if(bm.manual){bm.runs.push(nr);UI={t:'bar',id:'R'+(bm.runs.length-1)}}else{(bm.add=bm.add||[]).push(nr);UI={t:'bar',id:'U'+(bm.add.length-1)}}SEL=null;toast('เพิ่มเหล็กใหม่แล้ว แก้ค่าได้ที่แผงด้านซ้าย')}
+ else if(a==='bReset'){if(bm.ovr)delete bm.ovr[UI.id];toast('คืนค่าอัตโนมัติแล้ว')}
+ else if(a==='bDel'){const id=UI.id;if(id[0]==='R')bm.runs.splice(+id.slice(1),1);else if(id[0]==='U')bm.add.splice(+id.slice(1),1);else{bm.ovr=bm.ovr||{};bm.ovr[id]={del:true}}UI={t:'span',i:UI.si||0};SEL=null;toast('ลบเหล็กเส้นนี้แล้ว'+(id[0]==='M'||id[0]==='X'?' · กู้คืนได้ที่ ตั้งค่าคาน':''))}
+ else if(a==='bCopy'){const r=derive(bm).runs.find(x=>x.id===UI.id);if(r){const c={};['layer','bar','n','a','ea','oa','b','eb','ob','leg','man','col','bdl'].forEach(k=>{if(r[k]!==undefined)c[k]=r[k]});if(bm.manual){bm.runs.push(c);UI={t:'bar',id:'R'+(bm.runs.length-1)}}else{(bm.add=bm.add||[]).push(c);UI={t:'bar',id:'U'+(bm.add.length-1)}}SEL=null;toast('คัดลอกเป็นเหล็กเส้นใหม่แล้ว')}}
+ else if(a==='bCol')barSet(bm,UI.id,'col','')
+ else if(a==='restoreDel'){Object.keys(bm.ovr||{}).forEach(k=>{if(bm.ovr[k].del)delete bm.ovr[k]})}
+ else if(a==='clearOvr'){bm.ovr={};bm.add=[];toast('ล้างการแก้ไขเหล็กแล้ว')}
+ else if(a==='toManual'){bm.runs=cl(derive(bm).runs).map(r=>{delete r.home;delete r.cranks;delete r.ja;delete r.jb;delete r.nba;delete r.nbb;delete r.x;delete r.id;delete r.ovr;delete r.user;return r});bm.ovr={};bm.add=[];bm.manual=true;toast('แปลงเป็นแนวเหล็กกำหนดเองแล้ว')}
+ else if(a==='toSimple'){bm.manual=false;bm.runs=[];toast('กลับไปใช้เหล็กตามข้อมูลแต่ละช่วง')}
+ else if(a==='addRun')bm.runs.push(run('T1',bm.runs[0]?bm.runs[0].bar:'DB16',2,0,nG-1))
+ else if(a==='cpRun')bm.runs.splice(k+1,0,cl(bm.runs[k]))
+ else if(a==='delRun')bm.runs.splice(k,1)
+ else if(a==='skm'){bm.spans[UI.i].sk.mode=v}
+ else if(a==='hgAdd'){const s=bm.spans[UI.i];s.hg.push({x:+(s.L/2).toFixed(2),bs:200,hs:Math.max(300,s.h-100),bar:s.st.bar,n:3,s:50})}
+ else if(a==='hgDel'){bm.spans[UI.i].hg.splice(k,1)}
+ else if(a==='stStd'){const s=bm.spans[UI.i],ds=BARS[s.st.bar],d=s.h-bm.cov.b-ds-BARS[s.bot.bar]/2,f25=x=>Math.max(50,Math.floor(x/25)*25),db=Math.min(BARS[s.top.bar],BARS[s.bot.bar]);
+  if(bm.lap.seis){s.st.two=true;s.st.zone=0;s.st.s1=f25(Math.min(d/4,6*db,150));s.st.s2=f25(Math.min(d/2,600));toast('ตั้งปลอกแบบแผ่นดินไหว: ปลาย @'+s.st.s1+' ในระยะ 2h · กลาง @'+s.st.s2+' มม.')}
+  else if(s.st.two){s.st.s1=f25(Math.min(d/4,300));s.st.s2=f25(Math.min(d/2,600));toast('ปลาย @'+s.st.s1+' (d/4) · กลาง @'+s.st.s2+' มม. (d/2)')}
+  else{s.st.s1=f25(Math.min(d/2,600));toast('ระยะเรียง @'+s.st.s1+' มม. (d/2 ตาม ACI 9.7.6.2.2)')}}
+ else if(a==='lapT')bm.lap.top=k;else if(a==='lapB')bm.lap.bot=k;else if(a==='seis')bm.lap.seis=!bm.lap.seis;
+ save();renderTop();renderPanel();renderAll()}
+$('#top').addEventListener('click',act);$('#panel').addEventListener('click',act);
+
+/* ===== Bar editor ===== */
+function barSet(bm,id,k,v){if(id[0]==='R'){const r=bm.runs[+id.slice(1)];if(r)r[k]=v;return}if(id[0]==='U'){const r=(bm.add||[])[+id.slice(1)];if(r)r[k]=v;return}bm.ovr=bm.ovr||{};(bm.ovr[id]=bm.ovr[id]||{})[k]=v}
+function setPos(bm,id,end,x){const g=geom(derive(bm));let j=0;g.X.forEach((v,i)=>{if(Math.abs(v-x)<Math.abs(g.X[j]-x))j=i});barSet(bm,id,end,j);barSet(bm,id,'o'+end,Math.round(x-g.X[j]))}
+function barPanel(bm){const D=derive(bm),r=D.runs.find(x=>x.id===UI.id);if(!r)return'';const m=build(bm),g=geom(D),e=runExt(D,g,r),fi=Math.max(0,D.grids.findIndex(x=>!x.free)),ref=g.X[fi];
+ const go=D.grids.map((q,i)=>[i,q.free?'ปลายยื่น':q.n]),en=[['hook','งอในเสา'],['straight','ตรง'],['xhook','ยื่นแล้วงอ']],ps=m.P.filter(p=>p.rid===r.id),tot=ps.reduce((a,p)=>a+p.cut,0);
+ const kind={M:'เหล็กหลัก · สร้างอัตโนมัติ',X:'เหล็กเสริม · สร้างอัตโนมัติ',U:'เหล็กที่เพิ่มเอง',R:'แนวเหล็กกำหนดเอง'}[r.id[0]];
+ const f=(l,k,v,dis)=>`<div class="f"><label>${l}</label><input data-o="${k}" type="${typeof v==='number'?'number':'text'}" step="any" value="${esc(v)}"${dis?' disabled':''}></div>`;
+ const s=(l,k,v,opts)=>`<div class="f"><label>${l}</label><select data-o="${k}">${opts.map(o=>{const[a,b]=Array.isArray(o)?o:[o,o];return`<option value="${esc(a)}"${String(a)===String(v)?' selected':''}>${esc(b)}</option>`}).join('')}</select></div>`;
+ const pos=end=>{const t=end==='a'?r.ea:r.eb,x=end==='a'?e.xs:e.xe;return t==='hook'?`<div class="f"><label>ตำแหน่ง (ม.)</label><input disabled value="${m2(x-ref)} หน้าเสา"></div>`:f('ตำแหน่ง (ม.)','pos'+end,+((x-ref)/1000).toFixed(3))};
+ const hostO=[];for(let si=0;si<D.spans.length;si++){const a=Math.max(e.xs,g.fa[si]),b2=Math.min(e.xe,g.fb[si]);if(b2-a>1)hostO.push([si,'ช่วง '+go[si][1]+'–'+go[si+1][1]+' · T'+(bm.spans[si].lvl>=0?'+':'')+bm.spans[si].lvl.toFixed(2)])}
+ const ph=ps[0]&&ps[0].host,hostTxt=ph!=null?'ล็อกที่ช่วง '+go[ph][1]+'–'+go[ph+1][1]+' · หุ้ม'+(r.layer[0]==='T'?'บน ':'ล่าง ')+(r.layer[0]==='T'?secOf(m.D,ph).ct:secOf(m.D,ph).cb)+' มม.':'ตามระดับแต่ละช่วง (อัตโนมัติ)';
+ const p0=ps[0],cv=r.col||(p0?colorOf(Object.assign({},p0,{col:''})):'#C9A55C');
+ return`<div class="box sel"><div class="t"><span>${esc(r.layer)} · ${r.n}-${esc(r.bar)} · ${kind}${r.ovr?' · แก้ไขแล้ว':''}</span><span class="chips">${r.ovr?'<button class="chip" data-a="bReset">คืนค่าอัตโนมัติ</button>':''}<button class="chip" data-a="bCopy">คัดลอก</button><button class="chip" data-a="bDel">ลบ</button></span></div>
+ <div class="g4">${s('ชั้น','layer',r.layer,LAY)}${s('ขนาด','bar',r.bar,MAIN)}${f('จำนวน (เส้น)','n',r.n)}${f('ขางอ มม. (0=อัตโนมัติ)','leg',r.leg||0)}</div>
+ <div class="g2" style="margin-top:6px">${s('มัดรวม (Bundled)','bdl',r.bdl||1,[[1,'ไม่มัด'],[2,'มัด 2 เส้น'],[3,'มัด 3 เส้น · ทาบ +20%'],[4,'มัด 4 เส้น · ทาบ +33%']])}<div class="f"><label>ระยะทาบที่ใช้</label><input disabled value="${ps[0]?m2(ps[0].Ls)+' ม.':'—'}"></div></div>
+ <div class="g2" style="margin-top:6px">${s('Host · ล็อกระดับตามคาน','host',r.host==null?'':r.host,[['','อัตโนมัติ · ช่วงที่ยาวที่สุด']].concat(hostO))}<div class="f"><label>ระดับเหล็ก</label><input disabled value="${esc(hostTxt)}"></div></div>
+ <div class="sh">ปลายซ้าย (จุดเริ่ม)</div><div class="g4">${s('ที่กริด','a',r.a,go)}${s('ปลาย','ea',r.ea,en)}${f('เยื้อง มม.','oa',Math.round(r.oa||0))}${pos('a')}</div>
+ <div class="sh">ปลายขวา (จุดจบ)</div><div class="g4">${s('ที่กริด','b',r.b,go)}${s('ปลาย','eb',r.eb,en)}${f('เยื้อง มม.','ob',Math.round(r.ob||0))}${pos('b')}</div>
+ <div class="g2" style="margin-top:6px">${f('ความยาวแนวเหล็ก (ม.)','len',+((e.xe-e.xs)/1000).toFixed(3))}${f('ท่อนกำหนดเอง ม. (ว่าง = อัตโนมัติ)','man',r.man||'')}</div>
+ <div class="sh"><span>สีเหล็กเส้นนี้</span><span class="chips"><label class="sw2"><input type="color" data-o="col" value="${cv}">ตั้งสี</label>${r.col?'<button class="chip" data-a="bCol">ใช้สีอัตโนมัติ</button>':''}</span></div>
+ <div class="sh">ท่อนที่ต้องตัด</div><div class="pl">${ps.map(p=>`<div>${esc(p.mark)} · ${SHN[shCls(p.shape)]} · ยาวตัด ${m2(p.cut)} ม. · ${esc(p.span)}</div>`).join('')||'<div>—</div>'}<div style="color:var(--au2)">${ps.length} ท่อนต่อเส้น · ${r.n} เส้น · รวม ${m2(tot*r.n)} ม.</div></div>
+ <div class="note">ลากวงกลมสีทองที่ปลายเหล็กบนรูป 2D เพื่อย้าย (ดูดเข้าหน้าเสาและศูนย์กริด) · ปลาย "งอในเสา" ย้ายไม่ได้ ให้เปลี่ยนเป็น "ตรง" หรือ "ยื่นแล้วงอ" ก่อน · ตำแหน่งวัดจากกริด ${esc(D.grids[fi].n)}</div></div>`}
+function onBar(el,final){const bm=B(),k=el.dataset.o;let v=el.value;if(!final&&(v===''||/[.,-]$/.test(v)))return;
+ if(k==='posa'||k==='posb'||k==='len'){const D=derive(bm),g=geom(D),r=D.runs.find(x=>x.id===UI.id);if(!r)return;const e=runExt(D,g,r),ref=g.X[Math.max(0,D.grids.findIndex(x=>!x.free))],q=parseFloat(v);if(!isFinite(q))return;
+  if(k==='len'){const L=q*1000;if(!(L>100))return;if(r.eb!=='hook')setPos(bm,UI.id,'b',e.xs+L);else if(r.ea!=='hook')setPos(bm,UI.id,'a',e.xe-L);else{if(final)toast('ปลายทั้งสองงอในเสา เปลี่ยนปลายข้างใดข้างหนึ่งเป็น "ตรง" ก่อน');return}}
+  else setPos(bm,UI.id,k.slice(3),ref+q*1000)}
+ else{if(k==='host')v=v===''?'':parseInt(v);else if(k==='bdl')v=parseInt(v)||1;else if(['n','leg','oa','ob'].includes(k))v=parseFloat(v)||0;if(k==='a'||k==='b')v=parseInt(v);if(k==='n')v=Math.max(1,Math.round(v));barSet(bm,UI.id,k,v)}
+ save();if(final)renderPanel();renderAll(!final)}
+function svgPt(svg,e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse())}
+function snapX(x,tol){const g=M.g,D=M.D,c=[];g.X.forEach((X,i)=>{c.push(X);if(!D.grids[i].free)c.push(X-g.w[i]/2,X+g.w[i]/2)});c.push(g.xl+D.coverEnd,g.xr-D.coverEnd);let b=null;c.forEach(v=>{if(Math.abs(v-x)<=tol&&(b===null||Math.abs(v-x)<Math.abs(b-x)))b=v});return b===null?Math.round(x/10)*10:b}
+(function(){const el=$('#v2');
+ el.addEventListener('pointerdown',e=>{const h=e.target.closest('[data-h]');if(!h||UI.t!=='bar')return;const r=M.D.runs.find(x=>x.id===UI.id);if(!r)return;e.preventDefault();const ex=runExt(M.D,M.g,r);
+  DR={end:h.dataset.h,other:h.dataset.h==='a'?ex.xe:ex.xs,moved:false};FROZ=[M2.lo,M2.hi];try{el.setPointerCapture(e.pointerId)}catch(_){}});
+ el.addEventListener('pointermove',e=>{if(!DR)return;const q=svgPt(el,e);let x=M2.lo+(q.x-M2.mx)/M2.sx;x=snapX(x,12/M2.sx);x=DR.end==='a'?Math.min(x,DR.other-200):Math.max(x,DR.other+200);DR.moved=true;setPos(B(),UI.id,DR.end,x);renderAll(true)});
+ const up=()=>{if(!DR)return;const mv=DR.moved;DR=null;FROZ=null;if(mv){DRAGGED=Date.now();save();renderPanel();renderAll()}};
+ el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up)})();
+
+/* ===== Section cut ===== */
+let CUT={x:null,bid:null},TOOL='sel',DRC=null;
+const THD=()=>({dark:true,tx:'#E6E3DC',cf:'#16171B',cs:'#9A9DA3',lbl:'#D8D4CA',lead:'#6F737A',dim:'#D9705E',bad:'#E8604E',sub:'#8A8E95',fs:11.5,lw:1});
+const THL=()=>({dark:false,tx:'#111',cf:'#f2f2f2',cs:'#111',lbl:'#0000b0',lead:'#555',dim:'#c00000',bad:'#d01010',sub:'#444',fs:12,lw:1});
+function cutAt(m,x){const out=[];m.P.forEach(p=>{for(let bi=0;bi<p.n;bi++){const pts=barPath(m.D,m,p,bi);for(let k=0;k<pts.length-1;k++){const a=pts[k],b=pts[k+1],dx=b[0]-a[0];
+  if(Math.abs(dx)<0.5||Math.abs(b[2]-a[2])>Math.abs(dx)*0.35)continue;const x0=Math.min(a[0],b[0]),x1=Math.max(a[0],b[0]);
+  if(x>=x0&&x<x1){const t=(x-a[0])/dx;out.push({y:a[1]+t*(b[1]-a[1]),z:a[2]+t*(b[2]-a[2]),d:p.d,p,bi});break}}}});return out}
+function cutInfo(m,x){const D=m.D,g=m.g,cx=Math.max(g.xl+1,Math.min(g.xr-1,x)),col=g.X.findIndex((X,i)=>!D.grids[i].free&&Math.abs(cx-X)<g.w[i]/2),si=spanAt(g,cx),sec=secOf(D,si),zb=D.zb[si],bars=cutAt(m,cx),ds=BARS[sec.sb];
+ const byRun={};bars.forEach(b=>{const k=b.p.ri+':'+b.bi;byRun[k]=(byRun[k]||0)+1});
+ const grp={};bars.forEach(b=>{const k=b.p.layer+'|'+b.p.bar;(grp[k]=grp[k]||{layer:b.p.layer,bar:b.p.bar,top:b.p.top,list:[],lap:0}).list.push(b);if(byRun[b.p.ri+':'+b.bi]>1)grp[k].lap++});
+ const G=Object.values(grp).sort((a,b)=>Math.max(...b.list.map(q=>q.z))-Math.max(...a.list.map(q=>q.z)));
+ const laps=Object.values(byRun).filter(v=>v>1).length,rows=[];bars.slice().sort((a,b)=>a.z-b.z).forEach(b=>{const r=rows.find(r=>Math.abs(r.z-b.z)<b.d*0.6);if(r)r.b.push(b);else rows.push({z:b.z,b:[b]})});
+ let worst=null;rows.forEach(r=>{const s=r.b.sort((a,b)=>a.y-b.y);for(let i=1;i<s.length;i++){const c=s[i].y-s[i-1].y-(s[i].d+s[i-1].d)/2,need=Math.max(25,s[i].d,s[i-1].d,4/3*S.settings.agg);if(worst===null||c-need<worst.c-worst.need)worst={c,need}}});
+ const out=bars.filter(b=>b.z-b.d/2<zb+sec.cb+ds-1||b.z+b.d/2>zb+sec.h-sec.ct-ds+1||Math.abs(b.y)+b.d/2>sec.b/2-sec.cs-ds+1);
+ return{x:cx,col,si,sec,zb,bars,G,laps,worst,out,stOn:col<0&&!!m.ST[si]&&m.ST[si].n>0}}
+function cutDraw(m,ci,ox,oy,k,th,title){const s=ci.sec,b=s.b,h=s.h,zb=ci.zb,ds=BARS[s.sb],X=y=>ox+(y+b/2)*k,Y=z=>oy+(zb+h-z)*k,fs=th.fs,D=m.D;let o='';
+ o+=`<text x="${X(0)}" y="${oy-fs*1.6}" fill="${th.tx}" font-size="${fs*1.2}" text-anchor="middle" font-weight="bold">${esc(title)}</text>`;
+ o+=`<rect x="${X(-b/2)}" y="${Y(zb+h)}" width="${b*k}" height="${h*k}" fill="${th.cf}" stroke="${th.cs}" stroke-width="${th.lw*1.4}"/>`;
+ const scol=pieceCol({key:stirKey(D,s),cat:'st',bar:s.sb,shape:'S'},th.dark);
+ if(ci.stOn)o+=stirDraw(s,X,Y,zb,k,scol,th.dark);
+ if(ci.col<0&&s.sk&&s.sk.on){o+=skinDraw(s,X,Y,zb,k,pieceCol({key:D.id+'|ข',cat:'sk',bar:s.sk.bar,shape:'I'},th.dark));o+=`<text x="${X(-b/2)-fs*2.4}" y="${Y(zb+h*0.3)}" fill="${th.lbl}" font-size="${fs*0.85}" text-anchor="end">ข้าง 2×${s.sk.n}-${s.sk.bar}</text>`}
+ ci.bars.forEach(q=>{const bad=ci.out.includes(q);o+=`<circle data-k="${esc(q.p.key)}" data-r="${esc(q.p.rid)}" cx="${X(q.y).toFixed(2)}" cy="${Y(q.z).toFixed(2)}" r="${Math.max(1.6,q.d/2*k).toFixed(2)}" fill="${bad?th.bad:pieceCol(q.p,th.dark)}" style="cursor:pointer"/>`});
+ const lx=X(b/2)+fs*2.6;let last=-1e9;
+ ci.G.forEach(G=>{const zt=G.top?Math.max(...G.list.map(q=>q.z)):Math.min(...G.list.map(q=>q.z)),r=G.list.reduce((a,q)=>q.y>a.y?q:a,G.list[0]);let ly=Y(zt);ly=Math.max(ly,last+fs*1.45);last=ly;
+  o+=`<polyline points="${X(r.y)+r.d/2*k},${Y(r.z)} ${X(b/2)+fs*1.2},${ly} ${lx-3},${ly}" fill="none" stroke="${th.lead}" stroke-width="0.7"/><text x="${lx}" y="${ly+fs*0.35}" fill="${th.lbl}" font-size="${fs}">${G.list.length}-${G.bar} (${G.layer})${G.lap?' ทาบ':''}</text>`});
+ const yd=Y(zb)+fs*1.5;o+=`<line x1="${X(-b/2)}" y1="${yd}" x2="${X(b/2)}" y2="${yd}" stroke="${th.dim}" stroke-width="0.7"/>`+[X(-b/2),X(b/2)].map(x=>`<line x1="${x-3}" y1="${yd+3}" x2="${x+3}" y2="${yd-3}" stroke="${th.dim}" stroke-width="0.8"/>`).join('')+`<text x="${X(0)}" y="${yd+fs*1.25}" fill="${th.dim}" font-size="${fs*0.95}" text-anchor="middle">${m2(b)}</text>`;
+ const xd=X(-b/2)-fs*1.2;o+=`<line x1="${xd}" y1="${Y(zb+h)}" x2="${xd}" y2="${Y(zb)}" stroke="${th.dim}" stroke-width="0.7"/>`+[Y(zb+h),Y(zb)].map(y=>`<line x1="${xd-3}" y1="${y+3}" x2="${xd+3}" y2="${y-3}" stroke="${th.dim}" stroke-width="0.8"/>`).join('')+`<text x="${xd-fs*0.5}" y="${(Y(zb+h)+Y(zb))/2}" fill="${th.dim}" font-size="${fs*0.95}" text-anchor="middle" transform="rotate(-90 ${xd-fs*0.5} ${(Y(zb+h)+Y(zb))/2})">${m2(h)}</text>`;
+ o+=`<text x="${X(0)}" y="${yd+fs*2.6}" fill="${th.lbl}" font-size="${fs}" text-anchor="middle">${ci.stOn?esc(stLabel(s)):(ci.col>=0?'ตำแหน่งนี้อยู่ในเสา '+esc(D.grids[ci.col].n):'')}</text>`;
+ o+=`<text x="${X(0)}" y="${yd+fs*3.8}" fill="${th.sub}" font-size="${fs*0.85}" text-anchor="middle">หุ้ม บน ${s.ct} · ล่าง ${s.cb} · ข้าง ${s.cs} มม.</text>`;
+ return o}
+function renderSecV(){const el=$('#secv');if(!el||!M)return;const D=M.D,g=M.g,raw=B();
+ if(CUT.x==null||CUT.bid!==D.id){const i=D.grids[0].free&&D.spans.length>1?1:0;CUT={x:(g.fa[i]+g.fb[i])/2,bid:D.id}}
+ const ci=cutInfo(M,CUT.x),s=ci.sec,k=Math.min(150/s.b,230/s.h),ox=74,oy=40,W=390,H=oy+s.h*k+78,fi=Math.max(0,D.grids.findIndex(x=>!x.free)),ref=g.X[fi];
+ const sv=(raw.cuts||[]).find(c=>Math.abs(c.x-ci.x)<1);$('#secT').textContent=sv?'SECTION '+sv.n+'–'+sv.n:'SECTION';
+ const sm=ci.G.map(G=>[`${G.top?'บน':'ล่าง'} · ${G.layer}`,`${G.list.length}-${G.bar}${G.lap?' · ทาบ '+G.lap+' เส้น':''}`,'']);
+ sm.push(['ปลอก',ci.stOn?stLabel(s):(ci.col>=0?'อยู่ในเสา '+D.grids[ci.col].n:'—'),'']);
+ if(ci.worst)sm.push(['ช่องว่างน้อยสุด',`${ci.worst.c.toFixed(1)} มม. (ต้อง ≥ ${ci.worst.need.toFixed(1)})`,ci.worst.c>=ci.worst.need-0.01?'ok':'bad']);
+ if(ci.out.length)sm.push(['ระยะหุ้ม',`เหล็ก ${ci.out.length} เส้นอยู่นอกแนวปลอกหรือหุ้มไม่พอ`,'bad']);
+ el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="หน้าตัดคานที่ตำแหน่งที่เลือก">${cutDraw(M,ci,ox,oy,k,THD(),D.id+' · '+s.id)}</svg>
+ <div class="kv">${sm.map(([a,b,c])=>`<div><span>${esc(a)}</span><span class="${c}">${esc(b)}</span></div>`).join('')}</div>
+ <div class="g2" style="margin-top:10px;align-items:end"><div class="f"><label>ตำแหน่งตัด (ม. จากกริด ${esc(D.grids[fi].n)})</label><input type="number" step="0.01" data-cx="1" value="${((ci.x-ref)/1000).toFixed(2)}"></div><button class="gold" data-cadd="1" style="height:38px">${sv?'อยู่บนแผ่นแบบแล้ว':'ใส่ลงแผ่นแบบ'}</button></div>
+ ${(raw.cuts||[]).length?`<div class="chips" style="margin-top:8px">${raw.cuts.map((c,i)=>`<span class="cchip"><button class="chip${sv===c?' on':''}" data-cgo="${i}">${esc(c.n)}–${esc(c.n)} · ${m2(c.x-ref)}</button><button class="x" data-cdel="${i}" aria-label="ลบหน้าตัด ${esc(c.n)}">✕</button></span>`).join('')}</div>`:''}`}
+$('#secv').addEventListener('click',e=>{const raw=B();const c=e.target.closest('[data-k]');if(c){pick(c.dataset.k,false,c.dataset.r);return}
+ if(e.target.closest('[data-cadd]')){raw.cuts=raw.cuts||[];if(raw.cuts.some(c=>Math.abs(c.x-CUT.x)<1))return;const used=raw.cuts.map(c=>c.n);let n='A';for(let i=0;i<26;i++){const L=String.fromCharCode(65+i);if(!used.includes(L)){n=L;break}}
+  raw.cuts.push({n,x:Math.round(CUT.x)});save();renderAll();toast('เพิ่ม Section '+n+'–'+n+' ลงแผ่นแบบแล้ว');return}
+ const go=e.target.closest('[data-cgo]');if(go){CUT.x=raw.cuts[+go.dataset.cgo].x;render2D();renderSecV();renderStatus();return}
+ const dl=e.target.closest('[data-cdel]');if(dl){const c=raw.cuts.splice(+dl.dataset.cdel,1)[0];if(raw.lay)delete raw.lay['cut:'+c.n];save();renderAll();toast('ลบ Section '+c.n+' แล้ว')}});
+$('#secv').addEventListener('change',e=>{if(!e.target.dataset.cx)return;const D=M.D,g=M.g,ref=g.X[Math.max(0,D.grids.findIndex(x=>!x.free))],v=parseFloat(e.target.value);if(!isFinite(v))return;CUT.x=Math.max(g.xl+1,Math.min(g.xr-1,ref+v*1000));render2D();renderSecV();renderStatus()});
+function renderStatus(){const el=$('#status');if(!el||!M)return;const D=M.D,g=M.g,ref=g.X[Math.max(0,D.grids.findIndex(x=>!x.free))];
+ el.innerHTML=`<span>เครื่องมือ: <b>${TOOL==='cut'?'ตัดหน้าตัด':'เลือกและแก้ไข'}</b></span><span>ตำแหน่งตัด ${CUT.x!=null?m2(CUT.x-ref)+' ม.':'—'}</span><span>Snap หน้าเสา · ศูนย์กริด</span><span>${esc(D.id)} · ${D.spans.length} ช่วง · ${M.P.length} ท่อน</span><span class="${M.W.length?'bad':'ok'}" style="margin-left:auto">${M.W.length?'คำเตือน '+M.W.length+' รายการ':'ผ่านเกณฑ์ทั้งหมด'}</span>`}
+document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>{TOOL=b.dataset.tool;document.querySelectorAll('[data-tool]').forEach(x=>x.classList.toggle('on',x===b));$('#v2').classList.toggle('cutm',TOOL==='cut');renderStatus();toast(TOOL==='cut'?'เครื่องมือตัด: แตะตำแหน่งใดก็ได้บน Profile':'เครื่องมือเลือก')});
+document.querySelectorAll('[data-jump]').forEach(b=>b.onclick=()=>{S.tab=b.dataset.jump;save();renderOut();$('#tabs').scrollIntoView({behavior:'smooth',block:'start'})});
+(function(){const el=$('#v2');
+ el.addEventListener('pointerdown',e=>{if(!e.target.closest('[data-cut]'))return;e.preventDefault();DRC=true;FROZ=[M2.lo,M2.hi];try{el.setPointerCapture(e.pointerId)}catch(_){}});
+ el.addEventListener('pointermove',e=>{if(!DRC)return;const q=svgPt(el,e),g=M.g;CUT.x=Math.max(g.xl+1,Math.min(g.xr-1,Math.round((M2.lo+(q.x-M2.mx)/M2.sx)/10)*10));render2D();renderSecV();renderStatus()});
+ const up=()=>{if(!DRC)return;DRC=null;FROZ=null;DRAGGED=Date.now();render2D()};el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up)})();
+
+/* ===== Sheet layout mode ===== */
+let LDR=null,LSTEP=1,LEDIT=false;
+function nudge(dx,dy){const raw=B();raw.lay=raw.lay||{};SELIT.forEach(i=>{const o=raw.lay[i]||{dx:0,dy:0};raw.lay[i]={dx:Math.round(((o.dx||0)+dx)*10)/10,dy:Math.round(((o.dy||0)+dy)*10)/10}});save();renderOut()}
+function setOff(dx,dy){const raw=B();raw.lay=raw.lay||{};SELIT.forEach(i=>{const o=raw.lay[i]||{dx:0,dy:0};raw.lay[i]={dx:dx==null?(o.dx||0):dx,dy:dy==null?(o.dy||0):dy}});save();renderOut()}
+function selPiece(id){const t=id.slice(3),j=t.lastIndexOf(':'),rid=t.slice(0,j),i=t.slice(j+1);return M.P.find(q=>q.rid===rid&&String(q.i)===i)}
+function layPanelHTML(){const raw=B(),n=SELIT.size,id=[...SELIT][0],o=(n===1&&(raw.lay||{})[id])||{},ed=n===1&&(id.startsWith('pl:')||id.startsWith('tag:'));
+ let cur='';if(ed){if(id.startsWith('tag:'))cur=raw.id;else{const p=selPiece(id);cur=p?p.mark:''}}
+ return`<div class="card lay"><div class="chips"><span style="color:var(--au2);letter-spacing:1px">โหมดจัดหน้า · เลือก ${n} ชิ้น</span><label class="ck"><input type="checkbox" id="lMulti"${LMULTI?' checked':''}> เลือกหลายชิ้น</label><span class="note" style="margin:0">ลากเพื่อย้าย · Shift+คลิก เลือกหลายชิ้น · ลูกศรบนคีย์บอร์ด (Shift = 5 มม.)</span></div>
+ ${n?`<div class="chips" style="margin-top:8px;align-items:end">${n===1?`<div class="f" style="width:130px"><label>ขวา + / ซ้าย − (มม.)</label><input type="number" step="0.5" id="lDx" value="${+(o.dx||0).toFixed(1)}"></div><div class="f" style="width:130px"><label>ลง + / ขึ้น − (มม.)</label><input type="number" step="0.5" id="lDy" value="${+(o.dy||0).toFixed(1)}"></div>`:''}
+  <span class="nud"><button class="ib" data-nd="-1,0" aria-label="เลื่อนซ้าย">←</button><button class="ib" data-nd="0,-1" aria-label="เลื่อนขึ้น">↑</button><button class="ib" data-nd="0,1" aria-label="เลื่อนลง">↓</button><button class="ib" data-nd="1,0" aria-label="เลื่อนขวา">→</button></span>
+  <div class="f" style="width:96px"><label>ทีละ (มม.)</label><select id="lStep">${[0.5,1,2,5,10].map(v=>`<option${v==LSTEP?' selected':''}>${v}</option>`).join('')}</select></div>
+  <button class="ib" id="lReset">คืนตำแหน่งที่เลือก</button><button class="ib" id="lClr">ยกเลิกการเลือก</button></div>`:''}
+ ${ed?`<div class="chips" style="margin-top:8px;align-items:end">${LEDIT?`<div class="f" style="width:220px"><label>${id.startsWith('tag:')?'ชื่อคาน':'ชื่อเหล็ก (รหัสท่อน)'}</label><input type="text" id="lTxt" value="${esc(cur)}"></div><button class="gold" id="lSave">บันทึก</button><button class="ib" id="lCancel">ยกเลิก</button>`:`<button class="ib" id="lEdit">แก้ไขข้อความ</button>`}<span class="note" style="margin:0">ระยะและความยาวล็อกตามค่าจริง แก้ได้เฉพาะชื่อ</span></div>`:''}
+ <div class="chips" style="margin-top:8px"><button class="ib" id="lAll">คืนตำแหน่งทั้งแผ่น</button></div></div>`}
+function confirmBox(msg,ok){const d=document.createElement('div');d.className='modal';d.innerHTML=`<div class="mbox" role="dialog" aria-modal="true"><div class="mt">ข้อมูลเปลี่ยนแปลง</div><div class="mm">${msg}</div><div class="chips" style="justify-content:flex-end;margin-top:16px"><button class="ib" data-m="0">ยกเลิก</button><button class="gold" data-m="1">ตกลง</button></div></div>`;
+ document.body.appendChild(d);d.addEventListener('click',e=>{const b=e.target.closest('[data-m]');if(!b&&e.target!==d)return;d.remove();if(b&&b.dataset.m==='1')ok()})}
+function saveTxt(){const t=$('#lTxt');if(!t)return;const v=t.value.trim(),id=[...SELIT][0],raw=B();if(!v){toast('กรุณากรอกชื่อ');return}
+ if(id.startsWith('tag:')){if(v===raw.id){LEDIT=false;renderOut();return}if(S.beams.some(b=>b!==raw&&b.id===v)){toast('มีคานชื่อนี้แล้ว');return}
+  confirmBox(`ชื่อคาน <b>${esc(raw.id)}</b> → <b>${esc(v)}</b><br><br>ต้องการแก้ไขข้อมูลในระบบให้เปลี่ยนตามที่บันทึกไหม<br><span class="note">มีผลกับ Profile, 3D, ตาราง Bending, DXF และไฟล์เชื่อม</span>`,()=>{raw.id=v;SEL=null;LEDIT=false;SELIT.clear();save();renderTop();renderAll();toast('เปลี่ยนชื่อคานแล้ว')});return}
+ const p=selPiece(id);if(!p){toast('ไม่พบเหล็กที่เลือก');return}if(v===p.mark){LEDIT=false;renderOut();return}
+ if(M.P.some(q=>q.mark===v&&q.mark0!==p.mark0)){toast('มีรหัสเหล็กนี้แล้วในคานนี้');return}
+ const nSame=M.P.filter(q=>q.mark0===p.mark0).length;
+ confirmBox(`ชื่อเหล็ก <b>${esc(p.mark)}</b> → <b>${esc(v)}</b> (${nSame} ท่อนที่ใช้รหัสเดียวกัน)<br><br>ต้องการแก้ไขข้อมูลในระบบให้เปลี่ยนตามที่บันทึกไหม<br><span class="note">มีผลกับตาราง Bending, ส่งออก Bar Cut, DXF และไฟล์เชื่อม</span>`,()=>{raw.names=raw.names||{};raw.names[p.mark0]=v;SEL=null;LEDIT=false;save();renderAll();toast('เปลี่ยนชื่อเหล็กแล้ว')})}
+function bindLay(){const on=(id,fn)=>{const e=$(id);if(e)e.onclick=fn};
+ on('#layBtn',()=>{LAYM=!LAYM;if(!LAYM){SELIT.clear();LEDIT=false}renderOut()});
+ const lm=$('#lMulti');if(lm)lm.onchange=()=>{LMULTI=lm.checked};
+ const dx=$('#lDx'),dy=$('#lDy');if(dx)dx.onchange=()=>setOff(+dx.value,null);if(dy)dy.onchange=()=>setOff(null,+dy.value);
+ const st=$('#lStep');if(st)st.onchange=()=>{LSTEP=+st.value};
+ document.querySelectorAll('[data-nd]').forEach(b=>b.onclick=()=>{const[a,c]=b.dataset.nd.split(',').map(Number);nudge(a*LSTEP,c*LSTEP)});
+ on('#lReset',()=>{const raw=B();SELIT.forEach(i=>{if(raw.lay)delete raw.lay[i]});save();renderOut()});
+ on('#lClr',()=>{SELIT.clear();LEDIT=false;renderOut()});
+ on('#lAll',()=>{B().lay={};save();renderOut();toast('คืนตำแหน่งทั้งแผ่นแล้ว')});
+ on('#lEdit',()=>{LEDIT=true;renderOut();const t=$('#lTxt');if(t){t.focus();t.select()}});on('#lCancel',()=>{LEDIT=false;renderOut()});on('#lSave',saveTxt);
+ const t=$('#lTxt');if(t)t.onkeydown=e=>{if(e.key==='Enter')saveTxt()}}
+$('#out').addEventListener('pointerdown',e=>{if(!LAYM||S.tab!=='sheet')return;const svg=e.target.closest('#sheet svg');if(!svg)return;const it=e.target.closest('[data-it]');
+ if(!it){if(!e.shiftKey&&!LMULTI&&SELIT.size){SELIT.clear();LEDIT=false;renderOut()}return}
+ e.preventDefault();const id=it.dataset.it,raw=B();
+ if(e.shiftKey||LMULTI){if(SELIT.has(id))SELIT.delete(id);else SELIT.add(id)}else if(!SELIT.has(id)){SELIT.clear();SELIT.add(id)}
+ LEDIT=false;svg.querySelectorAll('[data-it]').forEach(g=>g.classList.toggle('itsel',SELIT.has(g.dataset.it)));
+ const p=svgPt(svg,e);LDR={x:p.x,y:p.y,svg,moved:false,dx:0,dy:0,base:[...SELIT].map(i=>[i,Object.assign({dx:0,dy:0},(raw.lay||{})[i])])};try{svg.setPointerCapture(e.pointerId)}catch(_){}});
+$('#out').addEventListener('pointermove',e=>{if(!LDR)return;const p=svgPt(LDR.svg,e),dx=p.x-LDR.x,dy=p.y-LDR.y;if(!LDR.moved&&Math.hypot(dx,dy)<0.6)return;LDR.moved=true;LDR.dx=dx;LDR.dy=dy;
+ LDR.base.forEach(([i,o])=>{const g=LDR.svg.querySelector('[data-it="'+CSS.escape(i)+'"]');if(g)g.setAttribute('transform',`translate(${((o.dx+dx)/LASTF).toFixed(2)} ${((o.dy+dy)/LASTF).toFixed(2)})`)})});
+$('#out').addEventListener('pointerup',()=>{if(!LDR)return;const d=LDR;LDR=null;const raw=B();raw.lay=raw.lay||{};
+ if(d.moved){d.base.forEach(([i,o])=>{raw.lay[i]={dx:Math.round((o.dx+d.dx)*10)/10,dy:Math.round((o.dy+d.dy)*10)/10}});save()}renderOut()});
+document.addEventListener('keydown',e=>{if(!LAYM||S.tab!=='sheet'||!SELIT.size||location.hash!=='#beam')return;const t=e.target;if(t&&/INPUT|SELECT|TEXTAREA/.test(t.tagName))return;
+ if(e.key==='Escape'){SELIT.clear();LEDIT=false;renderOut();return}const k={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];if(!k)return;e.preventDefault();const s=e.shiftKey?5:LSTEP;nudge(k[0]*s,k[1]*s)});
+
+/* ===== Filter + colour bar ===== */
+function renderFilt(){const rows=ROWS,u=k=>[...new Set(rows.map(r=>r[k]))].filter(Boolean),C=S.settings.col,pre=PAL[C.preset]||PAL.gold,ov=C.over||{};
+ const grp=(lbl,k,vals)=>`<div class="chips" style="margin-bottom:5px"><span class="note fl">${lbl}</span><button class="chip${!FIL[k]?' on':''}" data-f="${k}:">ทั้งหมด</button>${vals.map(v=>`<button class="chip${FIL[k]===v?' on':''}" data-f="${k}:${esc(v)}">${esc(v)}</button>`).join('')}</div>`;
+ const shapes=[...new Set(rows.map(r=>SHN[shCls(r.shape)]))];
+ let ent=[];if(C.mode==='type')ent=Object.keys(CATN).map(k=>['type:'+k,CATN[k],ov['type:'+k]||pre.type[k]]);
+ else if(C.mode==='size')ent=u('bar').map(b=>['size:'+b,b,ov['size:'+b]||(SIZEPAL[C.preset]||SIZEPAL.gold)[b]]);
+ else if(C.mode==='shape')ent=['I','L','U','S'].map(k=>['shape:'+k,SHN[k],ov['shape:'+k]||pre.shape[k]]);
+ $('#filt').innerHTML=`<details class="card" open><summary style="cursor:pointer;color:var(--mu);letter-spacing:2px;font-size:12px">ตัวกรองและสีเหล็ก</summary><div style="margin-top:8px">
+ ${grp('ชั้น','floor',u('floor'))}${grp('คาน','beam',u('beam'))}${grp('ชั้นเหล็ก','layer',u('layer'))}${grp('ขนาด','bar',u('bar'))}${grp('รูปร่าง','shape',shapes)}
+ <div class="chips" style="margin:8px 0 5px"><span class="note fl">สีตาม</span>${[['type','ประเภท'],['size','ขนาดเหล็ก'],['shape','รูปร่าง'],['mark','กำหนดเองทีละรายการ']].map(([k,t])=>`<button class="chip${C.mode===k?' on':''}" data-c="mode:${k}">${t}</button>`).join('')}</div>
+ <div class="chips" style="margin-bottom:5px"><span class="note fl">ชุดสี</span>${[['gold','ทอง'],['plan','ตามแบบ'],['mono','ขาวดำ']].map(([k,t])=>`<button class="chip${C.preset===k?' on':''}" data-c="preset:${k}">${t}</button>`).join('')}<button class="chip" data-c="reset:1">ล้างสีที่ตั้งเอง</button></div>
+ <div class="chips">${C.mode==='mark'?'<span class="note" style="margin:0">แตะช่องสีในตาราง Bending เพื่อตั้งสีทีละรายการ · รายการที่ไม่ได้ตั้งใช้สีตามประเภท</span>':ent.map(([k,t,c])=>`<label class="sw2"><input type="color" data-col="${esc(k)}" value="${c}">${esc(t)}</label>`).join('')}</div></div></details>`}
+$('#filt').addEventListener('click',e=>{const f=e.target.closest('[data-f]');if(f){const i=f.dataset.f.indexOf(':');FIL[f.dataset.f.slice(0,i)]=f.dataset.f.slice(i+1);renderAll();return}
+ const c=e.target.closest('[data-c]');if(c){const[k,v]=c.dataset.c.split(':'),C=S.settings.col;if(k==='mode')C.mode=v;else if(k==='preset')C.preset=v;else C.over={};save();renderAll()}});
+document.addEventListener('input',e=>{const k=e.target.dataset&&e.target.dataset.col;if(!k)return;S.settings.col.over[k]=e.target.value;save();renderAll(true,true)});
+
+/* ===== 2D editor ===== */
+function extRange(m){let lo=m.g.xl,hi=m.g.xr;m.P.forEach(p=>{lo=Math.min(lo,p.x0);hi=Math.max(hi,p.x1)});return[lo,hi]}
+function render2D(){if(M&&(CUT.x==null||CUT.bid!==M.D.id)){const D0=M.D,i=D0.grids[0].free&&D0.spans.length>1?1:0;CUT={x:(M.g.fa[i]+M.g.fb[i])/2,bid:D0.id}}const bm=B(),D=M.D,g=M.g,n=D.spans.length,[lo,hi]=FROZ||extRange(M),W=Math.max(1100,n*210),mx=46,sx=(W-2*mx)/(hi-lo),X=x=>mx+(x-lo)*sx;
+ const top=i=>D.zb[i]+secOf(D,i).h,zmax=Math.max(...D.zb.map((_,i)=>top(i))),zmin=Math.min(...D.zb),sy=Math.min(0.2,96/(zmax-zmin)),y0=64,Y=z=>y0+(zmax-z)*sy,yb=Y(zmin),H=yb+78,anyLvl=bm.spans.some(s=>s.lvl!==0);
+ M2={lo,hi,sx,mx};const el=$('#v2');el.setAttribute('viewBox',`0 0 ${W} ${H}`);el.style.minWidth=Math.max(340,n*185)+'px';
+ let o=`<defs><clipPath id="c2in"><rect x="${X(g.xl)}" y="0" width="${(g.xr-g.xl)*sx}" height="${H}"/></clipPath><clipPath id="c2out"><rect x="0" y="0" width="${X(g.xl)}" height="${H}"/><rect x="${X(g.xr)}" y="0" width="${W}" height="${H}"/></clipPath></defs>`;
+ D.grids.forEach((gr,j)=>{if(gr.free)return;const x=X(g.X[j]),on=UI.t==='grid'&&UI.i===j,adj=[j-1,j].filter(i=>i>=0&&i<n),ct=Math.max(...adj.map(top)),J=D.joints&&D.joints[j];
+  o+=`<g data-g="${j}" style="cursor:pointer"><rect x="${X(g.X[j]-g.w[j]/2)}" y="${Y(ct)-12}" width="${Math.max(4,g.w[j]*sx)}" height="${yb-Y(ct)+12+40}" fill="${on?'#2A2416':'#1A1B1F'}" stroke="${on?'#C9A55C':'#55585E'}"/><line x1="${x}" y1="38" x2="${x}" y2="${Y(ct)-12}" stroke="#3A3D43" stroke-dasharray="4 3"/><circle cx="${x}" cy="22" r="15" fill="${on?'#1C1810':'#0E0F12'}" stroke="${on?'#C9A55C':'#8A8E95'}" stroke-width="${on?2:1}"/><text x="${x}" y="27.5" fill="${on?'#E2C584':'#C8C5BE'}" font-size="16" text-anchor="middle">${esc(gr.n)}</text>`;
+  if(J){const ms=[J.t,J.b].filter(Boolean).map(R=>({lap:'',ext:'1',hook:'2',haunch:'3'})[R.m]).filter(Boolean);if(ms.length)o+=`<text x="${x+19}" y="16" fill="#E8963A" font-size="11">แบบ ${[...new Set(ms)].join('/')}</text>`}
+  o+='</g>'});
+ for(let i=0;i<n;i++){const s=secOf(D,i),xa=X(i===0?g.xl:g.fa[i]),xb=X(i===n-1?g.xr:g.fb[i]),on=UI.t==='span'&&UI.i===i,yt=Y(top(i)),hh=s.h*sy,xm=(xa+xb)/2,narrow=xb-xa<90;
+  o+=`<g data-s="${i}" style="cursor:pointer"><rect x="${xa}" y="${yt-16}" width="${xb-xa}" height="${yb-yt+16+62}" fill="#fff" fill-opacity="0.001"/><rect x="${xa}" y="${yt}" width="${xb-xa}" height="${hh}" fill="${on?'#1C1810':'#15161A'}" stroke="${on?'#C9A55C':'#6F737A'}" stroke-width="${on?2:1}"/>`;
+  const sk=stirKey(D,s),sc=V.stir?pieceCol({key:sk,cat:'st',bar:s.sb,shape:'S'},true):null;
+  M.ST[i].xs.forEach(x=>{o+=`<line x1="${X(x)}" y1="${yt+3}" x2="${X(x)}" y2="${yt+hh-3}" stroke="${sc?mix(sc,BG,0.55):'#2F3136'}" stroke-width="1"/>`});
+  if(s.sk&&s.sk.on)s.sk.zs.forEach(z=>{const y=Y(D.zb[i]+z);o+=`<line x1="${xa+3}" y1="${y}" x2="${xb-3}" y2="${y}" stroke="${mix(pieceCol({key:D.id+'|ข',cat:'sk',bar:s.sk.bar,shape:'I'},true),BG,0.3)}" stroke-width="1.2" stroke-dasharray="6 4"/>`});
+  M.ST[i].hgs.forEach(h=>{const hc=pieceCol({key:stirKey(D,s)+':ข',cat:'hg',bar:h.bar,shape:'S'},true);if(h.bs)o+=`<rect x="${X(h.xc-h.bs/2)}" y="${yt}" width="${Math.max(2,h.bs*sx)}" height="${Math.min(hh,(h.hs||s.h*0.6)*sy)}" fill="${hc}" fill-opacity="0.16" stroke="${hc}" stroke-dasharray="3 2"/>`;
+   h.xs.forEach(x=>{o+=`<line x1="${X(x)}" y1="${yt+2}" x2="${X(x)}" y2="${yt+hh-2}" stroke="${hc}" stroke-width="1.6"/>`})});
+  o+=`<text x="${xm}" y="${yb+20}" fill="${on?'#E2C584':'#C8C5BE'}" font-size="15" text-anchor="middle">${D.spans[i].toFixed(2)}</text>`;
+  if(!narrow)o+=`<text x="${xm}" y="${yb+38}" fill="#8A8E95" font-size="12.5" text-anchor="middle">${m2(s.b)}×${m2(s.h)} · ${esc(M.ST[i].label.replace(/^\d+-/,''))}</text>`;
+  if(anyLvl)o+=`<text x="${xm}" y="${yt-5}" fill="${on?'#E2C584':'#8A8E95'}" font-size="12.5" text-anchor="middle">T${bm.spans[i].lvl>=0?'+':''}${bm.spans[i].lvl.toFixed(2)}</text>`;
+  o+='</g>'}
+ M.P.forEach(p=>{const pts=barPath(D,M,p,0),on=SEL===p.key,c=pieceCol(p,true);
+  const d=pts.map(q=>X(q[0]).toFixed(1)+','+(Y(q[2])+(p.i%2?(p.top?3:-3):0)).toFixed(1)).join(' ');
+  o+=`<g data-k="${esc(p.key)}" data-r="${esc(p.rid)}" style="cursor:pointer"><polyline points="${d}" fill="none" stroke="#fff" stroke-opacity="0.001" stroke-width="12"/><polyline clip-path="url(#c2in)" points="${d}" fill="none" stroke="${c}" stroke-width="${on?4:2.4}" stroke-linejoin="round" stroke-linecap="round"/><polyline clip-path="url(#c2out)" points="${d}" fill="none" stroke="${c}" stroke-width="${on?4:2.4}" stroke-dasharray="7 5"/></g>`});
+ ((B().cuts)||[]).forEach(c=>{const x=X(c.x);o+=`<line x1="${x}" y1="44" x2="${x}" y2="${yb+40}" stroke="#6F737A" stroke-width="1" stroke-dasharray="4 3" pointer-events="none"/><text x="${x+5}" y="56" fill="#9A9DA3" font-size="13" pointer-events="none">${esc(c.n)}</text>`});
+ if(CUT.x!=null&&CUT.bid===D.id){const x=X(CUT.x);o+=`<line x1="${x}" y1="48" x2="${x}" y2="${yb+44}" stroke="#E8963A" stroke-width="1.5" stroke-dasharray="8 4" pointer-events="none"/><polygon points="${x-7},48 ${x+7},48 ${x},39" fill="#E8963A" pointer-events="none"/><polygon points="${x-7},${yb+44} ${x+7},${yb+44} ${x},${yb+53}" fill="#E8963A" pointer-events="none"/><circle data-cut="1" cx="${x}" cy="${yb+64}" r="9" fill="#0E0F12" stroke="#E8963A" stroke-width="2" style="cursor:ew-resize;touch-action:none"/>`}
+ if(UI.t==='bar'){const r=D.runs.find(x=>x.id===UI.id),ps=M.P.filter(p=>p.rid===UI.id);if(r&&ps.length){const e=runExt(D,g,r),p0=ps[0],pl=ps[ps.length-1],A=barPath(D,M,p0,0),Bp=barPath(D,M,pl,0),ya=Y(A[p0.hl?7:0][2]),yb2=Y(Bp[pl.hr?Bp.length-8:Bp.length-1][2]),ref=g.X[Math.max(0,D.grids.findIndex(x=>!x.free))];
+  ps.forEach(p=>{const pts=barPath(D,M,p,0);o+=`<polyline points="${pts.map(q=>X(q[0]).toFixed(1)+','+(Y(q[2])+(p.i%2?(p.top?3:-3):0)).toFixed(1)).join(' ')}" fill="none" stroke="#FFE08A" stroke-width="7" stroke-opacity="0.28" pointer-events="none"/>`});
+  [['a',e.xs,ya,r.ea],['b',e.xe,yb2,r.eb]].forEach(([k,x,y,t])=>{const lx=X(x);o+=`<text x="${lx}" y="${y-14}" fill="#FFE08A" font-size="12.5" text-anchor="middle" pointer-events="none">${m2(x-ref)}</text>`;
+   o+=t==='hook'?`<rect x="${lx-5}" y="${y-5}" width="10" height="10" fill="#55585E" stroke="#FFE08A" pointer-events="none"/>`:`<circle data-h="${k}" cx="${lx}" cy="${y}" r="10" fill="#FFE08A" stroke="#0B0B0D" stroke-width="2" style="cursor:ew-resize;touch-action:none"/>`})}}
+ el.innerHTML=o}
+$('#v2').addEventListener('click',e=>{if(Date.now()-DRAGGED<350)return;if(e.target.closest('[data-h]')||e.target.closest('[data-cut]'))return;const xm=M2?M2.lo+(svgPt($('#v2'),e).x-M2.mx)/M2.sx:null;
+ if(TOOL==='cut'){if(xm!=null){CUT.x=Math.max(M.g.xl+1,Math.min(M.g.xr-1,xm));render2D();renderSecV();renderStatus()}return}
+ if(xm!=null&&!e.target.closest('[data-g]'))CUT.x=Math.max(M.g.xl+1,Math.min(M.g.xr-1,xm));const k=e.target.closest('[data-k]');if(k){pick(k.dataset.k,true,k.dataset.r);return}
+ const gq=e.target.closest('[data-g]'),sq=e.target.closest('[data-s]');if(gq)UI={t:'grid',i:+gq.dataset.g};else if(sq)UI={t:'span',i:+sq.dataset.s};else return;
+ renderTop();renderPanel();render2D();renderSecV();renderStatus()});
+
+/* ===== 3D ===== */
+let M=null;
+function barPath(bm,m,p,bi){const g=m.g,d=p.d,R=bendD(d)/2+d/2,dir=p.top?-1:1,lapOff=(p.i%2)*d,lo=p.lo,hi=p.hi,ck=p.host!=null?[]:(p.r._ck||[]);
+ const cx=x=>Math.min(Math.max(x,g.xl+1),g.xr-1),sI=x=>p.host!=null?p.host:Math.max(lo,Math.min(hi,spanAt(g,cx(x))));
+ const yAt=x=>{const sl=slots(bm,g,sI(x),p.layer),y=sl.map[p.ri+':'+bi]||0;return y+(y>0?-lapOff:lapOff)};
+ const zAt=x=>{let z=zLayer(bm,sI(x),p.layer,d);ck.forEach(c=>{const t=Math.max(0,Math.min(1,(x-c.x0)*c.dir/(6*Math.abs(c.dz))));z+=t*c.dz});return z};
+ const xa=p.x0+d/2,xb=p.x1-d/2,pts=[];
+ if(p.hl){const z=zAt(xa),y=yAt(xa);pts.push([xa,y,z+dir*(p.la-d/2)]);for(let i=0;i<=6;i++){const a=i/6*Math.PI/2;pts.push([xa+R-R*Math.cos(a),y,z+dir*(R-R*Math.sin(a))])}}
+ else pts.push([xa,yAt(xa),zAt(xa)]);
+ const xi0=p.hl?xa+R:xa,xi1=p.hr?xb-R:xb,brk=[];
+ g.X.forEach((X,gi)=>{const hw=Math.max(g.w[gi],60)/2;brk.push(X-hw,X+hw)});ck.forEach(c=>brk.push(c.x0,c.x1));
+ brk.filter(v=>v>xi0+5&&v<xi1-5).sort((a,b)=>a-b).forEach(v=>pts.push([v,yAt(v),zAt(v)]));
+ if(p.hr){const z=zAt(xb),y=yAt(xb);for(let i=0;i<=6;i++){const a=i/6*Math.PI/2;pts.push([xb-R+R*Math.sin(a),y,z+dir*(R-R*Math.cos(a))])}pts.push([xb,y,z+dir*(p.lb-d/2)])}
+ else pts.push([xb,yAt(xb),zAt(xb)]);
+ return pts}
+function boxEdges(x1,x2,y1,y2,z1,z2){const c=[[x1,y1,z1],[x2,y1,z1],[x2,y2,z1],[x1,y2,z1],[x1,y1,z2],[x2,y1,z2],[x2,y2,z2],[x1,y2,z2]];return[[0,1,2,3,0],[4,5,6,7,4],[0,4],[1,5],[2,6],[3,7]].map(e=>e.map(i=>c[i]))}
+function render3D(){const bm=M.D,m=M,g=m.g,n=bm.spans.length,W=1000,H=300,[lo,hi]=extRange(m),len=hi-lo,s=V.zoom*(W-60)/len,cx=lo+len*V.pan;
+ const top=i=>bm.zb[i]+secOf(bm,i).h,cz=(Math.max(...bm.zb.map((_,i)=>top(i)))+Math.min(...bm.zb))/2;
+ const ct=Math.cos(V.th),sn=Math.sin(V.th),cp=Math.cos(V.ph),sp=Math.sin(V.ph);
+ const pr=q=>{const x=q[0]-cx,X=x*ct-q[1]*sn,D=x*sn+q[1]*ct;return[W/2+X*s,H/2+(-(q[2]-cz)*cp-D*sp)*s,D]};
+ const items=[];
+ if(V.conc){bm.spans.forEach((_,si)=>{const sc=secOf(bm,si);boxEdges(si===0&&bm.grids[0].free?g.xl:g.fa[si],si===n-1&&bm.grids[n].free?g.xr:g.fb[si],-sc.b/2,sc.b/2,bm.zb[si],top(si)).forEach(e=>items.push({pts:e,c:'#3A3D43',w:.8,d:1e9}))});
+  g.X.forEach((X,i)=>{if(bm.grids[i].free)return;const adj=[i-1,i].filter(k=>k>=0&&k<n),hw=g.w[i]/2,hb=Math.max(g.w[i],...adj.map(k=>secOf(bm,k).b))/2;
+   boxEdges(X-hw,X+hw,-hb,hb,Math.min(...adj.map(k=>bm.zb[k]))-450,Math.max(...adj.map(top))).forEach(e=>items.push({pts:e,c:'#2B2D32',w:.8,d:1e9}))})}
+ if(V.stir)m.ST.forEach(st=>{const sc=st.sec,ds=BARS[sc.sb],a=sc.b/2-sc.cs-ds/2,zb=bm.zb[st.si],z1=zb+sc.cb+ds/2,z2=zb+sc.h-sc.ct-ds/2,k=stirKey(bm,sc),col=pieceCol({key:k,cat:'st',bar:sc.sb,shape:'S'},true);
+  st.xs.forEach(x=>items.push({pts:[[x,-a,z1],[x,a,z1],[x,a,z2],[x,-a,z2],[x,-a,z1]],c:col,w:Math.max(SEL===k?1.6:.9,ds*s),d:x*sn,k}))});
+ m.P.forEach(p=>{const on=SEL===p.key,col=pieceCol(p,true);for(let bi=0;bi<p.n;bi++){const pts=barPath(bm,m,p,bi),mid=pts[Math.floor(pts.length/2)];
+  items.push({pts,c:col,w:Math.max(on?3:1.8,p.d*s),d:mid[0]*sn+mid[1]*ct-(on?1e6:0),k:p.key,r:p.rid})}});
+ items.sort((a,b)=>b.d-a.d);let o='';
+ items.forEach(it=>{const q=it.pts.map(pr);if(q.every(v=>v[0]<-50)||q.every(v=>v[0]>W+50))return;
+  o+=`<polyline ${it.k?`data-k="${esc(it.k)}" data-r="${esc(it.r||'')}" style="cursor:pointer"`:''} points="${q.map(v=>v[0].toFixed(1)+','+v[1].toFixed(1)).join(' ')}" fill="none" stroke="${it.c}" stroke-width="${it.w.toFixed(2)}" stroke-linejoin="round" stroke-linecap="round"/>`});
+ g.X.forEach((X,i)=>{if(bm.grids[i].free)return;const adj=[i-1,i].filter(k=>k>=0&&k<n),q=pr([X,0,Math.max(...adj.map(top))+260]);if(q[0]>0&&q[0]<W)o+=`<circle cx="${q[0]}" cy="${q[1]}" r="11" fill="#0E0F12" stroke="#8A8E95"/><text x="${q[0]}" y="${q[1]+4.5}" fill="#C8C5BE" font-size="13" text-anchor="middle">${esc(bm.grids[i].n)}</text>`});
+ $('#v3').innerHTML=o}
+(function(){const el=$('#v3');let drag=null,moved=false;
+ el.addEventListener('pointerdown',e=>{drag=[e.clientX,e.clientY];moved=false;try{el.setPointerCapture(e.pointerId)}catch(_){}});
+ el.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag[0],dy=e.clientY-drag[1];if(Math.abs(dx)+Math.abs(dy)>4)moved=true;if(!moved)return;drag=[e.clientX,e.clientY];V.th=Math.max(-1.5,Math.min(1.5,V.th+dx*0.008));V.ph=Math.max(0,Math.min(1.5,V.ph+dy*0.006));render3D()});
+ el.addEventListener('pointerup',e=>{drag=null;if(!moved){const t=document.elementFromPoint(e.clientX,e.clientY),k=t&&t.closest&&t.closest('[data-k]');if(k)pick(k.dataset.k,false,k.dataset.r);else if(SEL){SEL=null;renderAll()}}});
+ $('#zoom').oninput=e=>{V.zoom=+e.target.value;render3D()};$('#pan').oninput=e=>{V.pan=+e.target.value;render3D()};
+ $('#vfit').onclick=()=>{V.zoom=1;V.pan=.5;$('#zoom').value=1;$('#pan').value=.5;render3D()};
+ $('#vconc').onclick=e=>{V.conc=!V.conc;e.target.classList.toggle('on',V.conc);render3D()};
+ $('#vstir').onclick=e=>{V.stir=!V.stir;e.target.classList.toggle('on',V.stir);render2D();render3D()}})();
+function pick(key,focus,rid){const id=key.split('|')[0],bi=S.beams.findIndex(b=>b.id===id);
+ if(SEL===key&&(!rid||(UI.t==='bar'&&UI.id===rid))){SEL=null;if(UI.t==='bar')UI={t:'span',i:UI.si||0};renderPanel();renderAll();return}
+ SEL=key;if(bi>=0&&bi!==S.cur){S.cur=bi;renderTop()}
+ M=build(B());
+ if(key.includes('|ป/')){const k=M.ST.findIndex(t=>stirKey(M.D,t.sec)===key);UI={t:'span',i:Math.max(0,k)}}
+ else{const p=(rid&&M.P.find(q=>q.rid===rid&&q.key===key))||M.P.find(q=>q.key===key);if(p)UI={t:'bar',id:p.rid,si:p.lo}}
+ const ps=M.P.filter(p=>p.key===key);
+ if(focus&&ps.length){const[lo,hi]=extRange(M),len=hi-lo,x0=Math.min(...ps.map(p=>p.x0)),x1=Math.max(...ps.map(p=>p.x1));V.pan=((x0+x1)/2-lo)/len;V.zoom=Math.max(1,Math.min(14,0.8*len/Math.max(x1-x0,1500)));$('#zoom').value=V.zoom;$('#pan').value=V.pan}
+ renderPanel();renderAll()}
+
+/* ===== Sheet (Revit-like) ===== */
+const RED='#c00000',BLU='#0000b0';
+function secDraw(bm,m,k,ox,oy,sc){const s=bm.sections[k],si=bm.spanSec.reduce((b,v,i)=>v===k&&(b<0||m.g.Ln[i]>m.g.Ln[b])?i:b,-1),ds=BARS[s.sb],X=y=>ox+(y+s.b/2)*sc,Y=z=>oy+(s.h-z)*sc;let o='';
+ const sk=stirKey(bm,s),scol=pieceCol({key:sk,cat:'st',bar:s.sb,shape:'S'},false);
+ o+=`<rect x="${ox}" y="${oy}" width="${s.b*sc}" height="${s.h*sc}" fill="#f2f2f2" stroke="#111" stroke-width="1.3"/>`;
+ if(showCat('st'))o+=stirDraw(s,X,Y,0,sc,scol,false);
+ if(s.sk&&s.sk.on&&(!SH||SH.extra)){o+=skinDraw(s,X,Y,0,sc,pieceCol({key:bm.id+'|ข',cat:'sk',bar:s.sk.bar,shape:'I'},false));o+=`<text x="${ox+s.b*sc+16}" y="${oy+s.h*sc/2+20}" fill="${BLU}" font-size="12">เหล็กข้าง 2×${s.sk.n}-${s.sk.bar} mm</text>`}
+ const cntT={},cntB={};
+ if(si>=0)LAY.forEach(L=>{const sl=slots(bm,m.g,si,L);Object.entries(sl.map).forEach(([key,y])=>{const ri=+key.split(':')[0],r=bm.runs[ri],d=BARS[r.bar],z=layerZ(s,L,d),pc=m.P.find(p=>p.ri===ri);
+  if(!pc||showCat(pc.cat))o+=`<circle cx="${X(y)}" cy="${Y(z)}" r="${Math.max(1.6,d/2*sc)}" fill="${pc?pieceCol(pc,false):'#111'}"/>`;const c=L[0]==='T'?cntT:cntB;c[r.bar]=(c[r.bar]||0)+1})});
+ const lab=c=>Object.entries(c).map(([b,n])=>n+'-'+b+' mm').join(' + ')||'–',lx=ox+s.b*sc+16;
+ o+=`<text x="${lx}" y="${oy+14}" fill="${BLU}" font-size="13">${lab(cntT)}</text><text x="${lx}" y="${oy+s.h*sc/2+4}" fill="${BLU}" font-size="13">${stLabel(s)}</text><text x="${lx}" y="${oy+s.h*sc-2}" fill="${BLU}" font-size="13">${lab(cntB)}</text>`;
+ o+=`<line x1="${ox}" y1="${oy-10}" x2="${ox+s.b*sc}" y2="${oy-10}" stroke="${RED}"/><text x="${ox+s.b*sc/2}" y="${oy-14}" fill="${RED}" font-size="13" text-anchor="middle">${m2(s.b)}</text>`;
+ o+=`<line x1="${ox-10}" y1="${oy}" x2="${ox-10}" y2="${oy+s.h*sc}" stroke="${RED}"/><text x="${ox-14}" y="${oy+s.h*sc/2}" fill="${RED}" font-size="13" text-anchor="middle" transform="rotate(-90 ${ox-14} ${oy+s.h*sc/2})">${m2(s.h)}</text>`;
+ o+=`<text x="${ox-130}" y="${oy+s.h*sc/2-4}" font-size="22" font-weight="bold" fill="#111">${esc(bm.id)}</text><text x="${ox-130}" y="${oy+s.h*sc/2+16}" font-size="14" fill="#333">${esc(s.id)}</text>`;
+ const tot=m.ST.filter(t=>t.sec===s).reduce((a,t)=>a+t.n,0);if(SH&&!SH.stirShape)return o;let tx=ox-110;const ty=oy+s.h*sc+28,PS=stirPieces(s),ms=Math.min(sc*0.7,42/Math.max(...PS.map(q=>q.b||1)),56/Math.max(...PS.map(q=>q.a||1)));
+ PS.forEach(pc=>{const w=pc.shape==='ST'?10:pc.a*ms,hh=pc.shape==='SC'?14:pc.b*ms,key=sk+(pc.mk?':'+pc.mk:''),col=pieceCol({key,cat:'st',bar:s.sb,shape:pc.shape},false);
+  o+=`<g data-k="${esc(key)}" style="cursor:pointer"><rect x="${tx-4}" y="${ty-4}" width="${w+8}" height="${hh+8}" fill="#fff" fill-opacity="0.01"/>${pieceMini(pc,tx,ty,w,hh,col,SEL===key?2.5:1.3)}</g>`;
+  if(pc.a)o+=`<text x="${tx+w/2}" y="${ty+hh+20}" fill="${RED}" font-size="10.5" text-anchor="middle">${m2(pc.a)}</text>`;if(pc.b)o+=`<text x="${tx+w+4}" y="${ty+hh/2+4}" fill="${RED}" font-size="10.5">${m2(pc.b)}</text>`;
+  o+=`<text x="${tx+w/2}" y="${ty+hh+34}" fill="${BLU}" font-size="10.5" text-anchor="middle">${tot*pc.n} ${pc.mk?'ชิ้น':'ปลอก'} · ${m2(pc.cut)} m</text><text x="${tx+w/2}" y="${ty+hh+47}" fill="#444" font-size="9.5" text-anchor="middle">ขอ ${pc.h1}°${pc.h2!==pc.h1?'/'+pc.h2+'°':''} · ${m2(pc.e1)}</text>`;tx+=Math.max(w,30)+62});
+ return o}
+let SHRAW=null,SHF=0.28,LASTF=0.28,SELIT=new Set(),LAYM=false,LMULTI=false;
+const IT=(id,inner)=>{const o=(SHRAW&&SHRAW.lay&&SHRAW.lay[id])||{},t=(o.dx||o.dy)?` transform="translate(${((o.dx||0)/SHF).toFixed(2)} ${((o.dy||0)/SHF).toFixed(2)})"`:'';return`<g data-it="${esc(id)}"${t}${LAYM&&SELIT.has(id)?' class="itsel"':''}>${inner}</g>`};
+let SH=null,LASTSC='',LASTSP=100;
+const showCat=c=>!SH||(c==='st'?SH.stir:(c==='xt'||c==='xb')?SH.extra:SH.main);
+const PAPER={A4:[297,210],A3:[420,297],A2:[594,420],A1:[841,594]},NICE=[10,15,20,25,30,40,50,60,75,100,125,150,200,250,300,400,500,750,1000];
+function sheetCore(bm,m,Pu,sc){const g=m.g,[lo,hi]=extRange(m),W=1400,mx=(W-Pu)/2,sx=Pu/(hi-lo),X=x=>mx+(x-lo)*sx,nS=bm.spans.length;
+ const tp=i=>bm.zb[i]+secOf(bm,i).h,zmx=Math.max(...bm.zb.map((_,i)=>tp(i))),zmn=Math.min(...bm.zb);
+ const CUTS=(SHRAW&&SHRAW.cuts)||[],secH=(SH.sec||CUTS.length)?Math.max(...bm.sections.map(s=>s.h))*sc:0,rr=SH.rows?bm.runs.map((_,ri)=>ri).filter(ri=>m.P.some(p=>p.ri===ri&&showCat(p.cat))):[];
+ const y0=20,yg=y0+(SH.sec||CUTS.length?secH+(CUTS.length?120:70)+(SH.sec&&SH.stirShape?95:0):0)+20,yb=yg+(SH.dims?95:40),yr=yb+(SH.elev?(zmx-zmn)*sx+70:0),H=yr+rr.length*58+60,YZ=z=>yb+(zmx-z)*sx;
+ let o=`<defs><clipPath id="csin"><rect x="${X(g.xl)}" y="0" width="${(g.xr-g.xl)*sx}" height="${H}"/></clipPath><clipPath id="csout"><rect x="0" y="0" width="${X(g.xl)}" height="${H}"/><rect x="${X(g.xr)}" y="0" width="${W}" height="${H}"/></clipPath></defs>`;
+ {const nT=(SH.sec?bm.sections.length:0)+CUTS.length,stp=Math.min(600,1180/Math.max(1,nT));let ti=0;
+  if(SH.sec)bm.sections.forEach((s,k)=>{o+=IT('sec:'+s.base,secDraw(bm,m,k,170+(ti++)*stp,y0+14,sc))});
+  CUTS.forEach(c=>{const ci=cutInfo(m,c.x);o+=IT('cut:'+c.n,cutDraw(m,ci,140+(ti++)*stp,y0+32,sc,THL(),'SECTION '+c.n+'–'+c.n))})}
+ const xA=X(g.X[0]),xB=X(g.X[g.X.length-1]);
+ if(SH.dims){o+=`<line x1="${xA}" y1="${yg+38}" x2="${xB}" y2="${yg+38}" stroke="${RED}"/><text x="${(xA+xB)/2}" y="${yg+33}" fill="${RED}" font-size="14" text-anchor="middle">${m2(g.X[g.X.length-1]-g.X[0])}</text><line x1="${xA}" y1="${yg+68}" x2="${xB}" y2="${yg+68}" stroke="${RED}"/>`;
+  g.X.forEach((x,i)=>{[38,68].forEach(v=>o+=`<line x1="${X(x)-4}" y1="${yg+v+4}" x2="${X(x)+4}" y2="${yg+v-4}" stroke="${RED}"/>`);if(i<nS)o+=`<text x="${(X(x)+X(g.X[i+1]))/2}" y="${yg+63}" fill="${RED}" font-size="14" text-anchor="middle">${bm.spans[i].toFixed(2)}</text>`})}
+ if(SH.grid)g.X.forEach((x,i)=>{if(bm.grids[i].free)return;
+  o+=`<circle cx="${X(x)}" cy="${yg}" r="16" fill="#fff" stroke="#111" stroke-width="2"/><text x="${X(x)}" y="${yg+6}" font-size="17" font-weight="bold" fill="#7a0000" text-anchor="middle">${esc(bm.grids[i].n)}</text><line x1="${X(x)}" y1="${yg+16}" x2="${X(x)}" y2="${H-40}" stroke="#111" stroke-width=".6" stroke-dasharray="14 6"/>`});
+ if(SH.elev){bm.spans.forEach((_,si)=>{const s=secOf(bm,si),h=s.h*sx,xa=si===0?g.xl:g.X[si],xb2=si===nS-1?g.xr:g.X[si+1],yt=YZ(tp(si)),scol=pieceCol({key:stirKey(bm,s),cat:'st',bar:s.sb,shape:'S'},false);
+   o+=`<rect x="${X(xa)}" y="${yt}" width="${(xb2-xa)*sx}" height="${h}" fill="none" stroke="#111" stroke-width="1.4"/>`;
+   const st=m.ST[si];if(SH.stir){st.xs.forEach(v=>{const x=X(v);o+=`<line x1="${x}" y1="${yt+2}" x2="${x}" y2="${yt+h-2}" stroke="${scol}" stroke-width=".5"/>`});
+    st.hgs.forEach(hg=>{const hc=pieceCol({key:stirKey(bm,s)+':ข',cat:'hg',bar:hg.bar,shape:'S'},false);if(hg.bs)o+=`<rect x="${X(hg.xc-hg.bs/2)}" y="${yt}" width="${hg.bs*sx}" height="${Math.min(h,(hg.hs||s.h*0.6)*sx)}" fill="none" stroke="#111" stroke-width=".8" stroke-dasharray="4 3"/>`;
+     hg.xs.forEach(v=>{o+=`<line x1="${X(v)}" y1="${yt+2}" x2="${X(v)}" y2="${yt+h-2}" stroke="${hc}" stroke-width="1.2"/>`})});
+    if(s.sk&&s.sk.on&&SH.extra)s.sk.zs.forEach(z=>{const y=YZ(bm.zb[si]+z);o+=`<line x1="${X(g.fa[si])}" y1="${y}" x2="${X(g.fb[si])}" y2="${y}" stroke="${pieceCol({key:bm.id+'|ข',cat:'sk',bar:s.sk.bar,shape:'I'},false)}" stroke-width=".7" stroke-dasharray="8 4"/>`});
+    if(SH.labels)o+=IT('stl:'+si,`<text x="${(X(g.fa[si])+X(g.fb[si]))/2}" y="${yt+h+16}" fill="${BLU}" font-size="11" text-anchor="middle">${st.label}</text>`)}
+   if(SH.labels&&g.fb[si]-g.fa[si]>=1200){const cx=(X(g.fa[si])+X(g.fb[si]))/2,cy=yt+h/2;o+=IT('tag:'+si,`<rect x="${cx-26}" y="${cy-10}" width="52" height="20" fill="#fff" stroke="#111" stroke-width="1"/><text x="${cx}" y="${cy+5}" font-size="13" font-weight="bold" fill="#111" text-anchor="middle">${esc((SHRAW&&SHRAW.id)||bm.id)}</text>`)}
+   if(SH.dims&&bm.zb.some((z,i)=>tp(i)!==tp(0)))o+=IT('lvl:'+si,`<text x="${(X(g.fa[si])+X(g.fb[si]))/2}" y="${yt-5}" fill="${RED}" font-size="11" text-anchor="middle">T${tp(si)>=0?'+':''}${m2(tp(si))}</text>`)});
+  CUTS.forEach(c=>{const x=X(c.x),y1=YZ(zmx)-16,y2=YZ(zmn)+16;o+=`<line x1="${x}" y1="${y1}" x2="${x}" y2="${y2}" stroke="#111" stroke-width="1.2" stroke-dasharray="10 4 2 4"/><polyline points="${x-10},${y1} ${x},${y1} " fill="none"/><path d="M${x} ${y1} l-12 0 m12 0 l0 -2" stroke="#111" stroke-width="2"/><path d="M${x} ${y2} l-12 0" stroke="#111" stroke-width="2"/>`+IT('cm:'+c.n,`<text x="${x-16}" y="${y1-4}" font-size="15" font-weight="bold" fill="#111" text-anchor="middle">${esc(c.n)}</text><text x="${x-16}" y="${y2+16}" font-size="15" font-weight="bold" fill="#111" text-anchor="middle">${esc(c.n)}</text>`)});
+  g.X.forEach((x,i)=>{if(bm.grids[i].free)return;const adj=[i-1,i].filter(k=>k>=0&&k<nS),zb2=Math.min(...adj.map(k=>bm.zb[k]));o+=`<rect x="${X(x-g.w[i]/2)}" y="${YZ(zb2)}" width="${g.w[i]*sx}" height="22" fill="#fff" stroke="#111" stroke-width="1.4"/>`});
+  if(SH.inElev)m.P.forEach(p=>{if(!showCat(p.cat))return;const pts=barPath(bm,m,p,0);o+=`<polyline data-k="${esc(p.key)}" data-r="${esc(p.rid)}" style="cursor:pointer" points="${pts.map(q=>X(q[0]).toFixed(1)+','+YZ(q[2]).toFixed(1)).join(' ')}" fill="none" stroke="${pieceCol(p,false)}" stroke-width="${SEL===p.key?2.6:1.3}" stroke-linejoin="round"/>`})}
+ rr.forEach((ri,row)=>{const r=bm.runs[ri],y=yr+row*58+18,top=r.layer[0]==='T',dir=top?1:-1;
+  m.P.filter(p=>p.ri===ri&&showCat(p.cat)).forEach(p=>{const yy=y+(p.i%2?5:0)*(top?1:-1),on=SEL===p.key,c=pieceCol(p,false),x0=X(p.x0),x1=X(p.x1),lg=16;
+   let d=`M${x0} ${p.hl?yy+dir*lg:yy} `;if(p.hl)d+=`L${x0} ${yy+dir*3} Q${x0} ${yy} ${x0+3} ${yy} `;
+   (p.r._ck||[]).forEach(k=>{const a=Math.min(k.x0,k.x1),b=Math.max(k.x0,k.x1);if(a>=p.x0-1&&b<=p.x1+1)d+=k.dir>0?`L${X(a)} ${yy} L${X(b)} ${yy-Math.sign(k.dz)*7} `:`L${X(a)} ${yy-Math.sign(k.dz)*7} L${X(b)} ${yy} `});
+   d+=`L${p.hr?x1-3:x1} ${yy} `;if(p.hr)d+=`Q${x1} ${yy} ${x1} ${yy+dir*3} L${x1} ${yy+dir*lg}`;
+   o+=`<g data-k="${esc(p.key)}" data-r="${esc(p.rid)}" style="cursor:pointer"><path d="${d}" fill="none" stroke="#fff" stroke-opacity="0.01" stroke-width="16"/><path clip-path="url(#csin)" d="${d}" fill="none" stroke="${c}" stroke-width="${on?3.5:1.8}"/><path clip-path="url(#csout)" d="${d}" fill="none" stroke="${c}" stroke-width="${on?3.5:1.8}" stroke-dasharray="8 5"/>`;
+   if(SH.labels){const short=x1-x0<170,lx=(x0+x1)/2;
+    o+=IT('pl:'+p.rid+':'+p.i,`<text x="${lx}" y="${yy+(top?-1:1)*(short?18:6)+(top?0:9)}" fill="${BLU}" font-size="${short?9.5:11}" text-anchor="middle">${p.n}-${p.bar}mm-${esc(p.mark)}-${m2(p.cut)}m</text>`);
+    o+=IT('pd:'+p.rid+':'+p.i,`<text x="${lx}" y="${yy+(top?1:-1)*(short?9:8)+(top?9:0)}" fill="${RED}" font-size="${short?10:12.5}" text-anchor="middle">${m2(p.dims.b)} m</text>`);
+    if(p.hl)o+=`<text x="${x0-5}" y="${yy+dir*8}" fill="${RED}" font-size="10" text-anchor="middle" transform="rotate(-90 ${x0-5} ${yy+dir*8})">${m2(p.la)}</text>`;
+    if(p.hr)o+=`<text x="${x1+12}" y="${yy+dir*8}" fill="${RED}" font-size="10" text-anchor="middle" transform="rotate(-90 ${x1+12} ${yy+dir*8})">${m2(p.lb)}</text>`}
+   o+='</g>'})});
+ o+=IT('cap',`<text x="${W/2}" y="${H-14}" font-size="24" text-anchor="middle" fill="#111">${esc(bm.id)}-Profile</text>`);
+ return{s:o,W,H}}
+function paperSVG(bm,m,forFile){const P=S.settings.sheet;SH=P;SHRAW=m.raw||S.beams.find(b=>b.id===bm.id)||null;SHF=0.28;
+ try{const[pw,ph]=PAPER[P.paper]||PAPER.A3,ml=20,mr=10,mt=10,mb=10,tb=22,aw=pw-ml-mr-8,ah=ph-mt-mb-tb-6,[lo,hi]=extRange(m),L=hi-lo,mh=Math.max(...bm.sections.map(s=>s.h));
+  let Pu=1260,sc=0.2,core,f=1,note='',sNote='';
+  for(let it=0;it<5;it++){SHF=it?f:Math.min(aw/1400,0.3);core=sheetCore(bm,m,Pu,sc);f=Math.min(aw/1400,ah/core.H);const need=L/(1260*f),auto=NICE.find(v=>v>=need-1e-9)||Math.ceil(need);let sP;
+   if(P.scale==='auto'){sP=auto;note=''}else{sP=+P.scale;if(sP<need-1e-9){note='สเกล 1:'+P.scale+' ใหญ่เกินกระดาษ จึงใช้ 1:'+auto;sP=auto}else note=''}
+   Pu=L/(sP*f);const want=+P.secScale||20,sNeed=mh/(170*f),sS=Math.max(want,NICE.find(v=>v>=sNeed-1e-9)||want);sNote=sS>want?'หน้าตัดใหญ่เกิน จึงใช้ 1:'+sS:'';sc=1/(sS*f)}
+  SHF=f;core=sheetCore(bm,m,Pu,sc);const f2=Math.min(aw/1400,ah/core.H);if(Math.abs(f2-f)>1e-6){f=f2;SHF=f;core=sheetCore(bm,m,Pu,sc);f=Math.min(aw/1400,ah/core.H)}LASTF=f;
+  const aP=L/(Pu*f),aS=1/(sc*f),fmt=v=>(Math.abs(v-Math.round(v))<0.05*v/100+0.5?'1:':'≈1:')+Math.round(v);
+  LASTSP=Math.round(aP);LASTSC=`${P.paper} แนวนอน · Profile ${fmt(aP)} · หน้าตัด ${fmt(aS)}`+(note?' · '+note:'')+(sNote?' · '+sNote:'');
+  const ox=ml+4+(aw-1400*f)/2,oy=mt+3,today=new Date().toLocaleDateString('th-TH');
+  let s=`<svg xmlns="http://www.w3.org/2000/svg" ${forFile?`width="${pw}mm" height="${ph}mm" `:''}viewBox="0 0 ${pw} ${ph}" font-family="Arial,'IBM Plex Sans Thai',Tahoma,sans-serif"><rect width="${pw}" height="${ph}" fill="#fff"/><rect x="${ml}" y="${mt}" width="${pw-ml-mr}" height="${ph-mt-mb}" fill="none" stroke="#111" stroke-width="0.6"/>`;
+  s+=`<g transform="translate(${ox.toFixed(2)} ${oy.toFixed(2)}) scale(${f.toFixed(5)})">${core.s}</g>`;
+  const ty=ph-mb-tb,x0=ml,x1=pw-mr,w=x1-x0,c=[0,0.36,0.66,0.82].map(t=>x0+w*t),T=(x,y,t,sz,b)=>`<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-size="${sz}" fill="#111"${b?' font-weight="bold"':''}>${esc(t)}</text>`;
+  s+=`<line x1="${x0}" y1="${ty}" x2="${x1}" y2="${ty}" stroke="#111" stroke-width="0.5"/>`+c.slice(1).map(x=>`<line x1="${x}" y1="${ty}" x2="${x}" y2="${ph-mb}" stroke="#111" stroke-width="0.35"/>`).join('');
+  s+=T(c[0]+3,ty+6,'โครงการ',2.2)+T(c[0]+3,ty+13.5,P.title||'—',4,1)+T(c[0]+3,ty+19,'KTY Construction · KN Studio',2.2);
+  s+=T(c[1]+3,ty+6,'แบบ',2.2)+T(c[1]+3,ty+13.5,'แบบเสริมเหล็กคาน '+bm.id,4,1)+T(c[1]+3,ty+19,(bm.floor+' '+bm.line).trim(),2.6);
+  s+=T(c[2]+3,ty+6,'มาตราส่วน',2.2)+T(c[2]+3,ty+12.5,'Profile '+fmt(aP),2.8)+T(c[2]+3,ty+18.5,'หน้าตัด '+fmt(aS),2.8);
+  s+=T(c[3]+3,ty+6,'ผู้ออกแบบ · วันที่ · แผ่นที่',2.2)+T(c[3]+3,ty+12.5,P.by||'—',2.8)+T(c[3]+3,ty+18.5,(P.date||today)+(P.sheetNo?'  ·  '+P.sheetNo:''),2.6);
+  return s+'</svg>'}finally{SH=null;SHRAW=null}}
+function sheetSetHTML(){const P=S.settings.sheet,c=(k,t)=>`<label class="ck"><input type="checkbox" data-sp="${k}"${P[k]?' checked':''}> ${t}</label>`;
+ const sl=(k,t,opts)=>`<div class="f"><label>${t}</label><select data-sp="${k}">${opts.map(o=>{const[a,b]=Array.isArray(o)?o:[o,o];return`<option value="${a}"${String(a)===String(P[k])?' selected':''}>${b}</option>`}).join('')}</select></div>`;
+ const tx=(k,t)=>`<div class="f"><label>${t}</label><input type="text" data-sp="${k}" value="${esc(P[k]||'')}"></div>`;
+ return`<div class="card" style="margin-bottom:10px"><div class="g4">${sl('paper','กระดาษ (แนวนอน)',['A4','A3','A2','A1'])}${sl('scale','สเกล Profile',[['auto','อัตโนมัติ']].concat(NICE.filter(v=>v>=20).map(v=>[v,'1:'+v])))}${sl('secScale','สเกลหน้าตัด',[10,15,20,25,30,40,50].map(v=>[v,'1:'+v]))}${tx('sheetNo','แผ่นที่')}</div>
+ <div class="g3" style="margin-top:6px">${tx('title','ชื่อโครงการ')}${tx('by','ผู้ออกแบบ / เขียนแบบ')}${tx('date','วันที่ (ว่าง = วันนี้)')}</div>
+ <div class="sh">แสดงบนกระดาษและใน DXF</div><div class="chips">${c('main','เหล็กหลัก')}${c('extra','เหล็กเสริม')}${c('stir','เหล็กปลอก')}${c('inElev','เหล็กในรูปด้านคาน')}${c('rows','แถวรายละเอียดเหล็ก')}${c('labels','ชื่อและความยาวเหล็ก')}${c('sec','หน้าตัด')}${c('stirShape','รูปปลอก')}${c('elev','รูปด้านคาน')}${c('grid','เส้นกริด')}${c('dims','ระยะและระดับ')}${c('table','ตารางเหล็กใน DXF')}${c('color','พิมพ์สี')}${c('dxf3d','เหล็ก 3D ใน DXF')}</div></div>`}
+
+/* ===== Bending table ===== */
+function shapeSVG(r,col){const L=col||'#0000b0',w=250,h=54;let o=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}">`;
+ const t=(x,y,s,rot)=>`<text x="${x}" y="${y}" fill="${RED}" font-size="10.5" text-anchor="middle"${rot?` transform="rotate(-90 ${x} ${y})"`:''}>${s}</text>`;
+ if(r.shape&&r.shape[0]==='S'&&r.shape!=='S'||(r.shape==='S'&&r.dims.h1)){const d=r.dims,pc={shape:r.shape,h1:d.h1,h2:d.h2},w=r.shape==='S'||r.shape==='SU'?Math.max(24,Math.min(70,d.a/d.b*40)):r.shape==='SC'?90:20;o+=pieceMini(pc,r.shape==='ST'?120:95,8,w,r.shape==='SC'?20:38,L,1.6);
+  o+=(r.shape==='ST'?t(80,30,m2(d.b)+' m'):r.shape==='SC'?t(140,46,m2(d.a)+' m'):t(70,30,m2(d.b)+' m'))+t(205,22,(r.shape==='S'||r.shape==='SU'?m2(d.a)+' m':''))+t(205,38,'ขอ '+d.h1+'°/'+d.h2+'° · '+m2(d.c)+(d.e2&&d.e2!==d.c?'/'+m2(d.e2):''))}
+ else if(r.shape==='S'){o+=`<rect x="95" y="6" width="${Math.max(20,Math.min(70,r.dims.a/r.dims.b*40))}" height="40" rx="3" fill="none" stroke="${L}" stroke-width="1.6"/>`+t(70,30,m2(r.dims.b)+' m')+t(185,30,m2(r.dims.a)+' m · ขอ '+m2(r.dims.c))}
+ else{const a=r.dims.a>0,c=r.dims.c>0,k=r.kz?(r.kz>0?-8:8):0;
+  o+=`<path d="M${a?'20 10 L20 40 Q20 44 24 44':'20 44'} L${k?'150 44 L166 '+(44+k)+' L'+(c?'226 '+(44+k)+' Q230 '+(44+k)+' 230 '+(40+k)+' L230 '+(10+k):'230 '+(44+k)):(c?'226 44 Q230 44 230 40 L230 10':'230 44')}" fill="none" stroke="${L}" stroke-width="1.6"/>`+t(110,38,m2(r.dims.b)+' m'+(r.kz?' · คอม้า '+m2(Math.abs(r.kz)):''));
+  if(a)o+=t(12,27,m2(r.dims.a)+' m',1);if(c)o+=t(243,27,m2(r.dims.c)+' m',1)}
+ return o+'</svg>'}
+function bendTable(rows,file){const by={};rows.forEach(r=>{(by[r.beam+' - '+r.bar]=by[r.beam+' - '+r.bar]||[]).push(r)});let h='';const C=S.settings.col;
+ Object.entries(by).forEach(([k,rs])=>{const tw=rs.reduce((a,r)=>a+kgm(r.d)*r.cut/1000*r.qty,0);
+  h+=`<table class="bt" style="margin-bottom:14px"><tr class="gh"><td colspan="${file?7:8}">คาน ${esc(k)} mm · รวม ${tw.toFixed(1)} กก.</td></tr><tr>${file?'':'<th>สี</th>'}<th>ชื่อ</th><th>เหล็ก</th><th>ข้อมูล</th><th>ยาว</th><th>จำนวน</th><th>รูปร่าง</th><th>ตำแหน่งหน้างาน</th></tr>`+
+  rs.map(r=>{const col=paper(colorOf(r)),raw=colorOf(r);return`<tr class="r${SEL===r.key?' sel':''}" data-k="${esc(r.key)}">${file?'':`<td>${C.mode==='mark'?`<input type="color" class="cpick" data-col="mark:${esc(r.key)}" value="${raw}" aria-label="สีของ ${esc(r.mark)}">`:`<span class="dot" style="background:${raw}"></span>`}</td>`}<td>${esc(r.beam)}</td><td>${r.d} mm</td><td class="l">${esc(info(r))}</td><td>${m2(r.cut)} m</td><td>${r.qty}</td><td>${shapeSVG(r,col)}</td><td class="loc">${esc(r.floor)} ${esc(r.line)}<br>${r.layer} · ${SHN[shCls(r.shape)]} · ${r.places.map(esc).join(', ')}</td></tr>`}).join('')+'</table>'});
+ return h||'<div style="padding:16px;color:#444">ไม่มีรายการตามตัวกรอง</div>'}
+
+/* ===== DXF export (R12, millimetres) + link file ===== */
+const DXFL=[['KN-GRID',8,'DASHED'],['KN-GRIDTXT',7],['KN-CONC',7],['KN-COL',8],['KN-STIR',3],['KN-MAIN',5],['KN-EXTRA',6],['KN-JOINT',30],['KN-DIM',1],['KN-LABEL',5],['KN-SEC',7],['KN-TABLE',7],['KN-3D',2]];
+const dxfStr=s=>String(s).replace(/[^\x20-\x7eก-๛]/g,c=>'\\U+'+c.charCodeAt(0).toString(16).toUpperCase().padStart(4,'0'));
+function dxfBytes(str){const u=new Uint8Array(str.length);for(let i=0;i<str.length;i++){const c=str.charCodeAt(i);u[i]=c<128?c:(c>=0x0E01&&c<=0x0E5B?c-0x0E00+0xA0:63)}return new Blob([u],{type:'application/dxf'})}
+function dxfW(){const E=[],n=v=>String(Math.round(v*100)/100);let a=1e18,b=1e18,c=-1e18,d=-1e18;const ext=(x,y)=>{if(x<a)a=x;if(x>c)c=x;if(y<b)b=y;if(y>d)d=y};
+ return{E,ext:()=>[a,b,c,d],
+  line(l,x1,y1,x2,y2){ext(x1,y1);ext(x2,y2);E.push('0','LINE','8',l,'10',n(x1),'20',n(y1),'30','0','11',n(x2),'21',n(y2),'31','0')},
+  circle(l,x,y,r){ext(x-r,y-r);ext(x+r,y+r);E.push('0','CIRCLE','8',l,'10',n(x),'20',n(y),'30','0','40',n(r))},
+  text(l,x,y,h,s,al,rot){ext(x,y);E.push('0','TEXT','8',l,'10',n(x),'20',n(y),'30','0','40',n(h),'1',dxfStr(s));if(rot)E.push('50',n(rot));E.push('7','KNTHAI');if(al)E.push('72',String(al),'11',n(x),'21',n(y),'31','0')},
+  pl(l,pts,closed,bul){pts.forEach(p=>ext(p[0],p[1]));E.push('0','POLYLINE','8',l,'66','1','10','0','20','0','30','0','70',closed?'1':'0');pts.forEach((p,i)=>{E.push('0','VERTEX','8',l,'10',n(p[0]),'20',n(p[1]),'30','0');if(bul&&bul[i])E.push('42',bul[i].toFixed(6))});E.push('0','SEQEND','8',l)},
+  pl3(l,pts,closed){pts.forEach(p=>ext(p[0],p[1]));E.push('0','POLYLINE','8',l,'66','1','10','0','20','0','30','0','70',closed?'9':'8');pts.forEach(p=>E.push('0','VERTEX','8',l,'10',n(p[0]),'20',n(p[1]),'30',n(p[2]),'70','32'));E.push('0','SEQEND','8',l)}}}
+function dxfDoc(w,T){const[a,b,c,d]=w.ext(),n=v=>String(Math.round(v*100)/100),dash=3*T,gap=T;let L=[];
+ L.push('0','SECTION','2','HEADER','9','$ACADVER','1','AC1009','9','$DWGCODEPAGE','3','ANSI_874','9','$INSBASE','10','0','20','0','30','0','9','$EXTMIN','10',n(a),'20',n(b),'30','0','9','$EXTMAX','10',n(c),'20',n(d),'30','0','9','$LTSCALE','40','1','9','$TEXTSTYLE','7','KNTHAI','0','ENDSEC');
+ L.push('0','SECTION','2','TABLES','0','TABLE','2','LTYPE','70','2','0','LTYPE','2','CONTINUOUS','70','0','3','Solid line','72','65','73','0','40','0.0','0','LTYPE','2','DASHED','70','0','3','__ __ __','72','65','73','2','40',n(dash+gap),'49',n(dash),'49',n(-gap),'0','ENDTAB');
+ L.push('0','TABLE','2','LAYER','70',String(DXFL.length));DXFL.forEach(([nm,col,lt])=>L.push('0','LAYER','2',nm,'70','0','62',String(col),'6',lt||'CONTINUOUS'));L.push('0','ENDTAB');
+ L.push('0','TABLE','2','STYLE','70','1','0','STYLE','2','KNTHAI','70','0','40','0','41','1','50','0','71','0','42',n(T),'3','tahoma.ttf','4','','0','ENDTAB','0','ENDSEC','0','SECTION','2','ENTITIES');
+ L=L.concat(w.E);L.push('0','ENDSEC','0','EOF');return L.join('\r\n')+'\r\n'}
+function dxfBeam(w,raw,y0,sP){const P=S.settings.sheet,T=2.5*sP,sS=+P.secScale||20,k=sP/sS,m=build(raw),bm=m.D,g=m.g,[lo,hi]=extRange(m),XX=x=>x-lo,nS=bm.spans.length;
+ const show=c=>c==='st'?P.stir:(c==='xt'||c==='xb')?P.extra:P.main,LY=c=>c==='st'?'KN-STIR':(c==='xt'||c==='xb')?'KN-EXTRA':c==='jt'?'KN-JOINT':'KN-MAIN';
+ const tp=i=>bm.zb[i]+secOf(bm,i).h,zmx=Math.max(...bm.zb.map((_,i)=>tp(i))),zmn=Math.min(...bm.zb);
+ const OF=id=>{const o=(raw.lay||{})[id]||{};return[(o.dx||0)*sP,-(o.dy||0)*sP]},TX=(id,l,x,yy,h,t,al,rot)=>{const q=OF(id);w.text(l,x+q[0],yy+q[1],h,t,al,rot)};
+ let y=y0;w.text('KN-LABEL',0,y-1.6*T,1.6*T,'แบบเสริมเหล็กคาน '+bm.id+'  '+bm.floor+' '+bm.line+'  (Profile 1:'+sP+')');y-=3.5*T;
+ if(P.sec){let x=0,mh=0;bm.sections.forEach((s,si)=>{const ds=BARS[s.sb],bw=s.b*k,hh=s.h*k,ox=x+4*T+OF('sec:'+s.base)[0],oy=y-3*T-hh+OF('sec:'+s.base)[1],sp=bm.spanSec.indexOf(si);mh=Math.max(mh,hh);
+   w.pl('KN-SEC',[[ox,oy],[ox+bw,oy],[ox+bw,oy+hh],[ox,oy+hh]],true);
+   if(P.stir){const x0=ox+(s.cs+ds/2)*k,x1=ox+(s.b-s.cs-ds/2)*k,z0=oy+(s.cb+ds/2)*k,z1=oy+(s.h-s.ct-ds/2)*k,rr=Math.min((bendD(ds,true)/2+ds/2)*k,(x1-x0)/2-0.01),B8=Math.tan(Math.PI/8);
+    w.pl('KN-STIR',[[x0+rr,z0],[x1-rr,z0],[x1,z0+rr],[x1,z1-rr],[x1-rr,z1],[x0+rr,z1],[x0,z1-rr],[x0,z0+rr]],true,[0,B8,0,B8,0,B8,0,B8])}
+   const cT={},cB={};
+   if(sp>=0)LAY.forEach(L=>{const sl=slots(bm,g,sp,L);Object.entries(sl.map).forEach(([key,yy])=>{const ri=+key.split(':')[0],r=bm.runs[ri],d=BARS[r.bar],pc=m.P.find(p=>p.ri===ri),cat=pc?pc.cat:'mt',cc=L[0]==='T'?cT:cB;cc[r.bar]=(cc[r.bar]||0)+1;
+    if(show(cat))w.circle(LY(cat),ox+(yy+s.b/2)*k,oy+layerZ(s,L,d)*k,d/2*k)})});
+   const lab=c=>Object.entries(c).map(([b,n])=>n+'-'+b).join(' + ')||'-',lx=ox+bw+1.5*T,th=0.9*T;
+   if(P.labels){w.text('KN-LABEL',lx,oy+hh-th,th,lab(cT));w.text('KN-LABEL',lx,oy+hh/2-th/2,th,stLabel(s));w.text('KN-LABEL',lx,oy,th,lab(cB))}
+   w.text('KN-DIM',ox+bw/2,oy+hh+0.6*T,0.8*T,m2(s.b),1);w.text('KN-DIM',ox-0.6*T,oy+hh/2,0.8*T,m2(s.h),1,90);
+   w.text('KN-LABEL',ox+bw/2,oy-2*T,1.2*T,raw.id+' · '+s.id+'  1:'+sS,1);x+=bw+24*T});
+  (raw.cuts||[]).forEach(c=>{const ci=cutInfo(m,c.x),s=ci.sec,ds=BARS[s.sb],bw=s.b*k,hh=s.h*k,q=OF('cut:'+c.n),ox=x+4*T+q[0],oy=y-3*T-hh+q[1],YC=z=>oy+(z-ci.zb)*k;mh=Math.max(mh,hh);
+   w.pl('KN-SEC',[[ox,oy],[ox+bw,oy],[ox+bw,oy+hh],[ox,oy+hh]],true);
+   if(ci.stOn&&P.stir){const x0=ox+(s.cs+ds/2)*k,x1=ox+(s.b-s.cs-ds/2)*k,z0=oy+(s.cb+ds/2)*k,z1=oy+(s.h-s.ct-ds/2)*k,rr=Math.min((bendD(ds,true)/2+ds/2)*k,(x1-x0)/2-0.01),B8=Math.tan(Math.PI/8);w.pl('KN-STIR',[[x0+rr,z0],[x1-rr,z0],[x1,z0+rr],[x1,z1-rr],[x1-rr,z1],[x0+rr,z1],[x0,z1-rr],[x0,z0+rr]],true,[0,B8,0,B8,0,B8,0,B8])}
+   ci.bars.forEach(b=>{if(show(b.p.cat))w.circle(LY(b.p.cat),ox+(b.y+s.b/2)*k,YC(b.z),b.d/2*k)});
+   if(P.labels)ci.G.forEach(G=>w.text('KN-LABEL',ox+bw+1.5*T,YC(G.top?Math.max(...G.list.map(q=>q.z)):Math.min(...G.list.map(q=>q.z)))-0.45*T,0.9*T,G.list.length+'-'+G.bar+' ('+G.layer+')'+(G.lap?' LAP':'')));
+   w.text('KN-DIM',ox+bw/2,oy+hh+0.6*T,0.8*T,m2(s.b),1);w.text('KN-DIM',ox-0.6*T,oy+hh/2,0.8*T,m2(s.h),1,90);
+   w.text('KN-LABEL',ox+bw/2,oy-2*T,1.2*T,'SECTION '+c.n+'-'+c.n+'  '+raw.id+' · '+s.id+'  1:'+sS,1);x+=bw+24*T});
+  y-=mh+8*T}
+ const gX=i=>XX(g.X[i]),yG=y-1.6*T;let yd=yG-3.5*T;
+ if(P.dims){const xa=gX(0),xb=gX(g.X.length-1),yd2=yd-2.5*T;w.line('KN-DIM',xa,yd,xb,yd);w.text('KN-DIM',(xa+xb)/2,yd+0.5*T,T,m2(g.X[g.X.length-1]-g.X[0]),1);w.line('KN-DIM',xa,yd2,xb,yd2);
+  g.X.forEach((X,i)=>{[yd,yd2].forEach(v=>w.line('KN-DIM',XX(X)-0.4*T,v-0.4*T,XX(X)+0.4*T,v+0.4*T));if(i<nS)w.text('KN-DIM',(XX(X)+gX(i+1))/2,yd2+0.5*T,T,bm.spans[i].toFixed(2),1)});yd=yd2}
+ const yE=yd-4*T,YZ=z=>yE-(zmx-z);
+ if(P.elev){bm.spans.forEach((_,si)=>{const s=secOf(bm,si),xa=XX(si===0?g.xl:g.X[si]),xb=XX(si===nS-1?g.xr:g.X[si+1]);w.pl('KN-CONC',[[xa,YZ(bm.zb[si])],[xb,YZ(bm.zb[si])],[xb,YZ(tp(si))],[xa,YZ(tp(si))]],true);
+   const st=m.ST[si];if(P.stir){st.xs.forEach(x=>w.line('KN-STIR',XX(x),YZ(bm.zb[si]+s.cb),XX(x),YZ(tp(si)-s.ct)));if(P.labels)TX('stl:'+si,'KN-LABEL',(XX(g.fa[si])+XX(g.fb[si]))/2,YZ(bm.zb[si])-1.6*T,0.8*T,st.label,1)}
+   if(P.dims&&bm.zb.some((z,i)=>tp(i)!==tp(0)))TX('lvl:'+si,'KN-DIM',(XX(g.fa[si])+XX(g.fb[si]))/2,YZ(tp(si))+0.5*T,0.8*T,'T'+(tp(si)>=0?'+':'')+m2(tp(si)),1);
+   if(P.labels&&g.fb[si]-g.fa[si]>=1200){const q=OF('tag:'+si),cx=(XX(g.fa[si])+XX(g.fb[si]))/2+q[0],cy=YZ(bm.zb[si]+s.h/2)+q[1];w.pl('KN-LABEL',[[cx-2.2*T,cy-0.8*T],[cx+2.2*T,cy-0.8*T],[cx+2.2*T,cy+0.8*T],[cx-2.2*T,cy+0.8*T]],true);w.text('KN-LABEL',cx,cy-0.45*T,T,raw.id,1)}});
+  (raw.cuts||[]).forEach(c=>{const x=XX(c.x),y1=YZ(zmx)+1.2*T,y2=YZ(zmn)-1.2*T,q=OF('cm:'+c.n);w.line('KN-DIM',x,y1,x,y2);w.line('KN-DIM',x,y1,x-T,y1);w.line('KN-DIM',x,y2,x-T,y2);w.text('KN-LABEL',x-1.4*T+q[0],y1+0.4*T+q[1],1.2*T,c.n,1);w.text('KN-LABEL',x-1.4*T+q[0],y2-1.6*T+q[1],1.2*T,c.n,1)});
+  g.X.forEach((X,i)=>{if(bm.grids[i].free)return;const adj=[i-1,i].filter(q=>q>=0&&q<nS),zb=Math.min(...adj.map(q=>bm.zb[q])),hw=g.w[i]/2;w.pl('KN-COL',[[XX(X-hw),YZ(zb)],[XX(X-hw),YZ(zb)-600],[XX(X+hw),YZ(zb)-600],[XX(X+hw),YZ(zb)]])});
+  if(P.inElev)m.P.forEach(p=>{if(show(p.cat))w.pl(LY(p.cat),barPath(bm,m,p,0).map(q=>[XX(q[0]),YZ(q[2])]))})}
+ const rows=P.rows?bm.runs.map((_,ri)=>ri).filter(ri=>m.P.some(p=>p.ri===ri&&show(p.cat))):[],rh=Math.max(6*T,700),yR=YZ(zmn)-600-4*T;
+ rows.forEach((ri,row)=>{const r=bm.runs[ri],yy0=yR-row*rh,top=r.layer[0]==='T',dir=top?-1:1;
+  m.P.filter(p=>p.ri===ri&&show(p.cat)).forEach(p=>{const yy=yy0+(p.i%2?0.3*T*dir:0),x0=XX(p.x0),x1=XX(p.x1),pts=[];if(p.hl)pts.push([x0,yy+dir*p.la]);pts.push([x0,yy],[x1,yy]);if(p.hr)pts.push([x1,yy+dir*p.lb]);w.pl(LY(p.cat),pts);
+   if(P.labels){const lx=(x0+x1)/2;TX('pl:'+p.rid+':'+p.i,'KN-LABEL',lx,yy+(top?0.5*T:-1.4*T),0.8*T,p.n+'-'+p.bar+'mm-'+p.mark+'-'+m2(p.cut)+'m',1);TX('pd:'+p.rid+':'+p.i,'KN-DIM',lx,yy+(top?-1.4*T:0.5*T),0.8*T,m2(p.dims.b)+' m',1);
+    if(p.hl)w.text('KN-DIM',x0-0.4*T,yy+dir*p.la/2,0.6*T,m2(p.la),1,90);if(p.hr)w.text('KN-DIM',x1+T,yy+dir*p.lb/2,0.6*T,m2(p.lb),1,90)}})});
+ const yEnd=(rows.length?yR-(rows.length-1)*rh:YZ(zmn)-600)-3*T;
+ if(P.grid)g.X.forEach((X,i)=>{if(bm.grids[i].free)return;const x=XX(X);w.circle('KN-GRIDTXT',x,yG,1.5*T);w.text('KN-GRIDTXT',x,yG-0.5*T,1.2*T,bm.grids[i].n,1);w.line('KN-GRID',x,yG-1.5*T,x,yEnd)});
+ let yMin=yEnd;
+ if(P.table){const R=rowsOf(raw).filter(r=>show(r.cat)),tx=XX(hi)+8*T,ty=y0-3.5*T,cw=[8,4,4,4,5,4,5,3,4].map(v=>v*T),rh2=1.8*T,xs=[tx];cw.forEach(c=>xs.push(xs[xs.length-1]+c));
+  w.text('KN-TABLE',tx,ty+0.6*T,1.2*T,'BAR SCHEDULE '+bm.id);
+  const all=[['MARK','SIZE','SHAPE','A','B','C','CUT (m)','QTY','KG']].concat(R.map(r=>[r.mark,r.bar,r.shape,r.dims.a?m2(r.dims.a):'-',m2(r.dims.b),r.dims.c?m2(r.dims.c):'-',m2(r.cut),String(r.qty),(kgm(r.d)*r.cut/1000*r.qty).toFixed(1)]));
+  all.forEach((cells,i)=>{const yy=ty-i*rh2;cells.forEach((c,j)=>w.text('KN-TABLE',xs[j]+0.4*T,yy-1.3*T,0.8*T,c));w.line('KN-TABLE',xs[0],yy,xs[xs.length-1],yy)});
+  const yb=ty-all.length*rh2;w.line('KN-TABLE',xs[0],yb,xs[xs.length-1],yb);xs.forEach(x=>w.line('KN-TABLE',x,ty,x,yb));yMin=Math.min(yMin,yb)}
+ if(P.dxf3d){const off=yMin-8*T-600;m.P.forEach(p=>{if(!show(p.cat))return;for(let bi=0;bi<p.n;bi++)w.pl3('KN-3D',barPath(bm,m,p,bi).map(q=>[XX(q[0]),q[1]+off,q[2]]))});
+  if(P.stir)m.ST.forEach(st=>{const s=st.sec,ds=BARS[s.sb],a=s.b/2-s.cs-ds/2,z0=bm.zb[st.si]+s.cb+ds/2,z1=bm.zb[st.si]+s.h-s.ct-ds/2;st.xs.forEach(x=>w.pl3('KN-3D',[[XX(x),-a+off,z0],[XX(x),a+off,z0],[XX(x),a+off,z1],[XX(x),-a+off,z1]],true))});
+  w.text('KN-LABEL',0,off+3*T,T,'3D REBAR MODEL '+bm.id+' (X ตามคาน, Y ขวางคาน, Z ระดับจริง)');yMin=off-1000}
+ return y0-yMin}
+function dxfProject(list){const P=S.settings.sheet,base=LASTSP||100,sP=P.scale==='auto'?NICE.reduce((a,v)=>Math.abs(v-base)<Math.abs(a-base)?v:a,100):+P.scale,T=2.5*sP,w=dxfW();let y=0;
+ list.forEach(raw=>{y-=dxfBeam(w,raw,y,sP)+12*T});return dxfDoc(w,T)}
+function pluginJSON(){return{app:'KN Studio',format:'kg-rebar-link',version:5,units:'mm',axes:'x along beam from left end of the beam line, y across beam (centre = 0), z level (beam top level as entered)',
+ beams:S.beams.map(raw=>{const m=build(raw),D=m.D,g=m.g;return{id:D.id,floor:D.floor,line:D.line,qty:D.qty,fc_ksc:D.fc,grade:D.grade,
+  grids:D.grids.map((q,i)=>({name:q.n,x:g.X[i],width:g.w[i],free:!!q.free})),
+  spans:D.spans.map((L,i)=>{const s=secOf(D,i);return{from:D.grids[i].n,to:D.grids[i+1].n,x0:g.X[i],x1:g.X[i+1],b:s.b,h:s.h,z_bottom:D.zb[i],section:s.id,cover:{top:s.ct,bottom:s.cb,side:s.cs},stirrup:{size:s.sb,s1:s.s1,s2:s.two?s.s2:s.s1}}}),
+  bars:m.P.map(p=>({run:p.rid,mark:p.mark,layer:p.layer,size:p.bar,dia:p.d,count:p.n,shape:p.shape,category:p.cat,cut_length:p.cut,dims:p.dims,crank:p.kz||0,location:p.span,bend_inside_dia:bendD(p.d),
+   polylines:Array.from({length:p.n},(_,bi)=>barPath(D,m,p,bi).map(q=>q.map(v=>Math.round(v*10)/10)))})),
+  stirrups:m.ST.map(t=>{const c=stirCut(t.sec),ds=BARS[t.sec.sb];return{span:t.si,size:t.sec.sb,section:t.sec.id,count:t.n,cut_length:c.cut,outer:{a:c.A,b:c.B},hook_ext:c.ext,y_half:t.sec.b/2-t.sec.cs-ds/2,z0:D.zb[t.si]+t.sec.cb+ds/2,z1:D.zb[t.si]+t.sec.h-t.sec.ct-ds/2,positions:t.xs.map(v=>Math.round(v))}})}})}}
+
+/* ===== Output ===== */
+let DL=null;
+async function saveFile(filename,text,mime){if(window.KN&&KN.ready&&!KN.can('export')){toast('บัญชีนี้ไม่มีสิทธิ์ส่งออกไฟล์ ติดต่อแอดมิน');return}const isB=text instanceof Blob;
+ if(!DL){try{const bl=isB?text:new Blob([text],{type:mime||'application/octet-stream'}),u=URL.createObjectURL(bl),a=document.createElement('a');a.href=u;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);toast('บันทึก '+filename);return}catch(e){}}
+ try{if(!DL)throw 0;if(isB)await DL.save({filename,data:text});else{try{await DL.save({filename,data:text})}catch(e1){await DL.save({filename,data:new Blob([text],{type:mime})})}}toast('บันทึก '+filename)}catch(e){if(isB){toast('ดาวน์โหลดไม่ได้ในหน้านี้');return}try{await navigator.clipboard.writeText(text);toast('ดาวน์โหลดไม่ได้ จึงคัดลอกเนื้อหาไว้ให้แทน')}catch(_){toast('ดาวน์โหลดไม่ได้ในหน้านี้')}}}
+function renderOut(){const bm=M.D,m=M,rows=ROWS;let h='';
+ if(S.tab==='sheet'){const ps=paperSVG(bm,m);h=`<div class="chips" style="margin-bottom:8px"><button class="ib${PS?' on':''}" id="psBtn">ตั้งค่าแผ่นแบบ</button><button class="ib${LAYM?' on':''}" id="layBtn">โหมดจัดหน้า</button><button class="gold" id="dlSheet">ดาวน์โหลด SVG ขนาดกระดาษจริง</button><button class="ib" id="dlDxf">ส่งออก DXF คานนี้</button><button class="ib" id="dlDxfAll">DXF ทั้งโครงการ</button><span class="note" style="margin:0">${esc(LASTSC)}</span></div>${PS?sheetSetHTML():''}${LAYM?layPanelHTML():''}<div class="paper${LAYM?' laym':''}" id="sheet">${ps}</div><div class="note">แตะเหล็กบนแผ่นแบบเพื่อแก้ไข · โหมดจัดหน้า: ลากข้อความหรือหน้าตัดไปวางได้ · ไฟล์ SVG เปิดในเบราว์เซอร์แล้วสั่งพิมพ์ได้ขนาดจริง · DXF เปิดใน AutoCAD แล้ว Save As เป็น DWG ได้</div>`}
+ else if(S.tab==='bend'){const fr=rows.filter(passF),tw=fr.reduce((a,r)=>a+kgm(r.d)*r.cut/1000*r.qty,0);
+  h=`<div class="chips" style="margin:0 0 8px"><button class="gold" id="dlBend">ดาวน์โหลดตาราง (HTML)</button><button class="ib" id="dlCsv">ดาวน์โหลด CSV</button><span class="note" style="margin:0">${fr.length} รายการ · ${tw.toFixed(1)} กก. · แตะแถวเพื่อดูตำแหน่งในโมเดล</span></div><div class="paper" id="bend">${bendTable(fr)}</div>`}
+ else h=`<div class="chips" style="margin-bottom:8px"><button class="gold" id="dlDxf">ส่งออก DXF คานนี้</button><button class="ib" id="dlDxfAll">DXF ทั้งโครงการ</button><label class="ck"><input type="checkbox" data-sp="dxf3d"${S.settings.sheet.dxf3d?' checked':''}> รวมเหล็ก 3D ใน DXF</label><button class="ib" id="dlPlug">ไฟล์เชื่อม AutoCAD / Revit (JSON)</button><button class="ib" id="cpJson">คัดลอก JSON สำหรับ Bar Cut</button><button class="ib" id="cpProj">คัดลอกไฟล์โครงการ</button><button class="ib" id="ldProj">นำเข้าโครงการ</button><button class="ib" id="rsProj">เพิ่มคานตัวอย่าง B6 และ B5-B7</button></div><textarea id="io" placeholder="วาง JSON โครงการที่นี่แล้วกด นำเข้าโครงการ"></textarea><div class="note">ข้อมูลบันทึกในเบราว์เซอร์เครื่องนี้เท่านั้น ใช้ "คัดลอกไฟล์โครงการ" เพื่อย้ายเครื่องหรือสำรอง</div>`;
+ $('#out').innerHTML=h;
+ const on=(id,fn)=>{const e=$(id);if(e)e.onclick=fn};
+ on('#psBtn',()=>{PS=!PS;renderOut()});if(S.tab==='sheet')bindLay();
+ const clean0=fn=>{const s0=SEL;SEL=null;try{return fn()}finally{SEL=s0}};
+ on('#dlSheet',()=>saveFile(bm.id+'-'+S.settings.sheet.paper+'.svg',clean0(()=>paperSVG(bm,m,true)),'image/svg+xml'));
+ on('#dlDxf',()=>saveFile(B().id+'.dxf',dxfBytes(clean0(()=>dxfProject([B()]))),'application/dxf'));
+ on('#dlDxfAll',()=>saveFile('KN-Studio-project.dxf',dxfBytes(clean0(()=>dxfProject(S.beams))),'application/dxf'));
+ on('#dlPlug',()=>saveFile('KN-Studio-link.json',JSON.stringify(pluginJSON(),null,1),'application/json'));
+ on('#dlBend',()=>{const css='body{font-family:Arial,sans-serif}table{border-collapse:collapse;width:100%;margin-bottom:14px;font-size:13px}th,td{border:1px solid #111;padding:4px 8px;text-align:center}td.l,.loc{text-align:left}.loc{font-size:11px;color:#444}tr.gh td{font-size:16px;background:#f4f1ea}svg{width:230px;display:block;margin:0 auto}';
+  saveFile('Bending.html','<!DOCTYPE html><html><head><meta charset="utf-8"><title>Bending</title><style>'+css+'</style></head><body>'+bendTable(rows.filter(passF),true)+'</body></html>','text/html')});
+ on('#dlCsv',()=>saveFile('Bending.csv','﻿beam,floor,line,layer,mark,bar,shape,a_mm,b_mm,c_mm,crank_mm,cut_mm,qty,kg,places\n'+rows.filter(passF).map(r=>[r.beam,r.floor,r.line,r.layer,r.mark,r.bar,r.shape,r.dims.a,r.dims.b,r.dims.c,r.kz||0,r.cut,r.qty,(kgm(r.d)*r.cut/1000*r.qty).toFixed(2),'"'+r.places.join('; ')+'"'].join(',')).join('\n'),'text/csv'));
+ const cp=(t,msg)=>{$('#io').value=t;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast(msg),()=>{$('#io').select();toast('เลือกข้อความแล้ว กดคัดลอก')})};
+ on('#cpJson',()=>cp(JSON.stringify({app:'KN Studio',type:'bar-list',version:4,stock:S.settings.stock,bars:rows.map(({beam,floor,line,layer,mark,bar,shape,dims,kz,cut,qty,places})=>({beam,floor,line,layer,mark,bar,shape,dims,crank:kz||0,cut,qty,places}))},null,1),'คัดลอก JSON แล้ว'));
+ on('#cpProj',()=>cp(JSON.stringify({app:'KN Studio',type:'project',version:4,settings:S.settings,beams:S.beams}),'คัดลอกไฟล์โครงการแล้ว'));
+ on('#ldProj',()=>{try{const o=JSON.parse($('#io').value);if(!o.beams||!o.beams.length||!o.beams[0].spans||!o.beams[0].spans[0].st)throw 0;S.beams=o.beams;S.settings=Object.assign(defSettings(),o.settings||{});S.settings.col=Object.assign(defSettings().col,S.settings.col||{});S.settings.sheet=Object.assign(defSettings().sheet,S.settings.sheet||{});S.cur=0;SEL=null;UI={t:'span',i:0};save();renderTop();renderPanel();renderAll();toast('นำเข้าโครงการแล้ว')}catch(e){toast('รูปแบบ JSON ไม่ถูกต้อง')}});
+ on('#rsProj',()=>{S.beams.push(sampleB6(),sampleB57());S.cur=S.beams.length-2;SEL=null;UI={t:'span',i:1};save();renderTop();renderPanel();renderAll();toast('เพิ่มคานตัวอย่างแล้ว')});
+ document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.t===S.tab))}
+$('#out').addEventListener('click',e=>{if(e.target.closest('.cpick'))return;if(LAYM&&e.target.closest('#sheet'))return;const k=e.target.closest('[data-k]');if(k)pick(k.dataset.k,true,k.dataset.r)});
+$('#out').addEventListener('change',e=>{const k=e.target.dataset.sp;if(!k)return;const P=S.settings.sheet;P[k]=e.target.type==='checkbox'?e.target.checked:(k==='secScale'?+e.target.value:e.target.value);save();if(S.tab==='sheet')renderOut()});
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{S.tab=t.dataset.t;save();renderOut()});
+function renderAll(live,colOnly){const bm=B();M=build(bm);ROWS=allRows();$('#crumb').textContent='คาน · '+bm.id+' · '+bm.floor+' '+bm.line;
+ if(SEL&&!ROWS.some(r=>r.key===SEL))SEL=null;
+ render2D();render3D();if(!colOnly)renderFilt();
+ const r=SEL&&ROWS.find(x=>x.key===SEL);
+ $('#selinfo').innerHTML=r?`<div class="selinfo"><span>${esc(r.beam)} · ${esc(info(r))} · ${r.bar} × ${r.qty}</span><span>${esc(r.floor)} ${esc(r.line)} · ${r.layer} · ${r.places.map(esc).join(', ')}</span></div>`:'';
+ const wo=$('#warns details'),wasOpen=wo?wo.open:M.W.length<3;
+ $('#warns').innerHTML=M.W.length?`<details class="warn"${wasOpen?' open':''}><summary style="cursor:pointer">คำเตือนตามมาตรฐาน ${M.W.length} รายการ</summary>${M.W.map(w=>`<div style="margin-top:4px">• ${esc(w)}</div>`).join('')}</details>`:'<div class="okm">ไม่มีคำเตือน: ผ่านเกณฑ์ที่ตรวจทั้งหมด</div>';
+ renderSecV();renderStatus();
+ clearTimeout(tOut);if(live)tOut=setTimeout(renderOut,colOnly?150:350);else renderOut()}
+
+/* ===== Settings ===== */
+function renderSet(){const st=S.settings;
+ $('#setForm').innerHTML=`<div class="h">วัสดุและสต็อก</div>
+ <div class="g2">${fld('ขนาดหินใหญ่สุด (มม.)','agg',st.agg)}${sel('ความยาวเหล็กสต็อกสูงสุด (มม.)','stock',st.stock,[10000,12000])}</div>
+ <div class="g2" style="margin-top:6px">${fld('ปัดความยาวตัดทีละ (มม.)','round',st.round)}${fld('ระยะห่างแนวดิ่งระหว่างชั้นขั้นต่ำ (มม.)','vclear',st.vclear)}</div>
+ <div class="h">ระยะทาบ</div>
+ <div class="g3">${sel('วิธีคิด','lapMode',st.lapMode,[['aci','ACI 318 Class B (1.3ℓd)'],['mult','จำนวนเท่าของ db']])}${fld('จำนวนเท่า × db','lapMult',st.lapMult)}${fld('ระยะทาบขั้นต่ำ (มม.)','minLap',st.minLap)}</div>
+ <div class="h">เกณฑ์เตือนเหล็กเสริมพิเศษ</div>
+ <div class="g2">${fld('เสริมบนหัวเสา ยื่นอย่างน้อย (× L)','exTop',st.exTop)}${fld('เสริมล่าง หยุดห่างหน้าเสาไม่เกิน (× L)','exBot',st.exBot)}</div>
+ <div class="note">ตัวอย่างตั้งระยะทาบไว้ที่ 41 × db เพื่อให้ตรงกับแบบ Revit · วิธี ACI จะได้ระยะทาบยาวกว่านี้</div>
+ <div class="h">เส้นผ่านศูนย์กลางงอด้านในขั้นต่ำ (× db) · ACI 318</div>
+ <div class="g4">${fld('ปลอก ≤ 16 มม.','bend.stir',st.bend.stir)}${fld('หลัก ≤ DB25','bend.m25',st.bend.m25)}${fld('DB28–DB36','bend.m36',st.bend.m36)}${fld('> DB36','bend.big',st.bend.big)}</div>
+ <div style="margin-top:16px"><button class="ib" id="rsSet">คืนค่าเริ่มต้น</button></div>`;
+ $('#setForm').querySelectorAll('[data-p]').forEach(el=>el.addEventListener('change',e=>{setP(st,e.target.dataset.p,e.target.value);st.stock=+st.stock;st.round=Math.max(10,st.round);save();toast('บันทึกแล้ว')}));
+ $('#rsSet').onclick=()=>{const col=S.settings.col;S.settings=defSettings();S.settings.col=col;save();renderSet();toast('คืนค่าเริ่มต้นแล้ว')}}
+
+/* ===== Bar Cut: optimisation engine (Gilmore–Gomory column generation) ===== */
+function lpSolve(c,A,b,types){const m=A.length,n=c.length,BIG=1e7;let N=n;const sc=[],ar=[],sl=[];
+ types.forEach((t,i)=>{if(t==='ge'){sc[i]=N++;ar[i]=N++}else sl[i]=N++});
+ const T=[],basis=[],C=new Float64Array(N);for(let j=0;j<n;j++)C[j]=c[j];
+ for(let i=0;i<m;i++){const r=new Float64Array(N+1);for(let j=0;j<n;j++)r[j]=A[i][j];if(types[i]==='ge'){r[sc[i]]=-1;r[ar[i]]=1;C[ar[i]]=BIG;basis[i]=ar[i]}else{r[sl[i]]=1;basis[i]=sl[i]}r[N]=b[i];T.push(r)}
+ const z=new Float64Array(N+1);for(let j=0;j<=N;j++){let v=j<N?C[j]:0;for(let i=0;i<m;i++)v-=C[basis[i]]*T[i][j];z[j]=v}
+ for(let it=0;it<20000;it++){let e=-1,best=-1e-9;const bland=it>3000;for(let j=0;j<N;j++){if(z[j]<best){e=j;if(bland)break;best=z[j]}}if(e<0)break;
+  let r=-1,rt=Infinity;for(let i=0;i<m;i++){const a=T[i][e];if(a>1e-11){const q=T[i][N]/a;if(q<rt-1e-12){rt=q;r=i}}}if(r<0)return{status:'unbounded'};
+  const pr=T[r],pv=pr[e];for(let j=0;j<=N;j++)pr[j]/=pv;for(let i=0;i<m;i++){if(i===r)continue;const f=T[i][e];if(f!==0){const ri=T[i];for(let j=0;j<=N;j++)ri[j]-=f*pr[j]}}
+  const f=z[e];for(let j=0;j<=N;j++)z[j]-=f*pr[j];basis[r]=e}
+ const x=new Float64Array(N);basis.forEach((bj,i)=>x[bj]=T[i][N]);
+ const bad=types.some((t,i)=>t==='ge'&&x[ar[i]]>1e-6);let obj=0;for(let j=0;j<n;j++)obj+=c[j]*x[j];
+ return{status:bad?'infeasible':'ok',x:Array.from(x.slice(0,n)),y:types.map((t,i)=>t==='ge'?z[sc[i]]:-z[sl[i]]),obj}}
+// best cutting pattern for one stock length: maximise Σ val·a − pen(remainder) − A0, with piece-count and distinct-length limits
+function bestPattern(items,L,o,bound,val,A0,wm){wm=wm||1;const n=items.length,k=o.kerf,a=new Array(n).fill(0);let best={v:-Infinity,a:null},nodes=0;
+ const mr=new Array(n+1).fill(0);for(let i=n-1;i>=0;i--)mr[i]=Math.max(val[i]>0?val[i]/(items[i].l+k):0,mr[i+1]);
+ const ev=(cap,v,cnt)=>{if(!cnt)return;const t=v-o.pen(Math.max(0,cap-k))*wm-A0;if(t>best.v)best={v:t,a:a.slice()}};
+ const rec=(i,cap,v,cnt,dist)=>{if(++nodes>150000)return;if(i>=n){ev(cap,v,cnt);return}if(v+mr[i]*cap-A0<=best.v){ev(cap,v,cnt);return}
+  const it=items[i];let q=Math.min(bound[i],Math.floor(cap/(it.l+k)));if(o.P)q=Math.min(q,o.P-cnt);if(o.K&&dist>=o.K)q=0;
+  for(let t=q;t>=0;t--){a[i]=t;rec(i+1,cap-t*(it.l+k),v+t*val[i],cnt+t,dist+(t>0?1:0))}a[i]=0};
+ rec(0,L+k,0,0,0);return best}
+function solveCut(items0,stocks,o){const items=items0.filter(i=>i.d>0).sort((a,b)=>b.l-a.l),k=o.kerf;o.pen=r=>r>=o.R?o.wr*r:o.ws*r;
+ const S0=stocks.filter(s=>s.avail>0);if(!items.length)return{items,pats:[],lp:null,short:[]};
+ const tooLong=items.filter(it=>!S0.some(s=>it.l<=s.L));if(tooLong.length)return{items,error:'ท่อนยาวเกินเหล็กสต็อก: '+tooLong.map(i=>m2(i.l)+' ม.').join(', '),pats:[],short:[]};
+ const remOf=(s,a)=>Math.max(0,s.L-a.reduce((t,q,i)=>t+q*(items[i].l+k),0)),pc=(s,a)=>s.A+o.pen(remOf(s,a))*(s.wm||1);
+ const pats=[],seen=new Set(),add=(j,a)=>{if(!a.some(q=>q>0))return false;const key=j+'|'+a.join(',');if(seen.has(key))return false;seen.add(key);pats.push({j,a,cost:pc(S0[j],a)});return true};
+ S0.forEach((s,j)=>items.forEach((it,i)=>{let q=Math.min(it.d,Math.floor((s.L+k)/(it.l+k)));if(o.P)q=Math.min(q,o.P);if(q>0){const a=items.map(()=>0);a[i]=q;add(j,a)}}));
+ const scale=Math.max(1,...pats.map(p=>p.cost));let lp0=null,iters=0;
+ const cg=(dem,av)=>{let lp=null;const lim=S0.map((s,j)=>isFinite(av[j]));
+  for(let t=0;t<60;t++){iters++;const rows=[],b=[],types=[];items.forEach((it,i)=>{rows.push(pats.map(p=>p.a[i]));b.push(dem[i]);types.push('ge')});
+   S0.forEach((s,j)=>{if(lim[j]){rows.push(pats.map(p=>p.j===j?1:0));b.push(Math.max(0,av[j]));types.push('le')}});
+   lp=lpSolve(pats.map(p=>p.cost),rows,b,types);if(lp.status!=='ok')return lp;
+   const yI=lp.y.slice(0,items.length);let q=items.length;const yS=S0.map((s,j)=>lim[j]?lp.y[q++]:0);let added=0;
+   S0.forEach((s,j)=>{if(av[j]<=0)return;const bp=bestPattern(items,s.L,o,dem,yI,s.A-yS[j],s.wm);if(bp.a&&bp.v>1e-7*scale&&add(j,bp.a))added++});if(!added)break}
+  return lp};
+ const run=useLp=>{const res=items.map(i=>i.d),av=S0.map(s=>s.avail),used=new Map();
+  const apply=(j,a,c)=>{const key=j+'|'+a.join(',');used.set(key,{j,a,count:(used.get(key)||{count:0}).count+c});a.forEach((q,i)=>{res[i]=Math.max(0,res[i]-q*c)});av[j]-=c};
+  const one=(p)=>{if(av[p.j]<=0)return false;const a=p.a.map((q,i)=>Math.min(q,res[i]));if(!a.some(q=>q>0))return false;apply(p.j,a,1);return true};
+  if(useLp)for(let round=0;round<60&&res.some(v=>v>0);round++){const lp=cg(res,av);if(!lp||lp.status!=='ok')break;if(!lp0)lp0=lp;
+   const order=pats.map((p,pi)=>[p,lp.x[pi]||0]).filter(x=>x[1]>1e-9).sort((x,y)=>y[1]-x[1]);let any=false;
+   order.forEach(([p,x])=>{let c=Math.floor(x+1e-9);while(c-->0&&one(p))any=true});
+   if(!any){if(!order.length||!one(order[0][0]))break}}
+  for(let g=0;g<600&&res.some(v=>v>0);g++){let best=null;S0.forEach((s,j)=>{if(av[j]<=0)return;const bp=bestPattern(items,s.L,o,res,items.map(it=>it.l*o.lam),s.A,s.wm);if(bp.a&&(!best||bp.v>best.v))best={j,a:bp.a,v:bp.v}});
+   if(!best)break;let c=Infinity;best.a.forEach((q,i)=>{if(q>0)c=Math.min(c,Math.floor(res[i]/q))});apply(best.j,best.a,Math.max(1,Math.min(c,av[best.j])))}
+  const list=[...used.values()];return{list,res,cost:list.reduce((t,u)=>t+u.count*pc(S0[u.j],u.a),0),bars:list.reduce((t,u)=>t+u.count,0)}};
+ const lp={status:'ok',get obj(){return lp0?lp0.obj:null}};
+ const A=run(true),Bg=run(false),pick=[A,Bg].filter(c=>!c.res.some(v=>v>0)).sort((x,y)=>x.cost-y.cost||x.bars-y.bars)[0]||A;
+ const outPats=pick.list.map(u=>{const s=S0[u.j],r=remOf(s,u.a);return{s,a:u.a,count:u.count,r,keep:r>=o.R,pieces:u.a.map((q,i)=>({i,q})).filter(x=>x.q>0),cost:pc(s,u.a)}}).sort((x,y)=>y.count-x.count||y.s.L-x.s.L);
+ const made=items.map((it,i)=>outPats.reduce((t,p)=>t+p.a[i]*p.count,0));
+ return{items,pats:outPats,lp:lp0?lp0.obj:null,cost:pick.cost,iters,patsTried:pats.length,short:items.map((it,i)=>({it,n:pick.res[i]})).filter(x=>x.n>0),extra:items.map((it,i)=>({it,n:made[i]-it.d})).filter(x=>x.n>0)}}
+
+/* ===== Bar Cut: screen ===== */
+const defStock=()=>({ppk:26,newL:[{L:10000,on:true},{L:12000,on:true}],left:[]});
+const defCutCfg=()=>({obj:'waste',R:1000,kerf:0,P:0,K:0,leftFirst:true,group:'all',stir:true,ex:[]});
+S.stock=Object.assign(defStock(),S.stock||{});S.cutCfg=Object.assign(defCutCfg(),S.cutCfg||{});S.manual=S.manual||[];
+let RES=null,BCBUSY=false;
+const SEGC=['#C9A55C','#7FA8D8','#E2C584','#8FB58F','#D9A27E','#B58AD0','#A8884A','#6FB8B0','#E8963A','#9AA0A8'];
+function cutItems(){const cfg=S.cutCfg,gk=r=>cfg.group==='beam'?r.beam:cfg.group==='floor'?(r.floor||'—'):'ทั้งโครงการ',groups={};
+ const push=(bar,grp,l,q,ref)=>{const G=bar+'|'+grp,g=groups[G]=groups[G]||{bar,grp,items:{}};const it=g.items[l]=g.items[l]||{l,d:0,refs:[]};it.d+=q;it.refs.push(ref)};
+ allRows().filter(r=>!cfg.ex.includes(r.beam)&&(cfg.stir||(r.cat!=='st'&&r.cat!=='hg'))).forEach(r=>push(r.bar,gk(r),r.cut,r.qty,r.beam+' '+r.mark+' ×'+r.qty));
+ S.manual.forEach(m=>{if(m.L>0&&m.qty>0)push(m.bar,cfg.group==='all'?'ทั้งโครงการ':'เพิ่มเอง',m.L,m.qty,(m.mark||'เพิ่มเอง')+' ×'+m.qty)});
+ return Object.values(groups).map(g=>Object.assign(g,{items:Object.values(g.items).sort((a,b)=>b.l-a.l)})).sort((a,b)=>BARS[b.bar]-BARS[a.bar]||String(a.grp).localeCompare(String(b.grp)))}
+function runCut(){const cfg=S.cutCfg,st=S.stock,pool={},t0=performance.now();
+ st.left.forEach((l,i)=>{if(l.qty>0&&l.L>0){const k=l.bar+'|'+l.L;pool[k]=pool[k]||{bar:l.bar,L:l.L,qty:0};pool[k].qty+=l.qty}});
+ const out=cutItems().map(g=>{const ppm=kgm(BARS[g.bar])*st.ppk/1000,W=cfg.obj==='cost',stocks=[];
+  st.newL.filter(n=>n.on&&n.L>0).forEach(n=>stocks.push({L:n.L,avail:Infinity,kind:'new',label:'ใหม่ '+m2(n.L)+' ม.',price:ppm*n.L}));
+  Object.values(pool).filter(p=>p.bar===g.bar&&p.qty>0).forEach(p=>stocks.push({L:p.L,avail:p.qty,kind:'left',label:'เศษ '+m2(p.L)+' ม.',price:ppm*p.L,pool:p}));
+  stocks.forEach(s=>{const lf=s.kind==='left'&&cfg.leftFirst;s.wm=lf?0.2:1;s.A=W?(s.kind==='new'?s.price:(lf?-0.5*s.price:s.price)):(s.kind==='new'?0.02*s.L:(lf?-0.5*s.L:0.02*s.L))});
+  const ws=W?0.05*ppm:1,r=solveCut(g.items,stocks,{kerf:+cfg.kerf||0,R:+cfg.R||0,P:+cfg.P||0,K:+cfg.K||0,ws,wr:0.3*ws,lam:W?1.2*ppm:1});
+  (r.pats||[]).forEach(p=>{if(p.s.pool)p.s.pool.qty-=p.count});return{g,r,ppm}});
+ return{groups:out,ms:Math.round(performance.now()-t0),obj:cfg.obj,R:+cfg.R||0,date:new Date().toLocaleDateString('th-TH')}}
+function cutStats(G){const r=G.r,P=r.pats||[],need=r.items.reduce((t,i)=>t+i.l*i.d,0),used=P.reduce((t,p)=>t+p.s.L*p.count,0),keep=P.reduce((t,p)=>t+(p.keep?p.r*p.count:0),0),scrap=used-need-keep,
+ newBars={},left=P.filter(p=>p.s.kind==='left').reduce((t,p)=>t+p.count,0);P.filter(p=>p.s.kind==='new').forEach(p=>newBars[p.s.L]=(newBars[p.s.L]||0)+p.count);
+ const cost=P.filter(p=>p.s.kind==='new').reduce((t,p)=>t+p.s.price*p.count,0),kg=kgm(BARS[G.g.bar])*P.filter(p=>p.s.kind==='new').reduce((t,p)=>t+p.s.L*p.count,0)/1000;
+ return{need,used,keep,scrap:Math.max(0,scrap),newBars,left,cost,kg,eff:used?need/used:0,bars:P.reduce((t,p)=>t+p.count,0)}}
+function renderCut(){if(!$('#v-cut').classList.contains('on'))return;renderCutItems();renderCutStock();renderCutCfg();renderCutRes()}
+function renderCutItems(){const cfg=S.cutCfg,groups=cutItems(),tot=groups.reduce((t,g)=>t+g.items.reduce((a,i)=>a+i.d,0),0);
+ $('#bcSum').textContent=groups.length?`${groups.length} กลุ่ม · ${tot} ท่อน`:'';
+ let h=`<div class="sh" style="margin-top:0">ดึงเหล็กจากคาน</div><div class="chips">${S.beams.map(b=>`<button class="chip${cfg.ex.includes(b.id)?'':' on'}" data-bx="${esc(b.id)}">${esc(b.id)}</button>`).join('')}<label class="ck"><input type="checkbox" data-cc="stir"${cfg.stir?' checked':''}> รวมเหล็กปลอก</label></div>
+ <div class="sh">กลุ่มตัดร่วม</div><div class="chips">${[['all','ทั้งโครงการ'],['floor','แยกตามชั้น'],['beam','แยกตามคาน']].map(([k,t])=>`<button class="chip${cfg.group===k?' on':''}" data-cg="${k}">${t}</button>`).join('')}</div>
+ <div class="note">เหล็กขนาดเดียวกันในกลุ่มเดียวกันจะถูกจัดตัดร่วมกัน · เศษเก่าในสต็อกใช้ร่วมกันทุกกลุ่ม</div>`;
+ h+=groups.map(g=>`<div class="bcg"><div class="bcgh"><span>${g.bar}</span><span>${esc(g.grp)} · ${g.items.reduce((a,i)=>a+i.d,0)} ท่อน · ${(g.items.reduce((a,i)=>a+i.l*i.d,0)/1000).toFixed(1)} ม.</span></div>
+  <table class="bct"><tr><th>ยาวตัด</th><th>จำนวน</th><th>มาจาก</th></tr>${g.items.map(i=>`<tr><td>${m2(i.l)}</td><td>${i.d}</td><td class="src">${esc(i.refs.join(', '))}</td></tr>`).join('')}</table></div>`).join('')||'<div class="note">ยังไม่มีรายการ เลือกคานหรือเพิ่มรายการเอง</div>';
+ h+=`<div class="sh">เพิ่มรายการเอง</div>${S.manual.map((m,i)=>`<div class="mrow"><span>${m.bar} · ${m2(m.L)} ม. × ${m.qty}${m.mark?' · '+esc(m.mark):''}</span><button class="x" data-mdel="${i}" aria-label="ลบรายการ">✕</button></div>`).join('')}
+ <div class="g4" style="align-items:end"><div class="f"><label>ขนาด</label><select id="mBar">${Object.keys(BARS).map(b=>`<option${b==='DB16'?' selected':''}>${b}</option>`).join('')}</select></div><div class="f"><label>ยาว (ม.)</label><input id="mL" type="number" step="0.01" placeholder="2.92"></div><div class="f"><label>จำนวน</label><input id="mQ" type="number" step="1" placeholder="10"></div><button class="ib" id="mAdd" style="height:38px">เพิ่ม</button></div>
+ <div class="f" style="margin-top:6px"><label>ชื่อ/ตำแหน่ง (ไม่บังคับ)</label><input id="mMk" type="text" placeholder="F1 เหล็กยืน"></div>`;
+ $('#bcItems').innerHTML=h}
+function renderCutStock(){const st=S.stock;
+ let h=`<div class="g2"><div class="f"><label>ราคาเหล็ก (บาท/กก.) · ค่าตั้งต้นแก้ได้</label><input type="number" step="0.1" data-sk="ppk" value="${st.ppk}"></div><div></div></div>
+ <div class="sh">เหล็กเส้นใหม่ (ไม่จำกัดจำนวน)</div>${st.newL.map((n,i)=>`<div class="mrow"><label class="ck"><input type="checkbox" data-nl-on="${i}"${n.on?' checked':''}> ยาว</label><div class="f" style="width:90px"><input type="number" step="0.5" data-nl-l="${i}" value="${n.L/1000}" aria-label="ความยาวเหล็กใหม่ (ม.)"></div><span class="note" style="margin:0">ม. · DB16 ≈ ฿${Math.round(kgm(16)*n.L/1000*st.ppk)}/เส้น</span><button class="x" data-nl-del="${i}" aria-label="ลบความยาวนี้">✕</button></div>`).join('')}
+ <button class="chip" id="nlAdd">+ ความยาวอื่น</button>
+ <div class="sh">เศษเหล็กในสต็อก (ใช้ก่อนซื้อใหม่)</div>`;
+ h+=st.left.length?`<table class="bct"><tr><th>ขนาด</th><th>ยาว (ม.)</th><th>จำนวน</th><th>ที่มา</th><th></th></tr>${st.left.map((l,i)=>`<tr><td>${l.bar}</td><td><input class="ti" type="number" step="0.01" data-lf="L:${i}" value="${(l.L/1000).toFixed(2)}" aria-label="ความยาวเศษ"></td><td><input class="ti" type="number" step="1" data-lf="qty:${i}" value="${l.qty}" aria-label="จำนวนเศษ"></td><td class="src">${esc(l.note||'')}</td><td><button class="x" data-ldel="${i}" aria-label="ลบเศษนี้">✕</button></td></tr>`).join('')}</table>`:'<div class="note">ยังไม่มีเศษในสต็อก</div>';
+ h+=`<div class="g4" style="align-items:end;margin-top:6px"><div class="f"><label>ขนาด</label><select id="lBar">${Object.keys(BARS).map(b=>`<option${b==='DB16'?' selected':''}>${b}</option>`).join('')}</select></div><div class="f"><label>ยาว (ม.)</label><input id="lL" type="number" step="0.01" placeholder="3.40"></div><div class="f"><label>จำนวน</label><input id="lQ" type="number" step="1" placeholder="4"></div><button class="ib" id="lAdd" style="height:38px">เพิ่มเศษ</button></div>`;
+ $('#bcStock').innerHTML=h}
+function renderCutCfg(){const c=S.cutCfg;
+ $('#bcCfg').innerHTML=`<div class="sh" style="margin-top:0">เป้าหมาย</div><div class="g2"><button class="chip big${c.obj==='waste'?' on':''}" data-co="waste">เศษทิ้งน้อยสุด</button><button class="chip big${c.obj==='cost'?' on':''}" data-co="cost">ต้นทุนต่ำสุด</button></div>
+ <div class="g2" style="margin-top:8px"><div class="f"><label>เศษที่เก็บไว้ใช้ได้ ยาวตั้งแต่ R (ม.)</label><input type="number" step="0.1" data-cf="R" value="${c.R/1000}"></div><div class="f"><label>ความกว้างรอยตัด k (มม.)</label><input type="number" step="1" data-cf="kerf" value="${c.kerf}"></div></div>
+ <div class="g2" style="margin-top:6px"><div class="f"><label>ชิ้นสูงสุดต่อเส้น (0 = ไม่จำกัด)</label><input type="number" step="1" data-cf="P" value="${c.P}"></div><div class="f"><label>ความยาวต่างกันสูงสุดต่อเส้น (0 = ไม่จำกัด)</label><input type="number" step="1" data-cf="K" value="${c.K}"></div></div>
+ <div style="margin-top:8px"><label class="ck"><input type="checkbox" data-cc="leftFirst"${c.leftFirst?' checked':''}> ใช้เศษเก่าในสต็อกก่อนเหล็กใหม่</label></div>
+ <button class="gold wide" id="bcRun">${BCBUSY?'กำลังคำนวณ…':'คำนวณการตัด'}</button>
+ <details class="eq"><summary>หลักการคำนวณ</summary><div>
+ <p><b>รูปแบบการตัด p</b> จากเหล็กยาว L<sub>j</sub>: Σ a<sub>ip</sub>(l<sub>i</sub>+k) ≤ L<sub>j</sub>+k · เศษ r<sub>p</sub> = L<sub>j</sub> − Σ a<sub>ip</sub>(l<sub>i</sub>+k)</p>
+ <p><b>สมการหลัก (Gilmore–Gomory)</b><br>min Σ c<sub>p</sub>x<sub>p</sub> · โดย Σ a<sub>ip</sub>x<sub>p</sub> ≥ d<sub>i</sub> (ตัดครบทุกท่อน) · Σ<sub>p∈j</sub> x<sub>p</sub> ≤ a<sub>j</sub> (ไม่เกินสต็อก) · x<sub>p</sub> เป็นจำนวนเต็ม ≥ 0</p>
+ <p><b>ต้นทุนรูปแบบ</b> c<sub>p</sub> = A<sub>j</sub> + w<sub>s</sub>·เศษทิ้ง + w<sub>r</sub>·เศษเก็บ (เศษเก็บ = r ≥ R) · เป้าหมาย "เศษทิ้งน้อยสุด" ให้น้ำหนักเศษทิ้งสูงสุด · "ต้นทุนต่ำสุด" ใช้ราคาเหล็กเป็น A<sub>j</sub></p>
+ <p><b>วิธีแก้</b> Column generation: แก้ LP ด้วย Simplex แล้วหารูปแบบใหม่จาก Knapsack max Σ π<sub>i</sub>a<sub>i</sub> − c<sub>p</sub> (π = dual price) จนไม่มีรูปแบบที่ลดต้นทุนได้ → ปัดเป็นจำนวนเต็มแบบแก้ LP ซ้ำกับความต้องการที่เหลือ → เติมส่วนที่เหลือด้วย Greedy แล้วเลือกคำตอบที่ดีกว่าระหว่างสองวิธี</p></div></details>`}
+function barSegs(p,items,R){const L=p.s.L;let o='';p.pieces.forEach(x=>{const it=items[x.i],c=SEGC[x.i%SEGC.length];for(let q=0;q<x.q;q++)o+=`<div class="sg" style="flex:${it.l};background:${c}" title="${esc(m2(it.l)+' ม. · '+it.refs.join(', '))}"><span>${m2(it.l)}</span></div>`});
+ if(p.r>0)o+=`<div class="sg ${p.keep?'keep':'scrap'}" style="flex:${p.r}" title="${p.keep?'เศษเก็บ':'เศษทิ้ง'} ${m2(p.r)} ม."><span>${p.r>=L*0.06?m2(p.r):''}</span></div>`;return o}
+function renderCutRes(){const el=$('#bcRes');if(!RES){el.innerHTML='<div class="empty"><div class="eh">ยังไม่ได้คำนวณ</div><div class="note">ตรวจรายการตัดและสต็อกทางซ้าย แล้วกด "คำนวณการตัด"</div></div>';$('#bcInfo').textContent='';return}
+ const all=RES.groups.map(G=>({G,st:cutStats(G)})),T={need:0,used:0,keep:0,scrap:0,cost:0,kg:0,bars:0,left:0,newBars:{}};
+ all.forEach(({st})=>{['need','used','keep','scrap','cost','kg','bars','left'].forEach(k=>T[k]+=st[k]);Object.entries(st.newBars).forEach(([L,n])=>T.newBars[L]=(T.newBars[L]||0)+n)});
+ $('#bcInfo').textContent=`${RES.obj==='cost'?'ต้นทุนต่ำสุด':'เศษทิ้งน้อยสุด'} · คำนวณ ${RES.ms} มิลลิวินาที · ${RES.date}`;
+ const errs=all.filter(x=>x.G.r.error||x.G.r.short.length);
+ let h=`<div class="kpi"><div><span>เหล็กใหม่ที่ต้องใช้</span><b>${Object.entries(T.newBars).sort((a,b)=>b[0]-a[0]).map(([L,n])=>n+' × '+m2(+L)).join(' · ')||'0'}</b><em>เส้น × ม.</em></div>
+ <div><span>เศษทิ้ง</span><b class="g">${T.used?(T.scrap/T.used*100).toFixed(2):'0'}%</b><em>${(T.scrap/1000).toFixed(2)} ม.</em></div>
+ <div><span>เศษเก็บไว้ใช้ต่อ</span><b>${(T.keep/1000).toFixed(2)}</b><em>ม. (ยาว ≥ ${m2(RES.R)})</em></div>
+ <div><span>ใช้เศษเก่า</span><b>${T.left}</b><em>เส้น</em></div>
+ <div><span>น้ำหนักเหล็กใหม่</span><b>${T.kg.toFixed(1)}</b><em>กก.</em></div>
+ <div><span>ราคาโดยประมาณ</span><b>฿${Math.round(T.cost).toLocaleString()}</b><em>${S.stock.ppk} บาท/กก.</em></div></div>`;
+ if(errs.length)h+=errs.map(x=>`<div class="warn">${x.G.g.bar} · ${esc(x.G.g.grp)}: ${x.G.r.error?esc(x.G.r.error):'สต็อกไม่พอ ตัดไม่ครบ '+x.G.r.short.map(s=>m2(s.it.l)+' ม. × '+s.n).join(', ')}</div>`).join('');
+ h+=`<div class="chips" style="margin:12px 0"><button class="gold" id="bcApply">ยืนยันใช้ผลนี้ · ตัดสต็อกและเก็บเศษ</button><button class="ib" id="bcHtml">ดาวน์โหลดใบตัดเหล็ก (HTML)</button><button class="ib" id="bcCsv">ดาวน์โหลด CSV</button></div>`;
+ all.forEach(({G,st},gi)=>{const r=G.r;if(!r.pats.length)return;const minBars=Math.ceil(st.need/Math.max(...r.pats.map(p=>p.s.L)));
+  h+=`<div class="bcres"><div class="bcrh"><span class="sz">${G.g.bar}</span><span>${esc(G.g.grp)}</span><span class="st">${st.bars} เส้น · ใช้ประโยชน์ ${(st.eff*100).toFixed(1)}% · เศษทิ้ง ${(st.scrap/1000).toFixed(2)} ม. · เศษเก็บ ${(st.keep/1000).toFixed(2)} ม. · ขั้นต่ำทางทฤษฎี ${minBars} เส้น</span></div>`;
+  r.pats.forEach((p,pi)=>{h+=`<div class="pat"><div class="pth"><span>แบบที่ ${pi+1} · ${esc(p.s.label)}</span><b>× ${p.count}</b></div><div class="bar">${barSegs(p,r.items,RES.R)}</div>
+   <div class="ptd">${p.pieces.map(x=>`<span><i style="background:${SEGC[x.i%SEGC.length]}"></i>${m2(r.items[x.i].l)} × ${x.q}</span>`).join('')}<span class="${p.keep?'k':'s'}">${p.r>0?(p.keep?'เศษเก็บ ':'เศษทิ้ง ')+m2(p.r):'ไม่มีเศษ'}</span></div></div>`});
+  if(r.extra&&r.extra.length)h+=`<div class="note">ตัดเกินความต้องการ: ${r.extra.map(e=>m2(e.it.l)+' × '+e.n).join(', ')}</div>`;
+  h+=`<details class="eq"><summary>ท่อนในกลุ่มนี้มาจากไหน</summary><table class="bct">${r.items.map((it,i)=>`<tr><td><i class="dot" style="background:${SEGC[i%SEGC.length]}"></i>${m2(it.l)}</td><td>${it.d}</td><td class="src">${esc(it.refs.join(', '))}</td></tr>`).join('')}</table></details></div>`});
+ h+=`<div class="lg"><span><span class="sw" style="background:#3A3D42"></span>เศษเก็บ (≥ ${m2(RES.R)} ม.)</span><span><span class="sw" style="background:#5A2E27"></span>เศษทิ้ง</span></div>`;
+ el.innerHTML=h;
+ const on=(id,fn)=>{const e=$(id);if(e)e.onclick=fn};
+ on('#bcApply',()=>{const use={},rem=[];RES.groups.forEach(G=>(G.r.pats||[]).forEach(p=>{if(p.s.kind==='left'){const k=G.g.bar+'|'+p.s.L;use[k]=(use[k]||0)+p.count}if(p.keep)rem.push({bar:G.g.bar,L:Math.floor(p.r/10)*10,qty:p.count})}));
+  const nUse=Object.values(use).reduce((a,b)=>a+b,0),nRem=rem.reduce((a,b)=>a+b.qty,0);
+  confirmBox(`ใช้เศษเก่าจากสต็อก <b>${nUse}</b> เส้น และเก็บเศษใหม่เข้าสต็อก <b>${nRem}</b> ชิ้น<br><br>ต้องการบันทึกการเปลี่ยนแปลงสต็อกตามผลการตัดนี้ไหม`,()=>{
+   Object.entries(use).forEach(([k,n])=>{const[bar,L]=k.split('|');S.stock.left.filter(l=>l.bar===bar&&l.L===+L).forEach(l=>{const t=Math.min(l.qty,n);l.qty-=t;n-=t})});
+   S.stock.left=S.stock.left.filter(l=>l.qty>0);const note='ตัด '+RES.date;rem.forEach(r=>{const e=S.stock.left.find(l=>l.bar===r.bar&&l.L===r.L&&l.note===note);if(e)e.qty+=r.qty;else S.stock.left.push(Object.assign({note},r))});
+   save();RES=null;renderCut();toast('อัปเดตสต็อกแล้ว')})});
+ on('#bcCsv',()=>{let t='﻿size,group,pattern,stock,stock_length_m,count,pieces,remnant_m,remnant_type\n';RES.groups.forEach(G=>(G.r.pats||[]).forEach((p,i)=>{t+=[G.g.bar,'"'+G.g.grp+'"',i+1,p.s.kind,m2(p.s.L),p.count,'"'+p.pieces.map(x=>m2(G.r.items[x.i].l)+'x'+x.q).join(' + ')+'"',m2(p.r),p.r?(p.keep?'keep':'scrap'):'-'].join(',')+'\n'}));saveFile('KN-Studio-cutting.csv',t,'text/csv')});
+ on('#bcHtml',()=>saveFile('KN-Studio-cutting-list.html',cutSheetHTML(),'text/html'))}
+function cutSheetHTML(){const css='body{font-family:Tahoma,Arial,sans-serif;margin:24px;color:#111}h1{font-size:20px;margin:0}h2{font-size:16px;margin:22px 0 6px;border-bottom:2px solid #111;padding-bottom:4px}table{border-collapse:collapse;width:100%;font-size:13px}th,td{border:1px solid #444;padding:5px 7px;text-align:left;vertical-align:top}th{background:#eee}.bar{display:flex;height:22px;border:1px solid #333;margin:3px 0}.bar div{border-right:1px solid #fff;font-size:10px;color:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}.k{background:#888}.s{background:#b44}.ck{width:22px}';
+ let h=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>ใบตัดเหล็ก</title><style>${css}</style></head><body><h1>ใบตัดเหล็ก · KN Studio</h1><div>${esc(S.settings.sheet.title||'')} · ${RES.date} · ${RES.obj==='cost'?'ต้นทุนต่ำสุด':'เศษทิ้งน้อยสุด'}</div>`;
+ RES.groups.forEach(G=>{const r=G.r;if(!r.pats||!r.pats.length)return;h+=`<h2>${G.g.bar} · ${esc(G.g.grp)}</h2><table><tr><th>แบบ</th><th>เหล็ก</th><th>จำนวนเส้น</th><th>ตัดเป็น (ม.)</th><th>เศษ</th><th class="ck">✓</th></tr>`;
+  r.pats.forEach((p,i)=>{h+=`<tr><td>${i+1}</td><td>${esc(p.s.label)}</td><td><b>${p.count}</b></td><td>${p.pieces.map(x=>`${m2(r.items[x.i].l)} × ${x.q}`).join(' + ')}<div class="bar">${p.pieces.map(x=>Array.from({length:x.q},()=>`<div style="flex:${r.items[x.i].l};background:${SEGC[x.i%SEGC.length]}">${m2(r.items[x.i].l)}</div>`).join('')).join('')}${p.r>0?`<div class="${p.keep?'k':'s'}" style="flex:${p.r}"></div>`:''}</div></td><td>${p.r>0?(p.keep?'เก็บ ':'ทิ้ง ')+m2(p.r):'-'}</td><td></td></tr>`});
+  h+=`</table><table style="margin-top:6px"><tr><th>ยาว (ม.)</th><th>จำนวน</th><th>ใช้ที่</th></tr>${r.items.map(it=>`<tr><td>${m2(it.l)}</td><td>${it.d}</td><td>${esc(it.refs.join(', '))}</td></tr>`).join('')}</table>`});
+ return h+'</body></html>'}
+(function(){const v=$('#v-cut');
+ v.addEventListener('click',e=>{const t=e.target,cfg=S.cutCfg,st=S.stock;let x;
+  if((x=t.closest('[data-bx]'))){const id=x.dataset.bx;cfg.ex=cfg.ex.includes(id)?cfg.ex.filter(b=>b!==id):cfg.ex.concat(id)}
+  else if((x=t.closest('[data-cg]')))cfg.group=x.dataset.cg;
+  else if((x=t.closest('[data-co]')))cfg.obj=x.dataset.co;
+  else if((x=t.closest('[data-mdel]')))S.manual.splice(+x.dataset.mdel,1);
+  else if((x=t.closest('[data-ldel]')))st.left.splice(+x.dataset.ldel,1);
+  else if((x=t.closest('[data-nl-del]')))st.newL.splice(+x.dataset.nlDel,1);
+  else if(t.closest('#nlAdd'))st.newL.push({L:6000,on:true});
+  else if(t.closest('#mAdd')){const L=Math.round(parseFloat($('#mL').value)*1000),q=parseInt($('#mQ').value);if(!(L>0&&q>0)){toast('กรอกความยาวและจำนวน');return}S.manual.push({bar:$('#mBar').value,L,qty:q,mark:$('#mMk').value.trim()})}
+  else if(t.closest('#lAdd')){const L=Math.round(parseFloat($('#lL').value)*1000),q=parseInt($('#lQ').value);if(!(L>0&&q>0)){toast('กรอกความยาวและจำนวน');return}st.left.push({bar:$('#lBar').value,L,qty:q,note:'เพิ่มเอง'})}
+  else if(t.closest('#bcRun')){if(BCBUSY)return;BCBUSY=true;renderCutCfg();setTimeout(()=>{try{RES=runCut()}catch(err){toast('คำนวณไม่สำเร็จ: '+err.message)}BCBUSY=false;renderCutCfg();renderCutRes();$('#bcRes').scrollIntoView({behavior:'smooth',block:'start'})},40);return}
+  else return;
+  save();RES=null;renderCut()});
+ v.addEventListener('change',e=>{const t=e.target,cfg=S.cutCfg,st=S.stock;const d=t.dataset;
+  if(d.cc)cfg[d.cc]=t.checked;else if(d.cf)cfg[d.cf]=d.cf==='R'?Math.round((parseFloat(t.value)||0)*1000):Math.max(0,Math.round(parseFloat(t.value)||0));
+  else if(d.sk)st.ppk=Math.max(0,parseFloat(t.value)||0);else if(d.nlOn!==undefined)st.newL[+d.nlOn].on=t.checked;else if(d.nlL!==undefined)st.newL[+d.nlL].L=Math.round((parseFloat(t.value)||0)*1000);
+  else if(d.lf){const[k,i]=d.lf.split(':');st.left[+i][k]=k==='L'?Math.round((parseFloat(t.value)||0)*1000):Math.max(0,parseInt(t.value)||0)}else return;
+  save();RES=null;renderCut()})})();
+
+/* ===== Router ===== */
+function route(){if(window.KN&&!KN.ready)return;const v=(location.hash||'#home').slice(1);let name=['beam','settings','cut','detail'].includes(v)?v:'home';if(window.KN){const g=KN.guard(name);if(g&&g!==name){name=g;history.replaceState(null,'','#home')}}
+ document.querySelectorAll('.view').forEach(e=>e.classList.toggle('on',e.id==='v-'+name));$('#homeBtn').style.display=name==='home'?'none':'';
+ if(name==='beam'){$('#crumb').textContent='KN-Detail · คาน';renderTop();renderPanel();renderAll()}else if(name==='settings'){$('#crumb').textContent='ตั้งค่า';renderSet()}else if(name==='cut'){$('#crumb').textContent='Bar Cut · ตัดเหล็กเศษน้อยสุด';renderCut()}else if(name==='detail'){$('#crumb').textContent='KN-Detail'}else $('#crumb').textContent='';window.scrollTo(0,0)}
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{location.hash=b.dataset.go});
+$('#homeBtn').onclick=()=>{location.hash='home'};
+window.addEventListener('hashchange',route);if(window.KN)KN.boot();else route();
+if(window.claude&&window.claude.use)window.claude.use('downloads').then(d=>{DL=d},()=>{});
+</script>
+</body>
+</html>
