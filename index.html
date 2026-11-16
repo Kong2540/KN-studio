@@ -109,6 +109,16 @@ textarea{width:100%;min-height:90px;background:var(--p2);border:1px solid var(--
 .ph .vc{margin:0}
 .pb{padding:12px}
 .pnl .ed{border:0}.pnl #v3{border:0}
+.kn{grid-template-columns:52px minmax(0,1fr) var(--sideW,410px)}
+.kn.noside{grid-template-columns:52px minmax(0,1fr)}.kn.noside .side{display:none}
+.side{position:relative}.spl{position:absolute;left:-5px;top:0;bottom:0;width:10px;cursor:col-resize;z-index:4}.spl:hover,.spl.on{background:linear-gradient(90deg,transparent 4px,var(--au) 4px,var(--au) 6px,transparent 6px)}
+.pbtn{background:none;border:1px solid var(--ln2);color:var(--mu);cursor:pointer;padding:1px 7px;font-size:12px;line-height:1.4}.pbtn:hover{color:var(--au2);border-color:var(--au)}
+.rz{height:9px;cursor:row-resize;border-top:1px solid var(--ln);background:repeating-linear-gradient(90deg,transparent 0 46%,var(--ln2) 46% 54%,transparent 54%)}.rz:hover,.rz.on{background:var(--aud)}
+.pnl.max{position:fixed;left:52px;right:0;top:51px;bottom:29px;z-index:40;margin:0;display:flex;flex-direction:column}
+.pnl.max .ed{flex:1;overflow:auto}.pnl.max #v3{flex:1;height:auto!important}.pnl.max .rz{display:none}
+@media(min-width:1101px){.cen.duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:14px;align-content:start}
+ .cen.duo>#top{grid-column:1/-1;grid-row:1}.cen.duo>.o2{grid-column:1;grid-row:2}.cen.duo>.o6{grid-column:2;grid-row:2}.cen.duo>#selinfo{grid-column:1/-1;grid-row:3}.cen.duo>#filt{grid-column:1/-1;grid-row:4}}
+@media(max-width:1100px){.spl,.lay-d{display:none!important}}
 #panel>.box.sel{border:0;padding:0;background:none;margin:0}
 #panel>.box.sel>.t{font:500 13px 'IBM Plex Sans Thai';color:var(--au2);padding-bottom:8px;border-bottom:1px solid var(--ln);margin-bottom:10px}
 #v2.cutm{cursor:crosshair}
@@ -220,6 +230,10 @@ textarea{width:100%;min-height:90px;background:var(--p2);border:1px solid var(--
       <button class="rt on" data-tool="sel" aria-label="เลือกและแก้ไข" title="เลือกและแก้ไข"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 3l12 8-6 1.5L8.5 19z"/></svg></button>
       <button class="rt" data-tool="cut" aria-label="ตัดหน้าตัด" title="ตัดหน้าตัด"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v20"/><path d="M8 4h8M8 20h8"/><rect x="5" y="9" width="14" height="6"/></svg></button>
       <span class="rsep"></span>
+      <button class="rt lay-d" data-lay="stack" aria-label="จัดหน้าจอ Profile บน 3D ล่าง" title="Profile บน · 3D ล่าง"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="8"/><rect x="3" y="13" width="18" height="8"/></svg></button>
+      <button class="rt lay-d" data-lay="duo" aria-label="จัดหน้าจอ Profile กับ 3D ซ้ายขวา" title="Profile | 3D คู่กัน"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="8" height="18"/><rect x="13" y="3" width="8" height="18"/></svg></button>
+      <button class="rt lay-d" data-lay="side" aria-label="แสดงหรือซ่อนแผงขวา" title="แสดง/ซ่อนแผง Section และคุณสมบัติ"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18"/><line x1="15" y1="3" x2="15" y2="21"/></svg></button>
+      <span class="rsep"></span>
       <button class="rt" data-jump="sheet" aria-label="แผ่นแบบ" title="แผ่นแบบ"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14"/><path d="M3 15h18M14 15v4"/></svg></button>
       <button class="rt" data-jump="bend" aria-label="ตาราง Bending" title="ตาราง Bending"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16"/><path d="M3 9h18M3 14h18M9 4v16"/></svg></button>
       <button class="rt" data-go="cut" aria-label="Bar Cut" title="Bar Cut"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="11" height="4"/><rect x="15" y="5" width="6" height="4" stroke-dasharray="2 2"/><rect x="3" y="11" width="8" height="4"/><rect x="12" y="11" width="9" height="4"/><rect x="3" y="17" width="18" height="3"/></svg></button>
@@ -227,13 +241,13 @@ textarea{width:100%;min-height:90px;background:var(--p2);border:1px solid var(--
     </nav>
     <div class="cen">
       <div id="top" class="o1"></div>
-      <div class="pnl o2"><div class="ph"><span>Profile</span><span class="phr">แตะช่วง เสา หรือเหล็กเพื่อแก้ไข · แตะตำแหน่งใดก็ได้เพื่อดูหน้าตัด · ลากวงกลมเพื่อย้าย</span></div><div class="ed"><svg id="v2" role="img" aria-label="รูปด้านคานสำหรับกรอกข้อมูล"></svg></div></div>
+      <div class="pnl o2" id="pnl2"><div class="ph"><span>Profile <button class="pbtn" data-max="pnl2" title="ขยายเต็มจอ (Esc ออก)">⤢</button></span><span class="phr">แตะช่วง เสา หรือเหล็กเพื่อแก้ไข · แตะตำแหน่งใดก็ได้เพื่อดูหน้าตัด · ลากวงกลมเพื่อย้าย</span></div><div class="ed"><svg id="v2" role="img" aria-label="รูปด้านคานสำหรับกรอกข้อมูล"></svg></div></div>
       <div id="selinfo" class="o3"></div>
-      <div class="pnl o6"><div class="ph"><span>3D</span><span class="phr vc"><label>ซูม <input type="range" id="zoom" min="1" max="14" step="0.1" value="1"></label><label>เลื่อน <input type="range" id="pan" min="0" max="1" step="0.002" value="0.5"></label><button class="chip" id="vfit">ทั้งคาน</button><button class="chip on" id="vconc">คอนกรีต</button><button class="chip on" id="vstir">ปลอก</button></span></div>
-        <svg id="v3" viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="โมเดลสามมิติเหล็กเสริมคาน"></svg></div>
+      <div class="pnl o6" id="pnl3"><div class="ph"><span>3D <button class="pbtn" data-max="pnl3" title="ขยายเต็มจอ (Esc ออก)">⤢</button></span><span class="phr vc"><label>ซูม <input type="range" id="zoom" min="1" max="14" step="0.1" value="1"></label><label>เลื่อน <input type="range" id="pan" min="0" max="1" step="0.002" value="0.5"></label><button class="chip" id="vfit">ทั้งคาน</button><button class="chip on" id="vconc">คอนกรีต</button><button class="chip on" id="vstir">ปลอก</button></span></div>
+        <svg id="v3" viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="โมเดลสามมิติเหล็กเสริมคาน"></svg><div class="rz" id="rz3" title="ลากเพื่อปรับความสูง"></div></div>
       <div id="filt" class="o7"></div>
     </div>
-    <aside class="side">
+    <aside class="side"><div class="spl" id="sideSpl" title="ลากเพื่อปรับความกว้างแผงขวา"></div>
       <div class="pnl o4"><div class="ph"><span id="secT">Section</span><span class="phr">อัปเดตตามจุดที่เลือก</span></div><div id="secv" class="pb"></div></div>
       <div class="pnl o5"><div class="ph"><span>คุณสมบัติ</span></div><div id="panel" class="pb"></div></div>
       <div id="warns" class="o5"></div>
@@ -815,6 +829,7 @@ let LDR=null,LSTEP=1,LEDIT=false;
 function nudge(dx,dy){const raw=B();raw.lay=raw.lay||{};SELIT.forEach(i=>{const o=raw.lay[i]||{dx:0,dy:0};raw.lay[i]={dx:Math.round(((o.dx||0)+dx)*10)/10,dy:Math.round(((o.dy||0)+dy)*10)/10}});save();renderOut()}
 function setOff(dx,dy){const raw=B();raw.lay=raw.lay||{};SELIT.forEach(i=>{const o=raw.lay[i]||{dx:0,dy:0};raw.lay[i]={dx:dx==null?(o.dx||0):dx,dy:dy==null?(o.dy||0):dy}});save();renderOut()}
 function selPiece(id){const t=id.slice(3),j=t.lastIndexOf(':'),rid=t.slice(0,j),i=t.slice(j+1);return M.P.find(q=>q.rid===rid&&String(q.i)===i)}
+const LAYN=id=>id.startsWith('row:')?'แถวเหล็ก '+id.split(':')[1]:id.startsWith('pc:')?'ท่อนเหล็ก':id.startsWith('pl:')?'ชื่อเหล็ก':id.startsWith('pd:')?'ความยาวเหล็ก':id;
 function layPanelHTML(){const raw=B(),n=SELIT.size,id=[...SELIT][0],o=(n===1&&(raw.lay||{})[id])||{},ed=n===1&&(id.startsWith('pl:')||id.startsWith('tag:'));
  let cur='';if(ed){if(id.startsWith('tag:'))cur=raw.id;else{const p=selPiece(id);cur=p?p.mark:''}}
  return`<div class="card lay"><div class="chips"><span style="color:var(--au2);letter-spacing:1px">โหมดจัดหน้า · เลือก ${n} ชิ้น</span><label class="ck"><input type="checkbox" id="lMulti"${LMULTI?' checked':''}> เลือกหลายชิ้น</label><span class="note" style="margin:0">ลากเพื่อย้าย · Shift+คลิก เลือกหลายชิ้น · ลูกศรบนคีย์บอร์ด (Shift = 5 มม.)</span></div>
@@ -877,7 +892,7 @@ document.addEventListener('input',e=>{const k=e.target.dataset&&e.target.dataset
 function extRange(m){let lo=m.g.xl,hi=m.g.xr;m.P.forEach(p=>{lo=Math.min(lo,p.x0);hi=Math.max(hi,p.x1)});return[lo,hi]}
 function render2D(){if(M&&(CUT.x==null||CUT.bid!==M.D.id)){const D0=M.D,i=D0.grids[0].free&&D0.spans.length>1?1:0;CUT={x:(M.g.fa[i]+M.g.fb[i])/2,bid:D0.id}}const bm=B(),D=M.D,g=M.g,n=D.spans.length,[lo,hi]=FROZ||extRange(M),W=Math.max(1100,n*210),mx=46,sx=(W-2*mx)/(hi-lo),X=x=>mx+(x-lo)*sx;
  const top=i=>D.zb[i]+secOf(D,i).h,zmax=Math.max(...D.zb.map((_,i)=>top(i))),zmin=Math.min(...D.zb),sy=Math.min(0.2,96/(zmax-zmin)),y0=64,Y=z=>y0+(zmax-z)*sy,yb=Y(zmin),H=yb+78,anyLvl=bm.spans.some(s=>s.lvl!==0);
- M2={lo,hi,sx,mx};const el=$('#v2');el.setAttribute('viewBox',`0 0 ${W} ${H}`);el.style.minWidth=Math.max(340,n*185)+'px';
+ M2={lo,hi,sx,mx};const el=$('#v2');el.setAttribute('viewBox',`0 0 ${W} ${H}`);el.style.minWidth=(typeof LAYO!=='undefined'&&LAYO.mode==='duo'&&!document.querySelector('#pnl2.max')?340:Math.max(340,n*185))+'px';
  let o=`<defs><clipPath id="c2in"><rect x="${X(g.xl)}" y="0" width="${(g.xr-g.xl)*sx}" height="${H}"/></clipPath><clipPath id="c2out"><rect x="0" y="0" width="${X(g.xl)}" height="${H}"/><rect x="${X(g.xr)}" y="0" width="${W}" height="${H}"/></clipPath></defs>`;
  D.grids.forEach((gr,j)=>{if(gr.free)return;const x=X(g.X[j]),on=UI.t==='grid'&&UI.i===j,adj=[j-1,j].filter(i=>i>=0&&i<n),ct=Math.max(...adj.map(top)),J=D.joints&&D.joints[j];
   o+=`<g data-g="${j}" style="cursor:pointer"><rect x="${X(g.X[j]-g.w[j]/2)}" y="${Y(ct)-12}" width="${Math.max(4,g.w[j]*sx)}" height="${yb-Y(ct)+12+40}" fill="${on?'#2A2416':'#1A1B1F'}" stroke="${on?'#C9A55C':'#55585E'}"/><line x1="${x}" y1="38" x2="${x}" y2="${Y(ct)-12}" stroke="#3A3D43" stroke-dasharray="4 3"/><circle cx="${x}" cy="22" r="15" fill="${on?'#1C1810':'#0E0F12'}" stroke="${on?'#C9A55C':'#8A8E95'}" stroke-width="${on?2:1}"/><text x="${x}" y="27.5" fill="${on?'#E2C584':'#C8C5BE'}" font-size="16" text-anchor="middle">${esc(gr.n)}</text>`;
@@ -926,7 +941,7 @@ function barPath(bm,m,p,bi){const g=m.g,d=p.d,R=bendD(d)/2+d/2,dir=p.top?-1:1,la
  else pts.push([xb,yAt(xb),zAt(xb)]);
  return pts}
 function boxEdges(x1,x2,y1,y2,z1,z2){const c=[[x1,y1,z1],[x2,y1,z1],[x2,y2,z1],[x1,y2,z1],[x1,y1,z2],[x2,y1,z2],[x2,y2,z2],[x1,y2,z2]];return[[0,1,2,3,0],[4,5,6,7,4],[0,4],[1,5],[2,6],[3,7]].map(e=>e.map(i=>c[i]))}
-function render3D(){const bm=M.D,m=M,g=m.g,n=bm.spans.length,W=1000,H=300,[lo,hi]=extRange(m),len=hi-lo,s=V.zoom*(W-60)/len,cx=lo+len*V.pan;
+function render3D(){const el3=$('#v3'),cw=el3.clientWidth||1000,ch=el3.clientHeight||300,bm=M.D,m=M,g=m.g,n=bm.spans.length,W=1000,H=Math.max(150,Math.round(1000*ch/cw));el3.setAttribute('viewBox','0 0 '+W+' '+H);const [lo,hi]=extRange(m),len=hi-lo,s=V.zoom*(W-60)/len,cx=lo+len*V.pan;
  const top=i=>bm.zb[i]+secOf(bm,i).h,cz=(Math.max(...bm.zb.map((_,i)=>top(i)))+Math.min(...bm.zb))/2;
  const ct=Math.cos(V.th),sn=Math.sin(V.th),cp=Math.cos(V.ph),sp=Math.sin(V.ph);
  const pr=q=>{const x=q[0]-cx,X=x*ct-q[1]*sn,D=x*sn+q[1]*ct;return[W/2+X*s,H/2+(-(q[2]-cz)*cp-D*sp)*s,D]};
@@ -950,7 +965,23 @@ function render3D(){const bm=M.D,m=M,g=m.g,n=bm.spans.length,W=1000,H=300,[lo,hi
  $('#zoom').oninput=e=>{V.zoom=+e.target.value;render3D()};$('#pan').oninput=e=>{V.pan=+e.target.value;render3D()};
  $('#vfit').onclick=()=>{V.zoom=1;V.pan=.5;$('#zoom').value=1;$('#pan').value=.5;render3D()};
  $('#vconc').onclick=e=>{V.conc=!V.conc;e.target.classList.toggle('on',V.conc);render3D()};
- $('#vstir').onclick=e=>{V.stir=!V.stir;e.target.classList.toggle('on',V.stir);render2D();render3D()}})();
+ $('#vstir').onclick=e=>{V.stir=!V.stir;e.target.classList.toggle('on',V.stir);render2D();render3D()};
+ el.addEventListener('wheel',e=>{e.preventDefault();V.zoom=Math.max(1,Math.min(14,V.zoom*(e.deltaY>0?0.9:1.11)));$('#zoom').value=V.zoom;render3D()},{passive:false})})();
+/* ----- workspace layout (ETABS-like): stack / side-by-side, maximise, resizable 3D height and side panel ----- */
+const LAYO=(()=>{try{return Object.assign({mode:'stack',side:true,sideW:410,h3:300},JSON.parse(localStorage.getItem('kn.layout')||'{}'))}catch(e){return{mode:'stack',side:true,sideW:410,h3:300}}})();
+function applyLayout(){const kn=document.querySelector('#v-beam .kn'),cen=document.querySelector('#v-beam .cen');if(!kn)return;kn.style.setProperty('--sideW',LAYO.sideW+'px');kn.classList.toggle('noside',!LAYO.side);cen.classList.toggle('duo',LAYO.mode==='duo');
+ $('#v3').style.height=LAYO.h3+'px';document.querySelectorAll('[data-lay]').forEach(b=>b.classList.toggle('on',b.dataset.lay==='side'?!LAYO.side:b.dataset.lay===LAYO.mode));try{localStorage.setItem('kn.layout',JSON.stringify(LAYO))}catch(e){}}
+function relayout(){if(M){render2D();render3D()}}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-lay]');if(b){const v=b.dataset.lay;if(v==='side')LAYO.side=!LAYO.side;else LAYO.mode=v;applyLayout();relayout();return}
+ const mx=e.target.closest('[data-max]');if(mx){const p=document.getElementById(mx.dataset.max),on=!p.classList.contains('max');document.querySelectorAll('.pnl.max').forEach(q=>q.classList.remove('max'));p.classList.toggle('max',on);mx.textContent=on?'✕':'⤢';relayout()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.querySelector('.pnl.max')){document.querySelectorAll('.pnl.max').forEach(q=>q.classList.remove('max'));document.querySelectorAll('[data-max]').forEach(b=>b.textContent='⤢');relayout()}});
+(function(){let d=null;const sp=$('#sideSpl'),rz=$('#rz3');
+ sp.addEventListener('pointerdown',e=>{e.preventDefault();d={t:'side',x:e.clientX,v:LAYO.sideW};sp.classList.add('on');try{sp.setPointerCapture(e.pointerId)}catch(_){}});
+ rz.addEventListener('pointerdown',e=>{e.preventDefault();d={t:'h3',y:e.clientY,v:LAYO.h3};rz.classList.add('on');try{rz.setPointerCapture(e.pointerId)}catch(_){}});
+ const mv=e=>{if(!d)return;if(d.t==='side')LAYO.sideW=Math.max(300,Math.min(Math.round(window.innerWidth*0.55),d.v-(e.clientX-d.x)));else LAYO.h3=Math.max(160,Math.min(1200,d.v+(e.clientY-d.y)));applyLayout();if(d.t==='h3')render3D()};
+ const up=()=>{if(!d)return;d=null;sp.classList.remove('on');rz.classList.remove('on');relayout()};
+ [sp,rz].forEach(el=>{el.addEventListener('pointermove',mv);el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up)});
+ let rt=null;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(location.hash==='#beam')relayout()},150)});applyLayout()})();
 function pick(key,focus,rid){const id=key.split('|')[0],bi=S.beams.findIndex(b=>b.id===id);
  if(SEL===key&&(!rid||(UI.t==='bar'&&UI.id===rid))){SEL=null;if(UI.t==='bar')UI={t:'span',i:UI.si||0};renderPanel();renderAll();return}
  SEL=key;if(bi>=0&&bi!==S.cur){S.cur=bi;renderTop()}
@@ -983,14 +1014,18 @@ function secDraw(bm,m,k,ox,oy,sc){const s=bm.sections[k],si=bm.spanSec.reduce((b
   o+=`<text x="${tx+w/2}" y="${ty+hh+34}" fill="${BLU}" font-size="10.5" text-anchor="middle">${tot*pc.n} ${pc.mk?'ชิ้น':'ปลอก'} · ${m2(pc.cut)} m</text><text x="${tx+w/2}" y="${ty+hh+47}" fill="#444" font-size="9.5" text-anchor="middle">ขอ ${pc.h1}°${pc.h2!==pc.h1?'/'+pc.h2+'°':''} · ${m2(pc.e1)}</text>`;tx+=Math.max(w,30)+62});
  return o}
 let SHRAW=null,SHF=0.28,LASTF=0.28,SELIT=new Set(),LAYM=false,LMULTI=false;
+const LRANK=L=>L[0]==='T'?(+L[1]||1)-1:6-(+L[1]||1),RUNID=r=>(r.id||'r')+(r._g?':g':'');
+function rowOrder(bm,m,list){const x0=ri=>Math.min(...m.P.filter(p=>p.ri===ri).map(p=>p.x0));return list.slice().sort((a,b)=>{const A=bm.runs[a],Bq=bm.runs[b];return LRANK(A.layer)-LRANK(Bq.layer)||(A.x?1:0)-(Bq.x?1:0)||x0(a)-x0(b)})}
+function rowYs(bm,order,step,gap){let y=0,prev=null;return order.map(ri=>{const t=bm.runs[ri].layer[0];if(prev&&prev!==t)y+=gap;prev=t;const v=y;y+=step;return v})}
+const ITo=id=>{const q=IT(id,'');return q.slice(0,-4)};
 const IT=(id,inner)=>{const o=(SHRAW&&SHRAW.lay&&SHRAW.lay[id])||{},t=(o.dx||o.dy)?` transform="translate(${((o.dx||0)/SHF).toFixed(2)} ${((o.dy||0)/SHF).toFixed(2)})"`:'';return`<g data-it="${esc(id)}"${t}${LAYM&&SELIT.has(id)?' class="itsel"':''}>${inner}</g>`};
 let SH=null,LASTSC='',LASTSP=100;
 const showCat=c=>!SH||(c==='st'?SH.stir:(c==='xt'||c==='xb')?SH.extra:SH.main);
 const PAPER={A4:[297,210],A3:[420,297],A2:[594,420],A1:[841,594]},NICE=[10,15,20,25,30,40,50,60,75,100,125,150,200,250,300,400,500,750,1000];
 function sheetCore(bm,m,Pu,sc){const g=m.g,[lo,hi]=extRange(m),W=1400,mx=(W-Pu)/2,sx=Pu/(hi-lo),X=x=>mx+(x-lo)*sx,nS=bm.spans.length;
  const tp=i=>bm.zb[i]+secOf(bm,i).h,zmx=Math.max(...bm.zb.map((_,i)=>tp(i))),zmn=Math.min(...bm.zb);
- const CUTS=(SHRAW&&SHRAW.cuts)||[],secH=(SH.sec||CUTS.length)?Math.max(...bm.sections.map(s=>s.h))*sc:0,rr=SH.rows?bm.runs.map((_,ri)=>ri).filter(ri=>m.P.some(p=>p.ri===ri&&showCat(p.cat))):[];
- const y0=20,yg=y0+(SH.sec||CUTS.length?secH+(CUTS.length?120:70)+(SH.sec&&SH.stirShape?95:0):0)+20,yb=yg+(SH.dims?95:40),yr=yb+(SH.elev?(zmx-zmn)*sx+70:0),H=yr+rr.length*58+60,YZ=z=>yb+(zmx-z)*sx;
+ const CUTS=(SHRAW&&SHRAW.cuts)||[],secH=(SH.sec||CUTS.length)?Math.max(...bm.sections.map(s=>s.h))*sc:0,rr=SH.rows?rowOrder(bm,m,bm.runs.map((_,ri)=>ri).filter(ri=>m.P.some(p=>p.ri===ri&&showCat(p.cat)))):[],RST=+SH.rowGap||58,RY=rowYs(bm,rr,RST,26);
+ const y0=20,yg=y0+(SH.sec||CUTS.length?secH+(CUTS.length?120:70)+(SH.sec&&SH.stirShape?95:0):0)+20,yb=yg+(SH.dims?95:40),yr=yb+(SH.elev?(zmx-zmn)*sx+70:0),H=yr+(rr.length?RY[RY.length-1]+RST:0)+60,YZ=z=>yb+(zmx-z)*sx;
  let o=`<defs><clipPath id="csin"><rect x="${X(g.xl)}" y="0" width="${(g.xr-g.xl)*sx}" height="${H}"/></clipPath><clipPath id="csout"><rect x="0" y="0" width="${X(g.xl)}" height="${H}"/><rect x="${X(g.xr)}" y="0" width="${W}" height="${H}"/></clipPath></defs>`;
  {const nT=(SH.sec?bm.sections.length:0)+CUTS.length,stp=Math.min(600,1180/Math.max(1,nT));let ti=0;
   if(SH.sec)bm.sections.forEach((s,k)=>{o+=IT('sec:'+s.base,secDraw(bm,m,k,170+(ti++)*stp,y0+14,sc))});
@@ -1012,18 +1047,18 @@ function sheetCore(bm,m,Pu,sc){const g=m.g,[lo,hi]=extRange(m),W=1400,mx=(W-Pu)/
   CUTS.forEach(c=>{const x=X(c.x),y1=YZ(zmx)-16,y2=YZ(zmn)+16;o+=`<line x1="${x}" y1="${y1}" x2="${x}" y2="${y2}" stroke="#111" stroke-width="1.2" stroke-dasharray="10 4 2 4"/><polyline points="${x-10},${y1} ${x},${y1} " fill="none"/><path d="M${x} ${y1} l-12 0 m12 0 l0 -2" stroke="#111" stroke-width="2"/><path d="M${x} ${y2} l-12 0" stroke="#111" stroke-width="2"/>`+IT('cm:'+c.n,`<text x="${x-16}" y="${y1-4}" font-size="15" font-weight="bold" fill="#111" text-anchor="middle">${esc(c.n)}</text><text x="${x-16}" y="${y2+16}" font-size="15" font-weight="bold" fill="#111" text-anchor="middle">${esc(c.n)}</text>`)});
   g.X.forEach((x,i)=>{if(bm.grids[i].free)return;const adj=[i-1,i].filter(k=>k>=0&&k<nS),zb2=Math.min(...adj.map(k=>bm.zb[k]));o+=`<rect x="${X(x-g.w[i]/2)}" y="${YZ(zb2)}" width="${g.w[i]*sx}" height="22" fill="#fff" stroke="#111" stroke-width="1.4"/>`});
   if(SH.inElev)m.P.forEach(p=>{if(!showCat(p.cat))return;const pts=barPath(bm,m,p,0);o+=`<polyline data-k="${esc(p.key)}" data-r="${esc(p.rid)}" style="cursor:pointer" points="${pts.map(q=>X(q[0]).toFixed(1)+','+YZ(q[2]).toFixed(1)).join(' ')}" fill="none" stroke="${pieceCol(p,false)}" stroke-width="${SEL===p.key?2.6:1.3}" stroke-linejoin="round"/>`})}
- rr.forEach((ri,row)=>{const r=bm.runs[ri],y=yr+row*58+18,top=r.layer[0]==='T',dir=top?1:-1;
+ rr.forEach((ri,row)=>{const r=bm.runs[ri],y=yr+RY[row]+18,top=r.layer[0]==='T',dir=top?1:-1,rid=RUNID(r);o+=ITo('row:'+rid)+`<g style="cursor:move"><rect x="6" y="${y-9}" width="30" height="18" fill="#fff" stroke="#999" stroke-width=".7"/><text x="21" y="${y+4}" font-size="11" font-weight="bold" fill="#444" text-anchor="middle">${esc(r.layer)}</text></g>`;
   m.P.filter(p=>p.ri===ri&&showCat(p.cat)).forEach(p=>{const yy=y+(p.i%2?5:0)*(top?1:-1),on=SEL===p.key,c=pieceCol(p,false),x0=X(p.x0),x1=X(p.x1),lg=16;
    let d=`M${x0} ${p.hl?yy+dir*lg:yy} `;if(p.hl)d+=`L${x0} ${yy+dir*3} Q${x0} ${yy} ${x0+3} ${yy} `;
    (p.r._ck||[]).forEach(k=>{const a=Math.min(k.x0,k.x1),b=Math.max(k.x0,k.x1);if(a>=p.x0-1&&b<=p.x1+1)d+=k.dir>0?`L${X(a)} ${yy} L${X(b)} ${yy-Math.sign(k.dz)*7} `:`L${X(a)} ${yy-Math.sign(k.dz)*7} L${X(b)} ${yy} `});
    d+=`L${p.hr?x1-3:x1} ${yy} `;if(p.hr)d+=`Q${x1} ${yy} ${x1} ${yy+dir*3} L${x1} ${yy+dir*lg}`;
-   o+=`<g data-k="${esc(p.key)}" data-r="${esc(p.rid)}" style="cursor:pointer"><path d="${d}" fill="none" stroke="#fff" stroke-opacity="0.01" stroke-width="16"/><path clip-path="url(#csin)" d="${d}" fill="none" stroke="${c}" stroke-width="${on?3.5:1.8}"/><path clip-path="url(#csout)" d="${d}" fill="none" stroke="${c}" stroke-width="${on?3.5:1.8}" stroke-dasharray="8 5"/>`;
+   o+=ITo('pc:'+rid+':'+p.i)+`<g data-k="${esc(p.key)}" data-r="${esc(p.rid)}" style="cursor:pointer"><path d="${d}" fill="none" stroke="#fff" stroke-opacity="0.01" stroke-width="16"/><path clip-path="url(#csin)" d="${d}" fill="none" stroke="${c}" stroke-width="${on?3.5:1.8}"/><path clip-path="url(#csout)" d="${d}" fill="none" stroke="${c}" stroke-width="${on?3.5:1.8}" stroke-dasharray="8 5"/>`;
    if(SH.labels){const short=x1-x0<170,lx=(x0+x1)/2;
     o+=IT('pl:'+p.rid+':'+p.i,`<text x="${lx}" y="${yy+(top?-1:1)*(short?18:6)+(top?0:9)}" fill="${BLU}" font-size="${short?9.5:11}" text-anchor="middle">${p.n}-${p.bar}mm-${esc(p.mark)}-${m2(p.cut)}m</text>`);
     o+=IT('pd:'+p.rid+':'+p.i,`<text x="${lx}" y="${yy+(top?1:-1)*(short?9:8)+(top?9:0)}" fill="${RED}" font-size="${short?10:12.5}" text-anchor="middle">${m2(p.dims.b)} m</text>`);
     if(p.hl)o+=`<text x="${x0-5}" y="${yy+dir*8}" fill="${RED}" font-size="10" text-anchor="middle" transform="rotate(-90 ${x0-5} ${yy+dir*8})">${m2(p.la)}</text>`;
     if(p.hr)o+=`<text x="${x1+12}" y="${yy+dir*8}" fill="${RED}" font-size="10" text-anchor="middle" transform="rotate(-90 ${x1+12} ${yy+dir*8})">${m2(p.lb)}</text>`}
-   o+='</g>'})});
+   o+='</g></g>'});o+='</g>'});
  o+=IT('cap',`<text x="${W/2}" y="${H-14}" font-size="24" text-anchor="middle" fill="#111">${esc(bm.id)}-Profile</text>`);
  return{s:o,W,H}}
 function paperSVG(bm,m,forFile){const P=S.settings.sheet;SH=P;SHRAW=m.raw||S.beams.find(b=>b.id===bm.id)||null;SHF=0.28;
@@ -1050,6 +1085,7 @@ function sheetSetHTML(){const P=S.settings.sheet,c=(k,t)=>`<label class="ck"><in
  const tx=(k,t)=>`<div class="f"><label>${t}</label><input type="text" data-sp="${k}" value="${esc(P[k]||'')}"></div>`;
  return`<div class="card" style="margin-bottom:10px"><div class="g4">${sl('paper','กระดาษ (แนวนอน)',['A4','A3','A2','A1'])}${sl('scale','สเกล Profile',[['auto','อัตโนมัติ']].concat(NICE.filter(v=>v>=20).map(v=>[v,'1:'+v])))}${sl('secScale','สเกลหน้าตัด',[10,15,20,25,30,40,50].map(v=>[v,'1:'+v]))}${tx('sheetNo','แผ่นที่')}</div>
  <div class="g3" style="margin-top:6px">${tx('title','ชื่อโครงการ')}${tx('by','ผู้ออกแบบ / เขียนแบบ')}${tx('date','วันที่ (ว่าง = วันนี้)')}</div>
+ <div class="g4" style="margin-top:6px">${sl('rowGap','ระยะห่างแถวรูปเหล็ก',[[40,'แน่น'],[58,'ปกติ'],[75,'โปร่ง'],[95,'โปร่งมาก']])}</div>
  <div class="sh">แสดงบนกระดาษและใน DXF</div><div class="chips">${c('main','เหล็กหลัก')}${c('extra','เหล็กเสริม')}${c('stir','เหล็กปลอก')}${c('inElev','เหล็กในรูปด้านคาน')}${c('rows','แถวรายละเอียดเหล็ก')}${c('labels','ชื่อและความยาวเหล็ก')}${c('sec','หน้าตัด')}${c('stirShape','รูปปลอก')}${c('elev','รูปด้านคาน')}${c('grid','เส้นกริด')}${c('dims','ระยะและระดับ')}${c('table','ตารางเหล็กใน DXF')}${c('color','พิมพ์สี')}${c('dxf3d','เหล็ก 3D ใน DXF')}</div></div>`}
 
 /* ===== Bending table ===== */
@@ -1120,12 +1156,12 @@ function dxfBeam(w,raw,y0,sP){const P=S.settings.sheet,T=2.5*sP,sS=+P.secScale||
   (raw.cuts||[]).forEach(c=>{const x=XX(c.x),y1=YZ(zmx)+1.2*T,y2=YZ(zmn)-1.2*T,q=OF('cm:'+c.n);w.line('KN-DIM',x,y1,x,y2);w.line('KN-DIM',x,y1,x-T,y1);w.line('KN-DIM',x,y2,x-T,y2);w.text('KN-LABEL',x-1.4*T+q[0],y1+0.4*T+q[1],1.2*T,c.n,1);w.text('KN-LABEL',x-1.4*T+q[0],y2-1.6*T+q[1],1.2*T,c.n,1)});
   g.X.forEach((X,i)=>{if(bm.grids[i].free)return;const adj=[i-1,i].filter(q=>q>=0&&q<nS),zb=Math.min(...adj.map(q=>bm.zb[q])),hw=g.w[i]/2;w.pl('KN-COL',[[XX(X-hw),YZ(zb)],[XX(X-hw),YZ(zb)-600],[XX(X+hw),YZ(zb)-600],[XX(X+hw),YZ(zb)]])});
   if(P.inElev)m.P.forEach(p=>{if(show(p.cat))w.pl(LY(p.cat),barPath(bm,m,p,0).map(q=>[XX(q[0]),YZ(q[2])]))})}
- const rows=P.rows?bm.runs.map((_,ri)=>ri).filter(ri=>m.P.some(p=>p.ri===ri&&show(p.cat))):[],rh=Math.max(6*T,700),yR=YZ(zmn)-600-4*T;
- rows.forEach((ri,row)=>{const r=bm.runs[ri],yy0=yR-row*rh,top=r.layer[0]==='T',dir=top?-1:1;
-  m.P.filter(p=>p.ri===ri&&show(p.cat)).forEach(p=>{const yy=yy0+(p.i%2?0.3*T*dir:0),x0=XX(p.x0),x1=XX(p.x1),pts=[];if(p.hl)pts.push([x0,yy+dir*p.la]);pts.push([x0,yy],[x1,yy]);if(p.hr)pts.push([x1,yy+dir*p.lb]);w.pl(LY(p.cat),pts);
+ const rows=P.rows?rowOrder(bm,m,bm.runs.map((_,ri)=>ri).filter(ri=>m.P.some(p=>p.ri===ri&&show(p.cat)))):[],rh=Math.max(6*T,700)*((+P.rowGap||58)/58),yR=YZ(zmn)-600-4*T,RYd=rowYs(bm,rows,rh,rh*0.45);
+ rows.forEach((ri,row)=>{const r=bm.runs[ri],rid=RUNID(r),qr=OF('row:'+rid),yy0=yR-RYd[row]+qr[1],top=r.layer[0]==='T',dir=top?-1:1;if(P.labels)w.text('KN-LABEL',XX(lo)-6*T+qr[0],yy0-0.4*T,0.8*T,r.layer);
+  m.P.filter(p=>p.ri===ri&&show(p.cat)).forEach(p=>{const qp=OF('pc:'+rid+':'+p.i),yy=yy0+qp[1]+(p.i%2?0.3*T*dir:0),x0=XX(p.x0)+qr[0]+qp[0],x1=XX(p.x1)+qr[0]+qp[0],pts=[];if(p.hl)pts.push([x0,yy+dir*p.la]);pts.push([x0,yy],[x1,yy]);if(p.hr)pts.push([x1,yy+dir*p.lb]);w.pl(LY(p.cat),pts);
    if(P.labels){const lx=(x0+x1)/2;TX('pl:'+p.rid+':'+p.i,'KN-LABEL',lx,yy+(top?0.5*T:-1.4*T),0.8*T,p.n+'-'+p.bar+'mm-'+p.mark+'-'+m2(p.cut)+'m',1);TX('pd:'+p.rid+':'+p.i,'KN-DIM',lx,yy+(top?-1.4*T:0.5*T),0.8*T,m2(p.dims.b)+' m',1);
     if(p.hl)w.text('KN-DIM',x0-0.4*T,yy+dir*p.la/2,0.6*T,m2(p.la),1,90);if(p.hr)w.text('KN-DIM',x1+T,yy+dir*p.lb/2,0.6*T,m2(p.lb),1,90)}})});
- const yEnd=(rows.length?yR-(rows.length-1)*rh:YZ(zmn)-600)-3*T;
+ const yEnd=(rows.length?yR-RYd[RYd.length-1]:YZ(zmn)-600)-3*T;
  if(P.grid)g.X.forEach((X,i)=>{if(bm.grids[i].free)return;const x=XX(X);w.circle('KN-GRIDTXT',x,yG,1.5*T);w.text('KN-GRIDTXT',x,yG-0.5*T,1.2*T,bm.grids[i].n,1);w.line('KN-GRID',x,yG-1.5*T,x,yEnd)});
  let yMin=yEnd;
  if(P.table){const R=rowsOf(raw).filter(r=>show(r.cat)),tx=XX(hi)+8*T,ty=y0-3.5*T,cw=[8,4,4,4,5,4,5,3,4].map(v=>v*T),rh2=1.8*T,xs=[tx];cw.forEach(c=>xs.push(xs[xs.length-1]+c));
@@ -1398,6 +1434,20 @@ function linkNote(bm){const L=bm.link,p=P(),X=L.dir==='x',ax=X?'gx':'gy',ox=X?'g
  <div class="chips" style="margin-top:6px"><button class="chip" data-a="goPlan">ไปที่แปลน</button><button class="chip" data-a="unlink">ยกเลิกการผูก</button></div></div>`}
 function lockLinked(){document.querySelectorAll('#panel [data-p]').forEach(el=>{if(/^spans\.\d+\.L$|^grids\.\d+\.(w|n)$/.test(el.dataset.p)){el.disabled=true;el.title='ดึงจากแปลน'}})}
 function nextBeamId(){let n=0;S.beams.forEach(b=>{const m=/^B(\d+)$/.exec(b.id);if(m)n=Math.max(n,+m[1])});return'B'+(n+1)}
+const GTK='kn.gridTemplates',gridTpl=()=>{try{return JSON.parse(localStorage.getItem(GTK)||'[]')}catch(e){return[]}},setGridTpl=T=>{try{localStorage.setItem(GTK,JSON.stringify(T))}catch(e){}};
+function adjBeams(i){const b=S.beams[i],L=b&&b.link,o={prev:-1,next:-1};if(!L)return o;S.beams.forEach((x,q)=>{const K=x.link;if(q===i||!K||x.linkBad||K.lv!==L.lv||K.dir!==L.dir||K.k!==L.k)return;if(K.b===L.a)o.prev=q;if(K.a===L.b)o.next=q});return o}
+function freshBeam(src,id,a,b,spans,fl,fr){const n=cl(src);n.id=id;n.link=Object.assign({},src.link,{a,b});n.spans=spans.map(cl);const P0=P(),ax=src.link.dir==='x'?'gx':'gy',names=P0[ax].n.slice(a,b+1);
+ n.grids=names.map(nm=>Object.assign(cl(src.grids.find(g=>!g.free&&g.n===nm)||{ex:defEx(),jt:defJt()}),{n:nm,free:false}));
+ if(fl){n.grids.unshift(cl(src.grids[0]));n.spans.unshift(cl(src.spans[0]))}if(fr){n.grids.push(cl(src.grids[src.grids.length-1]));n.spans.push(cl(src.spans[src.spans.length-1]))}
+ n.ovr={};n.add=[];n.lay={};n.cuts=[];n.names={};n.manual=false;n.runs=[];syncBeam(n);return n}
+function splitBeam(i,q){const bm=S.beams[i],L=bm.link,sp=inner(bm),fl=bm.grids[0].free,fr=bm.grids[bm.grids.length-1].free,out=[];
+ if(q>0)out.push([L.a,L.a+q,sp.slice(0,q),fl,false]);out.push([L.a+q,L.a+q+1,[sp[q]],fl&&q===0,fr&&q===sp.length-1]);if(q<sp.length-1)out.push([L.a+q+1,L.b,sp.slice(q+1),false,fr]);
+ let nb=0;S.beams.forEach(b=>{const r=/^B(\d+)$/.exec(b.id);if(r)nb=Math.max(nb,+r[1])});const made=out.map((o,k)=>freshBeam(bm,k===0?bm.id:'B'+(nb+k),o[0],o[1],o[2],o[3],o[4]));
+ S.beams.splice(i,1,...made);const sel=i+(q>0?1:0);PSEL={t:'beam',i:sel};toast('แยกเป็น '+made.map(x=>x.id).join(', ')+' แล้ว · ตั้งชื่อคานช่วงนี้ได้ที่ช่องชื่อคาน')}
+function mergeBeams(i,j){const X0=S.beams[i],Y0=S.beams[j],first=X0.link.a<Y0.link.a?X0:Y0,second=first===X0?Y0:X0;
+ const fl=first.grids[0].free,fr=second.grids[second.grids.length-1].free,sp=inner(first).concat(inner(second));
+ const n=freshBeam(first,first.id,first.link.a,second.link.b,sp,fl,false);if(fr){n.grids.push(cl(second.grids[second.grids.length-1]));n.spans.push(cl(second.spans[second.spans.length-1]))}
+ const fi=S.beams.indexOf(first),si=S.beams.indexOf(second);S.beams[fi]=n;S.beams.splice(si,1);PSEL={t:'beam',i:S.beams.indexOf(n)};S.cur=0;toast('รวม '+first.id+' + '+second.id+' เป็น '+n.id+' แล้ว (การแก้ไขเหล็กรายเส้นถูกล้าง)')}
 function makeBeam(dir,k,a,b){const p=P(),lv=p.lv;
  const hit=S.beams.findIndex(x=>x.link&&x.link.lv===lv&&x.link.dir===dir&&x.link.k===k&&!(b<=x.link.a||a>=x.link.b));
  if(hit>=0){PSEL={t:'beam',i:hit};toast('มีคาน '+S.beams[hit].id+' อยู่บนแนวนี้แล้ว');return}
@@ -1417,7 +1467,10 @@ function renderPlanPanel(){const p=P(),lv=p.lv,used={};Object.entries(p.cols).fo
   <div class="f"><label>ชื่อกริด (คั่นด้วย ,)</label><input data-gn="${a}" value="${esc(csv(p[a].n))}"></div>
   <div class="f" style="margin-top:4px"><label>ระยะห่าง ม. (คั่นด้วย ,) · ${p[a].n.length-1} ช่วง</label><input data-gs="${a}" value="${esc(csv(p[a].sp.map(m)))}"></div>
   <div class="chips" style="margin-top:4px"><button class="chip" data-pa="gAdd:${a}">+ เส้น</button><button class="chip" data-pa="gDel:${a}">− เส้นสุดท้าย</button></div>`).join('')}
- <div class="note">ระยะห่างวัดศูนย์กริดถึงศูนย์กริด · เส้นสุดท้ายใช้ระยะเท่าช่วงก่อนหน้า</div></div>
+ <div class="note">ระยะห่างวัดศูนย์กริดถึงศูนย์กริด · เส้นสุดท้ายใช้ระยะเท่าช่วงก่อนหน้า</div>
+ <div class="sh">นำกริดไปใช้ต่อ</div>
+ <div class="chips"><button class="chip" data-pa="gtSave">บันทึกเป็นแม่แบบ</button>${gridTpl().length?`<select id="plTpl" class="chip">${gridTpl().map((t,q)=>`<option value="${q}">${esc(t.n)} · ${t.gx.n.length}×${t.gy.n.length}</option>`).join('')}</select><button class="chip" data-pa="gtUse">ใช้แม่แบบนี้</button><button class="chip" data-pa="gtDel">ลบแม่แบบ</button>`:''}<button class="chip" data-pa="gtFile">นำกริดจากไฟล์ .knp</button><input type="file" id="plGridIn" accept=".knp,.json" hidden></div>
+ <div class="note">แม่แบบเก็บในเครื่องนี้ ใช้ได้กับทุกโครงการ</div></div>
  <div class="box"><div class="sh" style="margin-top:0"><span>ชนิดเสา</span><button class="chip" data-pa="addCt">+ ชนิดเสา</button></div>
  <table class="lvt"><tr><td class="note">ชื่อ</td><td class="note">รูปทรง</td><td class="note">X มม.</td><td class="note">Y มม.</td><td></td></tr>
  ${p.ctypes.map((t,i)=>`<tr><td><input data-pp="ctypes.${i}.id" value="${esc(t.id)}" aria-label="ชื่อชนิดเสา"></td><td><select data-pp="ctypes.${i}.shape"><option value="rect"${t.shape==='rect'?' selected':''}>สี่เหลี่ยม</option><option value="round"${t.shape==='round'?' selected':''}>กลม</option></select></td>
@@ -1436,15 +1489,17 @@ function selPanel(){const p=P();if(!PSEL)return`<div class="note" style="padding
  if(PSEL.t==='beam'){const bm=S.beams[PSEL.i];if(!bm||!bm.link){PSEL=null;return''}const L=bm.link,X=L.dir==='x',ax=X?'gx':'gy',ox=X?'gy':'gx',sp=inner(bm);
   return`<div class="box sel"><div class="t"><span>คาน ${esc(bm.id)} · แนว ${esc(p[ox].n[L.k])} · ${esc(p[ax].n[L.a])} → ${esc(p[ax].n[L.b])}</span></div>
   <div class="g2"><div class="f"><label>ชื่อคาน</label><input data-pb="id" value="${esc(bm.id)}"></div><div class="f"><label>จำนวนคานแบบนี้</label><input data-pb="qty" type="number" value="${bm.qty}"></div></div>
-  <div class="pl" style="margin-top:6px">${sp.map((s,q)=>`<div>ช่วง ${q+1} · ยาว ${s.L.toFixed(2)} ม. · ${m2(s.b)}×${m2(s.h)} · บน ${s.top.n}-${s.top.bar} · ล่าง ${s.bot.n}-${s.bot.bar}</div>`).join('')}</div>
+  <div class="sh">ช่วงในคานนี้ · แยกช่วงเป็นคานคนละชื่อได้</div>${sp.map((s,q)=>`<div class="box" style="padding:6px 8px;margin-bottom:4px"><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span style="flex:1">${esc(p[ax].n[L.a+q])}–${esc(p[ax].n[L.a+q+1])} · ${s.L.toFixed(2)} ม. · ${m2(s.b)}×${m2(s.h)} · บน ${s.top.n}-${s.top.bar} · ล่าง ${s.bot.n}-${s.bot.bar}</span>${sp.length>1?`<button class="chip" data-pa="split:${q}">แยกเป็นคานใหม่</button>`:''}</div></div>`).join('')}
+  ${(()=>{const nb=adjBeams(PSEL.i);return nb.prev>=0||nb.next>=0?`<div class="chips" style="margin-top:6px">${nb.prev>=0?`<button class="chip" data-pa="merge:${nb.prev}">◀ รวมกับ ${esc(S.beams[nb.prev].id)}</button>`:''}${nb.next>=0?`<button class="chip" data-pa="merge:${nb.next}">รวมกับ ${esc(S.beams[nb.next].id)} ▶</button>`:''}</div>`:''})()}
+  ${S.beams.length>1?`<div class="chips" style="margin-top:6px"><span class="note" style="margin:0">ใช้หน้าตัดและเหล็กจาก</span><select id="plCopySrc" class="chip">${S.beams.map((x,q)=>q===PSEL.i?'':`<option value="${q}">${esc(x.id)}</option>`).join('')}</select><button class="chip" data-pa="copySec">ใช้กับทุกช่วง</button></div>`:''}
   <div class="chips" style="margin-top:8px"><button class="gold" data-pa="openBm">เปิดรายละเอียดคาน</button><button class="chip" data-pa="delBm">ลบคาน</button></div></div>`}
  return''}
 // ----- tools + drawing -----
-function renderPlanTools(){const T=[['sel','เลือก'],['col','วางเสา'],['beam','วาดคาน']];
+function renderPlanTools(){const T=[['sel','เลือก'],['col','วางเสา'],['beam','วาดคานต่อเนื่อง'],['span','วาดคานทีละช่วง']];
  $('#plTools').innerHTML=T.map(([k,t])=>`<button class="ib${PT===k?' on':''}" data-pt="${k}">${t}</button>`).join('')+`<span class="sep"></span>
  ${PT==='col'?`<select class="chip" id="plCt">${P().ctypes.map(t=>`<option value="${esc(t.id)}"${P().ct===t.id?' selected':''}>${esc(t.id)}</option>`).join('')}</select><button class="chip" data-pa="allCols">วางทุกจุดตัด</button><button class="chip" data-pa="clrCols">ลบเสาทั้งชั้น</button><span class="sep"></span>`:''}
  <button class="chip" data-pa="zin" aria-label="ซูมเข้า">＋</button><button class="chip" data-pa="zout" aria-label="ซูมออก">－</button><button class="chip" data-pa="fit">พอดีจอ</button>`;
- $('#plHint').textContent=PT==='beam'?(PBEAM?'แตะจุดจบบนแนวเดียวกับ '+ixName(PBEAM.i,PBEAM.j)+' · แตะจุดเดิมเพื่อยกเลิก':'แตะจุดตัดกริดจุดเริ่มของคาน'):PT==='col'?'แตะจุดตัดกริดเพื่อวางเสา '+P().ct+' · แตะเสาเดิมเพื่อเอาออก':'แตะเสาหรือคานเพื่อแก้ไข · ลากพื้นที่ว่างเพื่อเลื่อน · ล้อเมาส์เพื่อซูม'}
+ $('#plHint').textContent=PT==='span'?'แตะช่วงกริดที่ต้องการวางคาน (เส้นประระหว่างจุดตัด) · คานจะสร้างทีละช่วง':PT==='beam'?(PBEAM?'แตะจุดจบบนแนวเดียวกับ '+ixName(PBEAM.i,PBEAM.j)+' · แตะจุดเดิมเพื่อยกเลิก':'แตะจุดตัดกริดจุดเริ่มของคาน'):PT==='col'?'แตะจุดตัดกริดเพื่อวางเสา '+P().ct+' · แตะเสาเดิมเพื่อเอาออก':'แตะเสาหรือคานเพื่อแก้ไข · ลากพื้นที่ว่างเพื่อเลื่อน · ล้อเมาส์เพื่อซูม'}
 function planExt(){const X=gpos('gx'),Y=gpos('gy');return{w:X[X.length-1],h:Y[Y.length-1],X,Y}}
 function fitPV(){const e=planExt(),m=Math.max(e.w,e.h)*0.14+1600;PV={x:-m,y:-m,w:e.w+2*m,h:e.h+2*m}}
 function drawPlan(){const p=P(),e=planExt(),lv=p.lv,svg=$('#plSvg');if(!PV)fitPV();
@@ -1468,7 +1523,9 @@ function drawPlan(){const p=P(),e=planExt(),lv=p.lv,svg=$('#plSvg');if(!PV)fitPV
   o+=`<g data-col="${esc(k)}" data-ix="${i},${j}" style="cursor:pointer">${d.round?`<circle cx="${cx}" cy="${cy}" r="${d.bx/2}" ${st}/>`:`<rect x="${cx-d.bx/2}" y="${cy-d.by/2}" width="${d.bx}" height="${d.by}" ${st}/><line x1="${cx-d.bx/2}" y1="${cy-d.by/2}" x2="${cx+d.bx/2}" y2="${cy+d.by/2}" stroke="#55585E" stroke-width="${r*0.03}"/><line x1="${cx+d.bx/2}" y1="${cy-d.by/2}" x2="${cx-d.bx/2}" y2="${cy+d.by/2}" stroke="#55585E" stroke-width="${r*0.03}"/>`}
   <text x="${cx+Math.max(d.bx,d.by)/2+r*0.25}" y="${cy-Math.max(d.bx,d.by)/2-r*0.15}" fill="#C8C5BE" font-size="${fs*0.6}">${esc(d.name)}</text></g>`});
  // intersections (targets)
- if(PT!=='sel')X.forEach((x,i)=>Y.forEach((y,j)=>{const st=PBEAM&&PBEAM.i===i&&PBEAM.j===j;o+=`<circle data-ix="${i},${j}" cx="${x}" cy="${y}" r="${r*0.75}" fill="${st?'#E8963A':'#C9A55C'}" fill-opacity="${st?0.55:0.08}" stroke="${st?'#E8963A':'none'}" stroke-width="${r*0.06}" style="cursor:pointer"/>`}));
+ if(PT==='span'){const sw=r*0.9;Y.forEach((y,j)=>X.forEach((x,i)=>{if(i<X.length-1)o+=`<rect data-seg="x,${j},${i}" x="${x+r*0.6}" y="${y-sw/2}" width="${X[i+1]-x-r*1.2}" height="${sw}" fill="#E8963A" fill-opacity="0.07" stroke="#E8963A" stroke-opacity="0.35" stroke-width="${r*0.04}" stroke-dasharray="${r*0.3} ${r*0.2}" style="cursor:pointer"/>`}));
+  X.forEach((x,i)=>Y.forEach((y,j)=>{if(j<Y.length-1)o+=`<rect data-seg="y,${i},${j}" x="${x-sw/2}" y="${y+r*0.6}" width="${sw}" height="${Y[j+1]-y-r*1.2}" fill="#E8963A" fill-opacity="0.07" stroke="#E8963A" stroke-opacity="0.35" stroke-width="${r*0.04}" stroke-dasharray="${r*0.3} ${r*0.2}" style="cursor:pointer"/>`}))}
+ if(PT!=='sel'&&PT!=='span')X.forEach((x,i)=>Y.forEach((y,j)=>{const st=PBEAM&&PBEAM.i===i&&PBEAM.j===j;o+=`<circle data-ix="${i},${j}" cx="${x}" cy="${y}" r="${r*0.75}" fill="${st?'#E8963A':'#C9A55C'}" fill-opacity="${st?0.55:0.08}" stroke="${st?'#E8963A':'none'}" stroke-width="${r*0.06}" style="cursor:pointer"/>`}));
  const lvN=(lvOf(lv)||{}).n||'';o+=`<text x="${e.w/2}" y="${e.h+r*3.2}" fill="#8A8E95" font-size="${fs*0.9}" text-anchor="middle" pointer-events="none">แปลน ${esc(lvN)} · ระดับ +${(+(lvOf(lv)||{}).z||0).toFixed(2)} ม.</text>`;
  svg.setAttribute('viewBox',`${PV.x} ${PV.y} ${PV.w} ${PV.h}`);svg.innerHTML=o}
 function renderPlan(){P();syncAll();renderPlanTools();renderPlanPanel();drawPlan()}
@@ -1477,6 +1534,8 @@ function parseList(t){return String(t).split(/[,\s]+/).map(v=>v.trim()).filter(B
 // ----- events -----
 (function(){const pan=$('#plPanel'),tools=$('#plTools'),svg=$('#plSvg');
  pan.addEventListener('change',e=>{const el=e.target,p=P();
+  if(el.id==='plGridIn'){const f=el.files[0];el.value='';if(!f)return;const rd=new FileReader();rd.onload=()=>{let o=null;try{o=JSON.parse(rd.result)}catch(x){}const pl=o&&((o.data||o).plan);if(!pl||!pl.gx){toast('ไฟล์นี้ไม่มีข้อมูลกริด');return}
+   confirmBox('ใช้กริดและชั้นจากไฟล์ <b>'+esc(f.name)+'</b> ('+pl.gx.n.length+'×'+pl.gy.n.length+' เส้น)?<br>กริดและชั้นปัจจุบันจะถูกแทนที่',()=>{p.gx=cl(pl.gx);p.gy=cl(pl.gy);p.levels=cl(pl.levels||p.levels);p.lv=p.levels[0].id;if(pl.ctypes)pl.ctypes.forEach(t=>{if(!p.ctypes.some(x=>x.id===t.id))p.ctypes.push(cl(t))});PV=null;planChanged(true);renderPlanTools()})};rd.readAsText(f);return}
   if(el.dataset.gn){const a=el.dataset.gn,n=parseList(el.value);if(n.length<2){toast('ต้องมีกริดอย่างน้อย 2 เส้น');renderPlanPanel();return}if(new Set(n).size!==n.length){toast('ชื่อกริดซ้ำกัน');renderPlanPanel();return}
    const sp=p[a].sp.slice(0,n.length-1);while(sp.length<n.length-1)sp.push(sp[sp.length-1]||4000);p[a].n=n;p[a].sp=sp;planChanged(true);return}
   if(el.dataset.gs){const a=el.dataset.gs,v=parseList(el.value).map(parseFloat);if(v.some(x=>!(x>0))){toast('ระยะห่างต้องเป็นตัวเลขมากกว่า 0');renderPlanPanel();return}
@@ -1502,6 +1561,13 @@ function parseList(t){return String(t).split(/[,\s]+/).map(v=>v.trim()).filter(B
   else if(a==='snap'){const c=p.cols[PSEL.k],d=colDim(Object.assign({},c,{ex:0,ey:0}));if(v==='L')c.ex=d.bx/2;else if(v==='R')c.ex=-d.bx/2;else if(v==='T')c.ey=d.by/2;else if(v==='B')c.ey=-d.by/2;else{c.ex=0;c.ey=0}}
   else if(a==='openBm'){S.cur=PSEL.i;SEL=null;CUT.x=null;UI={t:'span',i:S.beams[S.cur].grids[0].free?1:0};save();location.hash='beam';return}
   else if(a==='delBm'){const bm=S.beams[PSEL.i];if(S.beams.length<=1){toast('ต้องมีคานอย่างน้อย 1 คาน');return}confirmBox('ลบคาน <b>'+esc(bm.id)+'</b> และรายละเอียดเหล็กทั้งหมดของคานนี้?',()=>{S.beams.splice(PSEL.i,1);S.cur=0;PSEL=null;planChanged(true)});return}
+  else if(a==='split'){splitBeam(PSEL.i,+v)}
+  else if(a==='merge'){mergeBeams(PSEL.i,+v)}
+  else if(a==='copySec'){const src=S.beams[+$('#plCopySrc').value],bm=S.beams[PSEL.i],s0=inner(src)[0];if(!s0)return;inner(bm).forEach(s=>{['b','h'].forEach(k=>s[k]=s0[k]);s.top=cl(s0.top);s.bot=cl(s0.bot);s.st=cl(s0.st);s.sk=cl(s0.sk)});toast('ใช้หน้าตัดและเหล็กของ '+src.id+' แล้ว')}
+  else if(a==='gtSave'){const n=prompt('ชื่อแม่แบบกริด',(lvOf(p.lv)||{}).n?'กริดโครงการ':'กริด');if(!n)return;const T=gridTpl();T.push({n,gx:cl(p.gx),gy:cl(p.gy),levels:cl(p.levels)});setGridTpl(T);toast('บันทึกแม่แบบกริด "'+n+'" แล้ว')}
+  else if(a==='gtUse'){const T=gridTpl(),t=T[+($('#plTpl')||{}).value];if(!t)return;confirmBox('ใช้กริดและชั้นจากแม่แบบ <b>'+esc(t.n)+'</b>?<br>กริดและชั้นปัจจุบันจะถูกแทนที่ · เสาและคานที่อยู่นอกกริดใหม่จะไม่แสดง',()=>{p.gx=cl(t.gx);p.gy=cl(t.gy);if(t.levels){p.levels=cl(t.levels);p.lv=p.levels[0].id}PV=null;planChanged(true);renderPlanTools()});return}
+  else if(a==='gtDel'){const T=gridTpl(),q=+($('#plTpl')||{}).value;if(!T[q])return;T.splice(q,1);setGridTpl(T)}
+  else if(a==='gtFile'){$('#plGridIn').click();return}
   else if(a==='allCols'){const e2=planExt();let n=0;e2.X.forEach((_,i)=>e2.Y.forEach((_,j)=>{const k=colKey(p.lv,i,j);if(!p.cols[k]){p.cols[k]={t:p.ct,rot:0,ex:0,ey:0};n++}}));toast('วางเสา '+p.ct+' เพิ่ม '+n+' ต้น')}
   else if(a==='clrCols'){confirmBox('ลบเสาทั้งหมดในชั้นนี้?',()=>{Object.keys(p.cols).forEach(k=>{if(k.split('|')[0]===p.lv)delete p.cols[k]});PSEL=null;planChanged(true)});return}
   else if(a==='zin'||a==='zout'){const f=a==='zin'?0.8:1.25,cx=PV.x+PV.w/2,cy=PV.y+PV.h/2;PV={x:cx-PV.w*f/2,y:cy-PV.h*f/2,w:PV.w*f,h:PV.h*f};drawPlan();return}
@@ -1517,6 +1583,7 @@ function parseList(t){return String(t).split(/[,\s]+/).map(v=>v.trim()).filter(B
  const up=()=>{PDR=null};svg.addEventListener('pointerup',up);svg.addEventListener('pointercancel',up);svg.addEventListener('pointerleave',up);
  svg.addEventListener('click',e=>{if(PMOV){PMOV=0;return}const p=P(),ix=e.target.closest('[data-ix]'),cg=e.target.closest('[data-col]'),bg=e.target.closest('[data-bm]');
   if(PT==='sel'){PSEL=cg?{t:'col',k:cg.dataset.col}:bg?{t:'beam',i:+bg.dataset.bm}:null;renderPlanPanel();drawPlan();return}
+  const sg=e.target.closest('[data-seg]');if(PT==='span'){if(!sg){if(bg){PSEL={t:'beam',i:+bg.dataset.bm};renderPlanPanel();drawPlan()}return}const[d,k,a]=sg.dataset.seg.split(',');makeBeam(d,+k,+a,+a+1);planChanged(true);return}
   if(!ix)return;const[i,j]=ix.dataset.ix.split(',').map(Number);
   if(PT==='col'){const k=colKey(p.lv,i,j);if(p.cols[k]){delete p.cols[k];if(PSEL&&PSEL.k===k)PSEL=null}else{p.cols[k]={t:p.ct,rot:0,ex:0,ey:0};PSEL={t:'col',k}}planChanged(true);return}
   if(PT==='beam'){if(!PBEAM){PBEAM={i,j};renderPlanTools();drawPlan();return}const a=PBEAM;PBEAM=null;
