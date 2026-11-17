@@ -232,6 +232,14 @@ body.sb-off :is(.sb,.sbb,#sbBtn){display:none}.sbb{display:none}
 #fileMenu{position:absolute;right:16px;top:50px;z-index:30;background:#131418;border:1px solid var(--ln2);border-top:1px solid var(--au);display:none;flex-direction:column;min-width:220px}
 #fileMenu button{background:none;border:0;border-bottom:1px solid var(--ln);text-align:left;padding:10px 14px;cursor:pointer}#fileMenu button:hover{color:var(--au2)}
 @media(max-width:860px){.pl{grid-template-columns:1fr;height:auto}.plc{height:70vh}.plp{order:2}}
+
+/* mobile top bar + aligned home tiles */
+.app{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;min-width:0}
+.app .tag{line-height:1.35;min-height:2.7em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-align:center}
+.top .crumb{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:599px){.top{gap:5px;padding:8px;overflow:hidden}.top>*{flex:none}.top .crumb{flex:1 1 0;min-width:0}.top .mark{display:none}.top .ib{padding:6px 9px;font-size:13px}.top .nb{min-width:36px;min-height:36px;padding:4px}
+ .top #knUser{flex:none;min-width:0;max-width:none;padding:6px 9px}.top #knUser .knu-n{display:none}
+ .apps{gap:22px 6px;margin-top:32px}.app .ic{width:64px;height:64px}.app .lb{font-size:12.5px}.app .tag{font-size:10.5px}}
 </style>
 <meta name="theme-color" content="#0B0B0D">
 <link rel="manifest" href="manifest.json">
@@ -259,7 +267,7 @@ body.sb-off :is(.sb,.sbb,#sbBtn){display:none}.sbb{display:none}
     <div class="apps">
       <button class="app live" data-go="detail"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34"><rect x="3" y="18" width="28" height="9" fill="none" stroke="#E2C584" stroke-width="1.5"/><rect x="12" y="4" width="10" height="14" fill="none" stroke="#C9A55C" stroke-width="1.5"/><g stroke="#8A8E95"><line x1="8" y1="18" x2="8" y2="27"/><line x1="14" y1="18" x2="14" y2="27"/><line x1="20" y1="18" x2="20" y2="27"/><line x1="26" y1="18" x2="26" y2="27"/></g></svg></div><div class="lb">KN-Detail</div><div class="tag">คาน · เสา · พื้น · ผนัง</div></button>
       <button class="app live" data-go="cut"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34"><g fill="#C9A55C"><rect x="3" y="8" width="18" height="5"/><rect x="22" y="8" width="9" height="5" opacity=".5"/><rect x="3" y="16" width="12" height="5"/><rect x="16" y="16" width="12" height="5"/><rect x="3" y="24" width="26" height="5"/></g></svg></div><div class="lb">Bar Cut</div><div class="tag">ตัดเหล็กเศษน้อยสุด</div></button>
-      <button class="app live" id="btTile"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34"><rect x="6" y="6" width="10" height="14" fill="none" stroke="#E2C584" stroke-width="1.5"/><rect x="18" y="6" width="10" height="14" fill="none" stroke="#C9A55C" stroke-width="1.2"/><g fill="#C9A55C"><circle cx="9" cy="9" r="1.2"/><circle cx="13" cy="9" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="13" cy="17" r="1.2"/></g><path d="M6 25h22M6 29h14" stroke="#8A8E95"/></svg></div><div class="lb">คลังหน้าตัดคาน</div><div class="tag">Beam Types · สร้างไว้ก่อน</div></button>
+      <button class="app live" id="btTile"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34"><rect x="6" y="6" width="10" height="14" fill="none" stroke="#E2C584" stroke-width="1.5"/><rect x="18" y="6" width="10" height="14" fill="none" stroke="#C9A55C" stroke-width="1.2"/><g fill="#C9A55C"><circle cx="9" cy="9" r="1.2"/><circle cx="13" cy="9" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="13" cy="17" r="1.2"/></g><path d="M6 25h22M6 29h14" stroke="#8A8E95"/></svg></div><div class="lb">คลังหน้าตัดคาน</div><div class="tag">Beam Types</div></button>
       <button class="app live" data-go="pdf"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34"><rect x="5" y="4" width="24" height="26" fill="none" stroke="#E2C584" stroke-width="1.5"/><rect x="9" y="8" width="16" height="8" fill="none" stroke="#C9A55C" stroke-width="1.2"/><rect x="9" y="19" width="7" height="7" fill="none" stroke="#C9A55C" stroke-width="1.2"/><g stroke="#8A8E95"><line x1="18" y1="20" x2="25" y2="20"/><line x1="18" y1="23" x2="25" y2="23"/></g></svg></div><div class="lb">จัดหน้า · PDF</div><div class="tag">Layout · พิมพ์แบบ</div></button>
       <button class="app soon"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34"><rect x="7" y="4" width="20" height="26" fill="none" stroke="#8A8E95" stroke-width="1.5"/><g stroke="#8A8E95"><line x1="11" y1="11" x2="23" y2="11"/><line x1="11" y1="16" x2="23" y2="16"/><line x1="11" y1="21" x2="19" y2="21"/></g></svg></div><div class="lb">BOQ</div><div class="tag">เร็ว ๆ นี้</div></button>
       <button class="app live" data-go="settings"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34"><circle cx="17" cy="17" r="5" fill="none" stroke="#E2C584" stroke-width="1.5"/><g stroke="#C9A55C" stroke-width="1.5"><line x1="17" y1="3" x2="17" y2="8"/><line x1="17" y1="26" x2="17" y2="31"/><line x1="3" y1="17" x2="8" y2="17"/><line x1="26" y1="17" x2="31" y2="17"/><line x1="7" y1="7" x2="10.5" y2="10.5"/><line x1="23.5" y1="23.5" x2="27" y2="27"/><line x1="27" y1="7" x2="23.5" y2="10.5"/><line x1="10.5" y1="23.5" x2="7" y2="27"/></g></svg></div><div class="lb">ตั้งค่า</div><div class="tag">มาตรฐาน · สต็อก</div></button>
@@ -490,7 +498,7 @@ function derive(bm){const st=S.settings,sp=bm.spans,n=sp.length,W=[];
  [0,n-1].forEach(c=>{if(n<2||!(c===0?D.grids[0].free:D.grids[n].free))return;const s=sp[c],nm='คานยื่น'+(c===0?'ซ้าย':'ขวา');
   if(s.bot.n<2)W.push(nm+': เหล็กล่างควรมีอย่างน้อย 2 เส้น');
   else if(s.bot.n*BARS[s.bot.bar]**2<0.25*s.top.n*BARS[s.top.bar]**2-1e-6)W.push(nm+': เหล็กล่างน้อยกว่า 0.25 เท่าของพื้นที่เหล็กบน')});
- if(bm.manual){D.runs=bm.runs.map((r,k)=>Object.assign({},r,{id:'R'+k}));return D}
+ if(bm.manual){D.runs=mergeMv(bm.runs.map((r,k)=>Object.assign({},r,{id:'R'+k})));return D}
  const topZ=i=>Math.round(sp[i].lvl*1000),botZ=i=>D.zb[i];
  const jres=(j,top)=>{const jt=jtOf(bm.grids[j]),dT=Math.abs(topZ(j-1)-topZ(j)),dB=Math.abs(botZ(j-1)-botZ(j)),hmin=Math.min(sp[j-1].h,sp[j].h),dd=top?dT:dB;
   let m=jt.mode;if(m==='auto')m=dd===0?'lap':(!top&&dT===0?'haunch':(Math.max(dT,dB)<hmin?'ext':'hook'));
@@ -548,12 +556,17 @@ function derive(bm){const st=S.settings,sp=bm.spans,n=sp.length,W=[];
  const ov=bm.ovr||{};
  D.runs=D.runs.filter(r=>!(ov[r.id]&&ov[r.id].del)).map(r=>{const o=ov[r.id];if(!o)return r;const q=Object.assign({},r,o);if(['a','b','ea','eb','oa','ob'].some(k=>k in o)){delete q.home;delete q.cranks;delete q.nba;delete q.nbb}q.ovr=true;return q});
  (bm.add||[]).forEach((r,k)=>D.runs.push(Object.assign({leg:bm.leg||0,man:''},r,{id:'U'+k,user:true,x:!(r.layer==='T1'||r.layer==='B1')})));
+ {const LM=bm.lmv||{};if(Object.keys(LM).length){const out=[];D.runs.forEach(r=>{const m=LM[r.id];if(!m){out.push(r);return}let n=r.n;const add=[];
+   Object.entries(m.n||{}).forEach(([L,k])=>{k=Math.min(+k||0,n);if(k<=0)return;n-=k;add.push(Object.assign({},r,{id:r.id+'>'+L,layer:L,n:k,mv:1,x:true}))});
+   if(n>0)out.push(m.all?Object.assign({},r,{n,layer:m.all,mv:1}):Object.assign({},r,{n}));out.push(...add)});D.runs=mergeMv(out)}}
  // cantilever: top bars must run into the back span >= max(L cantilever, ld)
  [0,n-1].forEach(c=>{if(n<2||!(c===0?D.grids[0].free:D.grids[n].free))return;const sj=c===0?1:n-1,face=c===0?g.X[sj]+g.w[sj]/2:g.X[sj]-g.w[sj]/2,Lc=g.Ln[c];
   D.runs.filter(r=>{if(r.layer!=='T1'||r.x||!D.grids[r.a]||!D.grids[r.b])return false;const h=homeOf(D,r);return h[0]<=c&&h[1]>=c}).forEach(r=>{const e=runExt(D,g,r),reach=c===0?e.xe-face:face-e.xs,need=Math.max(Lc,ldACI(bm,BARS[r.bar],true));
    if(reach<need-1)W.push('คานยื่น'+(c===0?'ซ้าย':'ขวา')+': เหล็กบนต้องยื่นเข้าช่วงใน ≥ max(L, ℓd) = '+m2(need)+' ม. ตอนนี้ยื่น '+m2(Math.max(0,reach))+' ม.')})});
  return D}
 
+function mergeMv(L){const same=(a,b)=>a.layer===b.layer&&a.bar===b.bar&&a.a===b.a&&a.b===b.b&&a.ea===b.ea&&a.eb===b.eb&&(+a.oa||0)===(+b.oa||0)&&(+a.ob||0)===(+b.ob||0)&&(+a.leg||0)===(+b.leg||0)&&(a.man||'')===(b.man||'')&&!a.bu&&!b.bu&&!a.cranks&&!b.cranks&&(+a.bdl||1)===(+b.bdl||1);
+ const out=[];L.forEach(r=>{if(r.mv){const t=out.find(o=>o!==r&&same(o,r));if(t){t.n=(+t.n||0)+(+r.n||0);t.merged=1;return}}out.push(Object.assign({},r))});return out}
 function build(src){const D0=src.sections?src:derive(src),bm=Object.assign({},D0,{runs:[]}),W=(D0.W||[]).slice(),LG=[],P=[],st=S.settings,R=st.round,rN=v=>Math.round(v/R)*R;let stagW=false;
  D0.runs.forEach(r=>{if(D0.stagger&&r.n>=2&&!r.man){const a=Math.ceil(r.n/2);bm.runs.push(Object.assign({},r,{n:a,_g:0}),Object.assign({},r,{n:r.n-a,_g:1}))}else bm.runs.push(r)});
  const g=geom(bm);
@@ -907,6 +920,14 @@ function cutDraw(m,ci,ox,oy,k,th,title){const s=ci.sec,b=s.b,h=s.h,zb=ci.zb,ds=B
  o+=`<text x="${X(0)}" y="${yd+fs*2.6}" fill="${th.lbl}" font-size="${fs}" text-anchor="middle">${ci.stOn?esc(stLabel(s)):(ci.col>=0?'ตำแหน่งนี้อยู่ในเสา '+esc(D.grids[ci.col].n):'')}</text>`;
  o+=`<text x="${X(0)}" y="${yd+fs*3.8}" fill="${th.sub}" font-size="${fs*0.85}" text-anchor="middle">หุ้ม บน ${s.ct} · ล่าง ${s.cb} · ข้าง ${s.cs} มม.</text>`;
  return o}
+function moveLayer(raw,r,toL,all){if(!r)return;const from=r.layer,id=r.id,n=all?r.n:1;if(raw.boff)delete raw.boff[RUNID(r)];
+ if(raw.manual&&/^R\d+$/.test(id)){const k=+id.slice(1),q=raw.runs[k];if(!q)return;if(all||q.n<=1){q.layer=toL;q.mv=1}else{q.n-=1;raw.runs.push(Object.assign(cl(q),{n:1,layer:toL,mv:1}))}}
+ else{raw.lmv=raw.lmv||{};const base=id.split('>')[0],m=raw.lmv[base]=raw.lmv[base]||{n:{}};m.n=m.n||{};if(!m.o)m.o=id.includes('>')?null:(m.all?m.o:from);
+  if(id.includes('>')){m.n[from]=Math.max(0,(+m.n[from]||0)-n);if(!m.n[from])delete m.n[from];if(toL!==m.o)m.n[toL]=(+m.n[toL]||0)+n}
+  else if(all){if(toL===m.o)delete m.all;else m.all=toL}
+  else m.n[toL]=(+m.n[toL]||0)+1;
+  if(!m.all&&!Object.keys(m.n).length)delete raw.lmv[base]}
+ SECSEL=null;save();renderAll();toast(`ย้าย ${n}-${r.bar} จาก ${from} ไปชั้น ${toL} แล้ว · จัดระยะอัตโนมัติ (Undo ได้)`)}
 let SECG=null,SECM=(()=>{try{return localStorage.getItem('kn.secm')||'g'}catch(e){return'g'}})(),SECSEL=null,SECDRAG=0,SECD=null;
 (function(){const el=$('#secv');
  el.addEventListener('pointerdown',e=>{const c=e.target.closest('circle[data-ri]');if(!c||!SECG)return;const svg=el.querySelector('svg'),ri=+c.dataset.ri,bi=+c.dataset.bi,D=M.D,r=D.runs[ri];if(!r)return;
@@ -915,14 +936,14 @@ let SECG=null,SECM=(()=>{try{return localStorage.getItem('kn.secm')||'g'}catch(e
   SECD={svg,ri,bi,rid:RUNID(r),grp:grp.map(x=>({el:x,cx:+x.getAttribute('cx'),cy:+x.getAttribute('cy')})),mv,st,x:e.clientX,y:e.clientY,f:SECG.W/svg.getBoundingClientRect().width,dy:0,dz:0,moved:false}});
  el.addEventListener('pointermove',e=>{if(!SECD)return;const G=SECG,s=G.s,k=G.k,ds=BARS[s.sb];let dy=(e.clientX-SECD.x)*SECD.f/k,dz=-(e.clientY-SECD.y)*SECD.f/k;if(Math.abs(dy)+Math.abs(dz)>1.5)SECD.moved=true;if(!SECD.moved)return;
   const ref=SECD.mv.find(q=>q.bi===SECD.bi)||SECD.mv[0],d=ref.d,ty=ref.y+dy,tz=ref.z+dz,tol=7;let sy=null,sz=null;
-  const zs=['T1','T2','T3','B1','B2','B3'].map(L=>G.zb+layerZ(s,L,d)),ys=[0,s.b/2-s.cs-ds-d/2,-(s.b/2-s.cs-ds-d/2)].concat(SECD.st.map(q=>q.y));
+  const LZ=['T1','T2','T3','B1','B2','B3'].map(L=>({L,z:G.zb+layerZ(s,L,d)})).filter(o=>o.z-d/2>G.zb+s.cb-1&&o.z+d/2<G.zb+s.h-s.ct+1),zs=LZ.map(o=>o.z),ys=[0,s.b/2-s.cs-ds-d/2,-(s.b/2-s.cs-ds-d/2)].concat(SECD.st.map(q=>q.y));
   zs.concat(SECD.st.map(q=>q.z)).forEach(z=>{if(Math.abs(z-tz)<tol&&(sz==null||Math.abs(z-tz)<Math.abs(sz-tz)))sz=z});ys.forEach(y=>{if(Math.abs(y-ty)<tol&&(sy==null||Math.abs(y-ty)<Math.abs(sy-ty)))sy=y});
-  dy=sy!=null?sy-ref.y:Math.round(dy/5)*5;dz=sz!=null?sz-ref.z:Math.round(dz/5)*5;SECD.dy=dy;SECD.dz=dz;
+  dy=sy!=null?sy-ref.y:Math.round(dy/5)*5;dz=sz!=null?sz-ref.z:Math.round(dz/5)*5;SECD.dy=dy;SECD.dz=dz;{const cur=M.D.runs[SECD.ri].layer,hit=sz!=null?LZ.find(o=>Math.abs(o.z-sz)<0.5):null;SECD.toL=hit&&hit.L!==cur?hit.L:null}
   SECD.grp.forEach(o=>{o.el.setAttribute('cx',(o.cx+dy*k).toFixed(2));o.el.setAttribute('cy',(o.cy-dz*k).toFixed(2))});
   let worst=null,out=0;SECD.mv.forEach(q=>{const y=q.y+dy,z=q.z+dz;SECD.st.forEach(o=>{const c=Math.hypot(o.y-y,o.z-z)-(o.d+q.d)/2;if(worst==null||c<worst)worst=c});
    if(z-q.d/2<G.zb+s.cb+ds-1||z+q.d/2>G.zb+s.h-s.ct-ds+1||Math.abs(y)+q.d/2>s.b/2-s.cs-ds+1)out++});
-  const need=Math.max(25,d,4/3*S.settings.agg),t=SECD.svg.querySelector('#secLive');if(t){t.textContent=`เลื่อน ${dy>=0?'+':''}${dy.toFixed(0)} / ${dz>=0?'+':''}${dz.toFixed(0)} มม.`+(worst!=null?` · ช่องว่างน้อยสุด ${worst.toFixed(0)} (ต้อง ≥ ${need.toFixed(0)})`:'')+(out?' · หุ้มไม่พอ':'');t.setAttribute('fill',(worst!=null&&worst<need-0.01)||out?'#E8604E':'#9BD18B')}});
- const up=()=>{if(!SECD)return;const d=SECD;SECD=null;if(!d.moved)return;SECDRAG=1;setTimeout(()=>SECDRAG=0,300);const raw=B();raw.boff=raw.boff||{};const o=raw.boff[d.rid]=raw.boff[d.rid]||{};
+  const need=Math.max(25,d,4/3*S.settings.agg),t=SECD.svg.querySelector('#secLive');if(t&&SECD.toL){t.textContent=`→ ย้ายไปชั้น ${SECD.toL} (${SECM==='g'?'ทั้งกลุ่ม':'1 เส้น'}) · ปล่อยเพื่อเปลี่ยนชั้น`;t.setAttribute('fill','#FFE08A');return}if(t){t.textContent=`เลื่อน ${dy>=0?'+':''}${dy.toFixed(0)} / ${dz>=0?'+':''}${dz.toFixed(0)} มม.`+(worst!=null?` · ช่องว่างน้อยสุด ${worst.toFixed(0)} (ต้อง ≥ ${need.toFixed(0)})`:'')+(out?' · หุ้มไม่พอ':'');t.setAttribute('fill',(worst!=null&&worst<need-0.01)||out?'#E8604E':'#9BD18B')}});
+ const up=()=>{if(!SECD)return;const d=SECD;SECD=null;if(!d.moved)return;SECDRAG=1;setTimeout(()=>SECDRAG=0,300);const raw=B();raw.boff=raw.boff||{};if(d.toL){moveLayer(raw,M.D.runs[d.ri],d.toL,SECM==='g');return}const o=raw.boff[d.rid]=raw.boff[d.rid]||{};
   if(SECM==='g'){o.g=[Math.round((+(o.g||[0,0])[0]||0)+d.dy),Math.round((+(o.g||[0,0])[1]||0)+d.dz)]}else{o.b=o.b||{};const b0=o.b[d.bi]||[0,0];o.b[d.bi]=[Math.round(b0[0]+d.dy),Math.round(b0[1]+d.dz)]}
   SECSEL=d.rid;save();renderAll();toast(SECM==='g'?'ย้ายเหล็กทั้งกลุ่มแล้ว · มีผลตลอดความยาวเหล็ก':'ย้ายเหล็กเส้นนี้แล้ว · มีผลตลอดความยาวเหล็ก')};
  el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up)})();
@@ -934,13 +955,13 @@ function renderSecV(){const el=$('#secv');if(!el||!M)return;const D=M.D,g=M.g,ra
  sm.push(['ปลอก',ci.stOn?stLabel(s):(ci.col>=0?'อยู่ในเสา '+D.grids[ci.col].n:'—'),'']);
  if(ci.worst)sm.push(['ช่องว่างน้อยสุด',`${ci.worst.c.toFixed(1)} มม. (ต้อง ≥ ${ci.worst.need.toFixed(1)})`,ci.worst.c>=ci.worst.need-0.01?'ok':'bad']);
  if(ci.out.length)sm.push(['ระยะหุ้ม',`เหล็ก ${ci.out.length} เส้นอยู่นอกแนวปลอกหรือหุ้มไม่พอ`,'bad']);
- SECG={k,ox,oy,zb:ci.zb,s,ci,W};const nOff=Object.keys(raw.boff||{}).length;
+ SECG={k,ox,oy,zb:ci.zb,s,ci,W};const nOff=Object.keys(raw.boff||{}).length+Object.keys(raw.lmv||{}).length;
  el.innerHTML=`<div class="chips secm"><span class="note" style="margin:0">ลากเหล็ก:</span><button class="chip${SECM==='g'?' on':''}" data-sm="g">ทั้งกลุ่ม</button><button class="chip${SECM==='b'?' on':''}" data-sm="b">ทีละเส้น</button>${nOff?`<button class="chip" data-sreset="sel"${SECSEL?'':' disabled'}>กลับอัตโนมัติ (กลุ่มที่เลือก)</button><button class="chip" data-sreset="all">กลับอัตโนมัติทั้งหมด (${nOff})</button>`:''}</div><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="หน้าตัดคานที่ตำแหน่งที่เลือก">${cutDraw(M,ci,ox,oy,k,THD(),D.id+' · '+s.id)}<text id="secLive" x="${W/2}" y="18" font-size="11" text-anchor="middle" fill="#FFE08A"></text></svg>
  <div class="kv">${sm.map(([a,b,c])=>`<div><span>${esc(a)}</span><span class="${c}">${esc(b)}</span></div>`).join('')}</div>
  <div class="g2" style="margin-top:10px;align-items:end"><div class="f"><label>ตำแหน่งตัด (ม. จากกริด ${esc(D.grids[fi].n)})</label><input type="number" step="0.01" data-cx="1" value="${((ci.x-ref)/1000).toFixed(2)}"></div><button class="gold" data-cadd="1" style="height:38px">${sv?'อยู่บนแผ่นแบบแล้ว':'ใส่ลงแผ่นแบบ'}</button></div>
  ${(raw.cuts||[]).length?`<div class="chips" style="margin-top:8px">${raw.cuts.map((c,i)=>`<span class="cchip"><button class="chip${sv===c?' on':''}" data-cgo="${i}">${esc(c.n)}–${esc(c.n)} · ${m2(c.x-ref)}</button><button class="x" data-cdel="${i}" aria-label="ลบหน้าตัด ${esc(c.n)}">✕</button></span>`).join('')}</div>`:''}`}
 $('#secv').addEventListener('click',e=>{const raw=B();if(SECDRAG){SECDRAG=0;return}const sm=e.target.closest('[data-sm]');if(sm){SECM=sm.dataset.sm;try{localStorage.setItem('kn.secm',SECM)}catch(_){}renderSecV();return}
- const rs=e.target.closest('[data-sreset]');if(rs){if(rs.dataset.sreset==='all'){raw.boff={};toast('เหล็กทุกเส้นกลับเป็นตำแหน่งอัตโนมัติแล้ว')}else if(SECSEL&&raw.boff){delete raw.boff[SECSEL];toast('กลุ่มเหล็กที่เลือกกลับเป็นตำแหน่งอัตโนมัติแล้ว')}SECSEL=null;save();renderAll();return}
+ const rs=e.target.closest('[data-sreset]');if(rs){if(rs.dataset.sreset==='all'){raw.boff={};raw.lmv={};toast('เหล็กทุกเส้นกลับเป็นตำแหน่งอัตโนมัติแล้ว')}else if(SECSEL){if(raw.boff)delete raw.boff[SECSEL];if(raw.lmv)delete raw.lmv[SECSEL.split('>')[0].replace(/:g$/,'')];toast('กลุ่มเหล็กที่เลือกกลับเป็นตำแหน่งอัตโนมัติแล้ว')}SECSEL=null;save();renderAll();return}
  const c=e.target.closest('[data-k]');if(c){const D=M.D,r=D.runs[+c.dataset.ri];SECSEL=r?RUNID(r):null;pick(c.dataset.k,false,c.dataset.r);return}
  if(e.target.closest('[data-cadd]')){raw.cuts=raw.cuts||[];if(raw.cuts.some(c=>Math.abs(c.x-CUT.x)<1))return;const used=raw.cuts.map(c=>c.n);let n='A';for(let i=0;i<26;i++){const L=String.fromCharCode(65+i);if(!used.includes(L)){n=L;break}}
   raw.cuts.push({n,x:Math.round(CUT.x)});save();renderAll();toast('เพิ่ม Section '+n+'–'+n+' ลงแผ่นแบบแล้ว');return}
