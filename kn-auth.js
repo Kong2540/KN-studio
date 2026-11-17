@@ -1,11 +1,11 @@
 /* =====================================================================
    KN Studio · บัญชีผู้ใช้ สิทธิ์ โครงการ และหน้าแอดมิน (Supabase)
-   เว็บ/มือถือ: ต้องออนไลน์ · โปรแกรม PC (.exe): ใช้ออฟไลน์ได้ภายในระยะที่แอดมินกำหนด
+   ทำงานบนเบราว์เซอร์ · ต้องออนไลน์
    ===================================================================== */
 (function(){
 'use strict';
-const CFG=window.KN_CONFIG||{},DESK=!!window.knDesktop,SITE=CFG.site||'https://kong2540.github.io/KN-Studio/';
-const PK=[['beam','KN-Detail · คาน','lvl'],['cut','Bar Cut','lvl'],['settings','ตั้งค่ามาตรฐาน','lvl'],['export','ส่งออก DXF / ไฟล์','bool'],['pc','ดาวน์โหลดและใช้โปรแกรม PC','bool']];
+const CFG=window.KN_CONFIG||{},DESK=false,SITE=CFG.site||'https://kong2540.github.io/KN-Studio/';
+const PK=[['beam','KN-Detail · คาน','lvl'],['cut','Bar Cut','lvl'],['settings','ตั้งค่ามาตรฐาน','lvl'],['export','ส่งออก DXF / ไฟล์','bool']];
 const LV={none:'ไม่เห็น',view:'ดูอย่างเดียว',edit:'แก้ไขได้'};
 const ST={pending:'รออนุมัติ',active:'ใช้งาน',suspended:'ระงับ',rejected:'ปฏิเสธ'};
 const DEF_SET={signup_fields:[{key:'phone',label:'เบอร์โทร',type:'tel',required:true}],
@@ -41,13 +41,14 @@ function permOf(p){const R=K.set.roles||{},base=Object.assign({},R[p.role]||R.vi
  if(p.role==='admin')PK.forEach(([k,,t])=>{out[k]=t==='lvl'?'edit':true});return out}
 K.can=(k,lv)=>{const v=K.perm[k];if(v===true||v===false)return v;return lv==='edit'?v==='edit':v==='edit'||v==='view'};
 K.isAdmin=()=>!!(K.prof&&K.prof.role==='admin'&&!K.offline);
-K.guard=name=>{if(!K.ready)return null;const m={beam:'beam',detail:'beam',plan:'beam',cut:'cut',settings:'settings'}[name];if(m&&!K.can(m))return'home';return name};
+K.guard=name=>{if(!K.ready)return null;const m={beam:'beam',detail:'beam',plan:'beam',pdf:'beam',cut:'cut',settings:'settings'}[name];if(m&&!K.can(m))return'home';return name};
 function applyPerms(){const b=document.body;['beam','cut','settings'].forEach(k=>{b.classList.toggle('ro-'+k,K.can(k)&&!K.can(k,'edit'))});
  const hideGo=(sel,k)=>document.querySelectorAll(sel).forEach(el=>{el.style.display=K.can(k)?'':'none'});
  hideGo('[data-go="detail"],[data-go="beam"]','beam');hideGo('[data-go="cut"]','cut');hideGo('[data-go="settings"]','settings');renderUserBtn()}
 
 /* ---------- boot ---------- */
 K.boot=async function(){
+ const VM=/^#v\/([0-9a-f-]{36})\/([0-9a-f-]{36})(?:\/(.*))?$/i.exec(location.hash);if(VM){K.pend={p:VM[1],t:VM[2],b:decodeURIComponent(VM[3]||'')};history.replaceState(null,'',location.pathname+'#home')}
  if(!CFG.url||!CFG.key||!window.supabase){card(`<h2>ยังไม่ได้ตั้งค่าการเชื่อมต่อ</h2><p class="kmu">แก้ไฟล์ <b>config.js</b> ใส่ Project URL และ publishable key ของ Supabase ตามคู่มือใน README</p>`);return}
  if(!K.sb)K.sb=window.supabase.createClient(CFG.url,CFG.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:!DESK,storageKey:'kn-studio-auth'}});
  if(!K._l){K._l=1;window.addEventListener('online',()=>{K.online=true;offBanner();if(DESK&&(K.offline||!K.ready))K.boot()});
@@ -74,6 +75,7 @@ function renderLogin(mode){mode=mode||'login';const login=mode==='login',F=(K.se
   return`<label class="kf"><span>${esc(f.label)}${req}</span><input class="kin" id="${id}" type="${['tel','number','date','email'].includes(f.type)?f.type:'text'}"></label>`};
  card(`<div class="kseg"><button class="${login?'on':''}" data-m="login">เข้าสู่ระบบ</button><button class="${login?'':'on'}" data-m="signup">สมัครสมาชิก</button></div>
  <h2>${login?'ยินดีต้อนรับ':'สมัครใช้งาน KN Studio'}</h2><p class="kmu">${login?'เข้าสู่ระบบเพื่อเปิดงานเขียนแบบเหล็กเสริม':'หลังสมัคร แอดมินจะตรวจสอบและกำหนดสิทธิ์ให้ก่อนใช้งาน'}</p>
+ ${K.pend?'<div class="kbox" style="margin:10px 0">สแกน QR แล้ว · '+(login?'เข้าสู่ระบบ':'สมัครและรอแอดมินอนุมัติ')+'เพื่อดูแบบคาน '+esc(K.pend.b||'')+'</div>':''}
  <form id="kfm" novalidate>
  ${login?'':`<label class="kf"><span>ชื่อ-นามสกุล <i>*</i></span><input class="kin" id="kf_dn" autocomplete="name"></label>${F.map(fld).join('')}`}
  <label class="kf"><span>อีเมล <i>*</i></span><input class="kin" id="kf_em" type="email" autocomplete="email" inputmode="email"></label>
@@ -117,6 +119,7 @@ async function enter(){
  LS.set('kn.cache',{uid:p.id,prof:p,set:K.set,checked:Date.now()});
  K.sb.from('profiles').update({last_seen:new Date().toISOString()}).eq('id',p.id).then(()=>{},()=>{});
  K.ready=true;applyPerms();offBanner();
+ if(K.pend){const v=K.pend;K.pend=null;if(await openView(v))return}
  const last=LS.get('kn.proj.'+p.id,null);if(last&&await openProject(last,true))return;
  renderProjects(true)}
 function renderBlocked(p,exp,msg){const pend=p.status==='pending';
@@ -145,6 +148,7 @@ async function push(){if(!K.proj||!K.proj.can_edit||SAVING)return;if(!navigator.
  try{const{error}=await K.sb.from('projects').update({data:window.knSnapshot(),name:K.proj.name}).eq('id',id);if(error)throw error;if(K.proj&&K.proj.id===id){localSave(false);setState('saved')}}
  catch(e){setState(netErr(e)?'dirty':'err');if(!netErr(e))toast('บันทึกขึ้นเซิร์ฟเวอร์ไม่ได้: '+errT(e))}finally{SAVING=false}}
 window.addEventListener('online',()=>{if(K.state==='dirty')push()});
+window.addEventListener('hashchange',()=>{const VM=/^#v\/([0-9a-f-]{36})\/([0-9a-f-]{36})(?:\/(.*))?$/i.exec(location.hash);if(!VM||!K.sb)return;const v={p:VM[1],t:VM[2],b:decodeURIComponent(VM[3]||'')};if(K.ready)openView(v);else{K.pend=v;history.replaceState(null,'',location.pathname+'#home');renderLogin()}});
 K.saveNow=async()=>{if(!K.proj){toast('ยังไม่ได้เปิดโครงการ');return}if(!K.proj.can_edit){toast('โครงการนี้ดูอย่างเดียว บันทึกไม่ได้');return}clearTimeout(T);localSave(true);
  if(!navigator.onLine||K.offline){setState('dirty');toast('บันทึกในเครื่องแล้ว · จะซิงก์ขึ้นเซิร์ฟเวอร์เมื่อออนไลน์');return}await push();if(K.state==='saved')toast('บันทึกแล้ว · '+new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'}))};
 window.addEventListener('beforeunload',e=>{if(K.state==='dirty'&&!DESK&&navigator.onLine){push()}});
@@ -158,8 +162,8 @@ async function openProject(id,quiet){
   let can=data.owner===K.prof.id;if(!can){const{data:m}=await K.sb.from('project_members').select('can_edit').eq('project_id',id).eq('user_id',K.prof.id).maybeSingle();can=!!(m&&m.can_edit)}
   const loc=LS.get('kn.pdata.'+id,null);let src=data.data;
   if(loc&&loc.dirty&&can&&loc.t>new Date(data.updated_at).getTime()-1000){src=loc.data;toast('พบงานที่ยังไม่ได้ซิงก์ในเครื่องนี้ ระบบใช้ฉบับล่าสุดในเครื่องและกำลังซิงก์ขึ้นเซิร์ฟเวอร์')}
-  K.proj={id,name:data.name,owner:data.owner,can_edit:can};renderUserBtn();LS.set('kn.proj.'+K.prof.id,id);
-  window.knApply(src);localSave(src!==data.data);hide();setState(can?'saved':'ro');if(src!==data.data)push();
+  K.proj={id,name:data.name,owner:data.owner,can_edit:can,token:data.view_token||null};document.body.classList.remove('kn-view');viewBanner(false);renderUserBtn();LS.set('kn.proj.'+K.prof.id,id);
+  window.knApply(src);localSave(src!==data.data);hide();setState(can?'saved':'ro');if(src!==data.data)push();else if(can&&!((src||{}).beams||[]).length)K.dirty();
   if(!can)toast('โครงการนี้ถูกแชร์ให้ดูอย่างเดียว การแก้ไขจะไม่ถูกบันทึก');return true}
  catch(e){if(!quiet)toast('เปิดโครงการไม่ได้: '+errT(e));return false}}
 async function renderProjects(first){
@@ -201,26 +205,60 @@ root().addEventListener('click',async e=>{const t=e.target.closest('button,[data
  if(d.at){renderAdmin(d.at);return}
  }catch(x){toast(errT(x))}});
 
+
+/* ---------- QR: read-only view ---------- */
+async function openView(v){try{const{data,error}=await K.sb.rpc('kn_view',{p:v.p,t:v.t});if(error)throw error;const r=(data||[])[0];
+  if(!r){toast('QR นี้ใช้ไม่ได้แล้ว หรือถูกยกเลิกโดยเจ้าของโครงการ');return false}
+  K.proj={id:r.id,name:r.name,can_edit:false,view:true,token:v.t};document.body.classList.add('kn-view');renderUserBtn();
+  history.replaceState(null,'',location.pathname+'#beam');window.knApply(r.data);const bs=(r.data&&r.data.beams)||[],idx=bs.findIndex(b=>b.id===v.b);
+  if(idx>=0){S.cur=idx;SEL=null;CUT.x=null;UI={t:'span',i:S.beams[idx].grids[0].free?1:0};route()}
+  hide();setState('ro');viewBanner(true);if(v.b&&idx<0)toast('ไม่พบคาน '+v.b+' ในโครงการนี้แล้ว');return true}
+ catch(e){toast('เปิดแบบจาก QR ไม่ได้: '+errT(e)+(String(e.message||'').includes('kn_view')?' · แอดมินต้องรัน upgrade_v2_qr.sql':''));return false}}
+function viewBanner(on){let b=document.getElementById('knView');if(!b){b=document.createElement('div');b.id='knView';document.body.appendChild(b)}
+ if(!on){b.style.display='none';return}b.innerHTML=`<span>โหมดดูอย่างเดียว (จาก QR) · ${esc(K.proj?K.proj.name:'')} · เลือกคานอื่นได้จากแถบด้านบน</span><button class="ib" id="knViewX">ออกจากโหมดดู</button>`;b.style.display='flex';
+ b.querySelector('#knViewX').onclick=async()=>{document.body.classList.remove('kn-view');viewBanner(false);K.proj=null;const last=LS.get('kn.proj.'+K.prof.id,null);if(!(last&&await openProject(last,true)))renderProjects(true)}}
+function qrObj(text){if(!window.qrcode)return null;const q=window.qrcode(0,'M');q.addData(text);q.make();return q}
+K.qrURL=b=>K.proj&&K.proj.token?SITE+'#v/'+K.proj.id+'/'+K.proj.token+'/'+encodeURIComponent(b||''):null;
+window.knQRCell=(b,x,y,sz)=>{const u=K.qrURL(b),q=u&&qrObj(u);if(!q)return null;const n=q.getModuleCount(),c=sz/n;let d='';
+ for(let r=0;r<n;r++){let c0=-1;for(let cc=0;cc<=n;cc++){const on=cc<n&&q.isDark(r,cc);if(on&&c0<0)c0=cc;if(!on&&c0>=0){d+=`M${(x+c0*c).toFixed(3)} ${(y+r*c).toFixed(3)}h${((cc-c0)*c).toFixed(3)}v${c.toFixed(3)}h${(-(cc-c0)*c).toFixed(3)}z`;c0=-1}}}
+ return`<rect x="${x}" y="${y}" width="${sz}" height="${sz}" fill="#fff"/><path d="${d}" fill="#000"/>`};
+function qrModal(){const b=(S.beams[S.cur]||{}).id,u=K.qrURL(b),q=u&&qrObj(u);if(!q){toast('ยังไม่มี QR ของโครงการนี้ · แอดมินต้องรัน upgrade_v2_qr.sql ก่อน');return}
+ const svg=q.createSvgTag({cellSize:6,margin:4,scalable:true});
+ modal(`<h3>QR Code · คาน ${esc(b)}</h3><div style="background:#fff;padding:8px;max-width:280px;margin:0 auto">${svg}</div>
+ <p class="kmu" style="word-break:break-all;margin-top:10px">${esc(u)}</p><p class="kmu">ผู้สแกนต้องมีบัญชีที่แอดมินอนุมัติแล้ว · เปิดคานนี้ก่อน แล้วเลือกดูคานอื่นในโครงการได้ · ดูได้อย่างเดียว</p>
+ <div class="kchips"><button class="ib" id="kqcp">คัดลอกลิงก์</button><button class="ib" id="kqdl">ดาวน์โหลด SVG</button>${K.proj.can_edit?'<button class="ib kdanger" id="kqnew">ออก QR ใหม่ (ยกเลิกของเดิม)</button>':''}</div>`,m=>{
+  m.querySelector('#kqcp').onclick=async()=>{try{await navigator.clipboard.writeText(u);toast('คัดลอกลิงก์แล้ว')}catch(e){toast('คัดลอกไม่ได้')}};
+  m.querySelector('#kqdl').onclick=()=>{const bl=new Blob([svg.replace('<svg ','<svg xmlns="http://www.w3.org/2000/svg" ')],{type:'image/svg+xml'}),a=document.createElement('a');a.href=URL.createObjectURL(bl);a.download='QR-'+b+'.svg';a.click()};
+  const nw=m.querySelector('#kqnew');if(nw)nw.onclick=async()=>{if(!await sure('ออก QR ใหม่? QR ที่พิมพ์ไปแล้วทุกแผ่นของโครงการนี้จะใช้ไม่ได้ทันที'))return;try{const{data,error}=await K.sb.rpc('kn_new_token',{p:K.proj.id});if(error)throw error;K.proj.token=data;m.remove();toast('ออก QR ใหม่แล้ว');if(window.renderOut&&location.hash==='#beam')renderOut();qrModal()}catch(e){toast(errT(e))}}})}
+
+/* ---------- other projects (for copying beam types) ---------- */
+K.otherProjects=async()=>{if(!K.ready||K.offline)return null;const L=await listProjects();return L.filter(p=>!K.proj||p.id!==K.proj.id).map(p=>({id:p.id,name:p.name}))};
+K.projectData=async id=>{const{data,error}=await K.sb.from('projects').select('data').eq('id',id).single();if(error)throw error;return data.data||{}};
+/* ---------- side bar actions ---------- */
+K.menu=async a=>{if(!K.ready)return;if(a==='menu'){const b=document.getElementById('knUser');if(b)b.click();return}
+ if(a==='proj'){if(K.offline)toast('ต้องออนไลน์เพื่อดูรายการโครงการ');else renderProjects()}else if(a==='admin'){if(K.isAdmin())renderAdmin('users')}
+ else if(a==='out'){if(K.state==='dirty'&&!await sure('ยังมีงานที่ยังไม่ได้ซิงก์ขึ้นเซิร์ฟเวอร์ ออกจากระบบตอนนี้งานส่วนนั้นจะค้างอยู่ในเครื่องนี้'))return;K.logout()}};
 /* ---------- user button (top bar) ---------- */
 function renderUserBtn(){const b=document.getElementById('knUser');if(!b||!K.prof)return;const R=(K.set.roles||{})[K.prof.role];
  b.style.display='';b.innerHTML=`<span id="knSync" class="knsync ${K.state}"></span><span class="knu-n">${esc(K.proj?K.proj.name:'เลือกโครงการ')}</span>`;setState(K.state);
  b.onclick=()=>{const pend=K.isAdmin()?'<span class="kbadge" id="kpend"></span>':'';
   const m=modal(`<div class="kme"><b>${esc(K.prof.display_name||K.prof.email)}</b><small>${esc(K.prof.email)} · ${esc(R?R.label:K.prof.role)}${K.offline?' · ออฟไลน์':''}</small></div>
-  <div class="kmenu"><button data-mm="proj">โครงการทั้งหมด</button>${K.isAdmin()?`<button data-mm="admin">หน้าแอดมิน ${pend}</button>`:''}${!DESK&&K.perm.pc?'<button data-mm="pc">ดาวน์โหลดโปรแกรม PC (.exe)</button>':''}${K.offline?'':'<button data-mm="pw">เปลี่ยนรหัสผ่าน</button>'}<button data-mm="out" class="kdanger">ออกจากระบบ</button></div>`,m=>{
+  <div class="kmenu">${K.proj&&K.proj.view?'<button data-mm="unview">ออกจากโหมดดู (QR)</button>':''}${K.proj&&K.proj.token&&location.hash==='#beam'?'<button data-mm="qr">QR Code ของคานนี้</button>':''}<button data-mm="proj">โครงการทั้งหมด</button>${K.isAdmin()?`<button data-mm="admin">หน้าแอดมิน ${pend}</button>`:''}${!DESK&&K.perm.pc?'':''}${K.offline?'':'<button data-mm="pw">เปลี่ยนรหัสผ่าน</button>'}<button data-mm="out" class="kdanger">ออกจากระบบ</button></div>`,m=>{
    m.querySelectorAll('[data-mm]').forEach(x=>x.onclick=async()=>{const a=x.dataset.mm;m.remove();
+    if(a==='qr'){qrModal();return}if(a==='unview'){const x=document.getElementById('knViewX');if(x)x.click();return}
     if(a==='proj'){if(K.offline)toast('ต้องออนไลน์เพื่อดูรายการโครงการ');else renderProjects()}
-    else if(a==='admin')renderAdmin('users');else if(a==='pc')window.open((K.set.desktop||{}).url||SITE,'_blank');else if(a==='pw')renderReset();
+    else if(a==='admin')renderAdmin('users');else if(a==='pw')renderReset();
     else if(a==='out'){if(K.state==='dirty'&&!await sure('ยังมีงานที่ยังไม่ได้ซิงก์ขึ้นเซิร์ฟเวอร์ ออกจากระบบตอนนี้งานส่วนนั้นจะค้างอยู่ในเครื่องนี้'))return;K.logout()}})});
   if(K.isAdmin())K.sb.from('profiles').select('id',{count:'exact',head:true}).eq('status','pending').then(r=>{const s=document.getElementById('kpend');if(s&&r.count)s.textContent=r.count})}}
 
 /* ---------- admin ---------- */
 let AU=[],AF='pending';
 async function renderAdmin(tab){if(!K.isAdmin())return;tab=tab||'users';
- const T=[['users','ผู้ใช้'],['roles','บทบาทและสิทธิ์'],['fields','ช่องสมัครสมาชิก'],['sys','ระบบ']];
+ const T=[['users','ผู้ใช้'],['roles','บทบาทและสิทธิ์'],['fields','ช่องสมัครสมาชิก']];
  page('หน้าแอดมิน',`<div class="kseg wide">${T.map(([k,t])=>`<button class="${tab===k?'on':''}" data-at="${k}">${t}</button>`).join('')}</div><div id="kad"><div class="kspin"></div></div>`);
  const el=root().querySelector('#kad');
  try{await loadSet();if(tab==='users'){const{data,error}=await K.sb.from('profiles').select('*').order('created_at',{ascending:false});if(error)throw error;AU=data||[];adUsers(el)}
-  else if(tab==='roles')adRoles(el);else if(tab==='fields')adFields(el);else adSys(el)}catch(e){el.innerHTML=`<p class="kmu">${esc(errT(e))}</p>`}}
+  else if(tab==='roles')adRoles(el);else if(tab==='fields')adFields(el);}catch(e){el.innerHTML=`<p class="kmu">${esc(errT(e))}</p>`}}
 async function saveSet(key,value){const{error}=await K.sb.from('app_settings').upsert({key,value,updated_at:new Date().toISOString()});if(error)throw error;K.set[key]=value;LS.set('kn.set',K.set)}
 function adUsers(el){const cnt=s=>AU.filter(u=>s==='all'||u.status===s).length,R=K.set.roles||{};
  const F=(K.set.signup_fields||[]),L=AU.filter(u=>AF==='all'||u.status===AF);
@@ -259,11 +297,4 @@ function adFields(el){const F=JSON.parse(JSON.stringify(K.set.signup_fields||[])
    row.querySelectorAll('[data-mv]').forEach(b=>b.onclick=()=>{const i=+row.dataset.i,j=i+ +b.dataset.mv;[F[i],F[j]]=[F[j],F[i]];draw()});row.querySelector('[data-rm]').onclick=()=>{F.splice(+row.dataset.i,1);draw()}});
   el.querySelector('#kfadd').onclick=()=>{F.push({key:'f'+Date.now().toString(36),label:'',type:'text',required:false});draw()};
   el.querySelector('#kfsave').onclick=async e=>{if(F.some(f=>!String(f.label).trim())){toast('กรุณาตั้งชื่อทุกช่อง');return}busy(e.target,true);try{await saveSet('signup_fields',F);toast('บันทึกช่องสมัครแล้ว')}catch(x){toast(errT(x))}busy(e.target,false)}};draw()}
-function adSys(el){const o=Object.assign({grace_days:14},K.set.offline||{}),d=Object.assign({},DEF_SET.desktop,K.set.desktop||{});
- el.innerHTML=`<div class="ksh">โปรแกรม PC (.exe)</div><div class="kgrid">
-  <label class="kf"><span>ใช้งานออฟไลน์ได้ต่อเนื่อง (วัน) · 0 = ไม่อนุญาต</span><input class="kin" type="number" min="0" id="kgr" value="${o.grace_days}"></label>
-  <label class="kf"><span>ลิงก์ดาวน์โหลด .exe</span><input class="kin" id="kdl" value="${esc(d.url)}"></label></div>
-  <p class="kmu">ทุกครั้งที่โปรแกรม PC ต่ออินเทอร์เน็ตได้ จะตรวจสิทธิ์และเริ่มนับวันใหม่ · ถ้าระงับบัญชี ผู้ใช้จะใช้ออฟไลน์ต่อได้ไม่เกินจำนวนวันนี้</p>
-  <div class="kchips"><span style="flex:1"></span><button class="kbtn sm" id="kssave">บันทึก</button></div>`;
- el.querySelector('#kssave').onclick=async e=>{busy(e.target,true);try{await saveSet('offline',{grace_days:Math.max(0,Math.round(+el.querySelector('#kgr').value||0))});await saveSet('desktop',Object.assign(d,{url:el.querySelector('#kdl').value.trim()}));toast('บันทึกแล้ว')}catch(x){toast(errT(x))}busy(e.target,false)}}
 })();

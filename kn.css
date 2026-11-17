@@ -85,3 +85,9 @@ select.kin{background:#0B0B0D url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 #knOff.full div{max-width:380px;color:var(--mu)}#knOff.full b{display:block;color:var(--au2);font-size:19px;font-weight:500;margin-bottom:8px}
 /* view-only */
 body.ro-beam #v-plan #plPanel,body.ro-beam #v-plan #plTools [data-pt=col],body.ro-beam #v-plan #plTools [data-pt=beam],body.ro-beam #v-beam #panel,body.ro-beam #v-beam #top .chips button:not([data-a^="sel"]),body.ro-beam #v-beam #top input,body.ro-cut #v-cut .bc input,body.ro-cut #v-cut .bc select,body.ro-settings #v-settings input,body.ro-settings #v-settings select{pointer-events:none;opacity:.6}
+
+/* QR read-only view */
+#knView{display:none;position:fixed;left:50%;top:58px;transform:translateX(-50%);z-index:45;background:#1F2A3A;border:1px solid #7FA8D8;color:#CFE0F5;padding:6px 8px 6px 14px;gap:10px;align-items:center;font-size:13px;max-width:94vw;flex-wrap:wrap}
+body.kn-view #saveBtn,body.kn-view [data-fm="open"],body.kn-view #layBtn{display:none!important}
+body.kn-view #v-beam #panel,body.kn-view #v-beam #top .chips button:not([data-a^="sel"]),body.kn-view #v-beam #top input,body.kn-view #v-plan #plPanel,body.kn-view #v-plan #plTools,body.kn-view #v-cut .bc,body.kn-view #setForm{pointer-events:none;opacity:.6}
+body.kn-view #v2 [data-h]{display:none}
