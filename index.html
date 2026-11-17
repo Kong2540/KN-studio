@@ -353,6 +353,9 @@ body.thpk button:hover,body.thpk .chip:hover,body.thpk .pbtn:hover,body.thpk .mn
 .svc{flex:1;min-height:0;overflow:hidden;position:relative;background:#5f6368;cursor:grab;display:flex}.svc.pan{cursor:grabbing}.svc>svg{width:100%;height:100%;display:block;background:transparent}.svc>svg>rect:first-of-type{filter:drop-shadow(0 2px 8px #0006)}
 #svFull{position:fixed;inset:0;z-index:300;background:#3c4043;display:flex}#svFull .svw{height:100%;width:100%}
 .svpop{position:fixed;z-index:310;width:min(720px,94vw);max-height:80vh;overflow:auto;background:var(--p1);border:1px solid var(--au);box-shadow:0 12px 40px #0008;padding:10px}
+#xh{position:fixed;inset:0;pointer-events:none;z-index:90;display:none}#xh i{position:fixed;display:block}#xh .xh-h{height:1px}#xh .xh-v{width:1px}#xh .xh-b{border:1px solid;background:transparent!important}
+body.xhon #plSvg,body.xhon #plSvg *,body.xhon .wb svg.wel,body.xhon .wb svg.wel *,body.xhon .wb svg.wst,body.xhon .wb svg.wst *{cursor:none!important}
+#rcM{position:fixed;z-index:400;min-width:200px;background:var(--p1);border:1px solid var(--ln2);box-shadow:0 10px 30px #0007;padding:4px;display:flex;flex-direction:column}#rcM button{background:none;border:0;color:var(--tx);text-align:left;padding:6px 10px;cursor:pointer;font-size:12.5px}#rcM button:hover{background:var(--aud);color:var(--au2)}#rcM hr{border:0;border-top:1px solid var(--ln);margin:3px 0}
 .chip.pk{border-color:#C58AE8;background:#2a1d33}
 .plsb{position:absolute;left:8px;right:8px;bottom:40px;display:none;gap:6px;align-items:center;flex-wrap:wrap;background:color-mix(in srgb,var(--p2) 93%,transparent);border:1px solid var(--au);padding:6px 8px;z-index:5}.plsbt{flex:1;min-width:120px;font-size:12px;color:var(--au2)}.plsbd{border-color:#E8604E!important;color:#F29A8C!important}
 .plgp{position:absolute;left:8px;top:52px;width:min(320px,calc(100% - 16px));max-height:60%;overflow:auto;display:none;background:color-mix(in srgb,var(--p2) 95%,transparent);border:1px solid var(--ln2);padding:8px;z-index:6}
@@ -1735,8 +1738,8 @@ function renderSet(){const st=S.settings;
  <div class="note">ตัวอย่างตั้งระยะทาบไว้ที่ 41 × db เพื่อให้ตรงกับแบบ Revit · วิธี ACI จะได้ระยะทาบยาวกว่านี้</div>
  <div class="h">เส้นผ่านศูนย์กลางงอด้านในขั้นต่ำ (× db) · ACI 318</div>
  <div class="g4">${fld('ปลอก ≤ 16 มม.','bend.stir',st.bend.stir)}${fld('หลัก ≤ DB25','bend.m25',st.bend.m25)}${fld('DB28–DB36','bend.m36',st.bend.m36)}${fld('> DB36','bend.big',st.bend.big)}</div>
- <div id="thmSet"></div><div id="dspSet"></div><div id="keySet"></div><div id="draftSet"></div><div id="dxSet"></div><div id="schSet"></div>
- <div style="margin-top:16px"><button class="ib" id="rsSet">คืนค่าเริ่มต้น</button></div>`;renderDraftUI();renderDxSet();renderSchSet();{const t0=$('#thmSet');if(t0){t0.innerHTML=thSetHTML();thBind(t0)}setTimeout(()=>{try{setNav()}catch(e){}},0);const a=$('#dspSet'),b=$('#keySet');if(a){a.innerHTML=dispSetHTML();dispBind(a)}if(b){b.innerHTML=keysSetHTML();dispBind(b)}}
+ <div id="thmSet"></div><div id="mseSet"></div><div id="dspSet"></div><div id="keySet"></div><div id="draftSet"></div><div id="dxSet"></div><div id="schSet"></div>
+ <div style="margin-top:16px"><button class="ib" id="rsSet">คืนค่าเริ่มต้น</button></div>`;renderDraftUI();renderDxSet();renderSchSet();{const ms=$('#mseSet');if(ms)ms.innerHTML=mseSetHTML()}{const t0=$('#thmSet');if(t0){t0.innerHTML=thSetHTML();thBind(t0)}setTimeout(()=>{try{setNav()}catch(e){}},0);const a=$('#dspSet'),b=$('#keySet');if(a){a.innerHTML=dispSetHTML();dispBind(a)}if(b){b.innerHTML=keysSetHTML();dispBind(b)}}
  $('#setForm').querySelectorAll('[data-p]').forEach(el=>el.addEventListener('change',e=>{setP(st,e.target.dataset.p,e.target.value);st.stock=+st.stock;st.round=Math.max(10,st.round);save();toast('บันทึกแล้ว')}));
  $('#setForm').querySelectorAll('[data-fwm]').forEach(el=>el.onchange=()=>{(st.fw=st.fw||{})[el.dataset.fwm]=el.value;save();toast('บันทึกแล้ว')});
  $('#stepStd').onclick=()=>{Object.assign(st,{stepCrank:75,stepSlope:6,stepExt:'ld'});save();renderSet();toast('คืนค่ามาตรฐานจุดต่อต่างระดับแล้ว')};
@@ -2083,7 +2086,7 @@ function drawPlan(){const p=P(),e=planExt(),lv=p.lv,svg=PLT||$('#plSvg');if(!PLT
  o+=drawAux(lv,r,fs);PBO=[];PBF=[];PBS=[];PBL=[];const JSG=joinSegs(lv);
  S.beams.forEach((bm,bi)=>{const L=bm.link;if(!L||L.t==='free'||L.lv!==lv||bm.linkBad)return;const pts=linkPts(L),sp=inner(bm),on=PSEL&&PSEL.t==='beam'&&PSEL.i===bi,c=on?'#FFE08A':'#C9A55C',nd=pt=>L.dir==='x'?{x:pt.x,y:Y[L.k]}:{x:X[L.k],y:pt.x},J0=bm.nj&&bm.nj.a?0:joinExt(JSG,nd(pts[0]),bi,lv),J1=bm.nj&&bm.nj.b?0:joinExt(JSG,nd(pts[pts.length-1]),bi,lv);
   for(let q=0;q<pts.length-1;q++){const s=sp[q]||sp[0],w=s?s.b:200,sg=Math.sign(pts[pts.length-1].x-pts[0].x)||1,a=pts[q].x-(q===0?sg*J0:0),b=pts[q+1].x+(q===pts.length-2?sg*J1:0);
-   const R=L.dir==='x'?{x:Math.min(a,b),y:Y[L.k]-w/2,w:Math.abs(b-a),h:w}:{x:X[L.k]-w/2,y:Math.min(a,b),w:w,h:Math.abs(b-a)};
+   const R=L.dir==='x'?{x:Math.min(a,b),y:Y[L.k]-w/2,w:Math.abs(b-a),h:w}:{x:X[L.k]-w/2,y:Math.min(a,b),w:w,h:Math.abs(b-a)};{const eo=+(s&&s.eo)||0;if(eo){if(L.dir==='x')R.y-=eo;else R.x+=eo}}
    const qq=q+(bm.grids[0].free?1:0);if(!plVis('b:'+bm.uid+':'+qq))continue;const ps=PMS.some(z=>z.i===bi&&z.q===qq),cc=ps?'#FFE08A':btFill(bm,qq,c),op=ps?0.55:on?0.45:0.22;
    {const sh=`x="${R.x}" y="${R.y}" width="${R.w}" height="${R.h}"`;PBO.push(`<rect ${sh} fill="none" stroke="${cc}" stroke-width="${r*0.12}" pointer-events="none"/>`);PBF.push(`<rect data-bm="${bi}" data-sq="${qq}" ${sh} fill="${mix(cc,'#0E0F12',1-op)}" style="cursor:pointer"/>`);if(ps||on)PBS.push(`<rect ${sh} fill="none" stroke="${cc}" stroke-width="${r*(ps?0.12:0.08)}" pointer-events="none"/>`)}
    const prv=q>0?bm.spans[qq-1]&&bm.spans[qq-1].bt:null;if(q===0||(P().lab!=='beam'&&(bm.spans[qq].bt||'')!==(prv||''))){const mid=(a+b)/2,w0=w/2,tx=L.dir==='x'?mid:X[L.k]+w0+r*0.9,ty=L.dir==='x'?Y[L.k]+w0+fs*0.95:mid,rot=L.dir==='y'?` transform="rotate(-90 ${tx} ${ty})"`:'';
@@ -2100,7 +2103,7 @@ function drawPlan(){const p=P(),e=planExt(),lv=p.lv,svg=PLT||$('#plSvg');if(!PLT
  if(PT!=='sel'&&PT!=='span')X.forEach((x,i)=>Y.forEach((y,j)=>{const st=PBEAM&&PBEAM.i===i&&PBEAM.j===j;o+=`<circle data-ix="${i},${j}" cx="${x}" cy="${y}" r="${r*0.75}" fill="${st?'#E8963A':'#C9A55C'}" fill-opacity="${st?0.55:0.08}" stroke="${st?'#E8963A':'none'}" stroke-width="${r*0.06}" style="cursor:pointer"/>`}));
  const lvN=(lvOf(lv)||{}).n||'';o+=`<text x="${e.w/2}" y="${e.h+r*3.2}" fill="#8A8E95" font-size="${fs*0.9}" text-anchor="middle" pointer-events="none">แปลน ${esc(lvN)} · ระดับ +${(+(lvOf(lv)||{}).z||0).toFixed(2)} ม.</text>`;
  if(['fbeam','gline','garc','col'].includes(PT))snapPts(lv).forEach(q=>{if(q.k!=='ix'||PT!=='col')o+=`<circle cx="${q.x}" cy="${q.y}" r="${r*0.16}" fill="#6FA8DC" fill-opacity=".55" pointer-events="none"/>`});
- if(PT==='sel')o+=plTempDims(r,fs);o+='<g id="plSnapG" pointer-events="none"></g>';svg.setAttribute('viewBox',`${PV.x} ${PV.y} ${PV.w} ${PV.h}`);svg.innerHTML=o;if(!PLT)winSync()}
+ if(DIMO().plan)DIMS().forEach((d,i)=>{if(d.lv===lv)o+=dimSVG(d,i,r,fs,PSEL&&PSEL.t==='dim'&&PSEL.i===i)});if(PT==='sel')o+=plTempDims(r,fs);o+='<g id="plSnapG" pointer-events="none"></g>';svg.setAttribute('viewBox',`${PV.x} ${PV.y} ${PV.w} ${PV.h}`);svg.innerHTML=o;if(!PLT)winSync()}
 /* ===== sub-grids · free beams (คานฝาก) · free columns ===== */
 const TAU=Math.PI*2,D2R=Math.PI/180;let PDRAW=null,PLEN='',PANG='',PCCW=false,PHOV=null;
 function AG(){const p=P();if(!Array.isArray(p.ag))p.ag=[];return p.ag}
@@ -2175,7 +2178,7 @@ function beamShapes(bm,fx,fy,k){const L=bm.link,out=[];const pa=L.t==='free'?pat
  for(let q=0;q<st.length-1;q++){const w=((bm.spans[q]||bm.spans[0]||{}).b||200)/2,s0=st[q],s1=st[q+1];
   if(pa.geo.k==='arc'){const G=pa.geo,a=pa.at(s0),b=pa.at(s1),ro=G.r+w,ri=Math.max(1,G.r-w),ang=(s1-s0)/G.r,lg=ang>Math.PI?1:0,P0=(p,rr)=>[fx(G.cx+(p.x-G.cx)*rr/G.r),fy(G.cy+(p.y-G.cy)*rr/G.r)];
    const[o0,o1,i1,i0]=[P0(a,ro),P0(b,ro),P0(b,ri),P0(a,ri)];out.push(`M${o0[0]} ${o0[1]} A${ro*k} ${ro*k} 0 ${lg} 1 ${o1[0]} ${o1[1]} L${i1[0]} ${i1[1]} A${ri*k} ${ri*k} 0 ${lg} 0 ${i0[0]} ${i0[1]} Z`)}
-  else{const a=pa.at(s0),b=pa.at(s1),nx=-a.ty*w,ny=a.tx*w;out.push(`M${fx(a.x+nx)} ${fy(a.y+ny)} L${fx(b.x+nx)} ${fy(b.y+ny)} L${fx(b.x-nx)} ${fy(b.y-ny)} L${fx(a.x-nx)} ${fy(a.y-ny)} Z`)}}
+  else{const a0=pa.at(s0),b0=pa.at(s1),eo=+((bm.spans[q]||{}).eo)||0,on=offN(a0.tx,a0.ty),a={x:a0.x+on[0]*eo,y:a0.y+on[1]*eo},b={x:b0.x+on[0]*eo,y:b0.y+on[1]*eo},nx=-a0.ty*w,ny=a0.tx*w;out.push(`M${fx(a.x+nx)} ${fy(a.y+ny)} L${fx(b.x+nx)} ${fy(b.y+ny)} L${fx(b.x-nx)} ${fy(b.y-ny)} L${fx(a.x-nx)} ${fy(a.y-ny)} Z`)}}
  return out}
 function beamLabelPos(bm,off){const L=bm.link,pa=L.t==='free'?pathOf(L):beamPathAny(bm);if(!pa)return null;const m=pa.at(pa.len/2),w=((inner(bm)[0]||bm.spans[0]||{}).b||200)/2+off;let ang=Math.atan2(m.ty,m.tx)/D2R;if(ang>90.5)ang-=180;if(ang<-89.5)ang+=180;const nx=-Math.sin(ang*D2R),ny=Math.cos(ang*D2R);return{x:m.x+nx*w,y:m.y+ny*w,ang}}
 function agPathD(G,fx,fy,k){if(G.k==='arc'){const P2=mkPath(G),a=P2.at(0),b=P2.at(P2.len),sw=nrmA(G.a1-G.a0)||360;if(sw>=359.9){return`M${fx(G.cx+G.r)} ${fy(G.cy)} A${G.r*k} ${G.r*k} 0 1 1 ${fx(G.cx-G.r)} ${fy(G.cy)} A${G.r*k} ${G.r*k} 0 1 1 ${fx(G.cx+G.r)} ${fy(G.cy)}`}return`M${fx(a.x)} ${fy(a.y)} A${G.r*k} ${G.r*k} 0 ${sw>180?1:0} 1 ${fx(b.x)} ${fy(b.y)}`}return`M${fx(G.x1)} ${fy(G.y1)} L${fx(G.x2)} ${fy(G.y2)}`}
@@ -2218,7 +2221,7 @@ function planHover(q0){const svg=$('#plSvg'),g=svg&&svg.querySelector('#plSnapG'
  if(PDRAW){const a=PDRAW.a;if(PT==='garc'){const P2=PDRAW.pts;if(P2.length===1)o+=`<circle cx="${P2[0].x}" cy="${P2[0].y}" r="${Math.hypot(q.x-P2[0].x,q.y-P2[0].y)}" fill="none" stroke="#6FA8DC" stroke-dasharray="${r*0.3} ${r*0.2}" stroke-width="${r*0.04}"/>`;else{const c=P2[0],R=Math.hypot(P2[1].x-c.x,P2[1].y-c.y);let a0=Math.atan2(P2[1].y-c.y,P2[1].x-c.x)/D2R,a1=Math.atan2(q.y-c.y,q.x-c.x)/D2R;if(PCCW)[a0,a1]=[a1,a0];o+=`<path d="${agPathD({k:'arc',cx:c.x,cy:c.y,r:R,a0,a1},x=>x,y=>y,1)}" fill="none" stroke="#6FA8DC" stroke-width="${r*0.08}"/>`}}
   else{const b=typedEnd(a,q);o+=`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="${PT==='fbeam'?'#FFE08A':'#6FA8DC'}" stroke-width="${PT==='fbeam'?r*0.25:r*0.06}" stroke-opacity=".7"/><text x="${(a.x+b.x)/2}" y="${(a.y+b.y)/2-r*0.4}" fill="#FFE08A" font-size="${r*0.6}" text-anchor="middle">${(Math.hypot(b.x-a.x,b.y-a.y)/1000).toFixed(2)} ม.</text>`}
   o+=`<circle cx="${a.x}" cy="${a.y}" r="${r*0.3}" fill="#E8963A"/>`}
- o+=`<circle cx="${q.x}" cy="${q.y}" r="${r*0.42}" fill="none" stroke="${C}" stroke-width="${r*0.08}"/>${q.k!=='raw'?`<circle cx="${q.x}" cy="${q.y}" r="${r*0.12}" fill="${C}"/>`:''}`;g.innerHTML=o}
+ o+=snapGlyph(q,r);if(0)o+=`<circle cx="${q.x}" cy="${q.y}" r="${r*0.42}" fill="none" stroke="${C}" stroke-width="${r*0.08}"/>${q.k!=='raw'?`<circle cx="${q.x}" cy="${q.y}" r="${r*0.12}" fill="${C}"/>`:''}`;g.innerHTML=o}
 /* drawing pieces used by the screen plan */
 function drawAux(lv,r,fs){let o='';const e=planExt();
  AG().forEach(g=>{if(g.lv!==lv)return;const G=agGeom(g),on=PAGS.includes(g.id)||(PSEL&&PSEL.t==='ag'&&PSEL.id===g.id),c=on?'#FFE08A':'#6FA8DC';
@@ -2623,7 +2626,7 @@ function wsColRange(lv){const L=lvOf(lv);if(!L)return[0,3000];const st=wsStory()
 const hex3=h=>{const m=/^#?([0-9a-f]{6})$/i.exec(h||'');if(!m)return[.8,.65,.36];const v=parseInt(m[1],16);return[(v>>16)/255,((v>>8)&255)/255,(v&255)/255]};
 const LVPAL=['#C9A55C','#6FA8DC','#9BD18B','#E8963A','#C58AE8','#5CC9B8','#E8D35C','#E88AB4'];
 /* ---------- scene ---------- */
-let WSJ={};function wsBuild(){WSJ={};const p=P(),W=WSS(),V0=W.vis,tri=[],tc=[],tn=[],tid=[],ta=[],ed=[],ec=[],rl=[],rc=[],els=[],labs=[];let bb=[1e18,1e18,1e18,-1e18,-1e18,-1e18];
+let WSJ={},WSEO=0;function wsBuild(){WSJ={};const p=P(),W=WSS(),V0=W.vis,tri=[],tc=[],tn=[],tid=[],ta=[],ed=[],ec=[],rl=[],rc=[],els=[],labs=[];let bb=[1e18,1e18,1e18,-1e18,-1e18,-1e18];
  const ext=(x,y,z)=>{if(x<bb[0])bb[0]=x;if(y<bb[1])bb[1]=y;if(z<bb[2])bb[2]=z;if(x>bb[3])bb[3]=x;if(y>bb[4])bb[4]=y;if(z>bb[5])bb[5]=z};
  const lvIdx={};p.levels.forEach((l,i)=>lvIdx[l.id]=i);
  const tri3=(a,b,c,col,id,al)=>{const ux=b[0]-a[0],uy=b[1]-a[1],uz=b[2]-a[2],vx=c[0]-a[0],vy=c[1]-a[1],vz=c[2]-a[2];let nx=uy*vz-uz*vy,ny=uz*vx-ux*vz,nz=ux*vy-uy*vx;const l=Math.hypot(nx,ny,nz)||1;nx/=l;ny/=l;nz/=l;[a,b,c].forEach(q=>{tri.push(q[0],q[1],q[2]);tn.push(nx,ny,nz);tc.push(col[0],col[1],col[2]);tid.push(id);ta.push(al);ext(q[0],q[1],q[2])})};
@@ -2638,7 +2641,7 @@ let WSJ={};function wsBuild(){WSJ={};const p=P(),W=WSS(),V0=W.vis,tri=[],tc=[],t
  const rebarOn=e=>V0.rebar==='all'||(V0.rebar==='sel'&&WSSEL&&WSSEL.key===e.key);
  /* extrude rectangle along path between s0..s1 */
  const extrude=(pa,s0,s1,hw,z0,z1,col,id,al,edgeCol)=>{const N=pa.geo.k==='arc'?Math.max(2,Math.ceil((s1-s0)/400)):1,L=[],R=[];
-  for(let k=0;k<=N;k++){const s=s0+(s1-s0)*k/N,q=pa.at(s),nx=-q.ty,ny=q.tx;L.push([q.x+nx*hw,-(q.y+ny*hw)]);R.push([q.x-nx*hw,-(q.y-ny*hw)])}
+  for(let k=0;k<=N;k++){const s=s0+(s1-s0)*k/N,q0=pa.at(s),on=offN(q0.tx,q0.ty),q={x:q0.x+on[0]*WSEO,y:q0.y+on[1]*WSEO,tx:q0.tx,ty:q0.ty},nx=-q.ty,ny=q.tx;L.push([q.x+nx*hw,-(q.y+ny*hw)]);R.push([q.x-nx*hw,-(q.y-ny*hw)])}
   for(let k=0;k<N;k++){const a=L[k],b=L[k+1],c=R[k+1],d=R[k];quad([a[0],a[1],z1],[b[0],b[1],z1],[c[0],c[1],z1],[d[0],d[1],z1],col,id,al);quad([d[0],d[1],z0],[c[0],c[1],z0],[b[0],b[1],z0],[a[0],a[1],z0],col,id,al);
    quad([a[0],a[1],z0],[b[0],b[1],z0],[b[0],b[1],z1],[a[0],a[1],z1],col,id,al);quad([c[0],c[1],z0],[d[0],d[1],z0],[d[0],d[1],z1],[c[0],c[1],z1],col,id,al)}
   const cap=(a,d)=>quad([a[0],a[1],z0],[a[0],a[1],z1],[d[0],d[1],z1],[d[0],d[1],z0],col,id,al);cap(L[0],R[0]);cap(R[N],L[N]);
@@ -2654,9 +2657,9 @@ let WSJ={};function wsBuild(){WSJ={};const p=P(),W=WSS(),V0=W.vis,tri=[],tc=[],t
   const CL=wsColsAt(L.lv),JSG3=WSJ[L.lv]||(WSJ[L.lv]=joinSegs(L.lv)),trim=(s0,dir)=>{const q=pa.at(Math.max(0,Math.min(pa.len,s0)));for(const c of CL){if(Math.hypot(c.x-q.x,c.y-q.y)<80){const h=c.d.round?c.d.bx/2:Math.abs(q.tx)*c.d.bx/2+Math.abs(q.ty)*c.d.by/2;return h}}return 0};
   for(let q=0;q<st.length-1&&q<bm.spans.length;q++){const sp=bm.spans[q],t=btOf(sp.bt);if(t&&W.tOff['b:'+t.id])continue;if(!t&&W.tOff['b:'])continue;const key='b'+bi+':'+q,e={key,kind:'beam',bi,q,lv:L.lv,id:els.length+1};if(!visible(e))continue;
    const top=lz+(+sp.lvl||0)*1000,bot=top-sp.h,sel=WSSEL&&WSSEL.key===key,rb=rebarOn(e)||(V0.rebar==='sel'&&WSSEL&&WSSEL.kind==='beam'&&WSSEL.bi===bi),col=sel?SELC:colorFor('beam',t,L.lv),al=rb?0.22:1;
-   e.c=pa.at((st[q]+st[q+1])/2);e.c=[e.c.x,-e.c.y,(top+bot)/2];e.rb=rb;els.push(e);{let s0=st[q],s1=st[q+1];const ta=trim(s0),tb=trim(s1);if(s1-s0-ta-tb>40){s0+=ta;s1-=tb}if(q===0&&!ta&&!(bm.nj&&bm.nj.a))s0-=joinExt(JSG3,pa.at(0),bi,L.lv);if(q===Math.min(st.length-1,bm.spans.length)-1&&!tb&&!(bm.nj&&bm.nj.b))s1+=joinExt(JSG3,pa.at(pa.len),bi,L.lv);extrude(pa,s0,s1,sp.b/2,bot,top,col,e.id,al,sel?SELC:EDG)}
+   e.c=pa.at((st[q]+st[q+1])/2);e.c=[e.c.x,-e.c.y,(top+bot)/2];e.rb=rb;els.push(e);{let s0=st[q],s1=st[q+1];const ta=trim(s0),tb=trim(s1);if(s1-s0-ta-tb>40){s0+=ta;s1-=tb}if(q===0&&!ta&&!(bm.nj&&bm.nj.a))s0-=joinExt(JSG3,pa.at(0),bi,L.lv);if(q===Math.min(st.length-1,bm.spans.length)-1&&!tb&&!(bm.nj&&bm.nj.b))s1+=joinExt(JSG3,pa.at(pa.len),bi,L.lv);WSEO=+sp.eo||0;extrude(pa,s0,s1,sp.b/2,bot,top,col,e.id,al,sel?SELC:EDG);WSEO=0}
    if(V0.lab){labs.push({p:[e.c[0],e.c[1],top+120],t:btLabel(bm,q),c:'b'})}}
-  if(bm.inGrp)return;if(V0.rebar!=='off'&&(V0.rebar==='all'||(WSSEL&&WSSEL.kind==='beam'&&WSSEL.bi===bi))){let m;try{m=build(bm)}catch(_){m=null}if(!m)return;const D=m.D,tw=(x,y,z)=>{const q=pa.at(Math.max(0,Math.min(pa.len,x))),nx=-q.ty,ny=q.tx;return[q.x+nx*y,-(q.y+ny*y),lz+z]};
+  if(bm.inGrp)return;if(V0.rebar!=='off'&&(V0.rebar==='all'||(WSSEL&&WSSEL.kind==='beam'&&WSSEL.bi===bi))){let m;try{m=build(bm)}catch(_){m=null}if(!m)return;const D=m.D,EOA=x=>{let q=0;while(q<st.length-2&&x>st[q+1])q++;return +((bm.spans[q]||{}).eo)||0},tw=(x,y,z)=>{const q=pa.at(Math.max(0,Math.min(pa.len,x))),on=offN(q.tx,q.ty),eo=EOA(x),nx=-q.ty,ny=q.tx;return[q.x+on[0]*eo+nx*y,-(q.y+on[1]*eo+ny*y),lz+z]};
    RID=(els.filter(x=>x.kind==='beam'&&x.bi===bi)[0]||{}).id||0;m.P.forEach(pc=>{const c=hex3(rbHex(pc.bar,pieceCol(pc,true)));for(let k=0;k<pc.n;k++){try{rline(barPath(D,m,pc,k).map(v=>tw(v[0],v[1],v[2])),c,pc.d)}catch(_){}}});
    if(V0.stir)m.ST.forEach(stp=>{const sc=stp.sec,ds=BARS[sc.sb],a=sc.b/2-sc.cs-ds/2,zb=D.zb[stp.si],z1=zb+sc.cb+ds/2,z2=zb+sc.h-sc.ct-ds/2,c=hex3('#A8884A');stp.xs.forEach(x=>rline([[x,-a,z1],[x,a,z1],[x,a,z2],[x,-a,z2],[x,-a,z1]].map(v=>tw(v[0],v[1],v[2])),DS.rb==='layer'?c:hex3(rbHex(sc.sb,'#A8884A')),ds))})}});
  if(V0.beam&&V0.rebar!=='off')GRPS().forEach(c=>{const ms=grpMembers(c);if(ms.length<2||ms.some(b=>!b.link||b.linkBad||W.lvOff[b.link.lv]))return;const on=V0.rebar==='all'||(WSSEL&&WSSEL.kind==='beam'&&ms.includes(S.beams[WSSEL.bi]));if(!on)return;
@@ -3131,7 +3134,7 @@ function extractRange(i,q0,q1,id){const bm=S.beams[i],L=bm.link,sp=inner(bm),n=s
  const made=[];out.forEach(q=>{let nm=q[5];if(nm==null){nm=k0>0?nextBeamIdEx(made):bm.id}made.push(freshBeam(bm,nm,q[0],q[1],q[2],q[3],q[4]))});
  S.beams.splice(i,1,...made);return i+(k0>0?1:0)}
 function nextBeamIdEx(extra){let n=0;S.beams.concat(extra||[]).forEach(b=>{const m=/^B(\d+)$/.exec(b.id);if(m)n=Math.max(n,+m[1])});return'B'+(n+1)}
-function plDelete(){const p=P(),lv=p.lv;{const n0=PMS.length;PMS=PMS.filter(o=>!(S.beams[o.i]&&S.beams[o.i].pin));if(PSEL&&PSEL.t==='beam'&&S.beams[PSEL.i]&&S.beams[PSEL.i].pin){PSEL=null}if(PMS.length<n0)toast('คานที่ Pin ไว้จะไม่ถูกลบ')}if(!plSelN()&&PSEL){if(PSEL.t==='col')PCOL=[PSEL.k];else if(PSEL.t==='xc')PXCS=[PSEL.i];else if(PSEL.t==='ag')PAGS=[PSEL.id];else if(PSEL.t==='beam')PMS=S.beams[PSEL.i].spans.map((_,q)=>({i:PSEL.i,q}))}
+function plDelete(){const p=P(),lv=p.lv;if(PSEL&&PSEL.t==='dim'){DIMS().splice(PSEL.i,1);PSEL=null;save();drawPlan();toast('ลบเส้นบอกระยะแล้ว');return}{const n0=PMS.length;PMS=PMS.filter(o=>!(S.beams[o.i]&&S.beams[o.i].pin));if(PSEL&&PSEL.t==='beam'&&S.beams[PSEL.i]&&S.beams[PSEL.i].pin){PSEL=null}if(PMS.length<n0)toast('คานที่ Pin ไว้จะไม่ถูกลบ')}if(!plSelN()&&PSEL){if(PSEL.t==='col')PCOL=[PSEL.k];else if(PSEL.t==='xc')PXCS=[PSEL.i];else if(PSEL.t==='ag')PAGS=[PSEL.id];else if(PSEL.t==='beam')PMS=S.beams[PSEL.i].spans.map((_,q)=>({i:PSEL.i,q}))}
  if(!plSelN()){toast('ยังไม่ได้เลือกชิ้นส่วน');return}
  const byB={};PMS.forEach(o=>{(byB[o.i]=byB[o.i]||new Set()).add(o.q)});const whole=new Set(),part=[],warn=[],dels=[];
  Object.entries(byB).forEach(([i,qs])=>{const bm=S.beams[+i];if(!bm)return;if(qs.size>=bm.spans.length||bm.link&&bm.link.t==='free'){whole.add(bm);dels.push('คาน '+bm.id+(qs.size<bm.spans.length?' (คานอิสระ ลบทั้งคาน)':''))}else{part.push([bm,[...qs].sort((a,b)=>a-b)]);dels.push('คาน '+bm.id+' ช่วง '+[...qs].map(q=>(bm.grids[q]||{}).n+'–'+(bm.grids[q+1]||{}).n).join(', '))}});
@@ -3402,7 +3405,7 @@ function winSync0(){try{renderStatus();detailFollowSel()}catch(e){}{const g=$('#
 function elevDraw(w,b){let sv=b.querySelector('svg.wel');if(!sv){b.innerHTML='<svg class="wel" xmlns="http://www.w3.org/2000/svg"></svg>';sv=b.querySelector('svg.wel');elevBind(sv,+b.id.slice(2))}const r=elevSVG(w);if(!w.vb)w.vb=r.bb;sv.setAttribute('viewBox',w.vb.join(' '));sv.setAttribute('preserveAspectRatio','xMidYMid meet');sv.innerHTML=r.s;sv._bb=r.bb}
 function elevBind(sv,i){let dr=null,ck=null;const W=()=>WINS().w[i],pt=e=>{const q=sv.createSVGPoint();q.x=e.clientX;q.y=e.clientY;return q.matrixTransform(sv.getScreenCTM().inverse())};
  sv.addEventListener('contextmenu',e=>e.preventDefault());
- sv.addEventListener('wheel',e=>{e.preventDefault();const w=W(),q=pt(e),f=e.deltaY>0?1.15:1/1.15,v=w.vb;w.vb=[q.x-(q.x-v[0])*f,q.y-(q.y-v[1])*f,v[2]*f,v[3]*f];sv.setAttribute('viewBox',w.vb.join(' '))},{passive:false});
+ sv.addEventListener('wheel',e=>{e.preventDefault();const w=W(),q=pt(e),f=MZF(e.deltaY),v=w.vb;w.vb=[q.x-(q.x-v[0])*f,q.y-(q.y-v[1])*f,v[2]*f,v[3]*f];sv.setAttribute('viewBox',w.vb.join(' '))},{passive:false});
  sv.addEventListener('pointerdown',e=>{winActivate(i);dr={x:e.clientX,y:e.clientY,vb:W().vb.slice(),mv:false,pan:true};try{sv.setPointerCapture(e.pointerId)}catch(_){}});
  sv.addEventListener('pointermove',e=>{if(!dr)return;const dx=e.clientX-dr.x,dy=e.clientY-dr.y;if(Math.abs(dx)+Math.abs(dy)>5)dr.mv=true;if(!dr.mv||!dr.pan)return;const R=sv.getBoundingClientRect(),k=Math.max(dr.vb[2]/R.width,dr.vb[3]/R.height),w=W();w.vb=[dr.vb[0]-dx*k,dr.vb[1]-dy*k,dr.vb[2],dr.vb[3]];sv.setAttribute('viewBox',w.vb.join(' '))});
  sv.addEventListener('pointerup',e=>{const d=dr;dr=null;if(!d||d.mv)return;const t=document.elementFromPoint(e.clientX,e.clientY)||e.target,bg=t.closest&&t.closest('[data-bm]'),gl=t.closest&&t.closest('[data-elg]');
@@ -3570,6 +3573,7 @@ function propBox(){const p=P();
   <tr><td>เหล็กบน</td><td style="display:flex;gap:4px"><input data-pr="tn" type="number" min="0" value="${com(x=>x.s.top.n)}" style="width:52px"><select data-pr="tb">${com(x=>x.s.top.bar)===''?'<option value="" selected>—</option>':''}${MAIN.map(x=>`<option${com(y=>y.s.top.bar)===x?' selected':''}>${x}</option>`).join('')}</select></td></tr>
   <tr><td>เหล็กล่าง</td><td style="display:flex;gap:4px"><input data-pr="bn" type="number" min="0" value="${com(x=>x.s.bot.n)}" style="width:52px"><select data-pr="bb">${com(x=>x.s.bot.bar)===''?'<option value="" selected>—</option>':''}${MAIN.map(x=>`<option${com(y=>y.s.bot.bar)===x?' selected':''}>${x}</option>`).join('')}</select></td></tr>
   <tr><td>ปลอก</td><td style="display:flex;gap:4px"><select data-pr="sb">${com(x=>x.s.st.bar)===''?'<option value="" selected>—</option>':''}${STIR.map(x=>`<option${com(y=>y.s.st.bar)===x?' selected':''}>${x}</option>`).join('')}</select><span style="align-self:center">@</span><input data-pr="ss" type="number" step="10" value="${com(x=>x.s.st.s1)}" style="width:70px"></td></tr>
+  <tr><td>เยื้อง e (มม.)<div class="note" style="margin:0;font-size:10.5px">+ บน/ขวา · ช่วงที่เลือก</div></td><td><input data-pr="eo" type="number" step="5" value="${com(x=>+x.s.eo||0)}" placeholder="หลายค่า"><div class="chips" style="margin-top:3px"><button class="pbtn" data-prb="e0" title="ศูนย์กลางตรงแนวกริด">กึ่งกลาง</button><button class="pbtn" data-prb="eout" title="ผิวคานชิดผิวนอกเสา">ชิดขอบนอกเสา</button><button class="pbtn" data-prb="ein" title="ผิวคานชิดผิวในเสา">ชิดขอบในเสา</button></div></td></tr>
   ${g?`<tr><td>กลุ่ม</td><td>⧉ ${esc(g.id)}</td></tr>`:''}</table>
   <div class="chips" style="margin-top:6px">${ids.length===1?`<button class="chip" data-prb="dlg">แก้ไข / แยกช่วง…</button>`:''}<button class="chip" data-prb="open">เปิดรายละเอียด</button><button class="chip plsbd" data-prb="del">ลบ</button></div></div>`}
  if(PCOL.length||PXCS.length){const cs=[...PCOL.map(k=>p.cols[k]),...PXCS.map(i=>XC()[i])].filter(Boolean),t=cs.every(c=>c.t===cs[0].t)?cs[0].t:'',ct=ctOf(t),lv=PCOL.length?PCOL[0].split('|')[0]:(XC()[PXCS[0]]||{}).lv,[z0,z1]=wsColRange(lv);
@@ -3591,14 +3595,14 @@ function propBind(){const pn=$('#plPanel');if(!pn||pn.dataset.prp)return;pn.data
   if(PMS.length){if(v==='')return;PMS.forEach(o=>{const b=S.beams[o.i],s=b&&b.spans[o.q];if(!s)return;const lz=(lvOf(b.link&&b.link.lv)||{z:0}).z;
     if(k==='bt'){if(v)btApply(b,o.q,btOf(v));else delete s.bt}else if(k==='b'&&num>=100){s.b=Math.round(num);delete s.bt}else if(k==='h'&&num>=150){s.h=Math.round(num);delete s.bt}
     else if(k==='el'&&isFinite(num))s.lvl=+(num-lz).toFixed(3);else if(k==='dl'&&isFinite(num))s.lvl=+num.toFixed(3);
-    else if(k==='tn'&&num>=0)s.top.n=Math.round(num);else if(k==='tb')s.top.bar=v;else if(k==='bn'&&num>=0)s.bot.n=Math.round(num);else if(k==='bb')s.bot.bar=v;else if(k==='sb')s.st.bar=v;else if(k==='ss'&&num>=50){s.st.s1=Math.round(num);if(!s.st.two)s.st.s2=s.st.s1}})}
+    else if(k==='tn'&&num>=0)s.top.n=Math.round(num);else if(k==='tb')s.top.bar=v;else if(k==='bn'&&num>=0)s.bot.n=Math.round(num);else if(k==='bb')s.bot.bar=v;else if(k==='sb')s.st.bar=v;else if(k==='ss'&&num>=50){s.st.s1=Math.round(num);if(!s.st.two)s.st.s2=s.st.s1}else if(k==='eo'&&isFinite(num)){if(num)s.eo=Math.round(num);else delete s.eo}})}
   else if(PCOL.length||PXCS.length){if(k==='ct'&&v){PCOL.forEach(c=>{if(p.cols[c])p.cols[c].t=v});PXCS.forEach(i=>{if(XC()[i])XC()[i].t=v})}else if(k==='rot')PCOL.forEach(c=>{if(p.cols[c])p.cols[c].rot=+v})}
   else if(PGS.length===1){const{ax,i}=PGS[0],P0=gpos(ax);if(k==='gn'){v=v.trim();if(!v||p[ax].n.some((x,j)=>x===v&&j!==i)){toast('ชื่อว่างหรือซ้ำ')}else p[ax].n[i]=v}
    else if(isFinite(num)){const nv=Math.round(num*1000);let d=0;if(k==='go')d=nv-P0[i];else if(k==='gL')d=nv-(P0[i]-P0[i-1]);else if(k==='gR')d=(P0[i+1]-P0[i])-nv;const got=gridMoveApply(ax,[i],d);if(Math.abs(got-d)>1)toast('ย้ายได้เท่าที่ไม่ชนกริดข้างเคียง')}}
   else{const l=lvOf(p.lv);if(!l)return;if(k==='ln')l.n=v.trim()||l.n;else if(k==='lz'&&isFinite(num))l.z=num;else if(k==='lt')l.ref=v==='1'}
   syncAll();save();renderPlanPanel();drawPlan();renderStatus()},true);
  pn.addEventListener('click',e=>{const b=e.target.closest('[data-prb]');if(!b)return;e.stopImmediatePropagation();const a=b.dataset.prb;
-  if(a==='del')plDelete();else if(a==='dlg'){const o=PMS[0];bmDlg(o.i,o.q,PMS.filter(z=>z.i===o.i).map(z=>z.q))}else if(a==='open')etAct('oBeam');else if(a==='story')dlgStory();else if(a==='grid')dlgGrid();
+  if(a==='e0'||a==='eout'||a==='ein'){PMS.forEach(o=>{const b=S.beams[o.i],s0=b&&b.spans[o.q];if(!s0)return;const v=eSuggest(b,o.q,a==='e0'?'0':a==='eout'?'out':'in');if(v)s0.eo=v;else delete s0.eo});syncAll();save();renderPlanPanel();drawPlan();try{if(WSG&&wsLive())wsRebuild()}catch(_){}toast(a==='e0'?'คานกึ่งกลางแนวกริด':a==='eout'?'คานชิดขอบนอกเสา':'คานชิดขอบในเสา')}else if(a==='del')plDelete();else if(a==='dlg'){const o=PMS[0];bmDlg(o.i,o.q,PMS.filter(z=>z.i===o.i).map(z=>z.q))}else if(a==='open')etAct('oBeam');else if(a==='story')dlgStory();else if(a==='grid')dlgGrid();
   else if(a==='elev'){const W=WINS(),g=PGS[0],k=g.ax+':'+g.i;let i=W.w.slice(0,WLN[W.lay]).findIndex(w=>w.t==='elev');if(i<0){if(W.lay==='1')W.lay='2v';i=WLN[W.lay]-1}W.w[i]=Object.assign(W.w[i]||{},{t:'elev',src:k,vb:null,f:(W.w[i]||{}).f||{}});W.act=i;save();winRender()}},true)}
 /* plan cursor coordinates */
 function stBindXY(){const svg=$('#plSvg');if(!svg||svg.dataset.xy)return;svg.dataset.xy=1;svg.addEventListener('pointermove',e=>{const el=$('#stXY');if(!el)return;try{const q=svg.createSVGPoint();q.x=e.clientX;q.y=e.clientY;const r=q.matrixTransform(svg.getScreenCTM().inverse());el.textContent=`X ${(r.x/1000).toFixed(2)} · Y ${(r.y/1000).toFixed(2)} ม.`}catch(_){}})}
@@ -3933,7 +3937,7 @@ const T={tr:(d)=>p=>({x:p.x+d.x,y:p.y+d.y}),rot:(c,an)=>p=>{const co=Math.cos(an
 function modDone(msg){planChanged(true);if(msg)toast(msg)}
 /* ---------- UI ---------- */
 function modBarInit(){const t=$('#plTools');if(!t||$('#modBar'))return;const b=document.createElement('div');b.id='modBar';b.className='plt modbar';t.after(b);const o=document.createElement('div');o.id='modOpt';t.after(o);b.after(o);modBarRender()}
-function modBarRender(){const b=$('#modBar');if(!b)return;const G=[['al','of','mm','dm','mv','co','ro','ar','re'],['tr','ts','tm','sl','sg','jn'],['pn','up','ma','de']];
+function modBarRender(){const b=$('#modBar');if(!b)return;const G=[['al','of','mm','dm','mv','co','ro','ar','re'],['tr','ts','tm','sl','sg','jn'],['pn','up','ma','de'],['me','di']];
  b.innerHTML='<span class="mbt">MODIFY</span>'+G.map(g=>g.map(k=>`<button class="chip${MOD&&MOD.t===k?' on':''}" data-mod="${k}">${esc(MTIP[k][0])}</button>`).join('')).join('<span class="sep"></span>');tbIcon(b);modOptRender()}
 function modOptRender(){const o=$('#modOpt');if(!o)return;if(!MOD){o.innerHTML='';o.style.display='none';return}const O=MOPT(),k=MOD.t,ck=(f,l)=>`<label class="ck"><input type="checkbox" data-mo="${f}"${O[f]?' checked':''}> ${l}</label>`,nm=(f,l,st,w)=>`<label class="ck">${l} <input type="number" data-mo="${f}" value="${O[f]}" step="${st}" style="width:${w||70}px"></label>`;
  let x='';if(k==='co')x=ck('multi','หลายชิ้น (Multiple)');if(['mv'].includes(k))x=ck('copyMv','คัดลอก');if(['ro','mm','dm'].includes(k))x=ck('copy','คัดลอก (Copy)');if(k==='ro')x+=nm('ang','มุม °',1,70)+'<span class="note" style="margin:0">ใส่มุมแล้วคลิกจุดหมุน = หมุนทันที</span>';if(k==='of')x=nm('dist','ระยะ ม.',0.05)+ck('copy','คัดลอก');if(k==='ar')x=nm('n','จำนวน',1,60)+ck('arLast','จุดที่ 2 = ชิ้นสุดท้าย');if(k==='sg')x=nm('gap','ช่อง มม.',10);if(k==='re')x=nm('sc','สเกล',0.1);
@@ -3945,8 +3949,8 @@ function modStart(k){if(location.hash!=='#plan')location.hash='plan';if(PT!=='se
  const needSel=['mm','dm','mv','co','ro','ar','re'].includes(k);if(needSel&&!sel.n){toast('เลือกชิ้นส่วนก่อน (Shift+คลิก เลือกหลายชิ้น) แล้วกดเครื่องมืออีกครั้ง');return}
  MOD={t:k,step:0,sel:needSel?sel:null};const H={al:'คลิกเส้นอ้างอิง (กริดหรือคาน)',of:'คลิกคาน · ฝั่งที่คลิกคือทิศ offset',mm:'คลิกเส้นกริดหรือคานที่เป็นแกน',dm:'คลิกจุดแรกของแกน',mv:'คลิกจุดฐาน',co:'คลิกจุดฐาน',ro:'คลิกจุดหมุน',ar:'คลิกจุดฐาน',re:'คลิกจุดฐาน',tr:'คลิกคานตัวที่ 1 (ฝั่งที่จะเก็บ)',ts:'คลิกเส้นอ้างอิง',tm:'คลิกเส้นอ้างอิง',sl:'คลิกบนคานตรงจุดที่จะแบ่ง',sg:'คลิกบนคานตรงจุดที่จะแบ่ง',jn:'คลิกใกล้ปลายคาน',ma:'คลิกคานต้นแบบ'};MOD.hint=H[k];modBarRender();drawPlan()}
 function modEnd(){MOD=null;modBarRender();const g=$('#plSnapG');if(g)g.innerHTML='';diSync&&diSync()}
-function modPt(q0){const q=snapAt(q0,planSym()*1.1);return MOD&&MOD.base&&['mv','co','ar','dm','ro'].includes(MOD.t)&&MOD.step>=1?snCon(MOD.base,q):q}
-function modClick(e,q0,typed){const k=MOD.t,O=MOPT(),tg=e?e.target:document.body;
+function modPt(q0){const q=snapAt(q0,planSym()*1.1);return MOD&&MOD.base&&['mv','co','ar','dm','ro','me','di'].includes(MOD.t)&&MOD.step>=1?snCon(MOD.base,q):q}
+function modClick(e,q0,typed){const k=MOD.t,O=MOPT(),tg=e?e.target:document.body;if(k==='me'||k==='di')return measClick(q0,typed);
  const pickB=()=>{const b=tg.closest&&tg.closest('[data-bm]');return b?+b.dataset.bm:-1};
  if(k==='mv'||k==='co'){const q=typed||modPt(q0);if(MOD.step===0){MOD.base=q;MOD.step=1;return modHint('คลิกจุดปลาย หรือพิมพ์ระยะ + Enter')}const d={x:q.x-MOD.base.x,y:q.y-MOD.base.y},cp=k==='co'||(k==='mv'&&O.copyMv);xform(T.tr(d),cp,MOD.sel);modDone((cp?'คัดลอก':'ย้าย')+' '+(Math.hypot(d.x,d.y)/1000).toFixed(2)+' ม.');if(k==='co'&&O.multi){MOD.sel=MOD.sel;return}return modEnd()}
  if(k==='ar'){const q=typed||modPt(q0);if(MOD.step===0){MOD.base=q;MOD.step=1;return modHint('คลิกตำแหน่งชิ้นที่ 2'+(O.arLast?' (ชิ้นสุดท้าย)':''))}const n=Math.max(2,Math.round(+O.n||2)),dv=O.arLast?(n-1):1,d={x:(q.x-MOD.base.x)/dv,y:(q.y-MOD.base.y)/dv};for(let i=1;i<n;i++)xform(T.tr({x:d.x*i,y:d.y*i}),true,MOD.sel);modDone('Array '+n+' ชุด');return modEnd()}
@@ -3970,7 +3974,7 @@ function modHover(){const g=$('#plSvg')&&$('#plSvg').querySelector('#plSnapG');i
  if(MOD.base){o+=`<circle cx="${MOD.base.x}" cy="${MOD.base.y}" r="${r*0.25}" fill="none" stroke="${C}" stroke-width="${r*0.05}"/><line x1="${MOD.base.x}" y1="${MOD.base.y}" x2="${q.x}" y2="${q.y}" stroke="${C}" stroke-width="${r*0.05}" stroke-dasharray="${r*0.3} ${r*0.15}"/>`;
   if(['mv','co','ar'].includes(MOD.t)&&MOD.sel){const d={x:q.x-MOD.base.x,y:q.y-MOD.base.y};MOD.sel.bs.forEach(bi=>{const s=bSeg(S.beams[bi]);if(s)o+=`<line x1="${s.a.x+d.x}" y1="${s.a.y+d.y}" x2="${s.z.x+d.x}" y2="${s.z.y+d.y}" stroke="${C}" stroke-width="${(S.beams[bi].spans[0]||{b:200}).b}" stroke-opacity=".35"/>`})}
   o+=`<text x="${(MOD.base.x+q.x)/2}" y="${(MOD.base.y+q.y)/2-r*0.4}" fill="${C}" font-size="${r*0.6}" text-anchor="middle">${(Math.hypot(q.x-MOD.base.x,q.y-MOD.base.y)/1000).toFixed(2)} ม.</text>`}
- o+=`<circle cx="${q.x}" cy="${q.y}" r="${r*0.18}" fill="${C}" fill-opacity=".6"/>`;g.innerHTML=o}
+ if(MOD.meas){const a=MOD.meas.a,b=MOD.meas.b,L=Math.hypot(b.x-a.x,b.y-a.y);o+=`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="#FFE08A" stroke-width="${r*0.06}"/><circle cx="${a.x}" cy="${a.y}" r="${r*0.15}" fill="#FFE08A"/><circle cx="${b.x}" cy="${b.y}" r="${r*0.15}" fill="#FFE08A"/><text x="${(a.x+b.x)/2}" y="${(a.y+b.y)/2-r*0.4}" fill="#FFE08A" font-size="${r*0.65}" text-anchor="middle" paint-order="stroke" stroke="#0E0F12" stroke-width="${r*0.15}">${(L/1000).toFixed(3)} ม.</text>`}o+=snapGlyph(q,r);g.innerHTML=o}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-mod]');if(b){if(MOD&&MOD.t===b.dataset.mod)modEnd();else modStart(b.dataset.mod);return}if(e.target.closest('[data-modx]')){modEnd();return}
  if(!MOD)return;const sv=e.target.closest&&e.target.closest('#plSvg');if(!sv||PMOV)return;e.preventDefault();e.stopImmediatePropagation();const m=sv.getScreenCTM(),p=sv.createSVGPoint();p.x=e.clientX;p.y=e.clientY;const q=p.matrixTransform(m.inverse());modClick(e,{x:q.x,y:q.y})},true);
 document.addEventListener('change',e=>{const f=e.target.dataset&&e.target.dataset.mo;if(!f)return;const O=MOPT();O[f]=e.target.type==='checkbox'?e.target.checked:(f==='ang'?e.target.value:+e.target.value);save()});
@@ -4082,6 +4086,109 @@ function svFull(){let f=$('#svFull');if(f)f.remove();f=document.createElement('d
 document.addEventListener('click',e=>{if(e.target.closest('[data-svfx]')){const f=$('#svFull');if(f)f.remove()}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){const f=$('#svFull');if(f&&!(typeof SEO!=='undefined'&&SEO)){f.remove();e.stopPropagation()}}},true);
 
+/* ===== รอบ 4: เมาส์แบบ AutoCAD · OSNAP หลายโหมด · วัดระยะ/เส้นบอกระยะ · ระยะเยื้องคาน e ===== */
+function MSE(){const st=S.settings;st.mouse=Object.assign({xh:true,xs:100,xc:'',pb:7,ap:12,mk:1,zi:false,zs:1.15,rc:'menu'},st.mouse||{});return st.mouse}
+const SNM=[['ix','จุดตัดกริด / กริดช่วย'],['col','ศูนย์เสา'],['colc','มุมเสา'],['end','ปลายคาน'],['mid','กึ่งกลางคาน (Midpoint)'],['cl','แนวศูนย์กลางคาน'],['edge','ขอบคาน 2 ข้าง'],['perp','ตั้งฉาก (Perpendicular)'],['near','ใกล้ที่สุดบนกริด (Nearest)']];
+function SNMOD(){const s=SNP();s.m=Object.assign({ix:true,col:true,colc:true,end:true,mid:true,cl:true,edge:true,perp:true,near:true},s.m||{});return s.m}
+const MZF=dy=>{const m=MSE();let f=dy>0?(+m.zs||1.15):1/(+m.zs||1.15);if(m.zi)f=1/f;return f};
+const offN=(tx,ty)=>{let n=[-ty,tx];if(Math.abs(tx)>=Math.abs(ty)){if(n[1]>0)n=[-n[0],-n[1]]}else if(n[0]<0)n=[-n[0],-n[1]];return n};
+/* ---------- snap ---------- */
+function snapTolW(tol){const sv=$('#plSvg');if(!sv||!PV)return tol;const w=sv.getBoundingClientRect().width||1;return(+MSE().ap||12)*PV.w/w}
+function beamGeoms(lv){const out=[];S.beams.forEach((b,bi)=>{if(!b.link||b.link.lv!==lv||b.linkBad||b.grp)return;let pa=null;try{pa=b.link.t==='free'?pathOf(b.link):beamPathAny(b)}catch(_){}if(!pa||pa.geo.k!=='line')return;const st=b.link.st&&b.link.st.length>1?b.link.st:[0,pa.len];
+ for(let q=0;q<st.length-1;q++){const sp=(b.link.t==='free'?b.spans[q]:inner(b)[q])||b.spans[0]||{},a=pa.at(st[q]),z=pa.at(st[q+1]),w=(+sp.b||200)/2,n=offN(a.tx,a.ty),eo=+sp.eo||0,c={x:n[0]*eo,y:n[1]*eo},nl=[-a.ty,a.tx];
+  out.push({bi,a:{x:a.x+c.x,y:a.y+c.y},z:{x:z.x+c.x,y:z.y+c.y},w,nl})}});return out}
+const segProj=(s,q)=>{const dx=s.z.x-s.a.x,dy=s.z.y-s.a.y,L2=dx*dx+dy*dy||1,t=Math.max(0,Math.min(1,((q.x-s.a.x)*dx+(q.y-s.a.y)*dy)/L2)),x=s.a.x+dx*t,y=s.a.y+dy*t;return{x,y,d:Math.hypot(q.x-x,q.y-y),t}};
+const lineFoot=(s,p)=>{const dx=s.z.x-s.a.x,dy=s.z.y-s.a.y,L2=dx*dx+dy*dy||1,t=((p.x-s.a.x)*dx+(p.y-s.a.y)*dy)/L2;return{x:s.a.x+dx*t,y:s.a.y+dy*t,t}};
+function snapBase(){if(typeof MOD!=='undefined'&&MOD&&MOD.base)return MOD.base;if(PDRAW&&PDRAW.a)return PDRAW.a;return null}
+snapAt=function(q,tol){const S0=SNP();if(!S0.os&&['fbeam','gline','garc'].includes(PT))return{x:Math.round(q.x/10)*10,y:Math.round(q.y/10)*10,k:'raw'};
+ const m=SNMOD(),lv=P().lv,T=snapTolW(tol);let best=null,bd=T;const cand=(x,y,k)=>{const d=Math.hypot(x-q.x,y-q.y);if(d<bd){bd=d;best={x,y,k}}};
+ const kmap={ix:'ix',x:'ix',end:'ix',cen:'ix',col:'col',bend:'end'};snapPts(lv).forEach(o=>{const mk=kmap[o.k]||'ix';if(m[mk])cand(o.x,o.y,o.k==='bend'?'end':o.k)});
+ if(m.colc)allCols(lv).forEach(c=>{const d=c.d||{};if(d.round)return;const hx=(d.bx||200)/2,hy=(d.by||200)/2;[[-1,-1],[1,-1],[1,1],[-1,1]].forEach(([sx,sy])=>cand(c.x+sx*hx,c.y+sy*hy,'colc'))});
+ const BG=beamGeoms(lv);BG.forEach(g=>{if(m.end){cand(g.a.x,g.a.y,'end');cand(g.z.x,g.z.y,'end')}if(m.mid)cand((g.a.x+g.z.x)/2,(g.a.y+g.z.y)/2,'mid');
+  if(m.edge)[1,-1].forEach(sg=>{const o={x:g.nl[0]*g.w*sg,y:g.nl[1]*g.w*sg};[g.a,g.z].forEach(p=>cand(p.x+o.x,p.y+o.y,'edge'))})});
+ if(best)return best;
+ const base=snapBase();bd=T*0.8;const on=(x,y,k)=>{const d=Math.hypot(x-q.x,y-q.y);if(d<bd){bd=d;best={x,y,k}}};
+ if(base&&m.perp)BG.forEach(g=>{const segs=[g];if(m.edge)[1,-1].forEach(sg=>segs.push({a:{x:g.a.x+g.nl[0]*g.w*sg,y:g.a.y+g.nl[1]*g.w*sg},z:{x:g.z.x+g.nl[0]*g.w*sg,y:g.z.y+g.nl[1]*g.w*sg}}));segs.forEach(s=>{const f=lineFoot(s,base);if(f.t>=-0.001&&f.t<=1.001)on(f.x,f.y,'perp')})});
+ if(best)return best;
+ BG.forEach(g=>{if(m.cl){const p=segProj(g,q);on(p.x,p.y,'cl')}if(m.edge)[1,-1].forEach(sg=>{const p=segProj({a:{x:g.a.x+g.nl[0]*g.w*sg,y:g.a.y+g.nl[1]*g.w*sg},z:{x:g.z.x+g.nl[0]*g.w*sg,y:g.z.y+g.nl[1]*g.w*sg}},q);on(p.x,p.y,'edge')})});
+ if(best)return best;
+ if(m.near){const geos=mainGeos().concat(AG().filter(g=>g.lv===lv).map(agGeom));geos.forEach(G=>{const pr=mkPath(G).proj(q);on(pr.x,pr.y,'on')})}if(best)return best;
+ return{x:Math.round(q.x/10)*10,y:Math.round(q.y/10)*10,k:'raw'}};
+const SNL={ix:'จุดตัด',x:'จุดตัด',end:'ปลาย',cen:'ศูนย์',col:'ศูนย์เสา',colc:'มุมเสา',mid:'กึ่งกลาง',cl:'แนวคาน',edge:'ขอบคาน',perp:'ตั้งฉาก',on:'บนเส้น',typed:'พิมพ์',orth:'ORTHO',polar:'POLAR'};
+function snapGlyph(q,r){const s=r*0.32*(+MSE().mk||1),C={ix:'#E8963A',x:'#E8963A',end:'#4CAF50',col:'#E8963A',colc:'#E8963A',mid:'#00BCD4',cl:'#9BD18B',edge:'#AB47BC',perp:'#FF7043',on:'#9BD18B'}[q.k]||'#FFE08A',sw=r*0.07;let g='';
+ if(q.k==='end')g=`<rect x="${q.x-s}" y="${q.y-s}" width="${2*s}" height="${2*s}" fill="none" stroke="${C}" stroke-width="${sw}"/>`;else if(q.k==='mid')g=`<polygon points="${q.x},${q.y-s*1.2} ${q.x+s*1.1},${q.y+s*0.8} ${q.x-s*1.1},${q.y+s*0.8}" fill="none" stroke="${C}" stroke-width="${sw}"/>`;
+ else if(q.k==='ix'||q.k==='x')g=`<path d="M${q.x-s} ${q.y-s}L${q.x+s} ${q.y+s}M${q.x+s} ${q.y-s}L${q.x-s} ${q.y+s}" stroke="${C}" stroke-width="${sw}"/>`;else if(q.k==='perp')g=`<path d="M${q.x-s} ${q.y+s}H${q.x+s}M${q.x} ${q.y+s}V${q.y-s}" stroke="${C}" stroke-width="${sw}" fill="none"/>`;
+ else if(q.k==='edge'||q.k==='cl'||q.k==='on')g=`<path d="M${q.x-s} ${q.y+s}L${q.x+s} ${q.y-s}M${q.x-s} ${q.y-s*0.2}L${q.x+s*0.2} ${q.y-s*1.4}" stroke="${C}" stroke-width="${sw}" fill="none"/>`;else g=`<circle cx="${q.x}" cy="${q.y}" r="${s}" fill="none" stroke="${C}" stroke-width="${sw}"/>`;
+ return q.k==='raw'?'':g+`<text x="${q.x+s*1.6}" y="${q.y-s*1.4}" font-size="${r*0.5}" fill="${C}" paint-order="stroke" stroke="#0E0F12" stroke-width="${r*0.12}">${SNL[q.k]||''}</text>`}
+/* OSNAP modes popup */
+function snPop(x,y){let p=$('#snPop');if(p){p.remove();return}const m=SNMOD();p=document.createElement('div');p.id='snPop';p.className='svpop';p.style.width='260px';p.innerHTML=`<b>โหมด OSNAP</b>${SNM.map(([k,t])=>`<label class="ck" style="display:flex;margin:3px 0"><input type="checkbox" data-snm="${k}"${m[k]?' checked':''}> ${t}</label>`).join('')}<div class="chips" style="margin-top:6px"><button class="chip" data-snma="1">เลือกทั้งหมด</button><button class="chip" data-snma="0">ไม่เลือก</button><button class="chip" data-snmx="1">ปิด</button></div>`;document.body.appendChild(p);p.style.left=Math.max(6,Math.min(innerWidth-270,x-130))+'px';p.style.top=Math.max(6,y-p.offsetHeight-10)+'px'}
+document.addEventListener('change',e=>{const k=e.target.dataset&&e.target.dataset.snm;if(!k)return;SNMOD()[k]=e.target.checked;save()});
+document.addEventListener('click',e=>{const a=e.target.closest('[data-snma]');if(a){const m=SNMOD();Object.keys(m).forEach(k=>m[k]=a.dataset.snma==='1');save();document.querySelectorAll('[data-snm]').forEach(c=>c.checked=a.dataset.snma==='1');return}if(e.target.closest('[data-snmx]')){const p=$('#snPop');if(p)p.remove()}});
+document.addEventListener('contextmenu',e=>{const b=e.target.closest&&e.target.closest('[data-snp="os"]');if(!b)return;e.preventDefault();snPop(e.clientX,e.clientY)});
+/* ---------- crosshair + pickbox (screen overlay) ---------- */
+let XHE=null;function xhEl(){if(XHE)return XHE;XHE=document.createElement('div');XHE.id='xh';XHE.innerHTML='<i class="xh-h"></i><i class="xh-v"></i><i class="xh-b"></i>';document.body.appendChild(XHE);return XHE}
+document.addEventListener('pointermove',e=>{const m=MSE(),wb=e.target.closest&&(e.target.closest('#plSvg')||e.target.closest('.wb svg.wel,.wb svg.wst'));const x=xhEl();if(!m.xh||!wb||e.pointerType==='touch'||(typeof THPK!=='undefined'&&THPK)){x.style.display='none';document.body.classList.remove('xhon');return}
+ const R=wb.getBoundingClientRect(),sz=Math.max(5,Math.min(100,+m.xs||100))/100,hw=R.width*sz/2,hh=R.height*sz/2,col=m.xc||(DSP().view2d==='light'?'#222':'#e6e6e6'),pb=+m.pb||7;document.body.classList.add('xhon');x.style.display='block';
+ const h=x.children[0],v=x.children[1],b=x.children[2];h.style.cssText=`left:${Math.max(R.left,e.clientX-hw)}px;width:${Math.min(R.right,e.clientX+hw)-Math.max(R.left,e.clientX-hw)}px;top:${e.clientY}px;background:${col}`;
+ v.style.cssText=`top:${Math.max(R.top,e.clientY-hh)}px;height:${Math.min(R.bottom,e.clientY+hh)-Math.max(R.top,e.clientY-hh)}px;left:${e.clientX}px;background:${col}`;b.style.cssText=`left:${e.clientX-pb}px;top:${e.clientY-pb}px;width:${pb*2}px;height:${pb*2}px;border-color:${col}`},true);
+document.addEventListener('pointerleave',()=>{if(XHE)XHE.style.display='none'});
+/* ---------- right click in plan (AutoCAD style) ---------- */
+let LASTCMD=null;
+function lastCmdRun(){if(!LASTCMD)return toast('ยังไม่มีคำสั่งล่าสุด');if(LASTCMD.t==='mod')modStart(LASTCMD.k);else etAct('pt:'+LASTCMD.k)}
+document.addEventListener('contextmenu',e=>{const sv=e.target.closest&&e.target.closest('#plSvg');if(!sv)return;e.preventDefault();const m=MSE();
+ const esc_=()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));
+ if(m.rc==='enter'){if(typeof MOD!=='undefined'&&MOD)modEnd();else if(PDRAW){PDRAW=null;renderPlanTools();drawPlan()}else lastCmdRun();return}
+ if(m.rc==='repeat'){if((typeof MOD!=='undefined'&&MOD)||PDRAW)esc_();else lastCmdRun();return}
+ const items=[];if((typeof MOD!=='undefined'&&MOD)||PDRAW)items.push(['ยกเลิก (Esc)',()=>{if(typeof MOD!=='undefined'&&MOD)modEnd();if(PDRAW){PDRAW=null;renderPlanTools();drawPlan()}}]);
+ if(LASTCMD)items.push(['ทำซ้ำ: '+LASTCMD.n,lastCmdRun]);items.push(['วัดระยะ (ME)',()=>modStart('me')],['เส้นบอกระยะ (DI)',()=>modStart('di')],['พอดีจอ (ZE)',()=>{PV=null;drawPlan()}],null,['โหมด OSNAP…',()=>snPop(e.clientX,e.clientY+200)]);
+ rcMenu(e.clientX,e.clientY,items)});
+function rcMenu(x,y,items){let m=$('#rcM');if(m)m.remove();m=document.createElement('div');m.id='rcM';m.innerHTML=items.map((it,i)=>it?`<button data-rc="${i}">${it[0]}</button>`:'<hr>').join('');document.body.appendChild(m);m.style.left=Math.min(innerWidth-m.offsetWidth-4,x)+'px';m.style.top=Math.min(innerHeight-m.offsetHeight-4,y)+'px';
+ m.onclick=ev=>{const b=ev.target.closest('[data-rc]');if(!b)return;m.remove();items[+b.dataset.rc][1]()};setTimeout(()=>document.addEventListener('pointerdown',function f(ev){if(!ev.target.closest('#rcM')){const q=$('#rcM');if(q)q.remove();document.removeEventListener('pointerdown',f,true)}},true),0)}
+/* ---------- dimensions (persistent) ---------- */
+function DIMS(){const p=P();p.dims=p.dims||[];return p.dims}
+function DIMO(){const p=P();p.dimOpt=Object.assign({plan:true,elev:false,pdf:true,dxf:true,txt:2.5},p.dimOpt||{});return p.dimOpt}
+function dimSVG(d,i,r,fs,sel){const a=d.a,b=d.b,dx=b.x-a.x,dy=b.y-a.y,L=Math.hypot(dx,dy)||1,nx=-dy/L,ny=dx/L,o=d.off||0,A={x:a.x+nx*o,y:a.y+ny*o},B={x:b.x+nx*o,y:b.y+ny*o},ex=r*0.25*Math.sign(o||1),C=sel?'#FFE08A':'#4FC3F7',ang=Math.atan2(dy,dx)/D2R,rot=ang>90||ang<-90?ang+180:ang,mx=(A.x+B.x)/2,my=(A.y+B.y)/2,sw=r*0.04,tk=r*0.18;
+ return`<g data-dim="${i}" style="cursor:pointer"><path d="M${a.x} ${a.y}L${A.x+nx*ex} ${A.y+ny*ex}M${b.x} ${b.y}L${B.x+nx*ex} ${B.y+ny*ex}M${A.x} ${A.y}L${B.x} ${B.y}" stroke="${C}" stroke-width="${sw}" fill="none"/><path d="M${A.x-tk*(dx/L-nx)} ${A.y-tk*(dy/L-ny)}L${A.x+tk*(dx/L-nx)} ${A.y+tk*(dy/L-ny)}M${B.x-tk*(dx/L-nx)} ${B.y-tk*(dy/L-ny)}L${B.x+tk*(dx/L-nx)} ${B.y+tk*(dy/L-ny)}" stroke="${C}" stroke-width="${sw*2}"/><text x="${mx+nx*r*0.25}" y="${my+ny*r*0.25}" font-size="${fs*0.6}" fill="${C}" text-anchor="middle" transform="rotate(${rot} ${mx+nx*r*0.25} ${my+ny*r*0.25})">${(L/1000).toFixed(2)}</text><path d="M${A.x} ${A.y}L${B.x} ${B.y}" stroke="transparent" stroke-width="${r*0.6}"/></g>`}
+/* ---------- beam offset e helpers ---------- */
+function eSuggest(b,q,kind){const sp=b.spans[q];if(!sp)return 0;if(kind==='0')return 0;let pa=null;try{pa=b.link.t==='free'?pathOf(b.link):beamPathAny(b)}catch(_){}if(!pa)return 0;const m=pa.at(pa.len/2),n=offN(m.tx,m.ty),lv=b.link.lv,cs=allCols(lv);
+ let cw=0;cs.forEach(c=>{const pr=mkPath(pa.geo).proj({x:c.x,y:c.y});if(pr.d<60){const d=c.d||{},w=d.round?d.bx:(Math.abs(m.tx)>=Math.abs(m.ty)?d.by:d.bx);cw=Math.max(cw,+w||0)}});if(!cw)cw=+sp.b||200;
+ const B0=planBounds(lv),cx=(B0.x0+B0.x1)/2,cy=(B0.y0+B0.y1)/2,out=Math.sign((m.x-cx)*n[0]+(m.y-cy)*n[1])||1,e=Math.max(0,(cw-(+sp.b||200))/2);return Math.round(kind==='out'?out*e:-out*e)}
+
+/* ---- รอบ 4 (ต่อ): วัดระยะ · เส้นบอกระยะ · ตั้งค่าเมาส์ ---- */
+MODT.push(['me','Measure วัดระยะ','ME'],['di','Aligned Dimension เส้นบอกระยะ','DI']);
+MIC.me='<path d="M3 17L17 3l4 4L7 21z"/><path d="M7 13l2 2M10 10l2 2M13 7l2 2"/>';MIC.di='<path d="M4 7v10M20 7v10M4 12h16"/><path d="M7 9l-3 3 3 3M17 9l3 3-3 3"/>';
+MTIP.me=['Measure','วัดระยะระหว่าง 2 จุด (ไม่บันทึก) แสดงระยะ ΔX ΔY และมุม',['คลิกจุดแรก (ใช้ OSNAP ได้ เช่น ขอบคาน กึ่งกลาง)','คลิกจุดที่ 2 · คลิกต่อเพื่อวัดใหม่ · Esc ออก']];
+MTIP.di=['Aligned Dimension','สร้างเส้นบอกระยะถาวรในแปลน (เลือกได้ว่าแสดงใน PDF)',['คลิกจุดแรก','คลิกจุดที่ 2','คลิกตำแหน่งวางเส้น · คลิกเส้นแล้ว Delete เพื่อลบ']];
+['me','di'].forEach(k=>{ICO['mod:'+k]=IC(MIC[k]);const t=MTIP[k];TIPS['mod:'+k]=[t[0],t[1],t[2],'m_'+k];if(!KCMD.some(x=>x[0]==='m_'+k))KCMD.push(['m_'+k,'Modify · '+t[0],k.toUpperCase()])});
+function measClick(q0,typed){const q=typed||modPt(q0);
+ if(MOD.step===0){MOD.base=q;MOD.meas=null;MOD.step=1;return modHint('คลิกจุดที่ 2'+(MOD.t==='me'?'':' ของเส้นบอกระยะ'))}
+ if(MOD.step===1){const a=MOD.base,b=q,dx=b.x-a.x,dy=b.y-a.y,L=Math.hypot(dx,dy);if(L<1)return;
+  if(MOD.t==='me'){MOD.meas={a,b};MOD.base=null;MOD.step=0;modHint(`ระยะ ${(L/1000).toFixed(3)} ม. · ΔX ${(Math.abs(dx)/1000).toFixed(3)} · ΔY ${(Math.abs(dy)/1000).toFixed(3)} · มุม ${((Math.atan2(-dy,dx)/D2R+360)%360).toFixed(1)}° · คลิกเพื่อวัดใหม่`);setTimeout(modHover,0);return}
+  MOD.b2=b;MOD.step=2;return modHint('คลิกตำแหน่งวางเส้นบอกระยะ')}
+ const a=MOD.base,b=MOD.b2,dx=b.x-a.x,dy=b.y-a.y,L=Math.hypot(dx,dy)||1,off=(q0.x-a.x)*(-dy/L)+(q0.y-a.y)*(dx/L);DIMS().push({lv:P().lv,a:{x:Math.round(a.x),y:Math.round(a.y)},b:{x:Math.round(b.x),y:Math.round(b.y)},off:Math.round(off)});save();drawPlan();MOD.base=null;MOD.b2=null;MOD.step=0;modHint('สร้างแล้ว '+(L/1000).toFixed(2)+' ม. · คลิกจุดแรกของเส้นถัดไป หรือ Esc')}
+const _modStart4=modStart;modStart=function(k){_modStart4(k);if(typeof MOD!=='undefined'&&MOD&&MOD.t===k&&(k==='me'||k==='di'))modHint(k==='me'?'คลิกจุดแรกที่จะวัด':'คลิกจุดแรกของเส้นบอกระยะ');if(MTIP[k])LASTCMD={t:'mod',k,n:MTIP[k][0]}};
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#plTools [data-pt]');if(b&&b.dataset.pt!=='sel')LASTCMD={t:'pt',k:b.dataset.pt,n:(TIPS['pt:'+b.dataset.pt]||[b.dataset.pt])[0]}});
+document.addEventListener('click',e=>{if(typeof MOD!=='undefined'&&MOD)return;const d=e.target.closest&&e.target.closest('#plSvg [data-dim]');if(!d||PT!=='sel'||PMOV)return;e.stopImmediatePropagation();PMS=[];PSEL={t:'dim',i:+d.dataset.dim};drawPlan();renderPlanPanel();toast('เลือกเส้นบอกระยะ · Delete เพื่อลบ')},true);
+document.addEventListener('keydown',e=>{if(!PSEL||PSEL.t!=='dim'||location.hash!=='#plan')return;const t=e.target;if(t&&/INPUT|SELECT|TEXTAREA/.test(t.tagName))return;if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();e.stopImmediatePropagation();plDelete()}},true);
+/* ---- settings: mouse & snap ---- */
+function mseSetHTML(){const m=MSE(),sm=SNMOD(),O=DIMO(),ck=(k,v,t,a)=>`<label class="ck"><input type="checkbox" data-${a}="${k}"${v?' checked':''}> ${t}</label>`;
+ return`<div class="h">เมาส์และ Snap (แบบ AutoCAD)</div>
+ <div class="g4"><div class="f"><label>Crosshair</label><select data-ms="xh"><option value="1"${m.xh?' selected':''}>แสดง</option><option value="0"${m.xh?'':' selected'}>ไม่แสดง (เคอร์เซอร์ปกติ)</option></select></div>
+ <div class="f"><label>ขนาด Crosshair (${m.xs}%)</label><input type="range" min="5" max="100" data-ms="xs" value="${m.xs}"></div>
+ <div class="f"><label>สี Crosshair</label><input type="color" data-ms="xc" value="${m.xc||'#e6e6e6'}"></div>
+ <div class="f"><label>Pickbox (${m.pb} px)</label><input type="range" min="2" max="20" data-ms="pb" value="${m.pb}"></div></div>
+ <div class="g4" style="margin-top:6px"><div class="f"><label>Aperture ระยะดูด Snap (${m.ap} px)</label><input type="range" min="4" max="40" data-ms="ap" value="${m.ap}"></div>
+ <div class="f"><label>ขนาดเครื่องหมาย Snap (×${m.mk})</label><input type="range" min="0.5" max="2.5" step="0.1" data-ms="mk" value="${m.mk}"></div>
+ <div class="f"><label>ล้อเมาส์</label><select data-ms="zi"><option value="0"${m.zi?'':' selected'}>หมุนขึ้น = ซูมเข้า (AutoCAD)</option><option value="1"${m.zi?' selected':''}>หมุนขึ้น = ซูมออก</option></select></div>
+ <div class="f"><label>ความเร็วซูม (×${m.zs})</label><input type="range" min="1.05" max="1.5" step="0.05" data-ms="zs" value="${m.zs}"></div></div>
+ <div class="g4" style="margin-top:6px"><div class="f"><label>คลิกขวาในแปลน</label><select data-ms="rc">${[['menu','เมนูลัด'],['repeat','ทำคำสั่งล่าสุดซ้ำ / ยกเลิก'],['enter','Enter (จบคำสั่ง)']].map(([a,b])=>`<option value="${a}"${m.rc===a?' selected':''}>${b}</option>`).join('')}</select></div></div>
+ <div class="sh">โหมด OSNAP (คลิกขวาที่ปุ่ม OSNAP ในแถบสถานะได้ด้วย)</div><div class="chips">${SNM.map(([k,t])=>ck(k,sm[k],t,'snm')).join('')}</div>
+ <div class="sh">เส้นบอกระยะ (DI) แสดงที่</div><div class="chips">${ck('plan',O.plan,'แปลนในหน้าทำงาน','dmo')}${ck('pdf',O.pdf,'แปลนในหน้าจัดหน้า PDF','dmo')}</div>
+ <div class="chips" style="margin-top:6px"><button class="chip" id="mseRst">คืนค่าเมาส์เริ่มต้น</button></div>`}
+document.addEventListener('input',e=>{const k=e.target.dataset&&e.target.dataset.ms;if(!k)return;const m=MSE(),v=e.target.value;m[k]=k==='xh'||k==='zi'?v==='1':k==='rc'||k==='xc'?v:+v;save();const l=e.target.closest('.f');if(l&&e.target.type==='range'){const lb=l.querySelector('label');if(lb)lb.textContent=lb.textContent.replace(/\(.*\)/,'('+(k==='mk'||k==='zs'?'×':'')+v+(k==='xs'?'%':k==='pb'||k==='ap'?' px':'')+')')}});
+document.addEventListener('change',e=>{const k=e.target.dataset&&e.target.dataset.ms;if(k){const m=MSE(),v=e.target.value;m[k]=k==='xh'||k==='zi'?v==='1':k==='rc'||k==='xc'?v:+v;save()}const d=e.target.dataset&&e.target.dataset.dmo;if(d){DIMO()[d]=e.target.checked;save();try{drawPlan()}catch(_){}}});
+document.addEventListener('click',e=>{if(e.target.id==='mseRst'){S.settings.mouse={};save();renderSet()}});
+
 function renderPlan(){P();syncAll();try{etbUI();modBarInit()}catch(e){console.error(e)}winBind();winRender();renderMenu();renderStatus();stBindXY();{const g=$('#winGrid');if(g)g.classList.toggle('lightv',DSP().view2d==='light')}try{kTips()}catch(e){}}
 function planChanged(full){syncAll();save();if(full)renderPlanPanel();drawPlan()}
 function parseList(t){return String(t).split(/[,\s]+/).map(v=>v.trim()).filter(Boolean)}
@@ -4151,7 +4258,7 @@ function parseList(t){return String(t).split(/[,\s]+/).map(v=>v.trim()).filter(B
  tools.addEventListener('input',e=>{if(e.target.id==='plLen')PLEN=e.target.value;else if(e.target.id==='plAng')PANG=e.target.value});
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&location.hash==='#plan'&&PDRAW){PDRAW=null;renderPlanTools();drawPlan()}});
  const pt=ev=>{const q=svg.createSVGPoint();q.x=ev.clientX;q.y=ev.clientY;return q.matrixTransform(svg.getScreenCTM().inverse())};
- svg.addEventListener('wheel',e=>{e.preventDefault();const q=pt(e),f=e.deltaY>0?1.15:1/1.15;PV={x:q.x-(q.x-PV.x)*f,y:q.y-(q.y-PV.y)*f,w:PV.w*f,h:PV.h*f};svg.setAttribute('viewBox',`${PV.x} ${PV.y} ${PV.w} ${PV.h}`)},{passive:false});
+ svg.addEventListener('wheel',e=>{e.preventDefault();const q=pt(e),f=MZF(e.deltaY);PV={x:q.x-(q.x-PV.x)*f,y:q.y-(q.y-PV.y)*f,w:PV.w*f,h:PV.h*f};svg.setAttribute('viewBox',`${PV.x} ${PV.y} ${PV.w} ${PV.h}`)},{passive:false});
  svg.addEventListener('pointerdown',e=>{PDR={sx:e.clientX,sy:e.clientY,v:Object.assign({},PV),k:svg.getBoundingClientRect()};PMOV=0});
  svg.addEventListener('pointermove',e=>{if(!PDR){if(e.pointerType!=='touch')planHover(pt(e));return}const dx=e.clientX-PDR.sx,dy=e.clientY-PDR.sy;if(Math.abs(dx)+Math.abs(dy)>5)PMOV=1;if(!PMOV)return;
   const s=Math.max(PDR.v.w/PDR.k.width,PDR.v.h/PDR.k.height);PV={x:PDR.v.x-dx*s,y:PDR.v.y-dy*s,w:PDR.v.w,h:PDR.v.h};svg.setAttribute('viewBox',`${PV.x} ${PV.y} ${PV.w} ${PV.h}`)});
@@ -4533,9 +4640,10 @@ function planVP(vp){const p=P(),lv=vp.src||p.lv,e=planExt(),X=e.X,Y=e.Y,B=planBo
  if(vp.ag!==false)AG().forEach(g=>{if(g.lv!==lv)return;const G=agGeom(g);o+=`<path data-ly="GRID" d="${agPathD(G,x,y,k)}" fill="none" stroke="#111"/>`;const a=mkPath(G).at(0);o+=`<text data-ly="GRIDTXT" x="${x(a.x)}" y="${y(a.y)-1.5*fk}" font-size="${(2*fk).toFixed(2)}" text-anchor="middle" fill="#111">${esc(g.n)}</text>`});
  S.beams.forEach(bm=>{const L=bm.link;if(!L||L.t!=='free'||L.lv!==lv||bm.linkBad)return;beamShapes(bm,x,y,k).forEach(d=>{o+=`<path data-ly="CONC" d="${d}" fill="none" stroke="#111"/>`});
   if(vp.bl!==false){const lp=beamLabelPos(bm,2.4*fk*sP),s0=inner(bm)[0]||bm.spans[0]||{};if(lp)o+=`<text data-ly="LABEL" x="${x(lp.x)}" y="${y(lp.y)}" font-size="${(2.3*fk).toFixed(2)}" text-anchor="middle" fill="${BLU}" transform="rotate(${lp.ang} ${x(lp.x)} ${y(lp.y)})">${esc(btLabel(bm,bm.grids[0].free&&bm.spans.length>1?1:0))}</text>`}});
+ if(DIMO().pdf)DIMS().forEach(dm=>{if(dm.lv!==lv)return;const a=dm.a,b=dm.b,dx=b.x-a.x,dy=b.y-a.y,L=Math.hypot(dx,dy)||1,nx=-dy/L,ny=dx/L,o2=dm.off||0,A={x:a.x+nx*o2,y:a.y+ny*o2},Bq={x:b.x+nx*o2,y:b.y+ny*o2},ang=Math.atan2(dy,dx)/D2R,rot=ang>90||ang<-90?ang+180:ang,mx=x((A.x+Bq.x)/2),my=y((A.y+Bq.y)/2);o+=`<g data-ly="DIM"><path d="M${x(a.x)} ${y(a.y)}L${x(A.x)} ${y(A.y)}M${x(b.x)} ${y(b.y)}L${x(Bq.x)} ${y(Bq.y)}M${x(A.x)} ${y(A.y)}L${x(Bq.x)} ${y(Bq.y)}" stroke="#C62828" stroke-width="0.18" fill="none"/><text x="${mx}" y="${my-0.8*fk}" font-size="${(1.8*fk).toFixed(2)}" fill="#C62828" text-anchor="middle" transform="rotate(${rot} ${mx} ${my})">${(L/1000).toFixed(2)}</text></g>`});
  XC().forEach(c=>{if(c.lv!==lv)return;const a=ancXY(c.p),d=colDim(c),cx=x(a.x),cy=y(a.y),bx=d.bx*k,by=d.by*k;o+=d.round?`<circle data-ly="COL" data-keep="1" cx="${cx}" cy="${cy}" r="${bx/2}" fill="#bdbdbd" stroke="#111"/>`:`<rect data-ly="COL" data-keep="1" x="${cx-bx/2}" y="${cy-by/2}" width="${bx}" height="${by}" fill="#bdbdbd" stroke="#111"/>`;if(vp.cl!==false)o+=`<text data-ly="LABEL" x="${cx+Math.max(bx,by)/2+0.8*fk}" y="${cy-Math.max(bx,by)/2-0.6*fk}" font-size="${(2*fk).toFixed(2)}" fill="#111">${esc(c.id)}</text>`});
  S.beams.forEach(bm=>{const L=bm.link;if(!L||L.t==='free'||L.lv!==lv||bm.linkBad)return;const pts=linkPts(L),sp=inner(bm);
-  for(let i=0;i<pts.length-1;i++){const s=sp[i]||sp[0],w=s?s.b:200,a=pts[i].x,b=pts[i+1].x;const r=L.dir==='x'?{x:Math.min(a,b),y:Y[L.k]-w/2,w:Math.abs(b-a),h:w}:{x:X[L.k]-w/2,y:Math.min(a,b),w,h:Math.abs(b-a)};
+  for(let i=0;i<pts.length-1;i++){const s=sp[i]||sp[0],w=s?s.b:200,a=pts[i].x,b=pts[i+1].x;const r=L.dir==='x'?{x:Math.min(a,b),y:Y[L.k]-w/2,w:Math.abs(b-a),h:w}:{x:X[L.k]-w/2,y:Math.min(a,b),w,h:Math.abs(b-a)};{const eo=+(s&&s.eo)||0;if(eo){if(L.dir==='x')r.y-=eo;else r.x+=eo}}
    o+=`<rect data-ly="CONC" x="${x(r.x)}" y="${y(r.y)}" width="${r.w*k}" height="${r.h*k}" fill="none" stroke="#111"/>`}
   if(vp.bl!==false&&pts.length>1){const mid=(pts[0].x+pts[1].x)/2,w0=(sp[0]?sp[0].b:200)/2,fs=2.3*fk,tx=L.dir==='x'?x(mid):x(X[L.k]+w0)+fs*1.1,ty=L.dir==='x'?y(Y[L.k]+w0)+fs*1.15:y(mid);
    o+=`<text data-ly="LABEL" x="${tx}" y="${ty}" font-size="${fs}" text-anchor="middle" fill="${BLU}"${L.dir==='y'?` transform="rotate(-90 ${tx} ${ty})"`:''}>${esc(btLabel(bm,bm.grids[0].free?1:0))}</text>`}});
