@@ -91,3 +91,6 @@ body.ro-beam #v-plan #plPanel,body.ro-beam #v-plan #plTools [data-pt=col],body.r
 body.kn-view #saveBtn,body.kn-view [data-fm="open"],body.kn-view #layBtn{display:none!important}
 body.kn-view #v-beam #panel,body.kn-view #v-beam #top .chips button:not([data-a^="sel"]),body.kn-view #v-beam #top input,body.kn-view #v-plan #plPanel,body.kn-view #v-plan #plTools,body.kn-view #v-cut .bc,body.kn-view #setForm{pointer-events:none;opacity:.6}
 body.kn-view #v2 [data-h]{display:none}
+
+.kna{--bg:#0B0B0D;--p1:#111215;--p2:#16171B;--ln:#23252A;--ln2:#33363C;--tx:#E6E3DC;--mu:#8A8E95;--dim:#5C6066;--au:#C9A55C;--au2:#E2C584;--aud:#1C1810;--bad:#E3A497;--badbg:#2A1714;--badln:#5A2E27;--ok:#8FB58F;color:#E6E3DC;color-scheme:dark}
+.kna .kin{color:#E6E3DC}.kna .kna-top{background:#0E0F12;color:#E6E3DC}

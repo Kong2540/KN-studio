@@ -1738,8 +1738,8 @@ function renderSet(){const st=S.settings;
  <div class="note">ตัวอย่างตั้งระยะทาบไว้ที่ 41 × db เพื่อให้ตรงกับแบบ Revit · วิธี ACI จะได้ระยะทาบยาวกว่านี้</div>
  <div class="h">เส้นผ่านศูนย์กลางงอด้านในขั้นต่ำ (× db) · ACI 318</div>
  <div class="g4">${fld('ปลอก ≤ 16 มม.','bend.stir',st.bend.stir)}${fld('หลัก ≤ DB25','bend.m25',st.bend.m25)}${fld('DB28–DB36','bend.m36',st.bend.m36)}${fld('> DB36','bend.big',st.bend.big)}</div>
- <div id="thmSet"></div><div id="mseSet"></div><div id="dspSet"></div><div id="keySet"></div><div id="draftSet"></div><div id="dxSet"></div><div id="schSet"></div>
- <div style="margin-top:16px"><button class="ib" id="rsSet">คืนค่าเริ่มต้น</button></div>`;renderDraftUI();renderDxSet();renderSchSet();{const ms=$('#mseSet');if(ms)ms.innerHTML=mseSetHTML()}{const t0=$('#thmSet');if(t0){t0.innerHTML=thSetHTML();thBind(t0)}setTimeout(()=>{try{setNav()}catch(e){}},0);const a=$('#dspSet'),b=$('#keySet');if(a){a.innerHTML=dispSetHTML();dispBind(a)}if(b){b.innerHTML=keysSetHTML();dispBind(b)}}
+ <div id="sysSet"></div><div id="thmSet"></div><div id="mseSet"></div><div id="dspSet"></div><div id="keySet"></div><div id="draftSet"></div><div id="dxSet"></div><div id="schSet"></div>
+ <div style="margin-top:16px"><button class="ib" id="rsSet">คืนค่าเริ่มต้น</button></div>`;renderDraftUI();renderDxSet();renderSchSet();{const ms=$('#mseSet');if(ms)ms.innerHTML=mseSetHTML()}{const sy=$('#sysSet');if(sy)sy.innerHTML=sysSetHTML()}{const t0=$('#thmSet');if(t0){t0.innerHTML=thSetHTML();thBind(t0)}setTimeout(()=>{try{setNav()}catch(e){}},0);const a=$('#dspSet'),b=$('#keySet');if(a){a.innerHTML=dispSetHTML();dispBind(a)}if(b){b.innerHTML=keysSetHTML();dispBind(b)}}
  $('#setForm').querySelectorAll('[data-p]').forEach(el=>el.addEventListener('change',e=>{setP(st,e.target.dataset.p,e.target.value);st.stock=+st.stock;st.round=Math.max(10,st.round);save();toast('บันทึกแล้ว')}));
  $('#setForm').querySelectorAll('[data-fwm]').forEach(el=>el.onchange=()=>{(st.fw=st.fw||{})[el.dataset.fwm]=el.value;save();toast('บันทึกแล้ว')});
  $('#stepStd').onclick=()=>{Object.assign(st,{stepCrank:75,stepSlope:6,stepExt:'ld'});save();renderSet();toast('คืนค่ามาตรฐานจุดต่อต่างระดับแล้ว')};
@@ -4188,6 +4188,28 @@ function mseSetHTML(){const m=MSE(),sm=SNMOD(),O=DIMO(),ck=(k,v,t,a)=>`<label cl
 document.addEventListener('input',e=>{const k=e.target.dataset&&e.target.dataset.ms;if(!k)return;const m=MSE(),v=e.target.value;m[k]=k==='xh'||k==='zi'?v==='1':k==='rc'||k==='xc'?v:+v;save();const l=e.target.closest('.f');if(l&&e.target.type==='range'){const lb=l.querySelector('label');if(lb)lb.textContent=lb.textContent.replace(/\(.*\)/,'('+(k==='mk'||k==='zs'?'×':'')+v+(k==='xs'?'%':k==='pb'||k==='ap'?' px':'')+')')}});
 document.addEventListener('change',e=>{const k=e.target.dataset&&e.target.dataset.ms;if(k){const m=MSE(),v=e.target.value;m[k]=k==='xh'||k==='zi'?v==='1':k==='rc'||k==='xc'?v:+v;save()}const d=e.target.dataset&&e.target.dataset.dmo;if(d){DIMO()[d]=e.target.checked;save();try{drawPlan()}catch(_){}}});
 document.addEventListener('click',e=>{if(e.target.id==='mseRst'){S.settings.mouse={};save();renderSet()}});
+
+/* ===== รอบ 5: ชื่อในแอป (แอดมินตั้ง) · ค่าเริ่มต้นระบบ ===== */
+const LBLW=new WeakMap();let LBLT=0,LBLS='';
+function lblList(){const L=(window.KN&&KN.set&&KN.set.labels)||[];return L.filter(r=>r&&r.from&&r.to).slice().sort((a,b)=>b.from.length-a.from.length)}
+function lblTx(t,L){if(!t||!t.trim())return t;let o=t;for(const r of L){if(r.exact){if(o.trim()===r.from)o=o.replace(r.from,r.to)}else if(o.includes(r.from))o=o.split(r.from).join(r.to)}return o}
+function knLabels(force){const L=lblList(),sig=JSON.stringify(L);if(!L.length&&!force&&!LBLS)return;if(sig!==LBLS){LBLS=sig}if(!L.length)return;
+ const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;if(!p||/^(SCRIPT|STYLE|TEXTAREA)$/.test(p.tagName)||p.isContentEditable||p.closest('.kin,.kna-pg,[data-nolbl]'))return NodeFilter.FILTER_REJECT;return NodeFilter.FILTER_ACCEPT}});
+ let n;while((n=w.nextNode())){const v=n.nodeValue,last=LBLW.get(n);if(last&&last.out===v&&last.sig===sig)continue;const src=last&&last.out===v?last.src:v,o=lblTx(src,L);LBLW.set(n,{src,out:o,sig});if(o!==v)n.nodeValue=o}
+ document.querySelectorAll('[title],[placeholder],[aria-label]').forEach(el=>{if(el.closest('.kna-pg,[data-nolbl]'))return;['title','placeholder','aria-label'].forEach(a=>{const v=el.getAttribute(a);if(!v)return;const k='data-lo-'+a,src=el.getAttribute(k)||v;if(el.getAttribute(k)&&el.getAttribute('data-lv-'+a)!==v){el.setAttribute(k,v)}const o=lblTx(el.getAttribute(k)||v,L);if(o!==v){el.setAttribute(k,el.getAttribute(k)||v);el.setAttribute('data-lv-'+a,o);el.setAttribute(a,o)}})});
+ const dt=lblTx(document.title,L);if(dt!==document.title)document.title=dt}
+new MutationObserver(()=>{if(!lblList().length)return;clearTimeout(LBLT);LBLT=setTimeout(()=>knLabels(),120)}).observe(document.body,{childList:true,subtree:true,characterData:true});
+setInterval(()=>{if(lblList().length&&JSON.stringify(lblList())!==LBLS)knLabels(true)},4000);
+/* system defaults */
+const SYS_KEEP=['theme','disp','fwg','dlay','mouse'];
+function sysDef(){return window.KN&&KN.set&&KN.set.sys_defaults&&KN.set.sys_defaults.settings?KN.set.sys_defaults:null}
+function sysReset(){const d=sysDef();if(!d)return toast('แอดมินยังไม่ได้ตั้งค่าเริ่มต้นระบบ');const keep={};SYS_KEEP.forEach(k=>{if(S.settings[k]!==undefined)keep[k]=S.settings[k]});S.settings=Object.assign({},S.settings,JSON.parse(JSON.stringify(d.settings)),keep,{_sys:d.at});save();try{renderAll()}catch(_){}try{renderSet()}catch(_){}try{thApply()}catch(_){}toast('รีเซ็ตเป็นค่าระบบแล้ว (ธีมและเมาส์ของคุณคงเดิม)')}
+let SYSN=null;function sysCheck(){const d=sysDef();if(!d||!S||!S.settings||S.settings._sys===d.at)return;const fresh=!(S.beams||[]).length&&!Object.keys((P().cols)||{}).length;
+ if(fresh){const keep={};SYS_KEEP.forEach(k=>{if(S.settings[k]!==undefined)keep[k]=S.settings[k]});S.settings=Object.assign({},S.settings,JSON.parse(JSON.stringify(d.settings)),keep,{_sys:d.at});save();toast('ใช้ค่าเริ่มต้นระบบกับโครงการใหม่แล้ว')}
+ else if(SYSN!==d.at){SYSN=d.at;toast('มีค่าเริ่มต้นระบบใหม่จากแอดมิน · ตั้งค่า → ค่าระบบ → รีเซ็ต',5000)}}
+function sysSetHTML(){const d=sysDef(),on=!!(window.KN&&KN.ready);if(!on)return'';return`<div class="h">ค่าระบบ (แอดมินกำหนด)</div><div class="note">${d?`แอดมินตั้งค่าเริ่มต้นระบบไว้เมื่อ ${new Date(d.at).toLocaleString('th-TH')}${S.settings._sys===d.at?' · โครงการนี้ใช้ค่าระบบล่าสุดแล้ว':' · โครงการนี้ยังไม่ได้ใช้ค่าระบบล่าสุด'}`:'แอดมินยังไม่ได้ตั้งค่าเริ่มต้นระบบ · ใช้ค่ามาตรฐานของโปรแกรม'} · ธีมสี การแสดงผล และเมาส์ เป็นของคุณเอง ไม่ถูกรีเซ็ต</div><div class="chips" style="margin-top:6px"><button class="chip" id="sysRst"${d?'':' disabled'}>รีเซ็ตเป็นค่าระบบ</button>${KN.isAdmin&&KN.isAdmin()?'<button class="chip" id="sysAdm">ตั้งค่าระบบ / ชื่อในแอป (แอดมิน)</button>':''}</div>`}
+document.addEventListener('click',e=>{if(e.target.id==='sysRst'){if(confirm('รีเซ็ตค่าตั้งค่าของโครงการนี้เป็นค่าระบบ? (ธีมและเมาส์ของคุณคงเดิม · Undo ได้)'))sysReset()}else if(e.target.id==='sysAdm'){const b=document.querySelector('[data-mm="admin"]');if(b)b.click();else toast('เปิดหน้าแอดมินจากเมนูบัญชี')}});
+setInterval(()=>{try{sysCheck()}catch(_){}},3000);
 
 function renderPlan(){P();syncAll();try{etbUI();modBarInit()}catch(e){console.error(e)}winBind();winRender();renderMenu();renderStatus();stBindXY();{const g=$('#winGrid');if(g)g.classList.toggle('lightv',DSP().view2d==='light')}try{kTips()}catch(e){}}
 function planChanged(full){syncAll();save();if(full)renderPlanPanel();drawPlan()}

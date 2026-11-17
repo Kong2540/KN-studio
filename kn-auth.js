@@ -254,11 +254,11 @@ function renderUserBtn(){const b=document.getElementById('knUser');if(!b||!K.pro
 /* ---------- admin ---------- */
 let AU=[],AF='pending';
 async function renderAdmin(tab){if(!K.isAdmin())return;tab=tab||'users';
- const T=[['users','ผู้ใช้'],['roles','บทบาทและสิทธิ์'],['fields','ช่องสมัครสมาชิก']];
+ const T=[['users','ผู้ใช้'],['roles','บทบาทและสิทธิ์'],['fields','ช่องสมัครสมาชิก'],['sys','ค่าเริ่มต้นระบบ'],['labels','ชื่อในแอป']];
  page('หน้าแอดมิน',`<div class="kseg wide">${T.map(([k,t])=>`<button class="${tab===k?'on':''}" data-at="${k}">${t}</button>`).join('')}</div><div id="kad"><div class="kspin"></div></div>`);
  const el=root().querySelector('#kad');
  try{await loadSet();if(tab==='users'){const{data,error}=await K.sb.from('profiles').select('*').order('created_at',{ascending:false});if(error)throw error;AU=data||[];adUsers(el)}
-  else if(tab==='roles')adRoles(el);else if(tab==='fields')adFields(el);}catch(e){el.innerHTML=`<p class="kmu">${esc(errT(e))}</p>`}}
+  else if(tab==='roles')adRoles(el);else if(tab==='fields')adFields(el);else if(tab==='sys')adSys(el);else if(tab==='labels')adLabels(el);}catch(e){el.innerHTML=`<p class="kmu">${esc(errT(e))}</p>`}}
 async function saveSet(key,value){const{error}=await K.sb.from('app_settings').upsert({key,value,updated_at:new Date().toISOString()});if(error)throw error;K.set[key]=value;LS.set('kn.set',K.set)}
 function adUsers(el){const cnt=s=>AU.filter(u=>s==='all'||u.status===s).length,R=K.set.roles||{};
  const F=(K.set.signup_fields||[]),L=AU.filter(u=>AF==='all'||u.status===AF);
@@ -297,4 +297,25 @@ function adFields(el){const F=JSON.parse(JSON.stringify(K.set.signup_fields||[])
    row.querySelectorAll('[data-mv]').forEach(b=>b.onclick=()=>{const i=+row.dataset.i,j=i+ +b.dataset.mv;[F[i],F[j]]=[F[j],F[i]];draw()});row.querySelector('[data-rm]').onclick=()=>{F.splice(+row.dataset.i,1);draw()}});
   el.querySelector('#kfadd').onclick=()=>{F.push({key:'f'+Date.now().toString(36),label:'',type:'text',required:false});draw()};
   el.querySelector('#kfsave').onclick=async e=>{if(F.some(f=>!String(f.label).trim())){toast('กรุณาตั้งชื่อทุกช่อง');return}busy(e.target,true);try{await saveSet('signup_fields',F);toast('บันทึกช่องสมัครแล้ว')}catch(x){toast(errT(x))}busy(e.target,false)}};draw()}
+/* ---------- ค่าเริ่มต้นระบบ + ชื่อในแอป (แอดมิน) ---------- */
+const SYS_SKIP=['theme','disp','fwg','dlay','_sys','mouse'];
+function adSys(el){const d=K.set.sys_defaults||null,S0=(typeof S!=='undefined'&&S&&S.settings),keys=S0?Object.keys(S0).filter(k=>!SYS_SKIP.includes(k)):[];
+ el.innerHTML=`<p class="kmu">ค่าเริ่มต้นระบบ = ค่าตั้งค่าที่ผู้ใช้ทุกคนได้ในโครงการใหม่ และใช้เมื่อผู้ใช้กด "รีเซ็ตเป็นค่าระบบ" (ตั้งค่า → ค่าระบบ) · <b>ธีมสี การแสดงผล และเมาส์ เป็นของผู้ใช้แต่ละคน ไม่รวมในค่าระบบ</b></p>
+ <div class="kinfo"><div><span>สถานะ</span><b>${d?'ตั้งไว้แล้ว':'ยังไม่ได้ตั้ง (ใช้ค่ามาตรฐานของโปรแกรม)'}</b></div>${d?`<div><span>บันทึกล่าสุด</span><b>${fmtD(d.at)} · ${esc(d.by||'')}</b></div><div><span>หมวดที่รวม</span><b>${esc(Object.keys(d.settings||{}).join(', '))}</b></div>`:''}</div>
+ <p class="kmu" style="margin-top:10px">ขั้นตอน: เปิดโครงการ → ตั้งค่ามาตรฐาน ระยะทาบ จุดต่อต่างระดับ แผ่นแบบ เลเยอร์ คีย์ลัด ฯลฯ ให้เรียบร้อย → กลับมากดปุ่มด้านล่าง</p>
+ <div class="kchips" style="margin-top:8px"><button class="kbtn sm" id="ksysSave"${S0?'':' disabled'}>บันทึกค่าตั้งค่าปัจจุบันเป็นค่าเริ่มต้นระบบ (${keys.length} หมวด)</button>${d?'<button class="ib kdanger" id="ksysDel">ล้างค่าเริ่มต้นระบบ</button>':''}</div>${S0?'':'<p class="kmu">เปิดโครงการก่อนจึงจะบันทึกได้</p>'}`;
+ const sv=el.querySelector('#ksysSave');if(sv)sv.onclick=async e=>{if(!confirm('บันทึกค่าตั้งค่าปัจจุบันเป็นค่าเริ่มต้นของทุกคน?'))return;busy(e.target,true);try{const st={};keys.forEach(k=>st[k]=JSON.parse(JSON.stringify(S.settings[k])));await saveSet('sys_defaults',{settings:st,at:new Date().toISOString(),by:(K.prof&&(K.prof.display_name||K.prof.email))||''});toast('บันทึกค่าเริ่มต้นระบบแล้ว');adSys(el)}catch(x){toast(errT(x))}busy(e.target,false)};
+ const dl=el.querySelector('#ksysDel');if(dl)dl.onclick=async e=>{if(!confirm('ล้างค่าเริ่มต้นระบบ? ผู้ใช้จะกลับไปใช้ค่ามาตรฐานของโปรแกรม'))return;busy(e.target,true);try{await saveSet('sys_defaults',null);toast('ล้างแล้ว');adSys(el)}catch(x){toast(errT(x))}busy(e.target,false)}}
+const LBL_SUG=['KN Studio','KN-Detail','โต๊ะทำงาน · แปลน / รูปด้าน','เปิดมุมมอง 3D','คลังหน้าตัด','นำเข้าจาก AutoCAD (DXF)','Bar Cut','จัดหน้า · PDF','BOQ','ตั้งค่า','Model Explorer','Properties','รายละเอียดคาน','แผ่นแบบ','ตาราง Bending','ส่งออก','วาดคานต่อเนื่อง','วาดคานทีละช่วง','คานอิสระ / คานฝาก','วางเสา','กริดช่วย เส้น','ชั้น','หลังคา'];
+function adLabels(el){const L=JSON.parse(JSON.stringify(K.set.labels||[]));let q='';
+ const draw=()=>{const rows=L.map((r,i)=>({r,i})).filter(o=>!q||(o.r.from+' '+o.r.to).toLowerCase().includes(q.toLowerCase()));
+  el.innerHTML=`<p class="kmu">เปลี่ยนคำที่แสดงในแอปสำหรับผู้ใช้ทุกคน เช่น "KN-Detail" → "รายละเอียดคาน" · ระบบจะแทนคำเดิมทุกที่ที่พบในหน้าจอ (เมนู ปุ่ม หัวข้อ ข้อความช่วย) · ไม่เปลี่ยนข้อมูลที่ผู้ใช้กรอก · คำยาวจะถูกแทนก่อนคำสั้น</p>
+  <div class="kchips"><input class="kin" id="klq" placeholder="ค้นหา" value="${esc(q)}" style="max-width:220px"><span style="flex:1"></span><button class="ib" id="kladd">+ เพิ่มคำ</button><button class="kbtn sm" id="klsave">บันทึกชื่อในแอป</button></div>
+  ${rows.map(({r,i})=>`<div class="kfx" data-li="${i}"><input class="kin" data-lx="from" value="${esc(r.from)}" placeholder="คำเดิม" list="klsug"><span style="text-align:center">→</span><input class="kin" data-lx="to" value="${esc(r.to)}" placeholder="คำใหม่"><label class="kck"><input type="checkbox" data-lx="exact"${r.exact?' checked':''}> ทั้งข้อความเท่านั้น</label><button class="ib kdanger" data-lrm>ลบ</button></div>`).join('')||'<p class="kmu">ยังไม่มีคำที่เปลี่ยน</p>'}
+  <datalist id="klsug">${LBL_SUG.map(t=>`<option value="${esc(t)}">`).join('')}</datalist>`;
+  el.querySelector('#klq').oninput=e=>{q=e.target.value;const p=e.target.selectionStart;draw();const n=el.querySelector('#klq');n.focus();n.setSelectionRange(p,p)};
+  el.querySelectorAll('[data-li]').forEach(row=>{const r=L[+row.dataset.li];row.querySelectorAll('[data-lx]').forEach(i=>{i.oninput=i.onchange=()=>{r[i.dataset.lx]=i.type==='checkbox'?i.checked:i.value}});row.querySelector('[data-lrm]').onclick=()=>{L.splice(+row.dataset.li,1);draw()}});
+  el.querySelector('#kladd').onclick=()=>{L.unshift({from:'',to:'',exact:false});q='';draw();const f=el.querySelector('[data-lx="from"]');if(f)f.focus()};
+  el.querySelector('#klsave').onclick=async e=>{const out=L.filter(r=>String(r.from).trim()&&String(r.to).trim()&&r.from!==r.to).map(r=>({from:String(r.from).trim(),to:String(r.to).trim(),exact:!!r.exact}));busy(e.target,true);try{await saveSet('labels',out);toast('บันทึกชื่อในแอปแล้ว · มีผลทันที');if(window.knLabels)knLabels(true)}catch(x){toast(errT(x))}busy(e.target,false)}};draw()}
+
 })();
