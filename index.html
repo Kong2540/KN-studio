@@ -233,6 +233,24 @@ body.sb-off :is(.sb,.sbb,#sbBtn){display:none}.sbb{display:none}
  .wsl{left:0;transform:translateX(-105%)}.wsr{right:0;transform:translateX(105%);flex-direction:column;flex-wrap:nowrap}body.ws-L .wsl,body.ws-R .wsr{transform:none}.wshint{display:none}}
 #pdfMod{z-index:90}
 .spin{display:inline-block;width:12px;height:12px;border:2px solid var(--au);border-right-color:transparent;border-radius:50%;animation:spn .8s linear infinite;vertical-align:-2px}@keyframes spn{to{transform:rotate(360deg)}}
+#v-plan .etb{display:grid;grid-template-columns:230px minmax(0,1fr) 320px;gap:8px;padding:8px;height:calc(100vh - 54px)}
+.exw{overflow:auto;border:1px solid var(--ln);background:#0D0E11;min-width:0}.exh{font:600 10.5px Cinzel,'IBM Plex Sans Thai',serif;letter-spacing:2.5px;color:var(--au2);padding:9px 10px;border-bottom:1px solid var(--ln)}
+#exBody details{border-bottom:1px solid var(--ln)}#exBody summary{cursor:pointer;padding:7px 10px;color:#C8C5BE;font-size:12px}.exi{display:flex;justify-content:space-between;gap:6px;width:100%;background:none;border:0;color:inherit;font:inherit;font-size:12px;padding:5px 12px;cursor:pointer;text-align:left}.exi span{color:var(--mu);font-size:11px}.exi.on,.exi:hover{color:var(--au2);background:#1a1710}.exs{max-height:240px;overflow:auto}#exBody #wsLeft{display:flex;flex-direction:column;gap:6px;padding:6px}
+.rcol{overflow:auto;display:flex;flex-direction:column;gap:8px;min-width:0}#v-plan .rcol .plp{overflow:visible;padding-right:0}
+#v-plan .plc{min-height:0}.wbar{display:flex;gap:4px;align-items:center;padding:4px 8px;border-bottom:1px solid var(--ln);flex-wrap:wrap}.wbar .chip{padding:3px 8px}.wtabs{display:none;gap:4px;flex-wrap:wrap}
+.wgrid{flex:1;display:grid;gap:4px;padding:4px;min-height:0}.wgrid.L1{grid-template:1fr/1fr}.wgrid.L2v{grid-template:1fr/1fr 1fr}.wgrid.L2h{grid-template:1fr 1fr/1fr}.wgrid.L3,.wgrid.L4{grid-template:1fr 1fr/1fr 1fr}.wgrid.L3 .win:first-child{grid-row:span 2}
+.win{display:flex;flex-direction:column;border:1px solid var(--ln);min-width:0;min-height:0;background:#0E0F12}.win.act{border-color:var(--au);box-shadow:0 0 0 1px #C9A55C55}
+.wh{display:flex;gap:3px;align-items:center;padding:3px 4px;border-bottom:1px solid var(--ln);flex-wrap:wrap}.wh .chip{padding:2px 6px;font-size:11.5px;min-height:0}.wh select.chip{max-width:150px}.wn{font-size:11px;color:var(--mu);padding:0 3px}
+.wb{position:relative;flex:1;min-height:0;overflow:hidden}.wb #plSvg,.wb svg.wst,.wb svg.wel{position:absolute;inset:0;width:100%;height:100%;min-height:0;touch-action:none;user-select:none;display:block}.wb svg.wel{cursor:default}
+.whint{position:absolute;right:6px;bottom:4px;font-size:10.5px;color:#6b6e74;pointer-events:none}
+#ws3{position:absolute;inset:0;display:flex;flex-direction:column}#ws3 .wst{padding:4px;gap:4px}#ws3 .wst .chip{font-size:11px;padding:2px 6px}#ws3 .wsv{flex:1;position:relative;min-height:0}
+.wmob{display:none}
+@media(max-width:1250px){#v-plan .etb{grid-template-columns:200px minmax(0,1fr) 280px}}
+@media(max-width:900px){#v-plan .etb{display:block;padding:0;height:calc(100vh - 54px)}#v-plan .plc{height:100%;border:0}
+ #v-plan .exw,#v-plan .rcol{position:fixed;top:54px;bottom:0;width:min(330px,88vw);z-index:45;background:var(--p1);transition:transform .2s;padding:8px;box-shadow:0 0 30px #000}#v-plan .exw{left:0;transform:translateX(-105%)}#v-plan .rcol{right:0;transform:translateX(105%)}body.ws-L #v-plan .exw,body.ws-R #v-plan .rcol{transform:none}
+ #v-plan .plt,.wbar,.wh,#ws3 .wst{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}#v-plan .plt>*,.wbar>*,.wh>*,#ws3 .wst>*{flex:0 0 auto}#v-plan .plt .sep{display:none}
+ .wmob{display:inline-block}.wlay{display:none}.wtabs{display:flex}.wgrid{grid-template:1fr/1fr!important}.wgrid .win:not(.act){display:none}.wgrid.L3 .win:first-child{grid-row:auto}}
+.chip.pk{border-color:#C58AE8;background:#2a1d33}
 .plsb{position:absolute;left:8px;right:8px;bottom:40px;display:none;gap:6px;align-items:center;flex-wrap:wrap;background:#15161AEE;border:1px solid var(--au);padding:6px 8px;z-index:5}.plsbt{flex:1;min-width:120px;font-size:12px;color:var(--au2)}.plsbd{border-color:#E8604E!important;color:#F29A8C!important}
 .plgp{position:absolute;left:8px;top:52px;width:min(320px,calc(100% - 16px));max-height:60%;overflow:auto;display:none;background:#15161AF2;border:1px solid var(--ln2);padding:8px;z-index:6}
 .btw2{border:1px solid #E8963A;background:#1d160c;color:#F2C38A;padding:6px 9px;margin-top:6px;font-size:12px;line-height:1.5}.bttabs{margin:6px 0 10px}
@@ -289,7 +307,7 @@ body.sb-off :is(.sb,.sbb,#sbBtn){display:none}.sbb{display:none}
     <div class="apps">
       <button class="app live" data-go="detail"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34"><rect x="3" y="18" width="28" height="9" fill="none" stroke="#E2C584" stroke-width="1.5"/><rect x="12" y="4" width="10" height="14" fill="none" stroke="#C9A55C" stroke-width="1.5"/><g stroke="#8A8E95"><line x1="8" y1="18" x2="8" y2="27"/><line x1="14" y1="18" x2="14" y2="27"/><line x1="20" y1="18" x2="20" y2="27"/><line x1="26" y1="18" x2="26" y2="27"/></g></svg></div><div class="lb">KN-Detail</div><div class="tag">คาน · เสา · พื้น · ผนัง</div></button>
       <button class="app live" data-go="cut"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34"><g fill="#C9A55C"><rect x="3" y="8" width="18" height="5"/><rect x="22" y="8" width="9" height="5" opacity=".5"/><rect x="3" y="16" width="12" height="5"/><rect x="16" y="16" width="12" height="5"/><rect x="3" y="24" width="26" height="5"/></g></svg></div><div class="lb">Bar Cut</div><div class="tag">ตัดเหล็กเศษน้อยสุด</div></button>
-      <button class="app live" data-go="ws"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke-width="1.4"><path d="M17 3l12 7v14l-12 7-12-7V10z" stroke="#E2C584"/><path d="M5 10l12 7 12-7M17 17v14" stroke="#C9A55C"/><path d="M11 13.5v14M23 13.5v14" stroke="#8A8E95" stroke-dasharray="2 2"/></svg></div><div class="lb">โต๊ะทำงาน</div><div class="tag">3D ทั้งอาคาร</div></button>
+      <button class="app live" data-go="ws"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke-width="1.4"><path d="M17 3l12 7v14l-12 7-12-7V10z" stroke="#E2C584"/><path d="M5 10l12 7 12-7M17 17v14" stroke="#C9A55C"/><path d="M11 13.5v14M23 13.5v14" stroke="#8A8E95" stroke-dasharray="2 2"/></svg></div><div class="lb">โต๊ะทำงาน</div><div class="tag">แปลน · รูปด้าน · 3D</div></button>
       <button class="app live" id="btTile"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34"><rect x="6" y="6" width="10" height="14" fill="none" stroke="#E2C584" stroke-width="1.5"/><rect x="18" y="6" width="10" height="14" fill="none" stroke="#C9A55C" stroke-width="1.2"/><g fill="#C9A55C"><circle cx="9" cy="9" r="1.2"/><circle cx="13" cy="9" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="13" cy="17" r="1.2"/></g><path d="M6 25h22M6 29h14" stroke="#8A8E95"/></svg></div><div class="lb">คลังหน้าตัด</div><div class="tag">คาน · เสา</div></button>
       <button class="app live" data-go="pdf"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34"><rect x="5" y="4" width="24" height="26" fill="none" stroke="#E2C584" stroke-width="1.5"/><rect x="9" y="8" width="16" height="8" fill="none" stroke="#C9A55C" stroke-width="1.2"/><rect x="9" y="19" width="7" height="7" fill="none" stroke="#C9A55C" stroke-width="1.2"/><g stroke="#8A8E95"><line x1="18" y1="20" x2="25" y2="20"/><line x1="18" y1="23" x2="25" y2="23"/></g></svg></div><div class="lb">จัดหน้า · PDF</div><div class="tag">Layout · พิมพ์แบบ</div></button>
       <button class="app soon"><div class="ic"><svg width="34" height="34" viewBox="0 0 34 34"><rect x="7" y="4" width="20" height="26" fill="none" stroke="#8A8E95" stroke-width="1.5"/><g stroke="#8A8E95"><line x1="11" y1="11" x2="23" y2="11"/><line x1="11" y1="16" x2="23" y2="16"/><line x1="11" y1="21" x2="19" y2="21"/></g></svg></div><div class="lb">BOQ</div><div class="tag">เร็ว ๆ นี้</div></button>
@@ -315,9 +333,10 @@ body.sb-off :is(.sb,.sbb,#sbBtn){display:none}.sbb{display:none}
   </div>
 </section>
 
-<section class="view" id="v-plan"><div class="pl">
-  <div class="plp" id="plPanel"></div>
-  <div class="plc"><div class="plt" id="plTools"></div><svg id="plSvg" xmlns="http://www.w3.org/2000/svg"></svg><div class="note" id="plHint" style="padding:6px 10px;margin:0"></div></div>
+<section class="view" id="v-plan"><div class="pl etb">
+  <div class="exw"><div class="exh">MODEL EXPLORER</div><div id="exBody"></div></div>
+  <div class="plc"><div class="plt" id="plTools"></div><div class="wbar" id="winBar"></div><div class="wgrid" id="winGrid"></div><div id="plPark" style="display:none"><svg id="plSvg" xmlns="http://www.w3.org/2000/svg"></svg></div><div class="note" id="plHint" style="padding:6px 10px;margin:0"></div></div>
+  <div class="rcol"><div id="wsRight"></div><div class="plp" id="plPanel"></div></div>
 </div></section>
 
 <section class="view" id="v-beam">
@@ -382,7 +401,7 @@ body.sb-off :is(.sb,.sbb,#sbBtn){display:none}.sbb{display:none}
 const BARS={RB6:6,RB9:9,DB10:10,DB12:12,DB16:16,DB20:20,DB25:25,DB28:28,DB32:32};
 const MAIN=['DB10','DB12','DB16','DB20','DB25','DB28','DB32'],STIR=['RB6','RB9','DB10','DB12'];
 const GR={SR24:235,SD30:295,SD40:390,SD50:490},LAY=['T1','T2','T3','B1','B2','B3'];
-function defSettings(){return{agg:19,stock:12000,round:50,minLap:300,lapMode:'aci',lapMult:40,vclear:25,exTop:0.25,exBot:0.125,bend:{stir:4,m25:6,m36:8,big:10},col:{mode:'type',preset:'gold',over:{}},sheet:{paper:'A4',rowMode:'pack',scale:'auto',secScale:20,sec:true,stirShape:true,grid:true,dims:true,elev:true,stir:true,main:true,extra:true,rows:true,labels:true,inElev:false,table:true,color:true,dxf3d:false,title:'',by:'',sheetNo:'',date:''}}}
+function defSettings(){return{stepCrank:75,stepSlope:6,stepExt:'ld',agg:19,stock:12000,round:50,minLap:300,lapMode:'aci',lapMult:40,vclear:25,exTop:0.25,exBot:0.125,bend:{stir:4,m25:6,m36:8,big:10},col:{mode:'type',preset:'gold',over:{}},sheet:{paper:'A4',rowMode:'pack',scale:'auto',secScale:20,sec:true,stirShape:true,grid:true,dims:true,elev:true,stir:true,main:true,extra:true,rows:true,labels:true,inElev:false,table:true,color:true,dxf3d:false,title:'',by:'',sheetNo:'',date:''}}}
 function run(layer,bar,n,a,b,o){return Object.assign({layer,bar,n,a,ea:'hook',oa:0,b,eb:'hook',ob:0,leg:0,man:'',bdl:1},o||{})}
 const defEx=bar=>({on:false,bar:bar||'DB16',n:2,rl:0.25,rr:0.25,layer:1});
 const defJt=()=>({mode:'auto',eT:0,eB:0,end:'hook'});
@@ -491,7 +510,7 @@ function stirXs(sec,fa,fb){const Ln=fb-fa,xs=[];if(Ln<=100)return xs;
  for(let i=1;i<=nm;i++)xs.push(a+(b-a)*i/(nm+1));for(let i=ne-1;i>=0;i--)xs.push(fb-50-i*sec.s1);return xs}
 const m2=v=>(v/1000).toFixed(2);
 const stLabel=s=>(s.two?`ป-${s.sb} mm @${m2(s.s1)}/${m2(s.s2)} m`:`ป-${s.sb} mm @${m2(s.s1)} m`)+(s.hk?` · ขอ ${s.hk}°`:'')+((+s.legs||2)>2?` · ${s.legs} ขา`:'');
-const JMN={lap:'ต่อทาบ (ระดับเท่ากัน)',ext:'แบบ 1 ยื่นฝากเข้าคานถัดไป',hook:'แบบ 2 งอฝังในเสา',haunch:'แบบ 3 ท้องเว้า ดัด 1:6'};
+const JMN={lap:'ต่อทาบ (ระดับเท่ากัน)',ext:'แบบ 1 ยื่นฝากตรงเข้าคานถัดไป',hook:'แบบ 2 งอ 90° ฝังในเสา',haunch:'แบบ 3 ดัดเอียง (ท้องเว้า)'};
 
 // simple per-span input -> sections + bar runs
 function derive(bm){const st=S.settings,sp=bm.spans,n=sp.length,W=[];
@@ -525,10 +544,11 @@ function derive(bm){const st=S.settings,sp=bm.spans,n=sp.length,W=[];
  if(bm.manual){D.runs=mergeMv(bm.runs.map((r,k)=>Object.assign({},r,{id:'R'+k})));return D}
  const topZ=i=>Math.round(sp[i].lvl*1000),botZ=i=>D.zb[i];
  const jres=(j,top)=>{const jt=jtOf(bm.grids[j]),dT=Math.abs(topZ(j-1)-topZ(j)),dB=Math.abs(botZ(j-1)-botZ(j)),hmin=Math.min(sp[j-1].h,sp[j].h),dd=top?dT:dB;
-  let m=jt.mode;if(m==='auto')m=dd===0?'lap':(!top&&dT===0?'haunch':(Math.max(dT,dB)<hmin?'ext':'hook'));
-  else if(m==='haunch'&&top)m=dd===0?'lap':'ext';else if(m==='ext'&&dd===0)m='lap';else if(m==='haunch'&&dd===0)m='lap';
-  return{m,dT,dB,hmin,e:top?jt.eT:jt.eB,auto:jt.mode==='auto'}};
- const defE=(m,d,top)=>m==='ext'?c10(35*d):m==='lap'?lapLen(bm,d,top):c10(ldACI(bm,d,top));
+  const lim=Math.max(0,+st.stepCrank||75);let m=jt.mode;if(m==='auto')m=dd===0?'lap':dd<lim?'haunch':'ext';
+  else if(m==='ext'&&dd===0)m='lap';else if(m==='haunch'&&dd===0)m='lap';
+  return{m,dT,dB,hmin,dd,lim,e:top?jt.eT:jt.eB,auto:jt.mode==='auto'}};
+ const extLen=(d,top)=>st.stepExt==='35'?c10(35*d):st.stepExt==='40'?c10(40*d):c10(ldACI(bm,d,top));
+ const defE=(m,d,top)=>m==='ext'?extLen(d,top):m==='lap'?lapLen(bm,d,top):c10(ldACI(bm,d,top));
  const endSpec=(j,side,c,top)=>{const gr=D.grids[j],d=BARS[c.bar],w=g.w[j],lay=top?'บน':'ล่าง';
   if(gr.free)return{e:'hook',o:0};
   if(j===0||j===n){const jt=jtOf(bm.grids[j]);if(jt.end==='ext'){const need=ldACI(bm,d,top),e=(top?jt.eT:jt.eB)||c10(need);
@@ -539,15 +559,18 @@ function derive(bm){const st=S.settings,sp=bm.spans,n=sp.length,W=[];
   const R=jres(j,top),min=defE(R.m,d,top),e=R.e||min,key=top?'t':'b';
   D.joints[j]=D.joints[j]||{};D.joints[j][key]=Object.assign(D.joints[j][key]||{},R,{eUsed:e,def:min,d});
   if(R.m==='hook'){if(w-bm.cov.e<ldhACI(bm,d)&&!(D.joints[j].wh))W.push('จุดต่อเสา '+gr.n+' (แบบ 2): ฝังเหล็กงอได้ '+(w-bm.cov.e)+' มม. น้อยกว่า ℓdh = '+Math.ceil(ldhACI(bm,d))+' มม.');D.joints[j].wh=1;return{e:'hook',o:0}}
-  if(R.e&&R.e<min-1)W.push('จุดต่อเสา '+gr.n+' เหล็ก'+lay+': ยื่น '+m2(R.e)+' ม. น้อยกว่าเกณฑ์ '+(R.m==='ext'?'35D':R.m==='lap'?'ระยะทาบ':'ℓd')+' = '+m2(min)+' ม.');
+  const wk='w'+key+side;if(!D.joints[j][wk]){D.joints[j][wk]=1;
+   if(R.e&&R.e<min-1)W.push('จุดต่อเสา '+gr.n+' เหล็ก'+lay+': ยื่น '+m2(R.e)+' ม. น้อยกว่าเกณฑ์ '+(R.m==='ext'?(st.stepExt==='ld'?'ℓd':st.stepExt+'D'):R.m==='lap'?'ระยะทาบ':'ℓd')+' = '+m2(min)+' ม. · แก้ระยะยื่นที่จุดต่อ');
+   if(R.m==='ext'){const ld=c10(ldACI(bm,d,top));if(e<ld-1)W.push('จุดต่อเสา '+gr.n+' เหล็ก'+lay+': ยื่นฝาก '+m2(e)+' ม. น้อยกว่า ℓd ตาม ACI 318-19 (25.4.2) = '+m2(ld)+' ม. · เพิ่มระยะยื่นหรือใช้แบบ 2 งอในเสา')}
+   if(R.m==='haunch'&&R.dd>=R.lim)W.push('จุดต่อเสา '+gr.n+' เหล็ก'+lay+': ต่างระดับ '+R.dd+' มม. ≥ '+R.lim+' มม. ไม่ควรดัดเหล็ก (ACI 318-19 10.7.4 / SP-66) · ใช้แบบ 1 ยื่นฝาก หรือแบบ 2 งอในเสา')}
   const nb=side==='b'?j:j-1,hs=side==='b'?j-1:j,lay2=top?'T1':'B1',zH=zLayer(D,hs,lay2,d),sN=D.sections[D.spanSec[nb]],ds2=BARS[sN.sb];
   const fits=zH>=D.zb[nb]+sN.cb+ds2+d/2-1&&zH<=D.zb[nb]+sN.h-sN.ct-ds2-d/2+1,sd=side==='b'?'คานซ้าย':'คานขวา';
   if(R.m==='ext'&&!fits){D.joints[j][key][side]='hook';if(!R.auto)W.push('จุดต่อเสา '+gr.n+' เหล็ก'+lay+' '+sd+': อยู่นอกความลึกคานถัดไป ยื่นฝากไม่ได้ จึงงอฝังในเสาแทน');return{e:'hook',o:0}}
   D.joints[j][key][side]=R.m;
   if(R.m==='lap')return{e:'straight',o:side==='b'?w/2+e:-(w/2+e),j:true};
-  if(R.m==='ext')return{e:'xhook',o:side==='b'?w/2+e:-(w/2+e),j:true,nb};
-  const dz=Math.abs(zLayer(D,nb,lay2,d)-zH),run=6*dz;
-  return{e:'straight',o:side==='b'?w/2+run+e:-(w/2+run+e),j:true,crank:{x0:side==='b'?g.X[j]+w/2:g.X[j]-w/2,dir:side==='b'?1:-1,nb}}};
+  if(R.m==='ext')return{e:'straight',o:side==='b'?w/2+e:-(w/2+e),j:true,nb};
+  const SL=Math.max(1,+st.stepSlope||6),dz=Math.abs(zLayer(D,nb,lay2,d)-zH),run=SL*dz;
+  return{e:'straight',o:side==='b'?w/2+run+e:-(w/2+run+e),j:true,crank:{x0:side==='b'?g.X[j]+w/2:g.X[j]-w/2,dir:side==='b'?1:-1,nb,k:SL}}};
  const mains=(layer,keyf,get,top)=>{let i=0;while(i<n){let j=i;while(j+1<n&&keyf(j+1)===keyf(i))j++;const c=get(i);
   if(c.n>0){const A=endSpec(i,'a',c,top),Z=endSpec(j+1,'b',c,top);
    D.runs.push({id:'M'+layer+':'+i,layer,bar:c.bar,n:c.n,a:i,b:j+1,ea:A.e,oa:A.o,eb:Z.e,ob:Z.o,leg:bm.leg||0,man:'',home:[i,j],ja:!!A.j,jb:!!Z.j,cranks:[A.crank,Z.crank].filter(Boolean),nba:A.nb,nbb:Z.nb})}i=j+1}};
@@ -710,12 +733,13 @@ function rowsOf(src){const m=build(src),bm=m.D,map={},rows=[];
   if(!skc[k]){skc[k]={key:bm.id+'|ข/'+(Object.keys(skc).length+1),beam:bm.id,floor:bm.floor,line:bm.line,mark:'ข/'+String(Object.keys(skc).length+1).padStart(2,'0'),layer:'ข้าง',bar:sk.bar,d:sk.d,shape:'I',cat:'sk',dims:{a:0,b:cut,c:0},cut,qty:0,places:[]};rows.push(skc[k])}
   const q=2*sk.n*np*bm.qty;skc[k].qty+=q;skc[k].places.push(sn(si)+' ข้างละ '+sk.n+' แถว'+(np>1?' · '+np+' ท่อนทาบ':'')+' ×'+q)});
  return rows}
-const allRows=()=>S.beams.flatMap(rowsOf);
+const allRows=()=>{grpSync();return OB().flatMap(rowsOf)};
 const passF=r=>(!FIL.floor||r.floor===FIL.floor)&&(!FIL.beam||r.beam===FIL.beam)&&(!FIL.layer||r.layer===FIL.layer)&&(!FIL.bar||r.bar===FIL.bar)&&(!FIL.shape||SHN[shCls(r.shape)]===FIL.shape);
 const anyF=()=>!!(FIL.floor||FIL.beam||FIL.layer||FIL.bar||FIL.shape);
 const visK=k=>{if(!anyF())return true;const r=ROWS.find(x=>x.key===k);return!!r&&passF(r)};
 const info=r=>r.shape&&r.shape[0]==='S'?`${r.mark}-${m2(r.cut)}m-(${r.shape==='SC'?m2(r.dims.a):r.shape==='ST'?m2(r.dims.b):m2(r.dims.a)+'×'+m2(r.dims.b)}) ขอ ${r.dims.h1}°/${r.dims.h2}°`:`${r.mark}-${m2(r.cut)}m-(${r.shape==='I'?'':r.shape==='K'?'คอม้า':r.shape}-${m2(r.dims.b)}m)`;
-function pieceCol(p,dark){if(p.bad&&SEL!==p.key)return dark?'#E8604E':'#d01010';if(!dark&&SH&&!SH.color)return SEL===p.key?'#e08a00':(visK(p.key)?'#111':'#bbb');const c=colorOf(p);if(SEL===p.key)return dark?HI:'#e08a00';const dim=(SEL&&SEL!==p.key)||!visK(p.key);return dark?(dim?mix(c,BG,0.72):c):(dim?mix(paper(c),'#ffffff',0.7):paper(c))}
+const psel=p=>SEL===p.key||(BSEL.length>1&&BSEL.includes(p.rid));
+function pieceCol(p,dark){if(p.bad&&!psel(p))return dark?'#E8604E':'#d01010';if(!dark&&SH&&!SH.color)return psel(p)?'#e08a00':(visK(p.key)?'#111':'#bbb');const c=colorOf(p);if(psel(p))return dark?HI:'#e08a00';const dim=(SEL&&!psel(p))||!visK(p.key);return dark?(dim?mix(c,BG,0.72):c):(dim?mix(paper(c),'#ffffff',0.7):paper(c))}
 
 /* ===== helpers ===== */
 const $=s=>document.querySelector(s);
@@ -733,9 +757,9 @@ function clean(bm){bm.spans.forEach(s=>{s.L=Math.max(0.2,s.L);s.b=Math.max(100,s
 function renderDrT(){const R=DRF().dimRows,el=$('#drT');if(!el)return;el.innerHTML=[['lap','L/n'],['stir','ระยะปลอก'],['ln','Ln'],['col','เสา'],['h','ลึกคาน']].map(([k,t])=>`<button class="pbtn${R[k]?' on':''}" data-dr="${k}" title="แสดง/ซ่อนแถวระยะ" style="${R[k]?'color:var(--au2);border-color:var(--au)':''}">${t}</button>`).join(' ')+` <button class="pbtn" data-thin="1" style="${DRF().thin?'color:var(--au2);border-color:var(--au)':''}" title="เส้นบางทั้งหมดบนจอ (Thin Lines)">เส้นบาง</button>`}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-dr],[data-thin]');if(!b)return;e.stopPropagation();const d=DRF();if(b.dataset.dr)d.dimRows[b.dataset.dr]=!d.dimRows[b.dataset.dr];else d.thin=!d.thin;save();renderDrT();if(M)render2D();if(S.tab==='sheet'&&location.hash==='#beam')renderOut()});
 function renderTop(){renderDrT();const bm=B(),fl=bm.grids[0].free,fr=bm.grids[bm.grids.length-1].free;
- $('#top').innerHTML=`<div class="chips" style="margin-bottom:8px">${S.beams.map((b,i)=>`<button class="chip${i===S.cur?' on':''}" data-a="sel:${i}">${esc(b.id)}</button>`).join('')}<button class="chip" data-a="addB">+ คานใหม่</button><button class="chip" data-a="dupB">คัดลอก</button><button class="chip" data-bdlg="1" title="เปลี่ยนหน้าตัด ระดับ หรือแยกช่วงเป็นคานใหม่">แก้ไข / แยกช่วง…</button>${S.beams.length>1?'<button class="chip" data-a="delB">ลบ</button>':''}</div>
+ $('#top').innerHTML=`<div class="chips" style="margin-bottom:8px">${S.beams.map((b,i)=>`<button class="chip${i===S.cur?' on':''}${TOPSEL.includes(i)?' pk':''}" data-a="sel:${i}"${b.grp?' style="border-color:#C58AE8;color:#D9B3F2"':''}>${b.grp?'⧉ ':''}${esc(b.id)}${b.inGrp?' <span style="color:#C58AE8">⧉</span>':''}</button>`).join('')}${TOPSEL.length>=2?`<button class="gold" data-grt="mk">⧉ จัดกลุ่ม ${TOPSEL.length} คาน</button>`:''}<button class="chip" data-grt="mgr" title="Shift+คลิกชื่อคานเพื่อเลือกหลายตัว">⧉ กลุ่มคาน…</button><button class="chip" data-a="addB">+ คานใหม่</button><button class="chip" data-a="dupB">คัดลอก</button><button class="chip" data-bdlg="1" title="เปลี่ยนหน้าตัด ระดับ หรือแยกช่วงเป็นคานใหม่">แก้ไข / แยกช่วง…</button>${S.beams.length>1?'<button class="chip" data-a="delB">ลบ</button>':''}</div>
  <div class="g4" style="margin-bottom:8px">${fld('ชื่อคาน','id',bm.id)}${fld('ชั้น','floor',bm.floor)}${fld('แนวกริด','line',bm.line)}${fld('จำนวนคานแบบนี้','qty',bm.qty)}</div>
- <div class="chips" style="margin-bottom:8px"><button class="chip" data-a="addSp">+ ช่วง</button><button class="chip" data-a="delSp">− ช่วง</button><button class="chip${fl?' on':''}" data-a="cantL">คานยื่นซ้าย</button><button class="chip${fr?' on':''}" data-a="cantR">คานยื่นขวา</button><button class="chip${UI.t==='beam'?' on':''}" data-a="beamSet">ตั้งค่าคาน</button><button class="gold" data-a="autoRb" style="padding:5px 12px">จัดเหล็กอัตโนมัติ</button><button class="chip" data-a="addBar">+ เพิ่มเหล็ก</button></div>`}
+ <div class="chips" style="margin-bottom:8px">${bm.grp?'':`<button class="chip" data-a="addSp">+ ช่วง</button><button class="chip" data-a="delSp">− ช่วง</button><button class="chip${fl?' on':''}" data-a="cantL">คานยื่นซ้าย</button><button class="chip${fr?' on':''}" data-a="cantR">คานยื่นขวา</button>`}<button class="chip${UI.t==='beam'?' on':''}" data-a="beamSet">ตั้งค่าคาน</button><button class="gold" data-a="autoRb" style="padding:5px 12px">จัดเหล็กอัตโนมัติ</button><button class="chip" data-a="addBar">+ เพิ่มเหล็ก</button></div>`}
 function quick(side,lay,d,L){const q=[['ld','ℓd'],['35','35D'],['40','40db'],['L4','0.25L']];return`<div class="chips" style="margin-top:4px"><span class="note" style="margin:0">ค่าลัด</span>${q.map(([k,t])=>`<button class="chip" data-a="qe:${side}:${lay}:${k}">${t}</button>`).join('')}</div>`}
 function jointPanel(bm,j){const g=bm.grids[j],p='grids.'+j+'.jt.',jt=jtOf(g),nG=bm.grids.length,D=derive(bm),n=bm.spans.length;
  if(bm.manual)return'<div class="note">คานนี้ใช้แนวเหล็กกำหนดเอง ปลายเหล็กกำหนดในแต่ละแนวเหล็ก</div>';
@@ -746,7 +770,7 @@ function jointPanel(bm,j){const g=bm.grids[j],p='grids.'+j+'.jt.',jt=jtOf(g),nG=
  const J=D.joints[j];if(!J)return'<div class="sh">จุดต่อ</div><div class="note">เหล็กหลักวิ่งต่อเนื่องผ่านเสานี้ (ระดับและเหล็กเท่ากันทั้งสองฝั่ง)</div>';
  const any=J.t||J.b,auto=jt.mode==='auto';
  let h=`<div class="sh">จุดต่อ · ต่างระดับ บน ${m2(any.dT)} / ล่าง ${m2(any.dB)} ม. · h ${m2(any.hmin)} ม.</div>
- <div class="chips"><button class="chip${auto?' on':''}" data-a="jm:auto">อัตโนมัติ</button><button class="chip${jt.mode==='ext'?' on':''}" data-a="jm:ext">แบบ 1 ยื่นฝาก</button><button class="chip${jt.mode==='hook'?' on':''}" data-a="jm:hook">แบบ 2 งอในเสา</button><button class="chip${jt.mode==='haunch'?' on':''}" data-a="jm:haunch">แบบ 3 ท้องเว้า</button></div>`;
+ <div class="chips"><button class="chip${auto?' on':''}" data-a="jm:auto">อัตโนมัติ</button><button class="chip${jt.mode==='ext'?' on':''}" data-a="jm:ext">แบบ 1 ยื่นฝาก</button><button class="chip${jt.mode==='hook'?' on':''}" data-a="jm:hook">แบบ 2 งอในเสา</button><button class="chip${jt.mode==='haunch'?' on':''}" data-a="jm:haunch">แบบ 3 ดัดเอียง 1:${+S.settings.stepSlope||6}</button></div><div class="note" style="margin:4px 0 0">อัตโนมัติ (ACI 318-19 / SP-66): ต่าง 0 = ต่อเนื่อง · ต่าง &lt; ${+S.settings.stepCrank||75} มม. = ดัดเอียง 1:${+S.settings.stepSlope||6} · มากกว่านั้น = ยื่นฝาก ${S.settings.stepExt==='ld'?'ℓd':S.settings.stepExt+'D'} ถ้าอยู่ในความลึกคานถัดไป ไม่งั้นงอ 90° ฝังในเสา · ตั้งเกณฑ์ได้ที่ ตั้งค่า</div>`;
  [['t','T','บน'],['b','B','ล่าง']].forEach(([k,K,nm])=>{const R=J[k];if(!R)return;
   const sd=R.m==='ext'&&(R.a==='hook'||R.b==='hook')?` (${R.b==='hook'?'คานซ้ายงอในเสา':'คานซ้ายยื่นเข้าคานขวา'} · ${R.a==='hook'?'คานขวางอในเสา':'คานขวายื่นเข้าคานซ้าย'})`:'';
   h+=`<div class="note" style="color:var(--au2);margin-top:8px">เหล็ก${nm}: ${JMN[R.m]}${sd}${R.m==='hook'?'':' · ยื่น '+m2(R.eUsed)+' ม. (เกณฑ์ '+m2(R.def)+')'}${R.m==='haunch'?' นับต่อจากช่วงดัด':''}</div>`;
@@ -778,7 +802,7 @@ function endPanel(bm,j){const g=bm.grids[j],p='grids.'+j+'.',n=bm.grids.length-1
  <div class="g2">${has[0]?fld('ด้านซ้าย (× L)',p+'ex.rl',g.ex.rl):'<div></div>'}${has[1]?fld('ด้านขวา (× L)',p+'ex.rr',g.ex.rr):'<div></div>'}</div>
  <div class="note">ใช้กับทั้งความยาวเหล็กเสริมบนที่หัวเสา และโซนห้ามทาบเหล็กบน · L = ${bm.lap.lnMax?'Ln ช่วงที่ยาวกว่าระหว่างสองข้าง (ACI)':'Ln ของช่วงด้านนั้น'}</div>`}
 function renderPanel(){const bm=B();let h='';
- if(UI.t==='bar'){const hb=barPanel(bm);if(hb){$('#panel').innerHTML=hb;return}UI={t:'span',i:UI.si||0}}
+ if(UI.t==='bar'){const hb=BSEL.length>1?barMulti(bm)||barPanel(bm):barPanel(bm);if(hb){$('#panel').innerHTML=grpTopBar(bm)+hb;grpBindDetail();return}UI={t:'span',i:UI.si||0}}
  if(UI.t==='span'&&!bm.spans[UI.i])UI={t:'span',i:bm.grids[0].free&&bm.spans.length>1?1:0};
  if(UI.t==='grid'&&!bm.grids[UI.i])UI={t:'span',i:0};
  if(UI.t==='span'){const i=UI.i,s=bm.spans[i],p='spans.'+i+'.',nm=(bm.grids[i].free?'ปลายยื่น':bm.grids[i].n)+' – '+(bm.grids[i+1].free?'ปลายยื่น':bm.grids[i+1].n);
@@ -818,7 +842,7 @@ function renderPanel(){const bm=B();let h='';
    <div style="margin-top:6px">${fld('ท่อนกำหนดเอง (ม.) เช่น 2.50,12,12 · เว้นว่าง = จัดอัตโนมัติ',p+'man',r.man)}</div></details>`});
   h+=`<div class="note">ปลาย "งอในเสา" วัดจากหน้านอกเสาหักระยะหุ้มปลาย · "ตรง" และ "ยื่นแล้วงอ" วัดจากศูนย์กลางกริด (+ ไปทางขวา)</div>`}
  else h+=`<div class="chips" style="margin-top:4px"><button class="chip" data-a="toManual">กำหนดแนวเหล็กเองทีละเส้น (ขั้นสูง)</button></div>`;
- $('#panel').innerHTML=(bm.link?linkNote(bm):'')+(UI.t==='span'?btBar(bm,UI.i):'')+h;if(bm.link)lockLinked()}
+ $('#panel').innerHTML=grpTopBar(bm)+(bm.link?linkNote(bm):'')+(UI.t==='span'?btBar(bm,UI.i):'')+h+bgsPanel(bm);if(bm.link||bm.grp)lockLinked();grpBindDetail()}
 let tOut=null;
 function onField(e,final){const el=e.target;if(el.dataset.o){onBar(el,final);return}const p=el.dataset.p;if(!p)return;const bm=B();if(el.type==='checkbox'&&!final)return;
  if(!final&&(el.value===''||/[.,-]$/.test(el.value)))return;
@@ -1086,6 +1110,7 @@ function render2D(){if(M&&(CUT.x==null||CUT.bid!==M.D.id)){const D0=M.D,i=D0.gri
   o+=`<text x="${xm}" y="${yb+20}" fill="${on?'#E2C584':'#C8C5BE'}" font-size="15" text-anchor="middle">${D.spans[i].toFixed(2)}</text>`;
   if(!narrow)o+=`<text x="${xm}" y="${yb+38}" fill="#8A8E95" font-size="12.5" text-anchor="middle">${m2(s.b)}×${m2(s.h)} · ${esc(M.ST[i].label.replace(/^\d+-/,''))}</text>`;
   if(anyLvl)o+=`<text x="${xm}" y="${yt-5}" fill="${on?'#E2C584':'#8A8E95'}" font-size="12.5" text-anchor="middle">T${bm.spans[i].lvl>=0?'+':''}${bm.spans[i].lvl.toFixed(2)}</text>`;
+  if(bm._own&&(i===0||bm._own[i]!==bm._own[i-1])){o+=`<text x="${xa+4}" y="${yt-(anyLvl?22:8)}" fill="#D9B3F2" font-size="13.5" font-weight="600">⧉ ${esc(bm._own[i])}</text>`;if(i>0)o+=`<line x1="${xa}" y1="${yt-(anyLvl?36:22)}" x2="${xa}" y2="${yt}" stroke="#C58AE8" stroke-width="1.5" stroke-dasharray="4 3"/>`}
   o+='</g>'}
  M.P.forEach(p=>{const pts=barPath(D,M,p,0),on=SEL===p.key,c=pieceCol(p,true);
   const d=pts.map(q=>X(q[0]).toFixed(1)+','+(Y(q[2])+(p.i%2?(p.top?3:-3):0)).toFixed(1)).join(' ');
@@ -1199,6 +1224,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.querySelec
  [sp,rz].forEach(el=>{el.addEventListener('pointermove',mv);el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up)});
  let rt=null;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(location.hash==='#beam')relayout()},150)});applyLayout()})();
 function pick(key,focus,rid){const id=key.split('|')[0],bi=S.beams.findIndex(b=>b.id===id);
+ if(rid&&location.hash==='#beam'&&(bi<0||bi===S.cur)){if(KSH){KSH=false;if(!BSEL.length&&UI.t==='bar'&&UI.id)BSEL=[UI.id];const k=BSEL.indexOf(rid);if(k>=0)BSEL.splice(k,1);else BSEL.push(rid);SEL=null;if(BSEL.length===1){UI={t:'bar',id:BSEL[0]};BSEL=[]}else if(BSEL.length)UI={t:'bar',id:BSEL[0]};renderPanel();renderAll();return}
+  const g=(B().bgs||[]).find(g=>g.ids.includes(rid));if(g&&!BSEL.includes(rid)){BSEL=g.ids.slice();SEL=null;UI={t:'bar',id:rid};renderPanel();renderAll();return}BSEL=[]}
  if(SEL===key&&(!rid||(UI.t==='bar'&&UI.id===rid))){SEL=null;if(UI.t==='bar')UI={t:'span',i:UI.si||0};renderPanel();renderAll();return}
  SEL=key;if(bi>=0&&bi!==S.cur){S.cur=bi;renderTop()}
  M=build(B());
@@ -1481,7 +1508,7 @@ function dxfBeam(w,raw,y0,sP){const P=S.settings.sheet,T=2.5*sP,sS=+P.secScale||
 function dxfProject(list){const P=S.settings.sheet,base=LASTSP||100,sP=P.scale==='auto'?NICE.reduce((a,v)=>Math.abs(v-base)<Math.abs(a-base)?v:a,100):+P.scale,T=2.5*sP,w=dxfW();let y=0;
  list.forEach(raw=>{y-=dxfBeam(w,raw,y,sP)+12*T});return dxfDoc(w,T)}
 function pluginJSON(){return{app:'KN Studio',format:'kg-rebar-link',version:5,units:'mm',axes:'x along beam from left end of the beam line, y across beam (centre = 0), z level (beam top level as entered)',
- beams:S.beams.map(raw=>{const m=build(raw),D=m.D,g=m.g;return{id:D.id,floor:D.floor,line:D.line,qty:D.qty,fc_ksc:D.fc,grade:D.grade,
+ beams:OB().map(raw=>{const m=build(raw),D=m.D,g=m.g;return{id:D.id,floor:D.floor,line:D.line,qty:D.qty,fc_ksc:D.fc,grade:D.grade,
   grids:D.grids.map((q,i)=>({name:q.n,x:g.X[i],width:g.w[i],free:!!q.free})),
   spans:D.spans.map((L,i)=>{const s=secOf(D,i);return{from:D.grids[i].n,to:D.grids[i+1].n,x0:g.X[i],x1:g.X[i+1],b:s.b,h:s.h,z_bottom:D.zb[i],section:s.id,cover:{top:s.ct,bottom:s.cb,side:s.cs},stirrup:{size:s.sb,s1:s.s1,s2:s.two?s.s2:s.s1}}}),
   bars:m.P.map(p=>({run:p.rid,mark:p.mark,layer:p.layer,size:p.bar,dia:p.d,count:p.n,shape:p.shape,category:p.cat,cut_length:p.cut,dims:p.dims,crank:p.kz||0,location:p.span,bend_inside_dia:bendD(p.d),
@@ -1507,7 +1534,7 @@ function renderOut(){const bm=M.D,m=M,rows=ROWS;let h='';
  on('#dlSheet',()=>saveFile(bm.id+'-'+S.settings.sheet.paper+'.svg',clean0(()=>paperSVG(bm,m,true)),'image/svg+xml'));
  bindDxVer('dxVerB');
  on('#dlDxf',()=>saveFile(dxfName(B().id),dxfBytes(clean0(()=>dxfProject([B()]))),'application/dxf'));
- on('#dlDxfAll',()=>saveFile(dxfName('KN-Studio-project'),dxfBytes(clean0(()=>dxfProject(S.beams))),'application/dxf'));
+ on('#dlDxfAll',()=>saveFile(dxfName('KN-Studio-project'),dxfBytes(clean0(()=>dxfProject(OB()))),'application/dxf'));
  on('#dlPlug',()=>saveFile('KN-Studio-link.json',JSON.stringify(pluginJSON(),null,1),'application/json'));
  on('#dlBend',()=>{const css='body{font-family:Arial,sans-serif}table{border-collapse:collapse;width:100%;margin-bottom:14px;font-size:13px}th,td{border:1px solid #111;padding:4px 8px;text-align:center}td.l,.loc{text-align:left}.loc{font-size:11px;color:#444}tr.gh td{font-size:16px;background:#f4f1ea}svg{width:230px;display:block;margin:0 auto}';
   saveFile('Bending.html','<!DOCTYPE html><html><head><meta charset="utf-8"><title>Bending</title><style>'+css+'</style></head><body>'+bendTable(rows.filter(passF),true)+'</body></html>','text/html')});
@@ -1521,7 +1548,7 @@ function renderOut(){const bm=M.D,m=M,rows=ROWS;let h='';
 $('#out').addEventListener('click',e=>{if(e.target.closest('.cpick'))return;if(LAYM&&e.target.closest('#sheet'))return;const k=e.target.closest('[data-k]');if(k)pick(k.dataset.k,true,k.dataset.r)});
 $('#out').addEventListener('change',e=>{const k=e.target.dataset.sp;if(!k)return;const P=S.settings.sheet;P[k]=e.target.type==='checkbox'?e.target.checked:(k==='secScale'?+e.target.value:e.target.value);save();if(S.tab==='sheet')renderOut()});
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{S.tab=t.dataset.t;save();renderOut()});
-function renderAll(live,colOnly){const bm=B();M=build(bm);ROWS=allRows();$('#crumb').textContent='คาน · '+bm.id+' · '+bm.floor+' '+bm.line;
+function renderAll(live,colOnly){grpSync();const bm=B();M=build(bm);ROWS=allRows();$('#crumb').textContent='คาน · '+bm.id+' · '+bm.floor+' '+bm.line;
  if(SEL&&!ROWS.some(r=>r.key===SEL))SEL=null;
  render2D();render3D();if(!colOnly)renderFilt();
  const r=SEL&&ROWS.find(x=>x.key===SEL);
@@ -1538,6 +1565,9 @@ function renderSet(){const st=S.settings;
  <div class="g2" style="margin-top:6px">${fld('ปัดความยาวตัดทีละ (มม.)','round',st.round)}${fld('ระยะห่างแนวดิ่งระหว่างชั้นขั้นต่ำ (มม.)','vclear',st.vclear)}</div>
  <div class="h">ระยะทาบ</div>
  <div class="g3">${sel('วิธีคิด','lapMode',st.lapMode,[['aci','ACI 318 Class B (1.3ℓd)'],['mult','จำนวนเท่าของ db']])}${fld('จำนวนเท่า × db','lapMult',st.lapMult)}${fld('ระยะทาบขั้นต่ำ (มม.)','minLap',st.minLap)}</div>
+ <div class="h">จุดต่อต่างระดับ · ACI 318-19 / ACI SP-66</div>
+ <div class="g3">${fld('ดัดเอียงได้เมื่อต่างระดับน้อยกว่า (มม.)','stepCrank',st.stepCrank)}${fld('ความชันดัด 1 : n','stepSlope',st.stepSlope)}${sel('ระยะยื่นฝากเข้าคานถัดไป','stepExt',st.stepExt,[['ld','ℓd ตาม ACI 25.4.2 (มาตรฐาน)'],['35','35D'],['40','40D']])}</div>
+ <div class="note">มาตรฐาน: ดัดได้เมื่อต่าง &lt; 75 มม. ความชัน 1:6 (ACI 318-19 10.7.4) · ต่างมากกว่านั้นตัดเหล็กเป็นสองท่อน ยื่นตรง ℓd เข้าคานถัดไป ถ้าอยู่นอกความลึกคานถัดไปงอ 90° ฝังในเสา ตรวจ ℓdh (25.4.3) · ถ้าตั้งต่ำกว่ามาตรฐาน โปรแกรมจะวาดตามค่าที่ตั้งและขึ้นคำเตือน <button class="chip" id="stepStd">คืนค่ามาตรฐาน</button></div>
  <div class="h">เกณฑ์เตือนเหล็กเสริมพิเศษ</div>
  <div class="g2">${fld('เสริมบนหัวเสา ยื่นอย่างน้อย (× L)','exTop',st.exTop)}${fld('เสริมล่าง หยุดห่างหน้าเสาไม่เกิน (× L)','exBot',st.exBot)}</div>
  <div class="note">ตัวอย่างตั้งระยะทาบไว้ที่ 41 × db เพื่อให้ตรงกับแบบ Revit · วิธี ACI จะได้ระยะทาบยาวกว่านี้</div>
@@ -1546,6 +1576,7 @@ function renderSet(){const st=S.settings;
  <div id="draftSet"></div><div id="dxSet"></div><div id="schSet"></div>
  <div style="margin-top:16px"><button class="ib" id="rsSet">คืนค่าเริ่มต้น</button></div>`;renderDraftUI();renderDxSet();renderSchSet();
  $('#setForm').querySelectorAll('[data-p]').forEach(el=>el.addEventListener('change',e=>{setP(st,e.target.dataset.p,e.target.value);st.stock=+st.stock;st.round=Math.max(10,st.round);save();toast('บันทึกแล้ว')}));
+ $('#stepStd').onclick=()=>{Object.assign(st,{stepCrank:75,stepSlope:6,stepExt:'ld'});save();renderSet();toast('คืนค่ามาตรฐานจุดต่อต่างระดับแล้ว')};
  $('#rsSet').onclick=()=>{const col=S.settings.col;S.settings=defSettings();S.settings.col=col;save();renderSet();toast('คืนค่าเริ่มต้นแล้ว')}}
 
 
@@ -1684,7 +1715,7 @@ function cutStats(G){const r=G.r,P=r.pats||[],need=r.items.reduce((t,i)=>t+i.l*i
 function renderCut(){if(!$('#v-cut').classList.contains('on'))return;S.stock=Object.assign(defStock(),S.stock||{});S.cutCfg=Object.assign(defCutCfg(),S.cutCfg||{});renderCutItems();renderCutStock();renderCutCfg();renderCutRes()}
 function renderCutItems(){const cfg=S.cutCfg,groups=cutItems(),tot=groups.reduce((t,g)=>t+g.items.reduce((a,i)=>a+i.d,0),0);
  $('#bcSum').textContent=groups.length?`${groups.length} กลุ่ม · ${tot} ท่อน`:'';
- let h=`<div class="sh" style="margin-top:0">ดึงเหล็กจากคาน</div><div class="chips">${S.beams.map(b=>`<button class="chip${cfg.ex.includes(b.id)?'':' on'}" data-bx="${esc(b.id)}">${esc(b.id)}</button>`).join('')}<label class="ck"><input type="checkbox" data-cc="stir"${cfg.stir?' checked':''}> รวมเหล็กปลอก</label></div>
+ let h=`<div class="sh" style="margin-top:0">ดึงเหล็กจากคาน</div><div class="chips">${OB().map(b=>`<button class="chip${cfg.ex.includes(b.id)?'':' on'}" data-bx="${esc(b.id)}">${esc(b.id)}</button>`).join('')}<label class="ck"><input type="checkbox" data-cc="stir"${cfg.stir?' checked':''}> รวมเหล็กปลอก</label></div>
  ${cutSelHTML(cfg)}
  <div class="sh">กลุ่มตัดร่วม</div><div class="chips">${[['all','ทั้งโครงการ'],['floor','แยกตามชั้น'],['beam','แยกตามคาน']].map(([k,t])=>`<button class="chip${cfg.group===k?' on':''}" data-cg="${k}">${t}</button>`).join('')}</div>
  <div class="note">เหล็กขนาดเดียวกันในกลุ่มเดียวกันจะถูกจัดตัดร่วมกัน · เศษเก่าในสต็อกใช้ร่วมกันทุกกลุ่ม</div>`;
@@ -1798,7 +1829,7 @@ function syncBeam(bm){const L=bm.link;if(!L)return false;if(L.t==='free')return 
  bm.grids=(fl?[bm.grids[0]]:[]).concat(ng,fr?[bm.grids[nG-1]]:[]);bm.spans=(fl?[bm.spans[0]]:[]).concat(ns,fr?[bm.spans[bm.spans.length-1]]:[]);
  bm.floor=lvOf(L.lv).n;bm.line='แนว '+p[ox].n[L.k];{const f0=fl?bm.spans[0].L*1000:0,b0=pts[0].x-f0;L.st=(fl?[0]:[]).concat(pts.map(q=>q.x-b0),fr?[pts[pts.length-1].x-b0+bm.spans[bm.spans.length-1].L*1000]:[])}return true}
 function syncAll(){if(!S.plan)return;S.beams.forEach(b=>{if(b.link&&b.link.t!=='free')syncBeam(b)});for(let k=0;k<2;k++)S.beams.forEach(b=>{if(b.link&&b.link.t==='free')syncBeam(b)});
- S.beams.forEach(b=>{const L=b.link;if(!L||L.t==='free'||b.linkBad)return;b.grids.forEach(g=>{if(g.nocol&&!g.free){const o=S.beams.find(x=>x!==b&&x.link&&x.link.t!=='free'&&x.link.lv===L.lv&&x.link.dir!==L.dir&&x.link.k!=null&&(L.dir==='x'?P().gx:P().gy).n.indexOf(g.n)===x.link.k);g.sh=o?beamWAt(o,0).h:0}})});syncHangers()}
+ S.beams.forEach(b=>{const L=b.link;if(!L||L.t==='free'||b.linkBad)return;b.grids.forEach(g=>{if(g.nocol&&!g.free){const o=S.beams.find(x=>x!==b&&x.link&&x.link.t!=='free'&&x.link.lv===L.lv&&x.link.dir!==L.dir&&x.link.k!=null&&(L.dir==='x'?P().gx:P().gy).n.indexOf(g.n)===x.link.k);g.sh=o?beamWAt(o,0).h:0}})});syncHangers();grpSync()}
 function linkNote(bm){const L=bm.link,p=P(),X=L.dir==='x',ax=X?'gx':'gy',ox=X?'gy':'gx';if(L.t==='free')return`<div class="lnk">${bm.linkBad?'⚠ '+esc(bm.badWhy||'ยังไม่มีจุดรองรับ'):'ผูกกับแปลน · '+esc((lvOf(L.lv)||{}).n||'')+' · '+esc(bm.line||'คานฝาก')+(bm.arcR?' · ความยาวคลี่ตามแนวโค้ง':'')}<br><span style="color:var(--mu)">ความยาวช่วงและจุดรองรับ (เสา / คาน) ดึงจากแปลน · แก้ที่หน้าแปลน</span><div class="chips" style="margin-top:6px"><button class="chip" data-a="goPlan">ไปที่แปลน</button><button class="chip" data-a="unlink">ยกเลิกการผูก</button></div></div>`;
  return`<div class="lnk">${bm.linkBad?'⚠ การผูกกับแปลนใช้ไม่ได้ (กริดหรือชั้นถูกลบ) · ข้อมูลคงค่าล่าสุด':`ผูกกับแปลน · ${esc((lvOf(L.lv)||{}).n||'')} · แนว ${esc(p[ox].n[L.k])} · ${esc(p[ax].n[L.a])} → ${esc(p[ax].n[L.b])}<br><span style="color:var(--mu)">ความยาวช่วง ชื่อกริด และขนาดเสา ดึงจากแปลน · แก้ที่หน้าแปลน</span>`}
  <div class="chips" style="margin-top:6px"><button class="chip" data-a="goPlan">ไปที่แปลน</button><button class="chip" data-a="unlink">ยกเลิกการผูก</button></div></div>`}
@@ -1877,7 +1908,7 @@ function renderPlanTools(){const T=[['sel','เลือก'],['col','วาง�
  $('#plHint').textContent=PT==='fbeam'?(PDRAW?'แตะจุดปลายคาน · ใส่ "ยาว" และ "มุม" เพื่อกำหนดเอง · ปลายที่ไม่แตะเสา/คาน = ปลายยื่น':'แตะจุดเริ่มคาน (จุดตัดกริด กริดช่วย เสา หรือบนแนวคาน) · ถ้าทั้งสองปลายอยู่บนกริดโค้งจะได้คานโค้ง'):PT==='gline'?(PDRAW?'แตะจุดปลายเส้น · ใส่ "ยาว" และ "มุม" ได้ (0° = ขวา, 90° = ขึ้น)':'แตะจุดเริ่มกริดช่วย · ดูดเข้าจุดตัดและเส้นที่มีอยู่'):PT==='garc'?(!PDRAW?'แตะจุดศูนย์กลางกริดโค้ง':PDRAW.pts.length===1?'แตะจุดเริ่มโค้ง (กำหนดรัศมี)':'แตะจุดจบโค้ง'):PT==='span'?'แตะช่วงกริดที่ต้องการวางคาน (เส้นประระหว่างจุดตัด) · คานจะสร้างทีละช่วง':PT==='beam'?(PBEAM?'แตะจุดจบบนแนวเดียวกับ '+ixName(PBEAM.i,PBEAM.j)+' · แตะจุดเดิมเพื่อยกเลิก':'แตะจุดตัดกริดจุดเริ่มของคาน'):PT==='col'?'แตะจุดตัดกริดหรือจุดบนกริดช่วยเพื่อวางเสา '+P().ct+' · แตะเสาเดิมเพื่อเอาออก':(matchMedia('(pointer:coarse)').matches?'แตะเลือก · ดับเบิลแตะคานเพื่อแก้ไข · ลากกริดที่เลือกเพื่อย้าย · ปุ่ม 🗑 ลบ':'คลิกเลือก (Shift = หลายชิ้น) · ลากกรอบ ซ้าย→ขวา = ในกรอบ / ขวา→ซ้าย = แตะกรอบ · ดับเบิลคลิกคาน = แก้ไข · Delete = ลบ · ลากกริดที่เลือกเพื่อย้าย · คลิกขวาลาก = เลื่อน')}
 function planExt(){const X=gpos('gx'),Y=gpos('gy');return{w:X[X.length-1],h:Y[Y.length-1],X,Y}}
 function fitPV(){const e=planExt(),m=Math.max(e.w,e.h)*0.14+1600;PV={x:-m,y:-m,w:e.w+2*m,h:e.h+2*m}}
-function drawPlan(){const p=P(),e=planExt(),lv=p.lv,svg=$('#plSvg');if(!PV)fitPV();
+function drawPlan(){const p=P(),e=planExt(),lv=p.lv,svg=PLT||$('#plSvg');if(!PLT)PLW=(WINS().w[WLIVE])||null;if(!PV)fitPV();
  const r=Math.max(e.w,e.h)/38+180,fs=r*0.95,X=e.X,Y=e.Y,ext=r*3.2;let o='';
  const dim=(x1,y1,x2,y2,t,v)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#D9705E" stroke-width="${r*0.05}"/><text x="${(x1+x2)/2+(v?-r*0.35:0)}" y="${(y1+y2)/2-(v?0:r*0.3)}" fill="#D9705E" font-size="${fs*0.62}" text-anchor="middle"${v?` transform="rotate(-90 ${(x1+x2)/2-r*0.35} ${(y1+y2)/2})"`:''}>${t}</text>`;
  X.forEach((x,i)=>{const gs=gHas('gx',i);o+=`<g data-g="gx:${i}" style="cursor:${gs?'ew-resize':'pointer'}"><line x1="${x}" y1="${-ext}" x2="${x}" y2="${e.h+r*1.5}" stroke="${gs?'#FFE08A':'#55585E'}" stroke-width="${r*(gs?0.09:0.04)}"${gs?'':` stroke-dasharray="${r*0.5} ${r*0.25}"`}/><line x1="${x}" y1="${-ext}" x2="${x}" y2="${e.h+r*1.5}" stroke="#fff" stroke-opacity="0.01" stroke-width="${r*0.5}"/><circle cx="${x}" cy="${-ext-r}" r="${r}" fill="${gs?'#3A2F18':'#0E0F12'}" stroke="${gs?'#FFE08A':'#C9A55C'}" stroke-width="${r*0.08}"/><text x="${x}" y="${-ext-r+fs*0.36}" fill="#E2C584" font-size="${fs}" text-anchor="middle">${esc(p.gx.n[i])}</text></g>`;
@@ -1886,17 +1917,17 @@ function drawPlan(){const p=P(),e=planExt(),lv=p.lv,svg=$('#plSvg');if(!PV)fitPV
   if(j<Y.length-1)o+=dim(-ext*0.45,y,-ext*0.45,Y[j+1],(p.gy.sp[j]/1000).toFixed(2),1)});
  if(X.length>1)o+=dim(X[0],-ext*0.8,X[X.length-1],-ext*0.8,(e.w/1000).toFixed(2));
  // beams of this level
- o+=drawAux(lv,r,fs);
+ o+=drawAux(lv,r,fs);o+=grpPlanSVG(lv,r,fs);
  S.beams.forEach((bm,bi)=>{const L=bm.link;if(!L||L.t==='free'||L.lv!==lv||bm.linkBad)return;const pts=linkPts(L),sp=inner(bm),on=PSEL&&PSEL.t==='beam'&&PSEL.i===bi,c=on?'#FFE08A':'#C9A55C';
   for(let q=0;q<pts.length-1;q++){const s=sp[q]||sp[0],w=s?s.b:200,a=pts[q].x,b=pts[q+1].x;
    const R=L.dir==='x'?{x:Math.min(a,b),y:Y[L.k]-w/2,w:Math.abs(b-a),h:w}:{x:X[L.k]-w/2,y:Math.min(a,b),w:w,h:Math.abs(b-a)};
-   const qq=q+(bm.grids[0].free?1:0),ps=PMS.some(z=>z.i===bi&&z.q===qq),cc=ps?'#FFE08A':btFill(bm,qq,c),op=ps?0.55:on?0.45:0.22;
+   const qq=q+(bm.grids[0].free?1:0);if(!plVis('b:'+bm.uid+':'+qq))continue;const ps=PMS.some(z=>z.i===bi&&z.q===qq),cc=ps?'#FFE08A':btFill(bm,qq,c),op=ps?0.55:on?0.45:0.22;
    o+=`<rect data-bm="${bi}" data-sq="${qq}" x="${R.x}" y="${R.y}" width="${R.w}" height="${R.h}" fill="${cc}" fill-opacity="${op}" stroke="${cc}" stroke-width="${r*(ps?0.12:0.06)}" style="cursor:pointer"/>`;
    const prv=q>0?bm.spans[qq-1]&&bm.spans[qq-1].bt:null;if(q===0||(P().lab!=='beam'&&(bm.spans[qq].bt||'')!==(prv||''))){const mid=(a+b)/2,w0=w/2,tx=L.dir==='x'?mid:X[L.k]+w0+r*0.9,ty=L.dir==='x'?Y[L.k]+w0+fs*0.95:mid,rot=L.dir==='y'?` transform="rotate(-90 ${tx} ${ty})"`:'';
     o+=`<text x="${tx}" y="${ty}" fill="${ps||on?'#FFE08A':btFill(bm,qq,c)}" font-size="${fs*0.8}" text-anchor="middle" font-weight="600" pointer-events="none"${rot}>${esc(btLabel(bm,qq))}</text>`}}});
  o+=drawFree(lv,r,fs);
  // columns
- Object.entries(p.cols).forEach(([k,c])=>{const[l,i,j]=k.split('|');if(l!==lv||X[+i]==null||Y[+j]==null)return;const d=colDim(c),cx=X[+i]+(+c.ex||0),cy=Y[+j]+(+c.ey||0),on=PCOL.includes(k)||(PSEL&&PSEL.t==='col'&&PSEL.k===k);
+ Object.entries(p.cols).forEach(([k,c])=>{const[l,i,j]=k.split('|');if(l!==lv||X[+i]==null||Y[+j]==null||!plVis('c:'+k))return;const d=colDim(c),cx=X[+i]+(+c.ex||0),cy=Y[+j]+(+c.ey||0),on=PCOL.includes(k)||(PSEL&&PSEL.t==='col'&&PSEL.k===k);
   const st=`fill="${on?'#3A2F18':'#22252B'}" stroke="${on?'#FFE08A':'#E6E3DC'}" stroke-width="${r*(on?0.12:0.07)}"`;
   o+=`<g data-col="${esc(k)}" data-ix="${i},${j}" style="cursor:pointer">${d.round?`<circle cx="${cx}" cy="${cy}" r="${d.bx/2}" ${st}/>`:`<rect x="${cx-d.bx/2}" y="${cy-d.by/2}" width="${d.bx}" height="${d.by}" ${st}/><line x1="${cx-d.bx/2}" y1="${cy-d.by/2}" x2="${cx+d.bx/2}" y2="${cy+d.by/2}" stroke="#55585E" stroke-width="${r*0.03}"/><line x1="${cx+d.bx/2}" y1="${cy-d.by/2}" x2="${cx-d.bx/2}" y2="${cy+d.by/2}" stroke="#55585E" stroke-width="${r*0.03}"/>`}
   <text x="${cx+Math.max(d.bx,d.by)/2+r*0.25}" y="${cy-Math.max(d.bx,d.by)/2-r*0.15}" fill="#C8C5BE" font-size="${fs*0.6}">${esc(d.name)} ${d.round?'Ø'+m2(d.bx):m2(d.bx)+'×'+m2(d.by)}</text></g>`});
@@ -1906,7 +1937,7 @@ function drawPlan(){const p=P(),e=planExt(),lv=p.lv,svg=$('#plSvg');if(!PV)fitPV
  if(PT!=='sel'&&PT!=='span')X.forEach((x,i)=>Y.forEach((y,j)=>{const st=PBEAM&&PBEAM.i===i&&PBEAM.j===j;o+=`<circle data-ix="${i},${j}" cx="${x}" cy="${y}" r="${r*0.75}" fill="${st?'#E8963A':'#C9A55C'}" fill-opacity="${st?0.55:0.08}" stroke="${st?'#E8963A':'none'}" stroke-width="${r*0.06}" style="cursor:pointer"/>`}));
  const lvN=(lvOf(lv)||{}).n||'';o+=`<text x="${e.w/2}" y="${e.h+r*3.2}" fill="#8A8E95" font-size="${fs*0.9}" text-anchor="middle" pointer-events="none">แปลน ${esc(lvN)} · ระดับ +${(+(lvOf(lv)||{}).z||0).toFixed(2)} ม.</text>`;
  if(['fbeam','gline','garc','col'].includes(PT))snapPts(lv).forEach(q=>{if(q.k!=='ix'||PT!=='col')o+=`<circle cx="${q.x}" cy="${q.y}" r="${r*0.16}" fill="#6FA8DC" fill-opacity=".55" pointer-events="none"/>`});
- if(PT==='sel')o+=plTempDims(r,fs);o+='<g id="plSnapG" pointer-events="none"></g>';svg.setAttribute('viewBox',`${PV.x} ${PV.y} ${PV.w} ${PV.h}`);svg.innerHTML=o}
+ if(PT==='sel')o+=plTempDims(r,fs);o+='<g id="plSnapG" pointer-events="none"></g>';svg.setAttribute('viewBox',`${PV.x} ${PV.y} ${PV.w} ${PV.h}`);svg.innerHTML=o;if(!PLT)winSync()}
 /* ===== sub-grids · free beams (คานฝาก) · free columns ===== */
 const TAU=Math.PI*2,D2R=Math.PI/180;let PDRAW=null,PLEN='',PANG='',PCCW=false,PHOV=null;
 function AG(){const p=P();if(!Array.isArray(p.ag))p.ag=[];return p.ag}
@@ -2036,9 +2067,9 @@ function drawAux(lv,r,fs){let o='';const e=planExt();
 function drawFree(lv,r,fs){let o='';
  S.beams.forEach((bm,bi)=>{const L=bm.link;if(!L||L.t!=='free'||L.lv!==lv)return;const on=PSEL&&PSEL.t==='beam'&&PSEL.i===bi,c=bm.linkBad?'#E8604E':on?'#FFE08A':'#C9A55C';
   if(bm.linkBad){const pa=pathOf(L),a=pa.at(0),b=pa.at(pa.len);o+=`<path data-bm="${bi}" d="${agPathD(pa.geo,x=>x,y=>y,1)}" fill="none" stroke="${c}" stroke-width="${r*0.25}" stroke-dasharray="${r*0.4} ${r*0.25}" style="cursor:pointer"/>`}
-  else beamShapes(bm,x=>x,y=>y,1).forEach((d,q)=>{const ps=PMS.some(z=>z.i===bi&&z.q===q),cc=ps?'#FFE08A':btFill(bm,q,c);o+=`<path data-bm="${bi}" data-sq="${q}" d="${d}" fill="${cc}" fill-opacity="${ps?0.55:on?0.45:0.22}" stroke="${cc}" stroke-width="${r*(ps?0.12:0.06)}" style="cursor:pointer"/>`});
+  else beamShapes(bm,x=>x,y=>y,1).forEach((d,q)=>{if(!plVis('b:'+bm.uid+':'+q))return;const ps=PMS.some(z=>z.i===bi&&z.q===q),cc=ps?'#FFE08A':btFill(bm,q,c);o+=`<path data-bm="${bi}" data-sq="${q}" d="${d}" fill="${cc}" fill-opacity="${ps?0.55:on?0.45:0.22}" stroke="${cc}" stroke-width="${r*(ps?0.12:0.06)}" style="cursor:pointer"/>`});
   const lp=beamLabelPos(bm,fs*0.75);if(lp){const s0=inner(bm)[0]||bm.spans[0]||{};o+=`<text x="${lp.x}" y="${lp.y}" fill="${c}" font-size="${fs*0.72}" text-anchor="middle" font-weight="600" pointer-events="none" transform="rotate(${lp.ang} ${lp.x} ${lp.y})">${esc(btLabel(bm,bm.grids[0].free&&bm.spans.length>1?1:0))}${bm.linkBad?' ⚠':''}</text>`}});
- XC().forEach((cc,q)=>{if(cc.lv!==lv)return;const a=ancXY(cc.p),d=colDim(cc),on=PXCS.includes(q)||(PSEL&&PSEL.t==='xc'&&PSEL.i===q),st=`fill="${on?'#3A2F18':'#22252B'}" stroke="${on?'#FFE08A':'#E6E3DC'}" stroke-width="${r*(on?0.12:0.07)}"`;
+ XC().forEach((cc,q)=>{if(cc.lv!==lv||!plVis('x:'+cc.id))return;const a=ancXY(cc.p),d=colDim(cc),on=PXCS.includes(q)||(PSEL&&PSEL.t==='xc'&&PSEL.i===q),st=`fill="${on?'#3A2F18':'#22252B'}" stroke="${on?'#FFE08A':'#E6E3DC'}" stroke-width="${r*(on?0.12:0.07)}"`;
   o+=`<g data-xc="${q}" style="cursor:pointer">${d.round?`<circle cx="${a.x}" cy="${a.y}" r="${d.bx/2}" ${st}/>`:`<rect x="${a.x-d.bx/2}" y="${a.y-d.by/2}" width="${d.bx}" height="${d.by}" ${st}/>`}<text x="${a.x+Math.max(d.bx,d.by)/2+r*0.25}" y="${a.y-Math.max(d.bx,d.by)/2-r*0.15}" fill="#C8C5BE" font-size="${fs*0.6}">${esc(cc.id)} · ${esc(d.name)}</text></g>`});return o}
 function agPanel(){const p=P(),lv=p.lv,L=AG().filter(g=>g.lv===lv),gn=[...p.gx.n.map((n,i)=>['gx:'+i,'กริด '+n+' (แนวตั้ง)']),...p.gy.n.map((n,i)=>['gy:'+i,'กริด '+n+' (แนวนอน)'])];
  const opt=(list,v)=>list.map(([a,b])=>`<option value="${esc(a)}"${String(a)===String(v)?' selected':''}>${esc(b)}</option>`).join('');
@@ -2449,9 +2480,14 @@ function wsBuild(){const p=P(),W=WSS(),V0=W.vis,tri=[],tc=[],tn=[],tid=[],ta=[],
    const top=lz+(+sp.lvl||0)*1000,bot=top-sp.h,sel=WSSEL&&WSSEL.key===key,rb=rebarOn(e)||(V0.rebar==='sel'&&WSSEL&&WSSEL.kind==='beam'&&WSSEL.bi===bi),col=sel?[1,.88,.54]:colorFor('beam',t,L.lv),al=rb?0.22:1;
    e.c=pa.at((st[q]+st[q+1])/2);e.c=[e.c.x,-e.c.y,(top+bot)/2];e.rb=rb;els.push(e);extrude(pa,st[q],st[q+1],sp.b/2,bot,top,col,e.id,al,sel?[1,.9,.5]:[.08,.08,.09]);
    if(V0.lab){labs.push({p:[e.c[0],e.c[1],top+120],t:btLabel(bm,q),c:'b'})}}
-  if(V0.rebar!=='off'&&(V0.rebar==='all'||(WSSEL&&WSSEL.kind==='beam'&&WSSEL.bi===bi))){let m;try{m=build(bm)}catch(_){m=null}if(!m)return;const D=m.D,tw=(x,y,z)=>{const q=pa.at(Math.max(0,Math.min(pa.len,x))),nx=-q.ty,ny=q.tx;return[q.x+nx*y,-(q.y+ny*y),lz+z]};
+  if(bm.inGrp)return;if(V0.rebar!=='off'&&(V0.rebar==='all'||(WSSEL&&WSSEL.kind==='beam'&&WSSEL.bi===bi))){let m;try{m=build(bm)}catch(_){m=null}if(!m)return;const D=m.D,tw=(x,y,z)=>{const q=pa.at(Math.max(0,Math.min(pa.len,x))),nx=-q.ty,ny=q.tx;return[q.x+nx*y,-(q.y+ny*y),lz+z]};
    m.P.forEach(pc=>{const c=hex3(pieceCol(pc,true));for(let k=0;k<pc.n;k++){try{rline(barPath(D,m,pc,k).map(v=>tw(v[0],v[1],v[2])),c)}catch(_){}}});
    if(V0.stir)m.ST.forEach(stp=>{const sc=stp.sec,ds=BARS[sc.sb],a=sc.b/2-sc.cs-ds/2,zb=D.zb[stp.si],z1=zb+sc.cb+ds/2,z2=zb+sc.h-sc.ct-ds/2,c=hex3('#A8884A');stp.xs.forEach(x=>rline([[x,-a,z1],[x,a,z1],[x,a,z2],[x,-a,z2],[x,-a,z1]].map(v=>tw(v[0],v[1],v[2])),c))})}});
+ if(V0.beam&&V0.rebar!=='off')GRPS().forEach(c=>{const ms=grpMembers(c);if(ms.length<2||ms.some(b=>!b.link||b.linkBad||W.lvOff[b.link.lv]))return;const on=V0.rebar==='all'||(WSSEL&&WSSEL.kind==='beam'&&ms.includes(S.beams[WSSEL.bi]));if(!on)return;
+  const pas=ms.map(beamPathAny);if(pas.some(x=>!x))return;const off=[];let acc=0;pas.forEach(q=>{off.push(acc);acc+=q.len});let m;try{m=build(c)}catch(_){return}const D=m.D;
+  const tw=(x,y,z)=>{let k=0;while(k<pas.length-1&&x>off[k]+pas[k].len)k++;const pa=pas[k],q=pa.at(Math.max(0,Math.min(pa.len,x-off[k]))),nx=-q.ty,ny=q.tx,lz=(lvOf(ms[k].link.lv)||{z:0}).z*1000;return[q.x+nx*y,-(q.y+ny*y),lz+z]};
+  m.P.forEach(pc=>{const cc=hex3(pieceCol(pc,true));for(let k=0;k<pc.n;k++){try{rline(barPath(D,m,pc,k).map(v=>tw(v[0],v[1],v[2])),cc)}catch(_){}}});
+  if(V0.stir)m.ST.forEach(stp=>{const sc=stp.sec,ds=BARS[sc.sb],a=sc.b/2-sc.cs-ds/2,zb=D.zb[stp.si],z1=zb+sc.cb+ds/2,z2=zb+sc.h-sc.ct-ds/2,cc=hex3('#A8884A');stp.xs.forEach(x=>rline([[x,-a,z1],[x,a,z1],[x,a,z2],[x,-a,z2],[x,-a,z1]].map(v=>tw(v[0],v[1],v[2])),cc))})});
  /* columns */
  if(V0.col)p.levels.forEach(l=>{if(!lvOn(l.id))return;allCols(l.id).forEach(c=>{const t=c.key?ctOf((p.cols[c.key]||{}).t):ctOf((XC()[c.xc]||{}).t);if(W.tOff['c:'+(t?t.id:'')])return;const key=c.key?'c:'+c.key:'x:'+c.xc,e={key,kind:'col',lv:l.id,ck:c.key,xc:c.xc,id:els.length+1};if(!visible(e))return;
   const[z0,z1]=wsColRange(l.id),sel=WSSEL&&WSSEL.key===key,rb=rebarOn(e),col=sel?[1,.88,.54]:colorFor('col',t,l.id),al=rb?0.22:1,x=c.x,y=-c.y,d=c.d,ec=sel?[1,.9,.5]:[.08,.08,.09];e.c=[x,y,(z0+z1)/2];e.rb=rb;els.push(e);
@@ -2488,7 +2524,7 @@ function wsMV(){const c=WSC,R=wsRot();return M4.mul(M4.tr(c.o[0],c.o[1],c.o[2]),
 function wsEye(q){const R=wsRot(),x=q[0]-WSC.t[0],y=q[1]-WSC.t[1],z=q[2]-WSC.t[2];return[R[0]*x+R[4]*y+R[8]*z+WSC.o[0],R[1]*x+R[5]*y+R[9]*z+WSC.o[1],R[2]*x+R[6]*y+R[10]*z+WSC.o[2]]}
 function wsFit(dir){const G=WSG;if(!G||!G.bb)return;const b=G.bb,cx=(b[0]+b[3])/2,cy=(b[1]+b[4])/2,cz=(b[2]+b[5])/2,dg=Math.hypot(b[3]-b[0],b[4]-b[1],b[5]-b[2])||10000;
  const V={iso:[-0.62,-0.95],top:[0,0],front:[0,-Math.PI/2],right:[-Math.PI/2,-Math.PI/2],back:[Math.PI,-Math.PI/2],left:[Math.PI/2,-Math.PI/2],bottom:[0,Math.PI]}[dir||'iso'];
- WSC=Object.assign(WSC||{},{yaw:V?V[0]:WSC.yaw,pitch:V?V[1]:WSC.pitch,t:[cx,cy,cz],o:[0,0,-dg*1.55]});wsDraw()}
+ WSC=Object.assign(WSC||{},{yaw:V?V[0]:WSC.yaw,pitch:V?V[1]:WSC.pitch,t:[cx,cy,cz],o:[0,0,-dg*1.55*Math.max(1,1/Math.max(0.3,(G.cv.clientWidth||1)/(G.cv.clientHeight||1)))]});wsDraw()}
 function wsDraw(){if(!WSG||!WSC)return;cancelAnimationFrame(WSRAF);WSRAF=requestAnimationFrame(()=>wsDraw0())}
 function wsDraw0(pick){const G=WSG,gl=G.gl,cv=G.cv,W=WSS(),dpr=Math.min(2,window.devicePixelRatio||1),w=Math.max(10,cv.clientWidth),h=Math.max(10,cv.clientHeight);if(cv.width!==Math.round(w*dpr)||cv.height!==Math.round(h*dpr)){cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr)}
  gl.viewport(0,0,cv.width,cv.height);const dk=!pick;gl.clearColor(pick?0:0.055,pick?0:0.058,pick?0:0.07,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.enable(gl.DEPTH_TEST);gl.useProgram(G.pg);
@@ -2592,11 +2628,11 @@ function wsBindCanvas(){const cv=$('#wsCv');let dr=null,moved=false;const T=new 
  cv.addEventListener('pointermove',e=>{if(e.pointerType==='touch'&&T.has(e.pointerId)){T.set(e.pointerId,[e.clientX,e.clientY]);if(T.size===2&&pin){const[a,b]=[...T.values()],d=Math.hypot(a[0]-b[0],a[1]-b[1]),m=[(a[0]+b[0])/2,(a[1]+b[1])/2];wsZoomAt(m[0],m[1],d/pin.d);wsPan(m[0]-pin.m[0],m[1]-pin.m[1]);pin={d,m};moved=true;return}}
   if(!dr)return;const dx=e.clientX-dr.x,dy=e.clientY-dr.y;if(Math.abs(dx)+Math.abs(dy)>2&&!moved){moved=true;if(dr.orbit&&!dr.pv){setPivot(pivotAt(dr.x,dr.y));dr.pv=true}}if(!moved)return;dr.x=e.clientX;dr.y=e.clientY;
   if(dr.orbit){WSC.yaw+=dx*0.008;WSC.pitch+=dy*0.008}else wsPan(dx,dy);wsDraw()});
- const up=e=>{if(e.pointerType==='touch')T.delete(e.pointerId);if(T.size<2)pin=null;if(dr&&!moved&&e.button===0){const el=wsPick(e.clientX,e.clientY);WSSEL=el;renderWSProps();wsRebuild();if(el&&matchMedia('(max-width:900px)').matches){document.body.classList.add('ws-R');document.body.classList.remove('ws-L')}}dr=null};
+ const up=e=>{if(e.pointerType==='touch')T.delete(e.pointerId);if(T.size<2)pin=null;if(dr&&!moved&&e.button===0){const el=wsPick(e.clientX,e.clientY);WSSEL=el;renderWSProps();wsRebuild();wsToPlanSel(el);if(el&&matchMedia('(max-width:900px)').matches){document.body.classList.add('ws-R');document.body.classList.remove('ws-L')}}dr=null};
  cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',()=>{dr=null;T.clear();pin=null});
  cv.addEventListener('wheel',e=>{e.preventDefault();wsZoomAt(e.clientX,e.clientY,e.deltaY<0?1.15:1/1.15)},{passive:false});
  cv.addEventListener('dblclick',e=>{const el=wsPick(e.clientX,e.clientY);if(el&&el.kind==='beam'){bmDlg(el.bi,el.q);return}wsFit(null)});
- window.addEventListener('resize',()=>{if(location.hash==='#ws')wsDraw()})}
+ window.addEventListener('resize',()=>{if(wsLive())wsDraw()})}
 function wsPan(dx,dy){const cv=WSG.cv,h=cv.clientHeight,f=1/Math.tan(22.5*Math.PI/180),k=Math.abs(WSC.o[2])*2/(f*h);WSC.o[0]+=dx*k;WSC.o[1]-=dy*k;wsDraw()}
 function wsZoomAt(cx,cy,f){const cv=WSG.cv,r=cv.getBoundingClientRect(),w=r.width,h=r.height,ff=1/Math.tan(22.5*Math.PI/180),nx=((cx-r.left)-w/2)/(h/2)/ff,ny=-((cy-r.top)-h/2)/(h/2)/ff,o=WSC.o,d=-o[2],a=d*(1-1/f);
  if(d-a<50&&f>1)return;o[0]-=nx*a;o[1]-=ny*a;o[2]+=a;wsDraw()}
@@ -2821,9 +2857,9 @@ function plSelClick(e){const t=e.target,add=e.shiftKey||e.ctrlKey||e.metaKey||PM
 /* ---------- selection bar (floating, works on phone) ---------- */
 function plSelBar(){const el=$('#plSelBar');if(!el)return;const n=plSelN();if(PT!=='sel'||!n){el.style.display='none';el.innerHTML='';return}
  const bs=[...new Set(PMS.map(o=>o.i))],parts=[];if(PMS.length)parts.push(`คาน ${bs.length} (${PMS.length} ช่วง)`);if(PCOL.length+PXCS.length)parts.push(`เสา ${PCOL.length+PXCS.length}`);if(PGS.length)parts.push(`กริด ${PGS.map(g=>P()[g.ax].n[g.i]).join(', ')}`);if(PAGS.length)parts.push(`กริดช่วย ${PAGS.length}`);
- el.style.display='flex';el.innerHTML=`<span class="plsbt">${esc(parts.join(' · '))}</span>${bs.length===1?'<button class="gold" data-sb="edit">✎ แก้ไขคาน</button>':''}${PGS.length||PAGS.length?'<button class="ib" data-sb="move">ย้าย…</button>':''}<button class="ib plsbd" data-sb="del">🗑 ลบ</button><button class="ib" data-sb="clr" aria-label="ยกเลิกการเลือก">✕</button>`;
+ const gs=[...new Set(bs.map(i=>S.beams[i]&&S.beams[i].inGrp))],g1=gs.length===1&&gs[0]?grpOf(S.beams[bs[0]]):null;el.style.display='flex';el.innerHTML=`<span class="plsbt">${esc(parts.join(' · '))}</span>${bs.length===1?'<button class="gold" data-sb="edit">✎ แก้ไขคาน</button>':''}${g1?`<button class="ib" data-sb="gopen">⧉ เปิดกลุ่ม ${esc(g1.id)}</button>`:bs.length>=2?'<button class="ib" data-sb="grp">⧉ จัดกลุ่มคาน</button>':''}${PGS.length||PAGS.length?'<button class="ib" data-sb="move">ย้าย…</button>':''}<button class="ib plsbd" data-sb="del">🗑 ลบ</button><button class="ib" data-sb="clr" aria-label="ยกเลิกการเลือก">✕</button>`;
  el.onclick=e=>{const b=e.target.closest('[data-sb]');if(!b)return;const a=b.dataset.sb;
-  if(a==='del')plDelete();else if(a==='clr'){plSelClear();plRefresh()}else if(a==='edit'){const o=PMS[0];bmDlg(o.i,o.q,PMS.filter(z=>z.i===o.i).map(z=>z.q))}
+  if(a==='grp'){const g=grpMake(bs.map(i=>S.beams[i]));if(g){plSelClear();planChanged(true);plSelBar()}}else if(a==='gopen'){grpOpen(g1)}else if(a==='del')plDelete();else if(a==='clr'){plSelClear();plRefresh()}else if(a==='edit'){const o=PMS[0];bmDlg(o.i,o.q,PMS.filter(z=>z.i===o.i).map(z=>z.q))}
   else if(a==='move'){const v=prompt('ย้ายกริดที่เลือก (ม.) · แนวตั้ง + ไปขวา · แนวนอน + ไปล่าง','0');const d=Math.round(parseFloat(v)*1000);if(!isFinite(d)||!d)return;plGridMoveSel(d,d);syncAll();save();plRefresh()}}}
 /* ---------- grid geometry edits ---------- */
 function gridMoveApply(ax,idx,d){const p=P(),P0=gpos(ax);if(!idx.length||!d)return 0;let lo=-1e12,hi=1e12;
@@ -2954,10 +2990,10 @@ function bmDlg(i,q,qs){const bm=S.beams[i];if(!bm)return;let m=document.getEleme
   if(a==='del'){m.style.display='none';const bi=S.beams.indexOf(bm);plSelClear();for(let k=st.q0;k<=st.q1;k++)PMS.push({i:bi,q:k});plDelete();return}
   const bi=apply();if(bi==null)return;m.style.display='none';const nb=S.beams[bi];
   if(a==='detail'){S.cur=bi;SEL=null;UI={t:'span',i:S.beams[bi]===bm?st.q0:0};save();location.hash='beam';return}
-  plSelClear();PSEL={t:'beam',i:bi};PMS=nb.spans.map((_,k)=>({i:bi,q:k}));if(location.hash==='#plan')plRefresh();else if(location.hash==='#beam'){S.cur=bi;renderTop();renderPanel();renderAll()}if(typeof WSG!=='undefined'&&WSG&&location.hash==='#ws'){WSSEL=null;renderWSProps();wsRebuild()}toast('บันทึกคาน '+nb.id+' แล้ว')};
+  plSelClear();PSEL={t:'beam',i:bi};PMS=nb.spans.map((_,k)=>({i:bi,q:k}));if(location.hash==='#plan')plRefresh();else if(location.hash==='#beam'){S.cur=bi;renderTop();renderPanel();renderAll()}if(typeof WSG!=='undefined'&&WSG&&wsLive()){WSSEL=null;renderWSProps();wsRebuild()}toast('บันทึกคาน '+nb.id+' แล้ว')};
  draw()}
 /* ---------- bind to plan svg ---------- */
-function plBindGE(){const svg=$('#plSvg'),plc=svg.parentNode;if(!svg||svg.dataset.ge)return;svg.dataset.ge=1;
+function plBindGE(){const svg=$('#plSvg'),plc=document.querySelector('#v-plan .plc');if(!svg||svg.dataset.ge)return;svg.dataset.ge=1;
  plc.style.position='relative';svg.addEventListener('contextmenu',e=>e.preventDefault());const sb=document.createElement('div');sb.id='plSelBar';sb.className='plsb';plc.appendChild(sb);const gp=document.createElement('div');gp.id='plGPick';gp.className='plgp';plc.appendChild(gp);
  const pt=ev=>{const q=svg.createSVGPoint();q.x=ev.clientX;q.y=ev.clientY;return q.matrixTransform(svg.getScreenCTM().inverse())};let raf=0;const redraw=()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(drawPlan)};
  svg.addEventListener('pointerdown',e=>{if(PT!=='sel'||e.button!==0)return;const t=e.target,gg=t.closest('[data-g]'),ag=t.closest('[data-ag]');
@@ -2978,10 +3014,229 @@ function plBindGE(){const svg=$('#plSvg'),plc=svg.parentNode;if(!svg||svg.datase
  svg.addEventListener('dblclick',e=>{if(PT!=='sel'||document.querySelector('#bdMod[style*="flex"]'))return;const el0=document.elementFromPoint(e.clientX,e.clientY),bg=(el0&&el0.closest('[data-bm]'))||e.target.closest('[data-bm]');e.stopImmediatePropagation();if(!bg)return;const i=+bg.dataset.bm,q=bg.dataset.sq!=null?+bg.dataset.sq:0;bmDlg(i,q)},true);
  document.addEventListener('keydown',e=>{if(location.hash!=='#plan')return;const t=e.target;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.tagName==='SELECT'||t.isContentEditable))return;if(document.querySelector('.modal,#bdMod[style*="flex"],#geMod[style*="flex"]'))return;
   if(e.key==='Delete'||e.key==='Backspace'){if(plSelN()||PSEL){e.preventDefault();plDelete()}}else if(e.key==='Escape'&&!PDRAW&&plSelN()){plSelClear();plRefresh()}});
- $('#plTools').addEventListener('click',e=>{const b=e.target.closest('[data-ge]');if(!b)return;const a=b.dataset.ge;if(a==='gadd')plGridAddDlg();else if(a==='gpick'){PGPK=!PGPK;plGPick();renderPlanTools()}else if(a==='multi'){PMULTI=!PMULTI;renderPlanTools()}})}
-function plSelTools(){return`<button class="chip" data-ge="gadd">+ กริด</button><button class="chip${PGPK?' on':''}" data-ge="gpick">เลือกกริด ▾</button><button class="chip${PMULTI?' on':''}" data-ge="multi" title="แตะหลายชิ้นต่อกัน (มือถือ)">เลือกหลายชิ้น</button><span class="sep"></span>`}
+ $('#plTools').addEventListener('click',e=>{const b=e.target.closest('[data-ge]');if(!b)return;const a=b.dataset.ge;if(a==='grp')grpDlg(PMS.map(o=>S.beams[o.i]&&S.beams[o.i].uid).filter(Boolean));else if(a==='gadd')plGridAddDlg();else if(a==='gpick'){PGPK=!PGPK;plGPick();renderPlanTools()}else if(a==='multi'){PMULTI=!PMULTI;renderPlanTools()}})}
+function plSelTools(){return`<button class="chip" data-ge="grp">⧉ กลุ่มคาน</button><button class="chip" data-ge="gadd">+ กริด</button><button class="chip${PGPK?' on':''}" data-ge="gpick">เลือกกริด ▾</button><button class="chip${PMULTI?' on':''}" data-ge="multi" title="แตะหลายชิ้นต่อกัน (มือถือ)">เลือกหลายชิ้น</button><span class="sep"></span>`}
 
-function renderPlan(){P();syncAll();renderPlanTools();renderPlanPanel();drawPlan();plSelBar();plGPick()}
+/* ===== กลุ่มคานต่อเนื่อง (จัดเหล็กรวม) · เลือกเหล็กหลายเส้น / กลุ่มเหล็ก ===== */
+let TOPSEL=[],BSEL=[],KSH=false;
+document.addEventListener('pointerdown',e=>{KSH=e.shiftKey||e.ctrlKey||e.metaKey},true);
+const ruid=()=>'b'+Math.random().toString(36).slice(2,10);
+const GRPS=()=>S.beams.filter(b=>b.grp);
+const grpOf=b=>b&&b.inGrp?S.beams.find(c=>c.grp&&c.uid===b.inGrp)||null:null;
+const OB=()=>S.beams.filter(b=>!b.inGrp);
+function grpMembers(c){const by=new Map(S.beams.map(b=>[b.uid,b]));return(c.grp.m||[]).map(u=>by.get(u)).filter(Boolean)}
+function grpSync(){if(!S||!S.beams)return;const seen=new Set();
+ S.beams.forEach(b=>{if(!b.uid||seen.has(b.uid)){const dup=!!b.uid;b.uid=ruid();if(dup&&!b.grp)delete b.inGrp}seen.add(b.uid)});
+ const by=new Map(S.beams.map(b=>[b.uid,b]));
+ GRPS().forEach(c=>{const G=c.grp,ms=(G.m||[]).map(u=>by.get(u)).filter(b=>b&&!b.grp&&(!b.inGrp||b.inGrp===c.uid));
+  if(ms.length<2){c._dead=1;ms.forEach(b=>delete b.inGrp);return}
+  G.m=ms.map(b=>b.uid);ms.forEach(b=>b.inGrp=c.uid);
+  const sp=[],gr=[],own=[];ms.forEach((b,k)=>{gr.push(...(k?b.grids.slice(1):b.grids));sp.push(...b.spans);b.spans.forEach(()=>own.push(b.id))});c.spans=sp;c.grids=gr;Object.defineProperty(c,'_own',{value:own,enumerable:false,configurable:true,writable:true});
+  const want=G.disp==='list'?ms.map(b=>b.id).join('+'):G.disp==='custom'&&G.cu?G.cu:(G.nm||'กลุ่ม');
+  if(G._last!=null&&c.id!==G._last&&c.id){G.disp='custom';G.cu=c.id}else{let id=want;while(S.beams.some(x=>x!==c&&x.id===id))id+="'";c.id=id}G._last=c.id;
+  c.floor=ms[0].floor;c.line=(ms[0].line||'')+' · '+ms.map(b=>b.id).join('+');c.manual=false});
+ if(S.beams.some(b=>b._dead)){S.beams=S.beams.filter(b=>!b._dead);S.cur=Math.max(0,Math.min(S.cur,S.beams.length-1))}
+ S.beams.forEach(b=>{if(b.inGrp&&!S.beams.some(c=>c.grp&&c.uid===b.inGrp))delete b.inGrp})}
+/* order + validate */
+function grpChain(list){const P2=list.map(b=>{const pa=beamPathAny(b);if(!pa)return null;const a=pa.at(0),z=pa.at(pa.len);return{b,a,z}});
+ if(P2.some(x=>!x))return{err:'มีคานที่ยังไม่ผูกกับแปลนหรือการผูกเสีย'};const lv=list[0].link.lv;if(list.some(b=>b.link.lv!==lv))return{err:'คานต้องอยู่ชั้นเดียวกัน'};
+ if(list.some(b=>b.inGrp))return{err:'มีคานที่อยู่ในกลุ่มอื่นแล้ว · ยกเลิกกลุ่มเดิมก่อน'};
+ const near=(p,q)=>Math.hypot(p.x-q.x,p.y-q.y)<60;let start=P2.filter(x=>!P2.some(y=>y!==x&&near(y.z,x.a)));
+ if(start.length!==1)return{err:'คานต้องต่อกันเป็นแนวเดียว ปลายชนปลาย และทิศเดียวกัน'};const out=[start[0]];
+ while(out.length<P2.length){const cur=out[out.length-1],nx=P2.filter(y=>!out.includes(y)&&near(cur.z,y.a));if(nx.length!==1)return{err:'คานต้องต่อกันเป็นแนวเดียว (ขาดช่วงหรือแยกทางที่ปลาย '+cur.b.id+')'};out.push(nx[0])}
+ for(let k=0;k<out.length-1;k++){const A=out[k].b,B2=out[k+1].b;if(A.grids[A.grids.length-1].free||B2.grids[0].free)return{err:'รอยต่อ '+A.id+'–'+B2.id+' เป็นปลายยื่น · ต้องต่อกันที่เสาหรือคาน'}}
+ return{ok:out.map(x=>x.b)}}
+function grpMake(list,nm){list=[...new Set(list)];if(list.length<2){toast('เลือกคานอย่างน้อย 2 ตัว');return null}const r=grpChain(list);if(r.err){plMsg('จัดกลุ่มไม่ได้',esc(r.err));return null}
+ grpSync();const ms=r.ok,m1=ms[0];let n=nm||ms.map(b=>b.id).join('+');while(S.beams.some(b=>b.id===n))n+="'";
+ const c=newBeam(n);c.uid=ruid();c.grp={m:ms.map(b=>b.uid),nm:n,disp:nm?'name':'list',show:true};['cov','fc','grade','lap','leg','stagger'].forEach(k=>{if(m1[k]!==undefined)c[k]=cl(m1[k])});c.qty=1;
+ S.beams.push(c);ms.forEach(b=>b.inGrp=c.uid);grpSync();save();toast('สร้างกลุ่ม '+c.id+' ('+ms.map(b=>b.id).join('+')+') · จัดเหล็กรวมได้ที่หน้า Detail');return c}
+function grpUngroup(c){confirmBox('ยกเลิกกลุ่ม <b>'+esc(c.id)+'</b>?<br>เหล็กที่จัดไว้ในกลุ่มจะถูกล้าง · คาน '+grpMembers(c).map(b=>esc(b.id)).join(', ')+' กลับไปจัดเหล็กของตัวเอง · กด Undo ย้อนได้',()=>{grpMembers(c).forEach(b=>delete b.inGrp);S.beams=S.beams.filter(b=>b!==c);S.cur=Math.max(0,Math.min(S.cur,S.beams.length-1));grpSync();save();grpRefreshUI();toast('ยกเลิกกลุ่มแล้ว')})}
+function grpOpen(c){grpSync();S.cur=S.beams.indexOf(c);SEL=null;BSEL=[];UI={t:'span',i:c.grids[0].free&&c.spans.length>1?1:0};save();if(location.hash==='#beam'){renderTop();renderPanel();renderAll()}else location.hash='beam'}
+function grpRefreshUI(){const h=location.hash;if(h==='#plan'){syncAll();plRefresh&&plRefresh()}else if(h==='#beam'){renderTop();renderPanel();renderAll()}else if(wsLive())wsRebuild();const m=document.getElementById('grMod');if(m&&m.style.display==='flex')grpDlg()}
+/* manager */
+function grpDlg(pre){grpSync();let m=document.getElementById('grMod');if(!m){m=document.createElement('div');m.id='grMod';m.className='bpm';document.body.appendChild(m)}m.style.display='flex';
+ const st=grpDlg.st=grpDlg.st||{sel:new Set(),lv:''};if(pre)st.sel=new Set(pre);const p=P(),lvs=p.levels;if(!st.lv)st.lv=(S.beams.find(b=>st.sel.has(b.uid))||{link:{lv:p.lv}}).link.lv||p.lv;
+ const G=GRPS(),cand=S.beams.filter(b=>b.link&&!b.linkBad&&!b.inGrp&&!b.grp&&b.link.lv===st.lv),lines={};cand.forEach(b=>{(lines[b.line||'—']=lines[b.line||'—']||[]).push(b)});
+ m.innerHTML=`<div class="bpc" role="dialog" aria-label="กลุ่มคาน" style="width:min(560px,100%);overflow:auto"><div class="bph"><b>⧉ กลุ่มคานต่อเนื่อง</b><span class="note" style="margin:0">${G.length} กลุ่ม</span><span style="flex:1"></span><button class="x" data-gr="x" aria-label="ปิด">✕</button></div>
+ ${G.map(c=>{const g=c.grp,ms=grpMembers(c);return`<div class="box" style="padding:8px;margin:0"><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><label class="ck" title="แสดงในแปลน"><input type="checkbox" data-gs="${c.uid}"${g.show!==false?' checked':''}> แสดง</label><b style="color:var(--au2);flex:1">⧉ ${esc(c.id)}</b><span class="note" style="margin:0">${esc(ms[0]?ms[0].floor:'')} · ${ms.map(b=>esc(b.id)).join(' + ')}</span></div>
+  <div class="g2" style="margin-top:6px"><div class="f"><label>ชื่อกลุ่ม</label><input data-gn="${c.uid}" value="${esc(g.nm||'')}"></div><div class="f"><label>ชื่อในแบบ / ตารางเหล็ก</label><select data-gd2="${c.uid}"><option value="name"${g.disp==='name'?' selected':''}>ใช้ชื่อกลุ่ม</option><option value="list"${g.disp==='list'?' selected':''}>รายชื่อคาน (${esc(ms.map(b=>b.id).join('+'))})</option><option value="custom"${g.disp==='custom'?' selected':''}>กำหนดเอง</option></select></div></div>
+  ${g.disp==='custom'?`<div class="f" style="margin-top:6px"><label>ชื่อที่กำหนดเอง</label><input data-gc="${c.uid}" value="${esc(g.cu||c.id)}"></div>`:''}
+  <div class="chips" style="margin-top:6px"><button class="gold" data-gr="open:${c.uid}">จัดเหล็กกลุ่มนี้</button><button class="chip" data-gr="plan:${c.uid}">ดูในแปลน</button><span style="flex:1"></span><button class="chip plsbd" data-gr="ung:${c.uid}">ยกเลิกกลุ่ม</button></div></div>`}).join('')||'<div class="note">ยังไม่มีกลุ่ม</div>'}
+ <div class="sh">สร้างกลุ่มใหม่</div><div class="chips"><select class="chip" data-gl2="1">${lvs.map(l=>`<option value="${l.id}"${l.id===st.lv?' selected':''}>${esc(l.n)}</option>`).join('')}</select><span class="note" style="margin:0">ติ๊กคานที่ต่อกันในแนวเดียว (ปลายชนปลาย)</span></div>
+ <div style="max-height:34vh;overflow:auto;border:1px solid var(--ln);padding:6px">${Object.entries(lines).map(([ln,bs])=>`<div class="note" style="margin:4px 0 2px">${esc(ln)}</div><div class="chips">${bs.map(b=>`<label class="ck"><input type="checkbox" data-gk="${b.uid}"${st.sel.has(b.uid)?' checked':''}> ${esc(b.id)}</label>`).join('')}</div>`).join('')||'<div class="note">ไม่มีคานที่ว่างในชั้นนี้</div>'}</div>
+ <div class="chips" style="margin-top:6px"><input class="chip" id="grNew" placeholder="ชื่อกลุ่ม (ว่าง = ชื่อคาน เช่น B7+B8+B9)" style="flex:1;min-width:160px"><button class="gold" data-gr="make">⧉ สร้างกลุ่ม (${[...st.sel].filter(u=>cand.some(b=>b.uid===u)).length})</button></div></div>`;
+ m.onchange=e=>{const t=e.target;const c=S.beams.find(b=>b.uid===(t.dataset.gs||t.dataset.gn||t.dataset.gd2||t.dataset.gc));
+  if(t.dataset.gk){if(t.checked)st.sel.add(t.dataset.gk);else st.sel.delete(t.dataset.gk);setTimeout(()=>grpDlg(),0);return}
+  if(t.dataset.gl2){st.lv=t.value;st.sel.clear();setTimeout(()=>grpDlg(),0);return}
+  if(!c)return;if(t.dataset.gs)c.grp.show=t.checked;else if(t.dataset.gn){c.grp.nm=t.value.trim()||c.grp.nm;if(c.grp.disp==='custom'&&!c.grp.cu)c.grp.disp='name'}else if(t.dataset.gd2){c.grp.disp=t.value;if(t.value==='custom'&&!c.grp.cu)c.grp.cu=c.id}else if(t.dataset.gc)c.grp.cu=t.value.trim();
+  c.grp._last=null;grpSync();save();setTimeout(()=>{grpDlg();grpRefreshUI()},0)};
+ m.onclick=e=>{if(e.target===m){m.style.display='none';return}const b=e.target.closest('[data-gr]');if(!b)return;const[a,u]=b.dataset.gr.split(':'),c=S.beams.find(x=>x.uid===u);
+  if(a==='x'){m.style.display='none';return}
+  if(a==='open'&&c){m.style.display='none';grpOpen(c);return}
+  if(a==='plan'&&c){m.style.display='none';const ms=grpMembers(c);P().lv=ms[0].link.lv;c.grp.show=true;plSelClear&&plSelClear();ms.forEach(x=>{const i=S.beams.indexOf(x);x.spans.forEach((_,q)=>PMS.push({i,q}))});save();location.hash='plan';setTimeout(()=>{renderPlan()},50);return}
+  if(a==='ung'&&c){grpUngroup(c);return}
+  if(a==='make'){const list=S.beams.filter(x=>st.sel.has(x.uid)&&cand.includes(x));const nm=(m.querySelector('#grNew').value||'').trim();const g=grpMake(list,nm);if(g){st.sel.clear();grpDlg();grpRefreshUI()}}}}
+/* plan overlay for shown groups */
+function grpPlanSVG(lv,r,fs){let o='';GRPS().forEach(c=>{if(c.grp.show===false)return;const ms=grpMembers(c);if(!ms.length||ms[0].link.lv!==lv)return;
+ ms.forEach(b=>{const pa=beamPathAny(b);if(!pa)return;o+=`<path d="${agPathD(pa.geo,x=>x,y=>y,1)}" fill="none" stroke="#C58AE8" stroke-opacity="0.28" stroke-width="${Math.max(r*0.9,(b.spans[0]||{b:200}).b+r*0.5)}" stroke-linecap="round" pointer-events="none"/>`});
+ const pa=beamPathAny(ms[0]);if(pa){const a=pa.at(0),vert=Math.abs(a.ty)>Math.abs(a.tx);o+=`<text x="${a.x+(vert?-r*1.2:r*0.3)}" y="${a.y+(vert?r*0.3:-r*1.0)}" fill="#D9B3F2" font-size="${fs*0.62}" font-weight="600" pointer-events="none">⧉ ${esc(c.id)}</text>`}});return o}
+/* ===== bar multi-select (Detail) ===== */
+function bmBarDel(bm,ids){const us=[],rs=[];ids.forEach(id=>{if(id[0]==='U')us.push(+id.slice(1));else if(id[0]==='R')rs.push(+id.slice(1));else{bm.ovr=bm.ovr||{};bm.ovr[id]={del:true}}});us.sort((a,b)=>b-a).forEach(i=>bm.add.splice(i,1));rs.sort((a,b)=>b-a).forEach(i=>bm.runs.splice(i,1))}
+function barMulti(bm){const D=derive(bm),rs=D.runs.filter(r=>BSEL.includes(r.id));if(rs.length<2)return'';const go=D.grids.map((q,i)=>[i,q.free?'ปลายยื่น':q.n]),en=[['hook','งอในเสา'],['straight','ตรง'],['xhook','ยื่นแล้วงอ']];
+ const com=k=>{const v=rs.map(r=>r[k]==null?'':String(r[k]));return v.every(x=>x===v[0])?v[0]:null};const bgs=bm.bgs||[],gi=bgs.findIndex(g=>g.ids.length===BSEL.length&&g.ids.every(x=>BSEL.includes(x)));
+ const sel=(l,k,opts)=>{const c=com(k);return`<div class="f"><label>${l}</label><select data-om="${k}">${c==null?'<option value="" selected>— หลายค่า —</option>':''}${opts.map(o=>{const[a,b]=Array.isArray(o)?o:[o,o];return`<option value="${esc(a)}"${c!=null&&String(a)===c?' selected':''}>${esc(b)}</option>`}).join('')}</select></div>`};
+ const num=(l,k)=>{const c=com(k);return`<div class="f"><label>${l}</label><input data-om="${k}" type="number" step="any" value="${c==null?'':esc(c)}" placeholder="หลายค่า"></div>`};
+ return`<div class="box sel"><div class="t"><span>${gi>=0?'กลุ่มเหล็ก <b>'+esc(bgs[gi].n)+'</b> · ':''}เลือก ${rs.length} เส้น</span><span class="chips"><button class="chip" data-bm2="clr">ยกเลิกเลือก</button></span></div>
+ <div class="pl">${rs.map(r=>`<div>${esc(r.layer)} · ${r.n}-${esc(r.bar)} · ${esc(go[r.a]?go[r.a][1]:'')} → ${esc(go[r.b]?go[r.b][1]:'')}</div>`).join('')}</div>
+ <div class="note">แก้ค่าด้านล่าง = แก้ทุกเส้นที่เลือกพร้อมกัน · Shift+คลิกเหล็กบนรูปเพื่อเพิ่ม/เอาออก</div>
+ <div class="g4">${sel('ชั้น','layer',LAY)}${sel('ขนาด','bar',MAIN)}${num('จำนวน (เส้น)','n')}${num('ขางอ มม.','leg')}</div>
+ <div class="sh">ปลายซ้าย</div><div class="g4">${sel('ที่กริด','a',go)}${sel('ปลาย','ea',en)}${num('เยื้อง มม.','oa')}<div></div></div>
+ <div class="sh">ปลายขวา</div><div class="g4">${sel('ที่กริด','b',go)}${sel('ปลาย','eb',en)}${num('เยื้อง มม.','ob')}<div></div></div>
+ <div class="chips" style="margin-top:8px">${gi>=0?`<button class="chip" data-bm2="ren">เปลี่ยนชื่อกลุ่มเหล็ก</button><button class="chip" data-bm2="ung">ยกเลิกกลุ่มเหล็ก</button>`:'<button class="gold" data-bm2="grp">รวมเป็นกลุ่มเหล็ก…</button>'}<button class="chip" data-bm2="yo">ย้ายทั้งหมด ± มม.…</button><span style="flex:1"></span><button class="chip plsbd" data-bm2="del">ลบทั้ง ${rs.length} เส้น</button></div>
+ ${bgs.length?`<div class="sh">กลุ่มเหล็กในคานนี้</div><div class="chips">${bgs.map((g,i)=>`<button class="chip${i===gi?' on':''}" data-bm2="pick:${i}">${esc(g.n)} (${g.ids.length})</button>`).join('')}</div>`:''}</div>`}
+function bgsPanel(bm){const bgs=bm.bgs||[];if(!bgs.length)return'';return`<div class="box"><div class="sh" style="margin-top:0">กลุ่มเหล็ก · คลิกเพื่อเลือกทั้งกลุ่ม</div><div class="chips">${bgs.map((g,i)=>`<button class="chip" data-bm2="pick:${i}">${esc(g.n)} (${g.ids.length})</button>`).join('')}</div><div class="note">สร้างกลุ่ม: Shift+คลิกเหล็กหลายเส้นบนรูป แล้วกด "รวมเป็นกลุ่มเหล็ก"</div></div>`}
+function grpBindDetail(){const pn=$('#panel');if(!pn||pn.dataset.grp)return;pn.dataset.grp=1;
+ pn.addEventListener('change',e=>{const t=e.target;if(!t.dataset.om)return;e.stopImmediatePropagation();const bm=B(),k=t.dataset.om;let v=t.value;if(v==='')return;
+  if(['n','leg','oa','ob'].includes(k)){v=parseFloat(v);if(!isFinite(v))return;if(k==='n')v=Math.max(1,Math.round(v))}else if(k==='a'||k==='b')v=+v;
+  BSEL.forEach(id=>barSet(bm,id,k,v));save();renderAll();renderPanel()},true);
+ pn.addEventListener('click',e=>{const b=e.target.closest('[data-bm2]');if(!b)return;e.stopImmediatePropagation();const bm=B(),[a,x]=b.dataset.bm2.split(':');bm.bgs=bm.bgs||[];
+  if(a==='clr'){BSEL=[];SEL=null;UI={t:'span',i:UI.si||0}}
+  else if(a==='grp'){const n=prompt('ชื่อกลุ่มเหล็ก','กลุ่ม '+(bm.bgs.length+1));if(!n)return;bm.bgs.forEach(g=>g.ids=g.ids.filter(i=>!BSEL.includes(i)));bm.bgs=bm.bgs.filter(g=>g.ids.length>1);bm.bgs.push({n:n.trim(),ids:BSEL.slice()});toast('สร้างกลุ่มเหล็ก '+n+' แล้ว · คลิกเหล็กเส้นไหนในกลุ่มก็เลือกทั้งกลุ่ม')}
+  else if(a==='ung'){bm.bgs=bm.bgs.filter(g=>!(g.ids.length===BSEL.length&&g.ids.every(i=>BSEL.includes(i))))}
+  else if(a==='ren'){const g=bm.bgs.find(g=>g.ids.length===BSEL.length&&g.ids.every(i=>BSEL.includes(i)));if(!g)return;const n=prompt('ชื่อกลุ่มเหล็ก',g.n);if(n)g.n=n.trim()}
+  else if(a==='pick'){const g=bm.bgs[+x];if(!g)return;const D=derive(bm);BSEL=g.ids.filter(id=>D.runs.some(r=>r.id===id));if(BSEL.length===1){UI={t:'bar',id:BSEL[0]};BSEL=[]}else if(BSEL.length)UI={t:'bar',id:BSEL[0]};SEL=null}
+  else if(a==='yo'){const v=parseFloat(prompt('ย้ายปลายเหล็กทุกเส้น (มม.) · + ไปขวา','0'));if(!isFinite(v)||!v)return;const D=derive(bm);BSEL.forEach(id=>{const r=D.runs.find(q=>q.id===id);if(!r)return;if(r.ea!=='hook')barSet(bm,id,'oa',Math.round((+r.oa||0)+v));if(r.eb!=='hook')barSet(bm,id,'ob',Math.round((+r.ob||0)+v))});toast('ย้ายแล้ว (ปลายที่งอในเสาไม่ย้าย)')}
+  else if(a==='del'){const ids=BSEL.slice();confirmBox('ลบเหล็ก '+ids.length+' เส้นที่เลือก?',()=>{bmBarDel(bm,ids);BSEL=[];SEL=null;UI={t:'span',i:0};save();renderPanel();renderAll()});return}
+  save();renderPanel();renderAll()},true)}
+function grpTopBar(bm){const g=grpOf(bm);if(bm.grp){const ms=grpMembers(bm);return`<div class="lnk" style="border-color:#C58AE8">⧉ กลุ่มคาน <b>${esc(bm.id)}</b> · ${ms.map(b=>esc(b.id)).join(' + ')} · ${esc(ms[0]?ms[0].floor:'')}<br><span style="color:var(--mu)">จัดเหล็กต่อเนื่องทั้งแนว · หน้าตัด ระดับ และเหล็กหลักของแต่ละช่วงคือของคานแต่ละตัว (แก้ที่นี่ได้) · ความยาวช่วงดึงจากแปลน</span><div class="chips" style="margin-top:6px"><button class="chip" data-grt="mgr">จัดการกลุ่ม…</button><button class="chip" data-grt="plan">ดูในแปลน</button><button class="chip plsbd" data-grt="ung">ยกเลิกกลุ่ม</button></div></div>`}
+ if(g)return`<div class="lnk" style="border-color:#C58AE8">⧉ คาน ${esc(bm.id)} อยู่ในกลุ่ม <b>${esc(g.id)}</b> · เหล็กของคานนี้จัดที่กลุ่ม (ไม่นับเหล็กของคานนี้ในตารางและ Bar Cut)<div class="chips" style="margin-top:6px"><button class="gold" data-grt="open">เปิดกลุ่ม ${esc(g.id)}</button><button class="chip" data-grt="mgr">จัดการกลุ่ม…</button></div></div>`;return''}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-grt]');if(!b)return;const bm=B(),a=b.dataset.grt,c=bm.grp?bm:grpOf(bm);
+ if(a==='mgr')grpDlg();else if(a==='open'&&c)grpOpen(c);else if(a==='ung'&&c)grpUngroup(c);else if(a==='plan'&&c){grpDlg();document.querySelector(`#grMod [data-gr="plan:${c.uid}"]`).click()}
+ else if(a==='mk'){const list=TOPSEL.map(i=>S.beams[i]).filter(Boolean);TOPSEL=[];if(grpMake(list)){grpOpen(S.beams[S.beams.length-1])}else renderTop()}});
+
+/* ===== โต๊ะทำงานแบบ ETABS: หลายหน้าต่าง · แปลน / รูปด้าน / 3D ===== */
+let WLIVE=-1,PLT=null,PLW=null,WSYNCR=0,WS3T=0,WSELSIG='',WPOP=null;
+const WLN={'1':1,'2v':2,'2h':2,'3':3,'4':4};
+function WINS(){const p=P();if(!p.win||!Array.isArray(p.win.w))p.win={lay:'1',act:0,w:[{t:'plan',lv:p.lv}]};const W=p.win;W.w.forEach(w=>{w.f=w.f||{}});if(W.act>=WLN[W.lay])W.act=0;return W}
+function winDef(i){const p=P(),src=elSources();if(i===1)return{t:'3d',f:{}};if(i===2)return{t:'elev',src:(src[0]||{}).k,f:{}};return{t:'elev',src:(src[Math.min(src.length-1,p.gx.n.length)]||{}).k,f:{}}}
+function plVis(k){const w=PLW;if(!w)return true;const f=w.f||{};if(k[0]==='b'&&f.beam===false)return false;if((k[0]==='c'||k[0]==='x')&&f.col===false)return false;if(w.hide&&w.hide.includes(k))return false;if(w.iso&&w.iso.length&&!w.iso.includes(k))return false;return true}
+const wsLive=()=>!!(typeof WSG!=='undefined'&&WSG&&WSG.cv&&WSG.cv.isConnected&&WSG.cv.offsetParent);
+/* ---------- elevation sources & geometry ---------- */
+function elSources(){const p=P(),out=[];['gx','gy'].forEach(ax=>p[ax].n.forEach((n,i)=>out.push({k:ax+':'+i,n:'กริด '+n,ax,i})));AG().forEach(g=>{if(g.k==='arc')return;out.push({k:'ag:'+g.id,n:'กริดช่วย '+g.n+' · '+((lvOf(g.lv)||{}).n||''),ag:g.id})});return out}
+function elLine(k){const p=P(),e=planExt(),[t,v]=String(k||'').split(':');let x1,y1,x2,y2;
+ if(t==='ag'){const g=AG().find(x=>x.id===v);if(!g||g.k==='arc')return null;const G=agGeom(g);x1=G.x1;y1=G.y1;x2=G.x2;y2=G.y2}
+ else{const P0=gpos(t),q=P0[+v];if(q==null)return null;if(t==='gx'){x1=q;y1=0;x2=q;y2=1}else{x1=0;y1=q;x2=1;y2=q}}
+ let tx=x2-x1,ty=y2-y1;const L=Math.hypot(tx,ty)||1;tx/=L;ty/=L;if(tx<-1e-6||(Math.abs(tx)<1e-6&&ty<0)){tx=-tx;ty=-ty}const R=(e.w+e.h)*2+20000;
+ return{ox:x1,oy:y1,tx,ty,geo:{k:'line',x1:x1-tx*R,y1:y1-ty*R,x2:x1+tx*R,y2:y1+ty*R},u:q=>(q.x-x1)*tx+(q.y-y1)*ty,d:q=>Math.abs((q.x-x1)*ty-(q.y-y1)*tx)}}
+function elTitle(k){const s=elSources().find(x=>x.k===k);return s?'รูปด้าน '+s.n:'รูปด้าน'}
+/* ---------- elevation renderer ---------- */
+function elevSVG(w){const p=P(),L=elLine(w.src),f=w.f||{},on=k=>{if(w.hide&&w.hide.includes(k))return false;if(w.iso&&w.iso.length&&!w.iso.includes(k))return false;return true};if(!L)return{s:'<text x="0" y="0" fill="#888" font-size="400">ไม่พบกริดนี้</text>',bb:[-1000,-1000,2000,2000]};
+ const lvs=p.levels.slice().sort((a,b)=>a.z-b.z),lvOk=id=>!f.lv||f.lv==='all'||f.lv===id;let o='',umin=1e18,umax=-1e18,zmin=1e18,zmax=-1e18;const ext=(u,z)=>{umin=Math.min(umin,u);umax=Math.max(umax,u);zmin=Math.min(zmin,z);zmax=Math.max(zmax,z)};
+ const r=Math.max(350,(planExt().w+planExt().h+(p.levels.reduce((m,l)=>Math.max(m,l.z),0)-p.levels.reduce((m,l)=>Math.min(m,l.z),0))*1000)/48),fs=r*0.9,cols=[],beams=[],cuts=[],bars=[],labs=[];
+ // columns
+ if(f.col!==false)p.levels.forEach(l=>{if(!lvOk(l.id))return;allCols(l.id).forEach(c=>{const h=Math.max(c.d.bx,c.d.by)/2;if(L.d(c)>h+5)return;const key=c.key?'c:'+c.key:'x:'+(XC()[c.xc]||{}).id;if(!on(key))return;const wd=c.d.round?c.d.bx:Math.abs(L.tx)*c.d.bx+Math.abs(L.ty)*c.d.by,u=L.u(c),[z0,z1]=wsColRange(l.id),sel=c.key?PCOL.includes(c.key):PXCS.includes(c.xc);
+  cols.push(`<g ${c.key?`data-col="${esc(c.key)}"`:`data-xc="${c.xc}"`} style="cursor:pointer"><rect x="${u-wd/2}" y="${-z1}" width="${wd}" height="${z1-z0}" fill="${sel?'#3A2F18':'#22252B'}" stroke="${sel?'#FFE08A':'#B9B6AF'}" stroke-width="${r*(sel?0.1:0.05)}"/></g>`);if(f.lab!==false)labs.push(`<text x="${u}" y="${-(z0+z1)/2}" fill="#9a9ca3" font-size="${fs*0.55}" text-anchor="middle" transform="rotate(-90 ${u} ${-(z0+z1)/2})" pointer-events="none">${esc(c.d.name)}</text>`);ext(u-wd/2,z0);ext(u+wd/2,z1)})});
+ // beams
+ const drawn=new Set();
+ S.beams.forEach((bm,bi)=>{const Lk=bm.link;if(!Lk||bm.linkBad||!Lk.st||!lvOk(Lk.lv)||f.beam===false)return;const pa=beamPathAny(bm);if(!pa)return;const lz=(lvOf(Lk.lv)||{z:0}).z*1000;
+  const A=pa.at(0),B2=pa.at(pa.len),onLine=pa.geo.k==='line'&&L.d(A)<60&&L.d(B2)<60;
+  if(onLine){drawn.add(bm);for(let q=0;q<bm.spans.length&&q<Lk.st.length-1;q++){const key='b:'+bm.uid+':'+q;if(!on(key))continue;const sp=bm.spans[q],ua=L.u(pa.at(Lk.st[q])),ub=L.u(pa.at(Lk.st[q+1])),top=lz+(+sp.lvl||0)*1000,x=Math.min(ua,ub),wd=Math.abs(ub-ua),sel=PMS.some(z=>z.i===bi&&z.q===q),c=sel?'#FFE08A':btFill(bm,q,'#C9A55C');
+    beams.push(`<rect data-bm="${bi}" data-sq="${q}" x="${x}" y="${-top}" width="${wd}" height="${sp.h}" fill="${c}" fill-opacity="${f.rb?0.12:sel?0.5:0.25}" stroke="${c}" stroke-width="${r*(sel?0.1:0.05)}" style="cursor:pointer"/>`);
+    if(f.lab!==false)labs.push(`<text x="${x+wd/2}" y="${-top-fs*0.35}" fill="${sel?'#FFE08A':'#E2C584'}" font-size="${fs*0.62}" text-anchor="middle" pointer-events="none">${esc(btLabel(bm,q))}</text>`);ext(x,top-sp.h);ext(x+wd,top)}}
+  else{pathX(L.geo,pa.geo).forEach(X=>{const s=pa.proj(X).s,sq=spanAtS(bm,s);if(!sq)return;const q=sq.q,key='b:'+bm.uid+':'+q;if(!on(key))return;const sp=bm.spans[q],u=L.u(X),top=lz+(+sp.lvl||0)*1000,t=pa.at(s),sn=Math.max(0.2,Math.abs(t.tx*L.ty-t.ty*L.tx)),wd=sp.b/sn,sel=PMS.some(z=>z.i===bi&&z.q===q);
+    cuts.push(`<g data-bm="${bi}" data-sq="${q}" style="cursor:pointer"><rect x="${u-wd/2}" y="${-top}" width="${wd}" height="${sp.h}" fill="${sel?'#5a4a22':'#2a2d33'}" stroke="${sel?'#FFE08A':'#E6E3DC'}" stroke-width="${r*(sel?0.1:0.05)}"/><path d="M${u-wd/2} ${-top}L${u+wd/2} ${-top+sp.h}M${u+wd/2} ${-top}L${u-wd/2} ${-top+sp.h}" stroke="#6a6d73" stroke-width="${r*0.025}"/></g>`);
+    if(f.lab!==false)labs.push(`<text x="${u}" y="${-top+sp.h+fs*0.7}" fill="#C8C5BE" font-size="${fs*0.5}" text-anchor="middle" pointer-events="none">${esc(bm.id)}</text>`);ext(u-wd/2,top-sp.h);ext(u+wd/2,top)})}});
+ // rebar (beams on this line; groups as one continuous line)
+ if(f.rb){const draw=(src,pas,lzs)=>{let m;try{m=build(src)}catch(_){return}const D=m.D,off=[];let a=0;pas.forEach(q=>{off.push(a);a+=q.len});const U=(x,z)=>{let k=0;while(k<pas.length-1&&x>off[k]+pas[k].len)k++;return[L.u(pas[k].at(Math.max(0,Math.min(pas[k].len,x-off[k])))),lzs[k]+z]};
+   m.P.forEach(pc=>{const c=pieceCol(pc,true);try{const pts=barPath(D,m,pc,0).map(v=>U(v[0],v[2]));bars.push(`<polyline points="${pts.map(q=>q[0].toFixed(0)+','+(-q[1]).toFixed(0)).join(' ')}" fill="none" stroke="${c}" stroke-width="${Math.max(r*0.06,pc.d||16)}" stroke-linejoin="round" pointer-events="none"/>`)}catch(_){}});
+   m.ST.forEach(stp=>{const sc=stp.sec,zb=D.zb[stp.si],z1=zb+sc.cb,z2=zb+sc.h-sc.ct;stp.xs.forEach(x=>{const p1=U(x,z1),p2=U(x,z2);bars.push(`<line x1="${p1[0]}" y1="${-p1[1]}" x2="${p2[0]}" y2="${-p2[1]}" stroke="#A8884A" stroke-width="${Math.max(r*0.03,BARS[sc.sb]||9)}" pointer-events="none"/>`)})})};
+  const done=new Set();drawn.forEach(bm=>{const g=grpOf(bm);if(g){if(done.has(g))return;done.add(g);const ms=grpMembers(g);if(ms.every(x=>drawn.has(x)))draw(g,ms.map(beamPathAny),ms.map(x=>(lvOf(x.link.lv)||{z:0}).z*1000));return}draw(bm,[beamPathAny(bm)],[(lvOf(bm.link.lv)||{z:0}).z*1000])})}
+ if(umin>umax){umin=0;umax=10000}lvs.forEach(l=>{ext(umin,l.z*1000);});if(zmin>zmax){zmin=0;zmax=3000}
+ // grids crossing
+ const gl=[],e=planExt();['gx','gy'].forEach(ax=>{const P0=gpos(ax);P0.forEach((v,i)=>{const G=ax==='gx'?{k:'line',x1:v,y1:-1e7,x2:v,y2:1e7}:{k:'line',x1:-1e7,y1:v,x2:1e7,y2:v},X=pathX(L.geo,G)[0];if(!X)return;gl.push({u:L.u(X),n:p[ax].n[i],k:ax+':'+i})})});
+ AG().forEach(g=>{if(g.k==='arc')return;const G=agGeom(g);const X=pathX(L.geo,G)[0];if(!X)return;if('ag:'+g.id===w.src)return;gl.push({u:L.u(X),n:g.n,k:'ag:'+g.id,aux:1})});
+ gl.forEach(g=>{umin=Math.min(umin,g.u);umax=Math.max(umax,g.u)});
+ const pad=r*3,zt=zmax+r*4.5,u0=umin-pad*2,u1=umax+pad*2;
+ lvs.forEach(l=>{const z=l.z*1000,dim=f.lv&&f.lv!=='all'&&f.lv!==l.id;o+=`<line x1="${u0}" y1="${-z}" x2="${u1}" y2="${-z}" stroke="${l.ref?'#E8963A':'#6F737A'}" stroke-width="${r*0.03}" stroke-dasharray="${r*0.4} ${r*0.2}" opacity="${dim?0.35:1}"/><text x="${u1+r*0.3}" y="${-z+fs*0.2}" fill="${l.ref?'#F2C38A':'#C8C5BE'}" font-size="${fs*0.6}" opacity="${dim?0.45:1}">${esc(l.n)} ${(l.z>=0?'+':'')+l.z.toFixed(2)}</text>`});
+ gl.forEach(g=>{o+=`<g data-elg="${g.k}" style="cursor:pointer"><line x1="${g.u}" y1="${-zt+r}" x2="${g.u}" y2="${-zmin+r}" stroke="${g.aux?'#6FA8DC':'#55585E'}" stroke-width="${r*0.03}" stroke-dasharray="${r*0.5} ${r*0.25}"/><circle cx="${g.u}" cy="${-zt}" r="${r*0.9}" fill="#0E0F12" stroke="${g.aux?'#6FA8DC':'#C9A55C'}" stroke-width="${r*0.07}"/><text x="${g.u}" y="${-zt+fs*0.32}" fill="${g.aux?'#9cc6ee':'#E2C584'}" font-size="${fs*0.85}" text-anchor="middle">${esc(g.n)}</text></g>`});
+ const sg=[...gl].sort((a,b)=>a.u-b.u);for(let k=0;k<sg.length-1;k++){const a=sg[k].u,b=sg[k+1].u;if(b-a<50)continue;o+=`<line x1="${a}" y1="${-zt+r*1.6}" x2="${b}" y2="${-zt+r*1.6}" stroke="#D9705E" stroke-width="${r*0.03}"/><text x="${(a+b)/2}" y="${-zt+r*1.45}" fill="#D9705E" font-size="${fs*0.5}" text-anchor="middle">${((b-a)/1000).toFixed(2)}</text>`}
+ o+=cols.join('')+beams.join('')+cuts.join('')+bars.join('')+labs.join('');
+ return{s:o,bb:[u0-r*2,-zt-r*2,(u1+r*8)-(u0-r*2),(zt+r*2)-(zmin-r*3)]}}
+/* ---------- window frames ---------- */
+function winHead(w,i){const p=P(),src=elSources(),ty=`<select class="chip" data-wt="${i}" aria-label="ชนิดหน้าต่าง"><option value="plan"${w.t==='plan'?' selected':''}>แปลน</option><option value="elev"${w.t==='elev'?' selected':''}>รูปด้าน</option><option value="3d"${w.t==='3d'?' selected':''}>3D</option></select>`;
+ let mid='';if(w.t==='plan')mid=`<select class="chip" data-wl="${i}" aria-label="ชั้น">${p.levels.map(l=>`<option value="${l.id}"${(w.lv||p.lv)===l.id?' selected':''}>${esc(l.n)} ${(l.z>=0?'+':'')+(+l.z).toFixed(2)}</option>`).join('')}</select><button class="chip" data-wn="${i}:1" title="ชั้นถัดขึ้นไป" aria-label="ชั้นบน">▲</button><button class="chip" data-wn="${i}:-1" title="ชั้นถัดลงมา" aria-label="ชั้นล่าง">▼</button>`;
+ else if(w.t==='elev')mid=`<select class="chip" data-we="${i}" aria-label="แนวรูปด้าน" style="max-width:170px">${src.map(s=>`<option value="${s.k}"${w.src===s.k?' selected':''}>${esc(s.n)}</option>`).join('')}</select><button class="chip" data-wn="${i}:-1" aria-label="แนวก่อนหน้า">◀</button><button class="chip" data-wn="${i}:1" aria-label="แนวถัดไป">▶</button>`;
+ const iso=(w.iso&&w.iso.length)||(w.hide&&w.hide.length);
+ return`<span class="wn">${i+1}</span>${ty}${mid}<span style="flex:1"></span>${w.t!=='3d'?`<button class="chip" data-wf="${i}" aria-label="ตัวเลือกการแสดง">แสดง ▾</button>`:''}<button class="chip" data-wh="${i}:iso" title="แยกดูเฉพาะที่เลือก (HI)">HI</button><button class="chip" data-wh="${i}:hide" title="ซ่อนที่เลือก (HH)">HH</button>${iso||w.t==='3d'?`<button class="chip" data-wh="${i}:reset" title="แสดงทั้งหมด">↺</button>`:''}<button class="chip" data-wm="${i}" title="ขยายเต็ม / คืน" aria-label="ขยายหน้าต่าง">⤢</button>`}
+function winRender(){const W=WINS(),grid=$('#winGrid'),park=$('#plPark'),svg=$('#plSvg');if(!grid)return;grpSync();
+ const n=W.max!=null?1:WLN[W.lay];while(W.w.length<WLN[W.lay])W.w.push(winDef(W.w.length));
+ if(W.w.filter((w,i)=>i<WLN[W.lay]&&w.t==='3d').length>1)W.w.forEach((w,i)=>{if(w.t==='3d'&&i!==W.w.findIndex(x=>x.t==='3d'))Object.assign(w,{t:'elev',src:(elSources()[0]||{}).k})});
+ park.appendChild(svg);const w3=$('#ws3');if(w3)park.appendChild(w3);
+ const idx=W.max!=null?[W.max]:[...Array(WLN[W.lay]).keys()];
+ grid.className='wgrid L'+(W.max!=null?'1':W.lay);grid.innerHTML=idx.map(i=>`<div class="win${i===W.act?' act':''}" data-win="${i}"><div class="wh">${winHead(W.w[i],i)}</div><div class="wb" id="wb${i}"></div></div>`).join('');
+ let live=-1;if(idx.includes(W.act)&&W.w[W.act].t==='plan')live=W.act;else if(WLIVE>=0&&idx.includes(WLIVE)&&W.w[WLIVE].t==='plan')live=WLIVE;else live=idx.find(i=>W.w[i].t==='plan');if(live==null)live=-1;
+ if(live>=0){const w=W.w[live];if(WLIVE!==live){if(WLIVE>=0&&W.w[WLIVE]&&PV)W.w[WLIVE].pv=cl(PV);PV=w.pv?cl(w.pv):null}if(w.lv&&lvOf(w.lv))P().lv=w.lv;else w.lv=P().lv;$('#wb'+live).appendChild(svg)}WLIVE=live;
+ const i3=idx.find(i=>W.w[i].t==='3d');if(i3!=null)ws3Mount($('#wb'+i3));
+ renderWinBar();renderExplorer();renderPlanTools();renderPlanPanel();drawPlan();plSelBar();plGPick();
+ if(i3!=null){renderWSTools();renderWSLeft();renderWSProps();wsRebuild();const cv=$('#wsCv'),asp=cv.clientWidth/Math.max(1,cv.clientHeight);if(!WSC)wsFit('iso');else if(!WSC.asp||Math.abs(Math.log(asp/WSC.asp))>0.4)wsFit(null);else wsDraw();if(WSC)WSC.asp=asp}else{const l=$('#wsLeft');if(l)l.innerHTML='';const rr=$('#wsRight');if(rr)rr.innerHTML=''}}
+function winSync(){if(PLT)return;cancelAnimationFrame(WSYNCR);WSYNCR=requestAnimationFrame(winSync0)}
+function winSync0(){const W=WINS(),idx=W.max!=null?[W.max]:[...Array(WLN[W.lay]).keys()];if(!$('#winGrid'))return;
+ idx.forEach(i=>{const w=W.w[i],b=$('#wb'+i);if(!b||i===WLIVE)return;if(w.t==='plan'){let sv=b.querySelector('svg.wst');if(!sv){b.innerHTML='<svg class="wst" xmlns="http://www.w3.org/2000/svg"></svg><div class="whint">แตะเพื่อแก้ไขในหน้าต่างนี้</div>';sv=b.querySelector('svg.wst');sv.addEventListener('pointerdown',()=>winActivate(i))}
+   const lv0=P().lv,pv0=PV,pw0=PLW;try{PLT=sv;PLW=w;P().lv=w.lv&&lvOf(w.lv)?w.lv:lv0;PV=w.pv?cl(w.pv):null;drawPlan();w.pv=cl(PV)}finally{PLT=null;P().lv=lv0;PV=pv0;PLW=pw0}}
+  else if(w.t==='elev')elevDraw(w,b)});
+ if(idx.some(i=>W.w[i].t==='3d')&&wsLive()){const sig=JSON.stringify([PMS[0],PCOL[0],PXCS[0]]);if(sig!==WSELSIG){WSELSIG=sig;const o=PMS[0],k=PCOL[0];WSSEL=o?{key:'b'+o.i+':'+o.q,kind:'beam',bi:o.i,q:o.q}:k?{key:'c:'+k,kind:'col',ck:k,lv:k.split('|')[0]}:null;renderWSProps()}clearTimeout(WS3T);WS3T=setTimeout(()=>{if(wsLive())wsRebuild()},220)}}
+function elevDraw(w,b){let sv=b.querySelector('svg.wel');if(!sv){b.innerHTML='<svg class="wel" xmlns="http://www.w3.org/2000/svg"></svg>';sv=b.querySelector('svg.wel');elevBind(sv,+b.id.slice(2))}const r=elevSVG(w);if(!w.vb)w.vb=r.bb;sv.setAttribute('viewBox',w.vb.join(' '));sv.setAttribute('preserveAspectRatio','xMidYMid meet');sv.innerHTML=r.s;sv._bb=r.bb}
+function elevBind(sv,i){let dr=null,ck=null;const W=()=>WINS().w[i],pt=e=>{const q=sv.createSVGPoint();q.x=e.clientX;q.y=e.clientY;return q.matrixTransform(sv.getScreenCTM().inverse())};
+ sv.addEventListener('contextmenu',e=>e.preventDefault());
+ sv.addEventListener('wheel',e=>{e.preventDefault();const w=W(),q=pt(e),f=e.deltaY>0?1.15:1/1.15,v=w.vb;w.vb=[q.x-(q.x-v[0])*f,q.y-(q.y-v[1])*f,v[2]*f,v[3]*f];sv.setAttribute('viewBox',w.vb.join(' '))},{passive:false});
+ sv.addEventListener('pointerdown',e=>{winActivate(i);dr={x:e.clientX,y:e.clientY,vb:W().vb.slice(),mv:false,pan:true};try{sv.setPointerCapture(e.pointerId)}catch(_){}});
+ sv.addEventListener('pointermove',e=>{if(!dr)return;const dx=e.clientX-dr.x,dy=e.clientY-dr.y;if(Math.abs(dx)+Math.abs(dy)>5)dr.mv=true;if(!dr.mv||!dr.pan)return;const R=sv.getBoundingClientRect(),k=Math.max(dr.vb[2]/R.width,dr.vb[3]/R.height),w=W();w.vb=[dr.vb[0]-dx*k,dr.vb[1]-dy*k,dr.vb[2],dr.vb[3]];sv.setAttribute('viewBox',w.vb.join(' '))});
+ sv.addEventListener('pointerup',e=>{const d=dr;dr=null;if(!d||d.mv)return;const t=document.elementFromPoint(e.clientX,e.clientY)||e.target,bg=t.closest&&t.closest('[data-bm]'),gl=t.closest&&t.closest('[data-elg]');
+  if(gl&&!bg){const k=gl.dataset.elg,w=W();if(k.startsWith('g')){plSelClear();const[ax,ii]=k.split(':');PGS=[{ax,i:+ii}];plRefresh()}return}
+  if(bg){const key=bg.dataset.bm+':'+bg.dataset.sq,now=Date.now();if(ck&&ck.k===key&&now-ck.t<450){ck=null;bmDlg(+bg.dataset.bm,+bg.dataset.sq);return}ck={k:key,t:now}}else ck=null;
+  plSelClick({target:t,shiftKey:e.shiftKey,ctrlKey:e.ctrlKey,metaKey:e.metaKey})});
+ sv.addEventListener('dblclick',e=>{const t=document.elementFromPoint(e.clientX,e.clientY),bg=t&&t.closest('[data-bm]');if(bg&&!document.querySelector('#bdMod[style*="flex"]'))bmDlg(+bg.dataset.bm,+bg.dataset.sq);else if(!bg){const w=W();w.vb=sv._bb.slice();sv.setAttribute('viewBox',w.vb.join(' '))}})}
+function winActivate(i){const W=WINS();if(W.act===i)return;W.act=i;document.querySelectorAll('#winGrid .win').forEach(el=>el.classList.toggle('act',+el.dataset.win===i));if(W.w[i].t==='plan'&&WLIVE!==i){save();winRender()}}
+/* ---------- 3D mount ---------- */
+function ws3Mount(body){let c=$('#ws3');if(!c){c=document.createElement('div');c.id='ws3';c.innerHTML=`<div class="wst" id="wsTools"></div><div class="wsv"><canvas id="wsCv"></canvas><svg id="wsLab" class="wslab"></svg><div class="wscube" id="wsCube"></div></div>`}
+ body.appendChild(c);const cv=$('#wsCv');if(!wsGL(cv)){c.querySelector('.wsv').innerHTML='<div class="note" style="padding:20px">อุปกรณ์นี้ไม่รองรับ WebGL</div>';return}if(!cv.dataset.b){cv.dataset.b=1;wsBindCanvas();if(window.ResizeObserver)new ResizeObserver(()=>{if(!WSC||!cv.clientWidth||!cv.clientHeight)return;const asp=cv.clientWidth/cv.clientHeight;if(!WSC.asp||Math.abs(Math.log(asp/WSC.asp))>0.4){wsFit(null);WSC.asp=asp}else wsDraw()}).observe(cv);cv.addEventListener('pointerdown',()=>{const i=+((cv.closest('.win')||{}).dataset||{}).win;if(isFinite(i))winActivate(i)},true)}
+ $('#wsCube').innerHTML=['top:บน','front:หน้า','right:ขวา','back:หลัง','left:ซ้าย','iso:ISO','bottom:ใต้'].map(s=>{const[k,t]=s.split(':');return`<button data-view="${k}">${t}</button>`}).join('');$('#wsCube').querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>wsFit(b.dataset.view))}
+function wsToPlanSel(el){if(location.hash!=='#plan')return;plSelClear();if(el){if(el.kind==='beam'){PMS=[{i:el.bi,q:el.q}];PSEL={t:'beam',i:el.bi}}else if(el.ck){PCOL=[el.ck];PSEL={t:'col',k:el.ck}}else if(el.xc!=null){PXCS=[el.xc];PSEL={t:'xc',i:el.xc}}}WSELSIG=JSON.stringify([PMS[0],PCOL[0],PXCS[0]]);renderPlanPanel();drawPlan();plSelBar()}
+function winEnsure3D(){const W=WINS(),n=WLN[W.lay];W.max=null;let i=W.w.slice(0,n).findIndex(w=>w.t==='3d');if(i<0){if(W.lay==='1'){W.lay='2v';while(W.w.length<2)W.w.push(winDef(W.w.length));W.w[1]={t:'3d',f:{}};i=1}else{i=n-1;W.w[i]={t:'3d',f:{}}}}W.act=i;save()}
+/* ---------- bars: layout + explorer ---------- */
+function renderWinBar(){const W=WINS(),b=$('#winBar');if(!b)return;const L=[['1','▢','1 หน้าต่าง'],['2v','◫','2 แนวตั้ง'],['2h','⬓','2 แนวนอน'],['3','◰','3 หน้าต่าง'],['4','⊞','4 หน้าต่าง']];
+ b.innerHTML=`<button class="chip wmob" data-wx="L">☰ Model</button>${L.map(([k,ic,t])=>`<button class="chip${W.lay===k&&W.max==null?' on':''} wlay" data-wlay="${k}" title="${t}" aria-label="${t}">${ic}</button>`).join('')}<span class="wtabs">${W.w.slice(0,WLN[W.lay]).map((w,i)=>`<button class="chip${i===W.act?' on':''}" data-wtab="${i}">${i+1}. ${esc(w.t==='plan'?'แปลน '+((lvOf(w.lv)||{}).n||''):w.t==='3d'?'3D':elTitle(w.src))}</button>`).join('')}</span><span style="flex:1"></span><button class="chip wmob" data-wx="R">ⓘ Properties</button>`}
+function renderExplorer(){const ex=$('#exBody');if(!ex)return;const p=P(),W=WINS(),aw=W.w[W.act]||{},src=elSources(),G=GRPS();
+ ex.innerHTML=`<details open><summary>แปลน (ชั้น)</summary>${p.levels.slice().sort((a,b)=>b.z-a.z).map(l=>`<button class="exi${aw.t==='plan'&&aw.lv===l.id?' on':''}" data-xo="plan:${l.id}">${esc(l.n)} <span>${(l.z>=0?'+':'')+(+l.z).toFixed(2)}${l.ref?' · อ้างอิง':''}</span></button>`).join('')}</details>
+ <details open><summary>รูปด้าน (ตามกริด)</summary><div class="exs">${src.map(s=>`<button class="exi${aw.t==='elev'&&aw.src===s.k?' on':''}" data-xo="elev:${s.k}">${esc(s.n)}</button>`).join('')}</div></details>
+ <details open><summary>3D</summary><button class="exi${aw.t==='3d'?' on':''}" data-xo="3d:">มุมมอง 3D ทั้งอาคาร</button><div id="wsLeft"></div></details>
+ <details${G.length?' open':''}><summary>กลุ่มคาน (${G.length})</summary>${G.map(c=>`<button class="exi" data-xo="grp:${c.uid}">⧉ ${esc(c.id)} <span>${grpMembers(c).map(b=>esc(b.id)).join('+')}</span></button>`).join('')}<button class="exi" data-xo="grpm:">จัดการกลุ่มคาน…</button></details>`}
+function winPop(i,anchor){const w=WINS().w[i],f=w.f,p=P();let el=$('#winPop');if(!el){el=document.createElement('div');el.id='winPop';el.className='plgp';document.body.appendChild(el)}
+ const r=anchor.getBoundingClientRect();el.style.cssText=`display:block;position:fixed;left:${Math.max(8,Math.min(innerWidth-300,r.right-280))}px;top:${r.bottom+4}px;z-index:60`;
+ const ck=(k,t,v)=>`<label class="ck"><input type="checkbox" data-pf="${k}"${v!==false?' checked':''}> ${t}</label>`;
+ el.innerHTML=`<div class="sh" style="margin-top:0;display:flex;justify-content:space-between">แสดงในหน้าต่าง ${i+1}<button class="x" data-pfx="1" aria-label="ปิด">✕</button></div>${ck('beam','คาน',f.beam)}${ck('col','เสา',f.col)}${w.t==='elev'?ck('lab','ป้ายชื่อ',f.lab)+`<label class="ck"><input type="checkbox" data-pf="rb"${f.rb?' checked':''}> เหล็กเสริม (คานในแนวนี้)</label><div class="f" style="margin-top:6px"><label>ชั้นที่แสดง</label><select data-pfl="1"><option value="all">ทุกชั้น</option>${p.levels.map(l=>`<option value="${l.id}"${f.lv===l.id?' selected':''}>เฉพาะ ${esc(l.n)}</option>`).join('')}</select></div>`:''}<label class="ck" style="opacity:.5"><input type="checkbox" disabled> พื้น · เร็ว ๆ นี้</label><div class="note">HI = แยกดูเฉพาะที่เลือก · HH = ซ่อนที่เลือก · ↺ = แสดงทั้งหมด</div>`;
+ el.onchange=e=>{const t=e.target;if(t.dataset.pf){if(t.dataset.pf==='rb')f.rb=t.checked;else f[t.dataset.pf]=t.checked}else if(t.dataset.pfl)f.lv=t.value;save();if(w.t==='plan'&&i===WLIVE)drawPlan();else winSync()};el.onclick=e=>{if(e.target.closest('[data-pfx]'))el.style.display='none'}}
+function selKeys2D(){const k=[];PMS.forEach(o=>{const b=S.beams[o.i];if(b)k.push('b:'+b.uid+':'+o.q)});PCOL.forEach(c=>k.push('c:'+c));PXCS.forEach(i=>{const c=XC()[i];if(c)k.push('x:'+c.id)});return k}
+function winBind(){const host=$('#v-plan');if(!host||host.dataset.win)return;host.dataset.win=1;
+ host.addEventListener('change',e=>{const t=e.target,W=WINS();
+  if(t.dataset.wt!=null){const i=+t.dataset.wt,w=W.w[i];w.t=t.value;w.iso=null;w.hide=null;if(w.t==='plan')w.lv=w.lv||P().lv;if(w.t==='elev')w.src=w.src||(elSources()[0]||{}).k;if(w.t==='3d')W.w.forEach((x,j)=>{if(j!==i&&x.t==='3d'){x.t='elev';x.src=x.src||(elSources()[0]||{}).k}});W.act=i;w.vb=null;save();winRender();return}
+  if(t.dataset.wl!=null){const i=+t.dataset.wl;W.w[i].lv=t.value;W.w[i].pv=null;if(i===WLIVE){P().lv=t.value;PSEL=null}W.act=i;save();winRender();return}
+  if(t.dataset.we!=null){const i=+t.dataset.we;W.w[i].src=t.value;W.w[i].vb=null;save();winRender();return}});
+ host.addEventListener('click',e=>{const W=WINS(),b=e.target.closest('[data-wn],[data-wf],[data-wh],[data-wm],[data-wlay],[data-wtab],[data-xo],[data-wx]');if(!b)return;
+  if(b.dataset.wlay){W.lay=b.dataset.wlay;W.max=null;save();winRender();return}
+  if(b.dataset.wtab!=null){W.act=+b.dataset.wtab;save();winRender();return}
+  if(b.dataset.wx){const k=b.dataset.wx;document.body.classList.toggle('ws-'+k);document.body.classList.remove('ws-'+(k==='L'?'R':'L'));return}
+  if(b.dataset.wm!=null){const i=+b.dataset.wm;W.max=W.max==null?i:null;W.act=i;save();winRender();return}
+  if(b.dataset.wf!=null){winPop(+b.dataset.wf,b);return}
+  if(b.dataset.wn){const[i,d]=b.dataset.wn.split(':').map(Number),w=W.w[i];if(w.t==='plan'){const L=P().levels.slice().sort((a,b)=>a.z-b.z),k=L.findIndex(l=>l.id===w.lv),n=L[Math.max(0,Math.min(L.length-1,k+d))];w.lv=n.id;w.pv=null;if(i===WLIVE)P().lv=n.id}else{const S2=elSources(),k=S2.findIndex(s=>s.k===w.src),n=S2[(k+d+S2.length)%S2.length];w.src=n.k;w.vb=null}W.act=i;save();winRender();return}
+  if(b.dataset.wh){const[i,a]=b.dataset.wh.split(':'),w=W.w[+i];if(w.t==='3d'){const ks=[];PMS.forEach(o=>ks.push('b'+o.i+':'+o.q));PCOL.forEach(c=>ks.push('c:'+c));PXCS.forEach(x=>ks.push('x:'+x));if(WSSEL&&!ks.includes(WSSEL.key))ks.push(WSSEL.key);
+    if(a==='reset'){WSHID.clear();WSISO=null}else if(!ks.length){toast('เลือกชิ้นส่วนก่อน');return}else if(a==='iso')WSISO=new Set(ks);else ks.forEach(k=>WSHID.add(k));wsRebuild();renderWSLeft();return}
+   const ks=selKeys2D();if(a==='reset'){w.iso=null;w.hide=null}else if(!ks.length){toast('เลือกชิ้นส่วนก่อน');return}else if(a==='iso')w.iso=ks;else w.hide=(w.hide||[]).concat(ks);save();winRender();return}
+  if(b.dataset.xo){const[t,v]=b.dataset.xo.split(/:(.*)/s),aw=W.w[W.act];
+   if(t==='plan'){aw.t='plan';aw.lv=v;aw.pv=null;if(W.act===WLIVE)P().lv=v}else if(t==='elev'){aw.t='elev';aw.src=v;aw.vb=null}else if(t==='3d'){winEnsure3D()}else if(t==='grp'){const c=S.beams.find(x=>x.uid===v);if(c)grpOpen(c);return}else if(t==='grpm'){grpDlg();return}
+   document.body.classList.remove('ws-L');save();winRender()}})}
+
+function renderPlan(){P();syncAll();winBind();winRender()}
 function planChanged(full){syncAll();save();if(full)renderPlanPanel();drawPlan()}
 function parseList(t){return String(t).split(/[,\s]+/).map(v=>v.trim()).filter(Boolean)}
 // ----- events -----
@@ -3069,6 +3324,7 @@ function parseList(t){return String(t).split(/[,\s]+/).map(v=>v.trim()).filter(B
    renderPlanTools();planChanged(true)}});
 })();
 plBindGE();
+document.addEventListener('click',e=>{const b=e.target.closest('#top [data-a^="sel:"]');if(!b||!(e.shiftKey||e.ctrlKey||e.metaKey))return;e.stopImmediatePropagation();const i=+b.dataset.a.slice(4);if(!TOPSEL.length&&i!==S.cur)TOPSEL=[S.cur];const k=TOPSEL.indexOf(i);if(k>=0)TOPSEL.splice(k,1);else TOPSEL.push(i);renderTop()},true);
 document.addEventListener('click',e=>{const b=e.target.closest('[data-bdlg]');if(!b)return;bmDlg(S.cur,UI&&UI.t==='span'?UI.i:0)});
 // ----- save button + file -----
 (function(){const fm=$('#fileMenu'),fi=$('#fileIn');
@@ -3436,7 +3692,7 @@ function planVP(vp){const p=P(),lv=vp.src||p.lv,e=planExt(),X=e.X,Y=e.Y,B=planBo
 function v3VP(vp){const raw=S.beams.find(b=>b.id===vp.src)||B(),m=build(raw),w=Math.max(20,vp.w),h=Math.max(20,vp.h),W=1000,H=Math.max(60,Math.round(1000*h/w)),keep=Object.assign({},V),sel=SEL;
  Object.assign(V,{tx:null,tz:null,px:0,py:0,box:false},vp.view||{});SEL=null;
  try{return{s:`<svg class="v3p" x="0" y="0" width="${w}" height="${h}" viewBox="0 0 ${W} ${H}" overflow="hidden">${v3SVG(m.D,m,W,H,false)}</svg>`,w,h,css:'',note:'3D · '+raw.id,beam:raw}}finally{Object.assign(V,keep);SEL=sel}}
-function bendData(vp){const ids=vp.ids&&vp.ids.length?vp.ids:S.beams.map(b=>b.id),rows=S.beams.filter(b=>ids.includes(b.id)).flatMap(rowsOf);return rows}
+function bendData(vp){const ids=vp.ids&&vp.ids.length?vp.ids:OB().map(b=>b.id),rows=S.beams.filter(b=>ids.includes(b.id)).flatMap(rowsOf);return rows}
 function bendGeo(fk){return{cols:[['คาน',16],['เหล็ก',12],['ข้อมูล',62],['ยาว',15],['จำนวน',13],['รูปร่าง',52],['ตำแหน่งหน้างาน',54]].map(([t,w])=>[t,w*fk]),rh:11*fk,gh:6*fk,hh:5.5*fk,fs:2.4*fk}}
 function bendSplit(rows,fk,areaH,start){const G=bendGeo(fk);let yy=0,n=0,prev=null;for(let i=start;i<rows.length;i++){const r=rows[i],g=r.beam+' - '+r.bar,add=(g!==prev?G.gh+G.hh:0)+G.rh;if(yy+add>areaH&&n>0)break;yy+=add;n++;prev=g}return n}
 function bendVP(vp){const fk=+vp.fk||1,G=bendGeo(fk),all=bendData(vp),s0=Math.min(+vp.start||0,Math.max(0,all.length-1)),n=+vp.max>0?+vp.max:all.length,rows=all.slice(s0,s0+n),W=G.cols.reduce((a,c)=>a+c[1],0);
@@ -3489,7 +3745,7 @@ function bendPages(ids,fk,o){const pages=[],pg0=newPage(o),a=pgArea(pg0),rows=be
 function quickPDF(t,src){const pg=newPage();let pages=[pg];if(t==='bend')pages=bendPages([],1);else pg.vps.push(fitVP(pg,newVP(t,src!=null?{src}:{})));loPrint(pages,loName()+'-'+(VPN[t]||t))}
 function toLayout(t,src){const L=LO();let pages=[newPage()];if(t==='bend')pages=bendPages([],1);else pages[0].vps.push(fitVP(pages[0],newVP(t,src!=null?{src}:{})));L.pages.push(...pages);L.cur=L.pages.length-pages.length;LOSEL=null;save();location.hash='pdf';toast('เพิ่มลงหน้ากระดาษแล้ว')}
 function autoBeams(){const L=LO(),c=L.pages[L.cur],o=c?{paper:c.paper,orient:c.orient,margin:c.margin,tb:c.tb}:{};if(c&&!c.vps.length)L.pages.splice(L.cur,1);let pg=newPage(o),a=pgArea(pg),yy=a.y;const out=[pg];
- S.beams.forEach(b=>{const vp=newVP('beam',{src:b.id,x:a.x,y:yy,w:a.w,h:a.h});shrinkVP(vp,a);const r=beamVP(vp);if(yy>a.y&&yy+r.h>a.y+a.h){pg=newPage(o);out.push(pg);yy=a.y;vp.y=yy}if(r.w<a.w)vp.x=a.x+(a.w-r.w)/2;pg.vps.push(vp);yy+=r.h+4});
+ OB().forEach(b=>{const vp=newVP('beam',{src:b.id,x:a.x,y:yy,w:a.w,h:a.h});shrinkVP(vp,a);const r=beamVP(vp);if(yy>a.y&&yy+r.h>a.y+a.h){pg=newPage(o);out.push(pg);yy=a.y;vp.y=yy}if(r.w<a.w)vp.x=a.x+(a.w-r.w)/2;pg.vps.push(vp);yy+=r.h+4});
  L.pages.push(...out);L.cur=L.pages.length-out.length;LOSEL=null;save();renderLO();toast('จัดคาน '+S.beams.length+' ตัว ลง '+out.length+' หน้า')}
 function presetLO(pg,kind){const a=pgArea(pg),v=pg.vps,g=4;if(!v.length){toast('ยังไม่มีรูปในหน้านี้');return}
  const slots=kind==='1'?[a]:kind==='tb'?[{x:a.x,y:a.y,w:a.w,h:(a.h-g)/2},{x:a.x,y:a.y+(a.h+g)/2,w:a.w,h:(a.h-g)/2}]:kind==='lr'?[{x:a.x,y:a.y,w:(a.w-g)/2,h:a.h},{x:a.x+(a.w+g)/2,y:a.y,w:(a.w-g)/2,h:a.h}]:
@@ -3525,7 +3781,7 @@ function renameBeam(b,v){v=String(v).trim();if(!v||v===b.id)return v?'':'ชื�
  const cc=S.cutCfg;if(cc)['off','plus'].forEach(k=>{if(!cc[k])return;Object.keys(cc[k]).forEach(key=>{if(key.startsWith(o+'|')){cc[k][v+key.slice(o.length)]=cc[k][key];delete cc[k][key]}})});
  S.beams.forEach(x=>{const L=x.link;if(!L)return;['sup','hg'].forEach(k=>{if(L[k]&&o in L[k]){L[k][v]=L[k][o];delete L[k][o]}})})}
 let SCHS={sort:null,dir:1,floor:'',q:'',sel:new Set()};
-function schRows(f){const s=SCHS;let L=S.beams.filter(b=>(!f||!f.floor||b.floor===f.floor)&&(!f||!f.q||(b.id+' '+(b.floor||'')+' '+(b.line||'')).toLowerCase().includes(f.q)));
+function schRows(f){const s=SCHS;let L=S.beams.filter(b=>!b.grp).filter(b=>(!f||!f.floor||b.floor===f.floor)&&(!f||!f.q||(b.id+' '+(b.floor||'')+' '+(b.line||'')).toLowerCase().includes(f.q)));
  const k=f&&f.sort;if(k){const F=schField(k),dir=f.dir||1;if(F)L=L.slice().sort((a,b)=>{const x=F.get(a),y=F.get(b),nx=parseFloat(x),ny=parseFloat(y);return(isFinite(nx)&&isFinite(ny)&&!/[a-zก-๙]/i.test(String(x)+String(y))?nx-ny:String(x).localeCompare(String(y),'th',{numeric:true}))*dir})}return L}
 function renderSch(){const el=$('#loSch');if(!el)return;if(!LOSCHON){el.innerHTML='';el.style.display='none';return}el.style.display='';const C=SCH().cols,s=SCHS,rows=schRows(s),floors=[...new Set(S.beams.map(b=>b.floor||''))].filter(Boolean);
  const all=rows.length&&rows.every(b=>s.sel.has(b.id));
@@ -3708,7 +3964,7 @@ function sbItems(){const v=(location.hash||'#home').slice(1),ad=window.KN&&KN.re
  return[
   {k:'home',t:'หน้าหลัก',ic:'home',go:'home',on:v==='home'||v===''},
   {g:'detail',t:'KN-Detail',ic:'beam',perm:'beam',kids:[
-   {t:'แปลน / กริดไลน์',ic:'plan',go:'plan',on:v==='plan'},{t:'โต๊ะทำงาน · 3D',ic:'cube',go:'ws',on:v==='ws'},{t:'คลังหน้าตัด',ic:'list',a:'btlib'},{t:'นำเข้าจาก AutoCAD (DXF)',ic:'plan',a:'dxin'},
+   {t:'โต๊ะทำงาน · แปลน / รูปด้าน',ic:'plan',go:'plan',on:v==='plan'},{t:'เปิดมุมมอง 3D',ic:'cube',go:'ws',on:false},{t:'คลังหน้าตัด',ic:'list',a:'btlib'},{t:'นำเข้าจาก AutoCAD (DXF)',ic:'plan',a:'dxin'},
    {g:'beam',t:'คาน (Beam)'+(bm?' · '+bm.id:''),ic:'beam',on:v==='beam',kids:[
     {t:'แก้ไขคาน',a:'beam:edit'},{t:'แผ่นงาน',a:'beam:sheet'},{t:'ตารางดัดเหล็ก',a:'beam:bend'},{t:'3D',a:'beam:3d'},{t:'ส่งออก',a:'beam:io'},{t:'เลือกคาน / หลายคาน…',a:'pick',ic:'list',hl:1}]},
    {t:'เสา (Column)',ic:'col',soon:1},{t:'พื้น (Slab)',ic:'slab',soon:1},{t:'Shear wall',ic:'wall',soon:1},{t:'Band beam',ic:'beam',soon:1},{t:'Deep beam',ic:'beam',soon:1}]},
@@ -3770,7 +4026,7 @@ function beamPages(ids){const out=[];let pg=newPage(),a=pgArea(pg),yy=a.y;out.pu
 const NAVS=[];
 function route(){if(window.KN&&!KN.ready)return;const v=(location.hash||'#home').slice(1);let name=['beam','settings','cut','detail','plan','pdf','ws'].includes(v)?v:'home';if(window.KN){const g=KN.guard(name);if(g&&g!==name){name=g;history.replaceState(null,'','#home')}}
  document.querySelectorAll('.view').forEach(e=>e.classList.toggle('on',e.id==='v-'+name));$('#homeBtn').style.display=name==='home'?'none':'';$('#backBtn').style.display=name==='home'?'none':'';if(NAVS[NAVS.length-1]!==name)NAVS.push(name);if(NAVS.length>40)NAVS.shift();if(LASTSNAP==null)undoReset();
- document.body.classList.remove('ws-L','ws-R');if(name==='plan'){$('#crumb').textContent='KN-Detail · แปลน';renderPlan()}else if(name==='beam'){$('#crumb').textContent='KN-Detail · คาน';syncAll();renderTop();renderPanel();renderAll()}else if(name==='settings'){$('#crumb').textContent='ตั้งค่า';renderSet()}else if(name==='cut'){$('#crumb').textContent='Bar Cut · ตัดเหล็กเศษน้อยสุด';renderCut()}else if(name==='detail'){$('#crumb').textContent='KN-Detail'}else if(name==='pdf'){$('#crumb').textContent='จัดหน้ากระดาษ · PDF';renderLO()}else if(name==='ws'){$('#crumb').textContent='โต๊ะทำงาน · 3D ทั้งอาคาร';syncAll();setTimeout(renderWS,0)}else $('#crumb').textContent='';window.scrollTo(0,0);renderSB()}
+ document.body.classList.remove('ws-L','ws-R');if(name==='plan'){$('#crumb').textContent='โต๊ะทำงาน · แปลน / รูปด้าน / 3D';renderPlan()}else if(name==='beam'){$('#crumb').textContent='KN-Detail · คาน';syncAll();renderTop();renderPanel();renderAll()}else if(name==='settings'){$('#crumb').textContent='ตั้งค่า';renderSet()}else if(name==='cut'){$('#crumb').textContent='Bar Cut · ตัดเหล็กเศษน้อยสุด';renderCut()}else if(name==='detail'){$('#crumb').textContent='KN-Detail'}else if(name==='pdf'){$('#crumb').textContent='จัดหน้ากระดาษ · PDF';renderLO()}else if(name==='ws'){winEnsure3D();location.replace('#plan');return}else $('#crumb').textContent='';window.scrollTo(0,0);renderSB()}
 document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{location.hash=b.dataset.go});{const bt=document.getElementById('btTile');if(bt)bt.onclick=()=>openBT()}
 $('#homeBtn').onclick=()=>{location.hash='home'};
  $('#v3pdf').onclick=()=>quickPDF('3d',B().id);
