@@ -300,6 +300,8 @@ body.thpk button:hover,body.thpk .chip:hover,body.thpk .pbtn:hover,body.thpk .mn
  body>#v-settings.on{display:flex!important;height:calc(100vh - var(--toph,55px))}body>#v-settings #setNav{display:flex;flex-direction:column;gap:1px;width:200px;flex:none;overflow:auto;border-right:1px solid var(--ln);padding:12px 6px;background:var(--p0)}#setNav button{background:none;border:0;border-left:2px solid transparent;color:var(--mu);text-align:left;padding:5px 9px;cursor:pointer;font-size:12.5px}#setNav button:hover{color:var(--tx)}#setNav button.on{color:var(--au2);border-left-color:var(--au);background:var(--aud)}body>#v-settings #setForm{flex:1;overflow:auto;margin:0;max-width:none;padding:16px 24px}
 }
 @media(min-width:1001px) and (max-height:960px){.sbi{padding-top:5px!important;padding-bottom:5px!important}}
+.wvb{display:flex;gap:4px;align-items:center;padding:2px 6px;border-top:1px solid var(--ln);background:var(--p1);font-size:11px;flex:none}.wvb select{background:var(--p2);border:1px solid var(--ln2);color:var(--tx2);font-size:11px;padding:1px 4px;height:22px}.wvb .vbn{margin-left:auto;color:var(--dim)}
+.seced{margin-top:10px;border-top:1px solid var(--ln);padding-top:6px}.seced td input,.seced td select{width:100%;min-width:0}.seced td:first-child{white-space:nowrap}.seced td:nth-child(3){display:flex;gap:3px;align-items:center}.seced .atx{color:var(--mu);font-size:11px}
 .chip.pk{border-color:#C58AE8;background:#2a1d33}
 .plsb{position:absolute;left:8px;right:8px;bottom:40px;display:none;gap:6px;align-items:center;flex-wrap:wrap;background:color-mix(in srgb,var(--p2) 93%,transparent);border:1px solid var(--au);padding:6px 8px;z-index:5}.plsbt{flex:1;min-width:120px;font-size:12px;color:var(--au2)}.plsbd{border-color:#E8604E!important;color:#F29A8C!important}
 .plgp{position:absolute;left:8px;top:52px;width:min(320px,calc(100% - 16px));max-height:60%;overflow:auto;display:none;background:color-mix(in srgb,var(--p2) 95%,transparent);border:1px solid var(--ln2);padding:8px;z-index:6}
@@ -1048,6 +1050,17 @@ let SECG=null,SECM=(()=>{try{return localStorage.getItem('kn.secm')||'g'}catch(e
   if(SECM==='g'){o.g=[Math.round((+(o.g||[0,0])[0]||0)+d.dy),Math.round((+(o.g||[0,0])[1]||0)+d.dz)]}else{o.b=o.b||{};const b0=o.b[d.bi]||[0,0];o.b[d.bi]=[Math.round(b0[0]+d.dy),Math.round(b0[1]+d.dz)]}
   SECSEL=d.rid;save();renderAll();toast(SECM==='g'?'ย้ายเหล็กทั้งกลุ่มแล้ว · มีผลตลอดความยาวเหล็ก':'ย้ายเหล็กเส้นนี้แล้ว · มีผลตลอดความยาวเหล็ก')};
  el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up)})();
+
+/* ---------- แก้เหล็กที่หน้าตัดโดยตรง (เฉพาะช่วงที่ตัด เปลี่ยนเฉพาะค่าที่แก้) ---------- */
+function secEdHTML(bm,i){const s=bm.spans&&bm.spans[i];if(!s||bm.manual)return bm.manual?'<div class="note">คานนี้ใช้แนวเหล็กกำหนดเอง · แก้ที่ "แนวเหล็ก"</div>':'';const p='spans.'+i+'.',G=bm.grids||[],nm=(G[i]&&!G[i].free?G[i].n:'ปลาย')+'–'+(G[i+1]&&!G[i+1].free?G[i+1].n:'ปลาย');
+ const so=(k,v,L)=>`<select data-sp="${p+k}">${L.map(x=>`<option${x===v?' selected':''}>${x}</option>`).join('')}</select>`,ni=(k,v,st)=>`<input type="number" data-sp="${p+k}" value="${v}" step="${st||1}" min="0">`;
+ return`<div class="seced"><div class="sh">แก้เหล็กช่วง ${esc(nm)}${s._own?'':''}</div><table class="ptb">
+ <tr><td>เหล็กบน (หลัก)</td><td>${ni('top.n',s.top.n)}</td><td>${so('top.bar',s.top.bar,MAIN)}</td></tr>
+ <tr><td>เหล็กล่าง (หลัก)</td><td>${ni('bot.n',s.bot.n)}</td><td>${so('bot.bar',s.bot.bar,MAIN)}</td></tr>
+ ${s.bm?`<tr><td${s.bm.on?'':' colspan="3"'}><label class="ck"><input type="checkbox" data-sp="${p}bm.on"${s.bm.on?' checked':''}> เสริมล่างกลางช่วง</label></td><td>${s.bm.on?ni('bm.n',s.bm.n):''}</td><td>${s.bm.on?so('bm.bar',s.bm.bar,MAIN):''}</td></tr>`:''}
+ <tr><td>ปลอก</td><td>${so('st.bar',s.st.bar,STIR)}</td><td><span class="atx">@</span>${ni('st.s1',s.st.s1,5)}${s.st.two?`<span class="atx">/</span>${ni('st.s2',s.st.s2,5)}`:''}<span class="atx">มม.</span></td></tr></table>
+ <div class="note" style="margin-top:4px">มีผลเฉพาะช่วงนี้และเฉพาะค่าที่แก้ · ใช้กับช่วงอื่นได้ที่ "ใช้กับทุกช่วง" ในแผงคุณสมบัติ</div></div>`}
+$('#secv').addEventListener('change',e=>{const el=e.target,p=el.dataset.sp;if(!p)return;const bm=B();setP(bm,p,el.type==='checkbox'?el.checked:el.value);try{clean(bm)}catch(_){}save();renderAll();toast('แก้แล้ว · '+p.replace(/^spans\.(\d+)\./,(_,k)=>'ช่วง '+(+k+1)+' · '))});
 function renderSecV(){const el=$('#secv');if(!el||!M)return;const D=M.D,g=M.g,raw=B();
  if(CUT.x==null||CUT.bid!==D.id){const i=D.grids[0].free&&D.spans.length>1?1:0;CUT={x:(g.fa[i]+g.fb[i])/2,bid:D.id}}
  const ci=cutInfo(M,CUT.x),s=ci.sec,k=Math.min(150/s.b,230/s.h),ox=74,oy=40,W=390,H=oy+s.h*k+78,fi=Math.max(0,D.grids.findIndex(x=>!x.free)),ref=g.X[fi];
@@ -1058,7 +1071,7 @@ function renderSecV(){const el=$('#secv');if(!el||!M)return;const D=M.D,g=M.g,ra
  if(ci.out.length)sm.push(['ระยะหุ้ม',`เหล็ก ${ci.out.length} เส้นอยู่นอกแนวปลอกหรือหุ้มไม่พอ`,'bad']);
  SECG={k,ox,oy,zb:ci.zb,s,ci,W};const nOff=Object.keys(raw.boff||{}).length+Object.keys(raw.lmv||{}).length;
  el.innerHTML=`<div class="chips secm"><span class="note" style="margin:0">ลากเหล็ก:</span><button class="chip${SECM==='g'?' on':''}" data-sm="g">ทั้งกลุ่ม</button><button class="chip${SECM==='b'?' on':''}" data-sm="b">ทีละเส้น</button>${nOff?`<button class="chip" data-sreset="sel"${SECSEL?'':' disabled'}>กลับอัตโนมัติ (กลุ่มที่เลือก)</button><button class="chip" data-sreset="all">กลับอัตโนมัติทั้งหมด (${nOff})</button>`:''}</div><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="หน้าตัดคานที่ตำแหน่งที่เลือก">${cutDraw(M,ci,ox,oy,k,THD(),D.id+' · '+s.id)}<text id="secLive" x="${W/2}" y="18" font-size="11" text-anchor="middle" fill="#FFE08A"></text></svg>
- <div class="kv">${sm.map(([a,b,c])=>`<div><span>${esc(a)}</span><span class="${c}">${esc(b)}</span></div>`).join('')}</div>
+ <div class="kv">${sm.map(([a,b,c])=>`<div><span>${esc(a)}</span><span class="${c}">${esc(b)}</span></div>`).join('')}</div>${secEdHTML(raw,ci.si)}
  <div class="g2" style="margin-top:10px;align-items:end"><div class="f"><label>ตำแหน่งตัด (ม. จากกริด ${esc(D.grids[fi].n)})</label><input type="number" step="0.01" data-cx="1" value="${((ci.x-ref)/1000).toFixed(2)}"></div><button class="gold" data-cadd="1" style="height:38px">${sv?'อยู่บนแผ่นแบบแล้ว':'ใส่ลงแผ่นแบบ'}</button></div>
  ${(raw.cuts||[]).length?`<div class="chips" style="margin-top:8px">${raw.cuts.map((c,i)=>`<span class="cchip"><button class="chip${sv===c?' on':''}" data-cgo="${i}">${esc(c.n)}–${esc(c.n)} · ${m2(c.x-ref)}</button><button class="x" data-cdel="${i}" aria-label="ลบหน้าตัด ${esc(c.n)}">✕</button></span>`).join('')}</div>`:''}`}
 $('#secv').addEventListener('click',e=>{const raw=B();if(SECDRAG){SECDRAG=0;return}const sm=e.target.closest('[data-sm]');if(sm){SECM=sm.dataset.sm;try{localStorage.setItem('kn.secm',SECM)}catch(_){}renderSecV();return}
@@ -1151,7 +1164,7 @@ function render2D(){if(M&&(CUT.x==null||CUT.bid!==M.D.id)){const D0=M.D,i=D0.gri
  let o=`<defs><clipPath id="c2in"><rect x="${X(g.xl)}" y="0" width="${(g.xr-g.xl)*sx}" height="${H}"/></clipPath><clipPath id="c2out"><rect x="0" y="0" width="${X(g.xl)}" height="${H}"/><rect x="${X(g.xr)}" y="0" width="${W}" height="${H}"/></clipPath></defs>`;
  D.grids.forEach((gr,j)=>{if(gr.free)return;const x=X(g.X[j]),on=UI.t==='grid'&&UI.i===j,adj=[j-1,j].filter(i=>i>=0&&i<n),ct=Math.max(...adj.map(top)),J=D.joints&&D.joints[j];
   o+=`<g data-g="${j}" style="cursor:pointer"><rect data-ly="COL" x="${X(g.X[j]-g.w[j]/2)}" y="${Y(ct)-12}" width="${Math.max(4,g.w[j]*sx)}" height="${yb-Y(ct)+12+40}" fill="${on?'#2A2416':'#1A1B1F'}" stroke="${on?'#C9A55C':'#55585E'}"/><line data-ly="GRID" x1="${x}" y1="38" x2="${x}" y2="${Y(ct)-12}" stroke="#3A3D43" stroke-dasharray="4 3"/><circle cx="${x}" cy="22" r="15" fill="${on?'#1C1810':'#0E0F12'}" stroke="${on?'#C9A55C':'#8A8E95'}" stroke-width="${on?2:1}"/><text x="${x}" y="27.5" fill="${on?'#E2C584':'#C8C5BE'}" font-size="16" text-anchor="middle">${esc(gr.n)}</text>`;
-  if(J){const ms=[J.t,J.b].filter(Boolean).map(R=>({lap:'',ext:'1',hook:'2',haunch:'3'})[R.m]).filter(Boolean);if(ms.length)o+=`<text x="${x+19}" y="16" fill="#E8963A" font-size="11">แบบ ${[...new Set(ms)].join('/')}</text>`}
+  if(J){const ms=[J.t,J.b].filter(Boolean).map(R=>({lap:'',ext:'1',hook:'2',haunch:'3'})[R.m]).filter(Boolean);if(ms.length)o+=`<title>รอยต่อต่างระดับ แบบ ${[...new Set(ms)].join('/')}</title>`}
   o+='</g>'});
  for(let i=0;i<n;i++){const s=secOf(D,i),xa=X(i===0?g.xl:g.fa[i]),xb=X(i===n-1?g.xr:g.fb[i]),on=UI.t==='span'&&UI.i===i,yt=Y(top(i)),hh=s.h*sy,xm=(xa+xb)/2,narrow=xb-xa<90;
   o+=`<g data-s="${i}" style="cursor:pointer"><rect x="${xa}" y="${yt-16}" width="${xb-xa}" height="${yb-yt+16+62}" fill="#fff" fill-opacity="0.001"/><rect data-ly="${on?'':'CONC'}" x="${xa}" y="${yt}" width="${xb-xa}" height="${hh}" fill="${on?'#1C1810':'#15161A'}" stroke="${on?'#C9A55C':'#6F737A'}" stroke-width="${on?2:1}"/>`;
@@ -1161,9 +1174,10 @@ function render2D(){if(M&&(CUT.x==null||CUT.bid!==M.D.id)){const D0=M.D,i=D0.gri
   M.ST[i].hgs.forEach(h=>{const hc=pieceCol({key:stirKey(D,s)+':ข',cat:'hg',bar:h.bar,shape:'S'},true);if(h.bs)o+=`<rect x="${X(h.xc-h.bs/2)}" y="${yt}" width="${Math.max(2,h.bs*sx)}" height="${Math.min(hh,(h.hs||s.h*0.6)*sy)}" fill="${hc}" fill-opacity="0.16" stroke="${hc}" stroke-dasharray="3 2"/>`;
    h.xs.forEach(x=>{o+=`<line x1="${X(x)}" y1="${yt+2}" x2="${X(x)}" y2="${yt+hh-2}" stroke="${hc}" stroke-width="1.6"/>`})});
   o+=`<text x="${xm}" y="${yb+20}" fill="${on?'#E2C584':'#C8C5BE'}" font-size="15" text-anchor="middle">${D.spans[i].toFixed(2)}</text>`;
-  if(!narrow)o+=`<text x="${xm}" y="${yb+38}" fill="#8A8E95" font-size="12.5" text-anchor="middle">${m2(s.b)}×${m2(s.h)} · ${esc(M.ST[i].label.replace(/^\d+-/,''))}</text>`;
+  o+=fitTxt(xm,yb+38,xb-xa-8,[`${m2(s.b)}×${m2(s.h)}`,M.ST[i].label.replace(/^\d+-/,'')],12.5,'#8A8E95');
   if(anyLvl)o+=`<text x="${xm}" y="${yt-5}" fill="${on?'#E2C584':'#8A8E95'}" font-size="12.5" text-anchor="middle">T${bm.spans[i].lvl>=0?'+':''}${bm.spans[i].lvl.toFixed(2)}</text>`;
-  if(bm._own&&(i===0||bm._own[i]!==bm._own[i-1])){o+=`<text x="${xa+4}" y="${yt-(anyLvl?22:8)}" fill="#D9B3F2" font-size="13.5" font-weight="600">⧉ ${esc(bm._own[i])}</text>`;if(i>0)o+=`<line x1="${xa}" y1="${yt-(anyLvl?36:22)}" x2="${xa}" y2="${yt}" stroke="#C58AE8" stroke-width="1.5" stroke-dasharray="4 3"/>`}
+  if(!bm._own&&i===(D.grids[0].free&&n>1?1:0))o+=`<text x="${xa+4}" y="${yt-(anyLvl?22:8)}" fill="#E2C584" font-size="13.5" font-weight="600">${esc(bm.id)}</text>`;
+  if(bm._own&&(i===0||bm._own[i]!==bm._own[i-1])){o+=`<text x="${xa+4}" y="${yt-(anyLvl?22:8)}" fill="#D9B3F2" font-size="13.5" font-weight="600">${esc(bm._own[i])}</text>`;if(i>0)o+=`<line x1="${xa}" y1="${yt-(anyLvl?36:22)}" x2="${xa}" y2="${yt}" stroke="#C58AE8" stroke-width="1.5" stroke-dasharray="4 3"/>`}
   o+='</g>'}
  M.P.forEach(p=>{const pts=barPath(D,M,p,0),on=SEL===p.key,c=pieceCol(p,true);
   const d=pts.map(q=>X(q[0]).toFixed(1)+','+(Y(q[2])+(p.i%2?(p.top?3:-3):0)).toFixed(1)).join(' ');
@@ -1967,7 +1981,7 @@ function renderPlanTools(){const T=[['sel','เลือก'],['col','วาง�
 function planExt(){const X=gpos('gx'),Y=gpos('gy');return{w:X[X.length-1],h:Y[Y.length-1],X,Y}}
 function fitPV(){const e=planExt(),m=Math.max(e.w,e.h)*0.14+1600;PV={x:-m,y:-m,w:e.w+2*m,h:e.h+2*m}}
 function drawPlan(){const p=P(),e=planExt(),lv=p.lv,svg=PLT||$('#plSvg');if(!PLT)PLW=(WINS().w[WLIVE])||null;if(!PV)fitPV();
- const r=Math.max(e.w,e.h)/38+180,fs=r*0.95,X=e.X,Y=e.Y,ext=r*3.2;let o='';
+ const SC=(PLW&&+PLW.sc)||100,r=SC*4,fs=r*0.95,X=e.X,Y=e.Y,ext=r*3.2;let o='';
  const dim=(x1,y1,x2,y2,t,v)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#D9705E" stroke-width="${r*0.05}"/><text x="${(x1+x2)/2+(v?-r*0.35:0)}" y="${(y1+y2)/2-(v?0:r*0.3)}" fill="#D9705E" font-size="${fs*0.62}" text-anchor="middle"${v?` transform="rotate(-90 ${(x1+x2)/2-r*0.35} ${(y1+y2)/2})"`:''}>${t}</text>`;
  X.forEach((x,i)=>{const gs=gHas('gx',i);o+=`<g data-g="gx:${i}" style="cursor:${gs?'ew-resize':'pointer'}"><line x1="${x}" y1="${-ext}" x2="${x}" y2="${e.h+r*1.5}" stroke="${gs?'#FFE08A':'#55585E'}" stroke-width="${r*(gs?0.09:0.04)}"${gs?'':` stroke-dasharray="${r*0.5} ${r*0.25}"`}/><line x1="${x}" y1="${-ext}" x2="${x}" y2="${e.h+r*1.5}" stroke="#fff" stroke-opacity="0.01" stroke-width="${r*0.5}"/><circle cx="${x}" cy="${-ext-r}" r="${r}" fill="${gs?'#3A2F18':'#0E0F12'}" stroke="${gs?'#FFE08A':'#C9A55C'}" stroke-width="${r*0.08}"/><text x="${x}" y="${-ext-r+fs*0.36}" fill="#E2C584" font-size="${fs}" text-anchor="middle">${esc(p.gx.n[i])}</text></g>`;
   if(i<X.length-1)o+=dim(x,-ext*0.45,X[i+1],-ext*0.45,(p.gx.sp[i]/1000).toFixed(2))});
@@ -2518,7 +2532,7 @@ function wsBuild(){const p=P(),W=WSS(),V0=W.vis,tri=[],tc=[],tn=[],tid=[],ta=[],
  const lvIdx={};p.levels.forEach((l,i)=>lvIdx[l.id]=i);
  const tri3=(a,b,c,col,id,al)=>{const ux=b[0]-a[0],uy=b[1]-a[1],uz=b[2]-a[2],vx=c[0]-a[0],vy=c[1]-a[1],vz=c[2]-a[2];let nx=uy*vz-uz*vy,ny=uz*vx-ux*vz,nz=ux*vy-uy*vx;const l=Math.hypot(nx,ny,nz)||1;nx/=l;ny/=l;nz/=l;[a,b,c].forEach(q=>{tri.push(q[0],q[1],q[2]);tn.push(nx,ny,nz);tc.push(col[0],col[1],col[2]);tid.push(id);ta.push(al);ext(q[0],q[1],q[2])})};
  const quad=(a,b,c,d,col,id,al)=>{tri3(a,b,c,col,id,al);tri3(a,c,d,col,id,al)};
- const eline=(a,b,col)=>{ed.push(a[0],a[1],a[2],b[0],b[1],b[2]);ec.push(col[0],col[1],col[2],col[0],col[1],col[2])};
+ const EN=[],SOL=[],eline=(a,b,col,na,nb,own)=>{ed.push(a[0],a[1],a[2],b[0],b[1],b[2]);ec.push(col[0],col[1],col[2],col[0],col[1],col[2]);EN.push(na?[na,nb,own]:null)};
  const DS=DSP(),TUBE=DS.tube,tb=[],tbn=[],tbc=[],tbid=[],EDG=hex3(DS.edge),SELC=hex3(DS.sel);let RID=0,RDB=12;
  const tube=(a,b,r,col)=>{const dx=b[0]-a[0],dy=b[1]-a[1],dz=b[2]-a[2],L=Math.hypot(dx,dy,dz);if(L<1)return;const t=[dx/L,dy/L,dz/L];let u=Math.abs(t[2])<0.9?[0,0,1]:[1,0,0];let v=[t[1]*u[2]-t[2]*u[1],t[2]*u[0]-t[0]*u[2],t[0]*u[1]-t[1]*u[0]];const lv=Math.hypot(...v);v=v.map(x=>x/lv);u=[v[1]*t[2]-v[2]*t[1],v[2]*t[0]-v[0]*t[2],v[0]*t[1]-v[1]*t[0]];const N=6,P=[];for(let k=0;k<=N;k++){const g=k/N*Math.PI*2,c=Math.cos(g),s=Math.sin(g);P.push([u[0]*c+v[0]*s,u[1]*c+v[1]*s,u[2]*c+v[2]*s])}
   const ext2=r*0.9;const A=[a[0]-t[0]*ext2,a[1]-t[1]*ext2,a[2]-t[2]*ext2],B2=[b[0]+t[0]*ext2,b[1]+t[1]*ext2,b[2]+t[2]*ext2];
@@ -2532,15 +2546,19 @@ function wsBuild(){const p=P(),W=WSS(),V0=W.vis,tri=[],tc=[],tn=[],tid=[],ta=[],
   for(let k=0;k<N;k++){const a=L[k],b=L[k+1],c=R[k+1],d=R[k];quad([a[0],a[1],z1],[b[0],b[1],z1],[c[0],c[1],z1],[d[0],d[1],z1],col,id,al);quad([d[0],d[1],z0],[c[0],c[1],z0],[b[0],b[1],z0],[a[0],a[1],z0],col,id,al);
    quad([a[0],a[1],z0],[b[0],b[1],z0],[b[0],b[1],z1],[a[0],a[1],z1],col,id,al);quad([c[0],c[1],z0],[d[0],d[1],z0],[d[0],d[1],z1],[c[0],c[1],z1],col,id,al)}
   const cap=(a,d)=>quad([a[0],a[1],z0],[a[0],a[1],z1],[d[0],d[1],z1],[d[0],d[1],z0],col,id,al);cap(L[0],R[0]);cap(R[N],L[N]);
-  [[L,z0],[L,z1],[R,z0],[R,z1]].forEach(([A,z])=>{for(let k=0;k<N;k++)eline([A[k][0],A[k][1],z],[A[k+1][0],A[k+1][1],z],edgeCol)});
-  [0,N].forEach(k=>{const a=L[k],d=R[k];eline([a[0],a[1],z0],[d[0],d[1],z0],edgeCol);eline([a[0],a[1],z1],[d[0],d[1],z1],edgeCol);eline([a[0],a[1],z0],[a[0],a[1],z1],edgeCol);eline([d[0],d[1],z0],[d[0],d[1],z1],edgeCol)})};
+  const own=SOL.length,UP=[0,0,1],DN=[0,0,-1];for(let k=0;k<N;k++){const a=L[k],b=L[k+1],c=R[k+1],d=R[k],cx=(a[0]+b[0]+c[0]+d[0])/4,cy=(a[1]+b[1]+c[1]+d[1])/4,ux=(b[0]+c[0]-a[0]-d[0])/2,uy=(b[1]+c[1]-a[1]-d[1])/2,ul=Math.hypot(ux,uy)||1;SOL.push({k:'box',p0:[(a[0]+d[0])/2,(a[1]+d[1])/2],p1:[(b[0]+c[0])/2,(b[1]+c[1])/2],hw:hw,z0,z1,bb:[Math.min(a[0],b[0],c[0],d[0]),Math.min(a[1],b[1],c[1],d[1]),z0,Math.max(a[0],b[0],c[0],d[0]),Math.max(a[1],b[1],c[1],d[1]),z1]})}
+  const nrm=(P,Q,sg)=>{const dx=Q[0]-P[0],dy=Q[1]-P[1],l=Math.hypot(dx,dy)||1;return[-dy/l*sg,dx/l*sg,0]},sideN=(A,k,B)=>{const m=[(A[k][0]+A[k+1][0])/2,(A[k][1]+A[k+1][1])/2],o=[(B[k][0]+B[k+1][0])/2,(B[k][1]+B[k+1][1])/2],v=[m[0]-o[0],m[1]-o[1]],l=Math.hypot(v[0],v[1])||1;return[v[0]/l,v[1]/l,0]};
+  [[L,R],[R,L]].forEach(([A,B])=>{for(let k=0;k<N;k++){const n=sideN(A,k,B);eline([A[k][0],A[k][1],z0],[A[k+1][0],A[k+1][1],z0],edgeCol,n,DN,own);eline([A[k][0],A[k][1],z1],[A[k+1][0],A[k+1][1],z1],edgeCol,n,UP,own)}});
+  [[0,1,-1],[N,N-1,1]].forEach(([k,k2,sg])=>{const a=L[k],d=R[k],tx=((L[k][0]+R[k][0])-(L[k2][0]+R[k2][0]))/2,ty=((L[k][1]+R[k][1])-(L[k2][1]+R[k2][1]))/2,tl=Math.hypot(tx,ty)||1,cn=[tx/tl,ty/tl,0],nl=sideN(L,Math.min(k,N-1),R),nr=sideN(R,Math.min(k,N-1),L);
+   eline([a[0],a[1],z0],[d[0],d[1],z0],edgeCol,cn,DN,own);eline([a[0],a[1],z1],[d[0],d[1],z1],edgeCol,cn,UP,own);eline([a[0],a[1],z0],[a[0],a[1],z1],edgeCol,cn,nl,own);eline([d[0],d[1],z0],[d[0],d[1],z1],edgeCol,cn,nr,own)})};
  const colorFor=(kind,t,lv)=>{if(W.colorBy==='mat')return hex3(kind==='col'?(DS.colc||'#9a9ca3'):(DS.conc||'#C9A55C'));if(W.colorBy==='level')return hex3(LVPAL[(lvIdx[lv]||0)%LVPAL.length]);if(W.colorBy==='cat')return kind==='col'?[.62,.63,.66]:[.79,.65,.36];return hex3(t&&t.col||(kind==='col'?'#9a9ca3':'#C9A55C'))};
  const lvOn=lv=>!W.lvOff[lv];
  /* beams */
  if(V0.beam)S.beams.forEach((bm,bi)=>{const L=bm.link;if(!L||bm.linkBad||!lvOn(L.lv))return;const pa=L.t==='free'?pathOf(L):beamPathAny(bm);if(!pa)return;const st=L.st&&L.st.length>1?L.st:[0,pa.len],lz=(lvOf(L.lv)||{z:0}).z*1000;
+  const CL=wsColsAt(L.lv),trim=(s0,dir)=>{const q=pa.at(Math.max(0,Math.min(pa.len,s0)));for(const c of CL){if(Math.hypot(c.x-q.x,c.y-q.y)<80){const h=c.d.round?c.d.bx/2:Math.abs(q.tx)*c.d.bx/2+Math.abs(q.ty)*c.d.by/2;return h}}return 0};
   for(let q=0;q<st.length-1&&q<bm.spans.length;q++){const sp=bm.spans[q],t=btOf(sp.bt);if(t&&W.tOff['b:'+t.id])continue;if(!t&&W.tOff['b:'])continue;const key='b'+bi+':'+q,e={key,kind:'beam',bi,q,lv:L.lv,id:els.length+1};if(!visible(e))continue;
    const top=lz+(+sp.lvl||0)*1000,bot=top-sp.h,sel=WSSEL&&WSSEL.key===key,rb=rebarOn(e)||(V0.rebar==='sel'&&WSSEL&&WSSEL.kind==='beam'&&WSSEL.bi===bi),col=sel?SELC:colorFor('beam',t,L.lv),al=rb?0.22:1;
-   e.c=pa.at((st[q]+st[q+1])/2);e.c=[e.c.x,-e.c.y,(top+bot)/2];e.rb=rb;els.push(e);extrude(pa,st[q],st[q+1],sp.b/2,bot,top,col,e.id,al,sel?SELC:EDG);
+   e.c=pa.at((st[q]+st[q+1])/2);e.c=[e.c.x,-e.c.y,(top+bot)/2];e.rb=rb;els.push(e);{let s0=st[q],s1=st[q+1];const ta=trim(s0),tb=trim(s1);if(s1-s0-ta-tb>40){s0+=ta;s1-=tb}extrude(pa,s0,s1,sp.b/2,bot,top,col,e.id,al,sel?SELC:EDG)}
    if(V0.lab){labs.push({p:[e.c[0],e.c[1],top+120],t:btLabel(bm,q),c:'b'})}}
   if(bm.inGrp)return;if(V0.rebar!=='off'&&(V0.rebar==='all'||(WSSEL&&WSSEL.kind==='beam'&&WSSEL.bi===bi))){let m;try{m=build(bm)}catch(_){m=null}if(!m)return;const D=m.D,tw=(x,y,z)=>{const q=pa.at(Math.max(0,Math.min(pa.len,x))),nx=-q.ty,ny=q.tx;return[q.x+nx*y,-(q.y+ny*y),lz+z]};
    RID=(els.filter(x=>x.kind==='beam'&&x.bi===bi)[0]||{}).id||0;m.P.forEach(pc=>{const c=hex3(rbHex(pc.bar,pieceCol(pc,true)));for(let k=0;k<pc.n;k++){try{rline(barPath(D,m,pc,k).map(v=>tw(v[0],v[1],v[2])),c,pc.d)}catch(_){}}});
@@ -2553,8 +2571,8 @@ function wsBuild(){const p=P(),W=WSS(),V0=W.vis,tri=[],tc=[],tn=[],tid=[],ta=[],
  /* columns */
  if(V0.col)p.levels.forEach(l=>{if(!lvOn(l.id))return;allCols(l.id).forEach(c=>{const t=c.key?ctOf((p.cols[c.key]||{}).t):ctOf((XC()[c.xc]||{}).t);if(W.tOff['c:'+(t?t.id:'')])return;const key=c.key?'c:'+c.key:'x:'+c.xc,e={key,kind:'col',lv:l.id,ck:c.key,xc:c.xc,id:els.length+1};if(!visible(e))return;
   const[z0,z1]=wsColRange(l.id),sel=WSSEL&&WSSEL.key===key,rb=rebarOn(e),col=sel?SELC:colorFor('col',t,l.id),al=rb?0.22:1,x=c.x,y=-c.y,d=c.d,ec=sel?SELC:EDG;e.c=[x,y,(z0+z1)/2];e.rb=rb;els.push(e);
-  if(d.round){const N=20,r=d.bx/2,P2=k=>[x+r*Math.cos(k/N*Math.PI*2),y+r*Math.sin(k/N*Math.PI*2)];for(let k=0;k<N;k++){const a=P2(k),b=P2(k+1);quad([a[0],a[1],z0],[b[0],b[1],z0],[b[0],b[1],z1],[a[0],a[1],z1],col,e.id,al);tri3([x,y,z1],[a[0],a[1],z1],[b[0],b[1],z1],col,e.id,al);tri3([x,y,z0],[b[0],b[1],z0],[a[0],a[1],z0],col,e.id,al);eline([a[0],a[1],z0],[b[0],b[1],z0],ec);eline([a[0],a[1],z1],[b[0],b[1],z1],ec)}}
-  else{const hx=d.bx/2,hy=d.by/2,C=[[x-hx,y-hy],[x+hx,y-hy],[x+hx,y+hy],[x-hx,y+hy]];for(let k=0;k<4;k++){const a=C[k],b=C[(k+1)%4];quad([a[0],a[1],z0],[b[0],b[1],z0],[b[0],b[1],z1],[a[0],a[1],z1],col,e.id,al);eline([a[0],a[1],z0],[b[0],b[1],z0],ec);eline([a[0],a[1],z1],[b[0],b[1],z1],ec);eline([a[0],a[1],z0],[a[0],a[1],z1],ec)}
+  const own=SOL.length;if(d.round){const N=20,r=d.bx/2,P2=k=>[x+r*Math.cos(k/N*Math.PI*2),y+r*Math.sin(k/N*Math.PI*2)];SOL.push({k:'cyl',c:[x,y],r,z0,z1,bb:[x-r,y-r,z0,x+r,y+r,z1]});for(let k=0;k<N;k++){const a=P2(k),b=P2(k+1),an=(k+0.5)/N*Math.PI*2,rn=[Math.cos(an),Math.sin(an),0];quad([a[0],a[1],z0],[b[0],b[1],z0],[b[0],b[1],z1],[a[0],a[1],z1],col,e.id,al);tri3([x,y,z1],[a[0],a[1],z1],[b[0],b[1],z1],col,e.id,al);tri3([x,y,z0],[b[0],b[1],z0],[a[0],a[1],z0],col,e.id,al);eline([a[0],a[1],z0],[b[0],b[1],z0],ec,rn,[0,0,-1],own);eline([a[0],a[1],z1],[b[0],b[1],z1],ec,rn,[0,0,1],own)}}
+  else{const hx=d.bx/2,hy=d.by/2,C=[[x-hx,y-hy],[x+hx,y-hy],[x+hx,y+hy],[x-hx,y+hy]],FN=[[0,-1,0],[1,0,0],[0,1,0],[-1,0,0]];SOL.push({k:'box',p0:[x-hx,y],p1:[x+hx,y],hw:hy,z0,z1,bb:[x-hx,y-hy,z0,x+hx,y+hy,z1]});for(let k=0;k<4;k++){const a=C[k],b=C[(k+1)%4];quad([a[0],a[1],z0],[b[0],b[1],z0],[b[0],b[1],z1],[a[0],a[1],z1],col,e.id,al);eline([a[0],a[1],z0],[b[0],b[1],z0],ec,FN[k],[0,0,-1],own);eline([a[0],a[1],z1],[b[0],b[1],z1],ec,FN[k],[0,0,1],own);eline([a[0],a[1],z0],[a[0],a[1],z1],ec,FN[(k+3)%4],FN[k],own)}
    quad([C[0][0],C[0][1],z1],[C[1][0],C[1][1],z1],[C[2][0],C[2][1],z1],[C[3][0],C[3][1],z1],col,e.id,al);quad([C[3][0],C[3][1],z0],[C[2][0],C[2][1],z0],[C[1][0],C[1][1],z0],[C[0][0],C[0][1],z0],col,e.id,al)}
   if(V0.lab)labs.push({p:[x,y,z1+150],t:(c.key?d.name:c.n),c:'c'});
   if(rb&&t){RID=e.id;const G=colGeo(t),r=ctRb(t),bc=hex3(rbHex(r.bar,'#E8963A')),tcl=hex3(rbHex(r.tb||'RB9','#A8884A')),TD=BARS[r.tb]||9,rot=c.key&&(p.cols[c.key]||{}).rot&&!d.round,T=(u,v)=>rot?[x+v,y+u]:[x+u,y+v];
@@ -2566,6 +2584,7 @@ function wsBuild(){const p=P(),W=WSS(),V0=W.vis,tri=[],tc=[],tn=[],tid=[],ta=[],
  const gl=[],gc=[],e2=planExt(),pad=1500;
  if(V0.grid){const zg=bb[2],gcol=hex3(DS.grid);e2.X.forEach((x,i)=>{gl.push(x,pad,zg,x,-e2.h-pad,zg);gc.push(...gcol,...gcol);labs.push({p:[x,pad+600,zg],t:p.gx.n[i],c:'g'})});e2.Y.forEach((y,j)=>{gl.push(-pad,-y,zg,e2.w+pad,-y,zg);gc.push(...gcol,...gcol);labs.push({p:[-pad-600,-y,zg],t:p.gy.n[j],c:'g'})})}
  if(V0.lv)p.levels.forEach((l,i)=>{if(W.lvOff[l.id])return;const z=l.z*1000,c=hex3(l.ref?'#E8963A':DS.lvl),x0=-pad*1.4,x1=e2.w+pad,y0=pad,y1=-e2.h-pad;[[x0,y0,x1,y0],[x1,y0,x1,y1],[x1,y1,x0,y1],[x0,y1,x0,y0]].forEach(s=>{gl.push(s[0],s[1],z,s[2],s[3],z);gc.push(...c,...c)});labs.push({p:[x1+300,y1,z],t:l.n+' +'+l.z.toFixed(2),c:l.ref?'r':'l'})});
+ {const r2=wsJoinEdges(ed,ec,EN,SOL);ed.length=0;ec.length=0;for(const v of r2.ed)ed.push(v);for(const v of r2.ec)ec.push(v)}
  WSE=els;WSLAB=labs;return{tri:new Float32Array(tri),tn:new Float32Array(tn),tc:new Float32Array(tc),tid:new Float32Array(tid),ta:new Float32Array(ta),ed:new Float32Array(ed),ec:new Float32Array(ec),rl:new Float32Array(rl),rc:new Float32Array(rc),gl:new Float32Array(gl),gc:new Float32Array(gc),tb:new Float32Array(tb),tbn:new Float32Array(tbn),tbc:new Float32Array(tbc),tbid:new Float32Array(tbid),bb}}
 /* ---------- GL ---------- */
 const WSVS=`attribute vec3 p;attribute vec3 n;attribute vec3 c;attribute float a;attribute float id;uniform mat4 mv;uniform mat4 pr;uniform float pk;varying vec3 vc;varying vec3 vw;varying float va;varying vec3 vn;
@@ -2618,6 +2637,17 @@ function wsLabels(){const sv=$('#wsLab');if(!sv||!WSG)return;const cv=WSG.cv,w=c
   else o+=`<text x="${sx}" y="${sy}" fill="${LT2?(L.c==='l'?DSL.lvl:L.c==='r'?'#C25E00':DSL.gtxt):(L.c==='l'?'#C8C5BE':L.c==='r'?'#F2C38A':L.c==='c'?'#d6d6d6':'#FFE08A')}" font-size="${L.c==='b'||L.c==='c'?10.5:11.5}" text-anchor="${L.c==='l'||L.c==='r'?'start':'middle'}" paint-order="stroke" stroke="${LBG}" stroke-width="3">${esc(L.t)}</text>`});
  sv.setAttribute('viewBox',`0 0 ${w} ${h}`);sv.innerHTML=o}
 function wsPick(cx,cy){const G=WSG,gl=G.gl,cv=G.cv,r=cv.getBoundingClientRect();wsDraw0(true);const dpr=cv.width/cv.clientWidth,px=new Uint8Array(4);gl.readPixels(Math.round((cx-r.left)*dpr),Math.round(cv.height-(cy-r.top)*dpr),1,1,gl.RGBA,gl.UNSIGNED_BYTE,px);wsDraw0();const id=px[0]+px[1]*256+px[2]*65536;return id?WSE.find(e=>e.id===id)||null:null}
+
+/* ---------- รวมเป็นชิ้นเดียวแบบ Revit: ซ่อนเส้นที่รอยต่อคอนกรีต ---------- */
+const WSCOLC={};function wsColsAt(lv){return allCols(lv)}
+function wsInside(p,S0,own,tol){for(let i=0;i<S0.length;i++){if(i===own)continue;const o=S0[i],b=o.bb;if(p[0]<b[0]-1||p[0]>b[3]+1||p[1]<b[1]-1||p[1]>b[4]+1||p[2]<=o.z0+tol||p[2]>=o.z1-tol)continue;
+  if(o.k==='cyl'){if(Math.hypot(p[0]-o.c[0],p[1]-o.c[1])<o.r-tol)return true;continue}
+  const dx=o.p1[0]-o.p0[0],dy=o.p1[1]-o.p0[1],L=Math.hypot(dx,dy)||1,ux=dx/L,uy=dy/L,vx=p[0]-o.p0[0],vy=p[1]-o.p0[1],t=vx*ux+vy*uy,n=Math.abs(-vx*uy+vy*ux);if(t>tol&&t<L-tol&&n<o.hw-tol)return true}return false}
+function wsJoinEdges(ed,ec,EN,SOL){const oe=[],oc=[],E=3,TOL=0.6;const hid=(m,ns)=>{if(wsInside(m,SOL,ns?ns[2]:-1,TOL))return true;if(!ns)return false;const[a,b]=ns,p1=[m[0]+E*b[0]-E*a[0],m[1]+E*b[1]-E*a[1],m[2]+E*b[2]-E*a[2]],p2=[m[0]+E*a[0]-E*b[0],m[1]+E*a[1]-E*b[1],m[2]+E*a[2]-E*b[2]];return wsInside(p1,SOL,ns[2],TOL)||wsInside(p2,SOL,ns[2],TOL)};
+ for(let i=0;i<EN.length;i++){const A=[ed[i*6],ed[i*6+1],ed[i*6+2]],B=[ed[i*6+3],ed[i*6+4],ed[i*6+5]],c=[ec[i*6],ec[i*6+1],ec[i*6+2]],ns=EN[i];if(!ns){oe.push(...A,...B);oc.push(...c,...c);continue}
+  const L=Math.hypot(B[0]-A[0],B[1]-A[1],B[2]-A[2]),n=Math.max(1,Math.min(400,Math.ceil(L/40)));let st=-1;const P=t=>[A[0]+(B[0]-A[0])*t,A[1]+(B[1]-A[1])*t,A[2]+(B[2]-A[2])*t];
+  for(let k=0;k<=n;k++){const vis=k<n&&!hid(P((k+0.5)/n),ns);if(vis&&st<0)st=k;if(!vis&&st>=0){oe.push(...P(st/n),...P(k/n));oc.push(...c,...c);st=-1}}}
+ return{ed:oe,ec:oc}}
 function wsRebuild(){if(!WSG)return;try{wsUpload(wsBuild())}catch(e){console.error(e);toast('สร้างโมเดล 3D ไม่ได้: '+e.message)}wsDraw()}
 /* ---------- UI ---------- */
 function renderWS(){const v=$('#v-ws');if(!v)return;const W=WSS(),p=P();
@@ -3204,7 +3234,7 @@ function elTitle(k){const s=elSources().find(x=>x.k===k);return s?'รูปด�
 /* ---------- elevation renderer ---------- */
 function elevSVG(w){const p=P(),L=elLine(w.src),f=w.f||{},on=k=>{if(w.hide&&w.hide.includes(k))return false;if(w.iso&&w.iso.length&&!w.iso.includes(k))return false;return true};if(!L)return{s:'<text x="0" y="0" fill="#888" font-size="400">ไม่พบกริดนี้</text>',bb:[-1000,-1000,2000,2000]};
  const lvs=p.levels.slice().sort((a,b)=>a.z-b.z),lvOk=id=>!f.lv||f.lv==='all'||f.lv===id;let o='',umin=1e18,umax=-1e18,zmin=1e18,zmax=-1e18;const ext=(u,z)=>{umin=Math.min(umin,u);umax=Math.max(umax,u);zmin=Math.min(zmin,z);zmax=Math.max(zmax,z)};
- const r=Math.max(350,(planExt().w+planExt().h+(p.levels.reduce((m,l)=>Math.max(m,l.z),0)-p.levels.reduce((m,l)=>Math.min(m,l.z),0))*1000)/48),fs=r*0.9,cols=[],beams=[],cuts=[],bars=[],labs=[];
+ const SC=+w.sc||100,r=SC*3.6,fs=SC*4,cols=[],beams=[],cuts=[],bars=[],labs=[],LBM=new Map();
  // columns
  if(f.col!==false)p.levels.forEach(l=>{if(!lvOk(l.id))return;allCols(l.id).forEach(c=>{const h=Math.max(c.d.bx,c.d.by)/2;if(L.d(c)>h+5)return;const key=c.key?'c:'+c.key:'x:'+(XC()[c.xc]||{}).id;if(!on(key))return;const wd=c.d.round?c.d.bx:Math.abs(L.tx)*c.d.bx+Math.abs(L.ty)*c.d.by,u=L.u(c),[z0,z1]=wsColRange(l.id),sel=c.key?PCOL.includes(c.key):PXCS.includes(c.xc);
   cols.push(`<g ${c.key?`data-col="${esc(c.key)}"`:`data-xc="${c.xc}"`} style="cursor:pointer"><rect x="${u-wd/2}" y="${-z1}" width="${wd}" height="${z1-z0}" fill="${sel?'#3A2F18':'#22252B'}" stroke="${sel?'#FFE08A':'#B9B6AF'}" stroke-width="${r*(sel?0.1:0.05)}"/></g>`);if(f.lab!==false)labs.push(`<text x="${u}" y="${-(z0+z1)/2}" fill="#9a9ca3" font-size="${fs*0.55}" text-anchor="middle" transform="rotate(-90 ${u} ${-(z0+z1)/2})" pointer-events="none">${esc(c.d.name)}</text>`);ext(u-wd/2,z0);ext(u+wd/2,z1)})});
@@ -3214,14 +3244,14 @@ function elevSVG(w){const p=P(),L=elLine(w.src),f=w.f||{},on=k=>{if(w.hide&&w.hi
   const A=pa.at(0),B2=pa.at(pa.len),onLine=pa.geo.k==='line'&&L.d(A)<60&&L.d(B2)<60;
   if(onLine){drawn.add(bm);for(let q=0;q<bm.spans.length&&q<Lk.st.length-1;q++){const key='b:'+bm.uid+':'+q;if(!on(key))continue;const sp=bm.spans[q],ua=L.u(pa.at(Lk.st[q])),ub=L.u(pa.at(Lk.st[q+1])),top=lz+(+sp.lvl||0)*1000,x=Math.min(ua,ub),wd=Math.abs(ub-ua),sel=PMS.some(z=>z.i===bi&&z.q===q),c=sel?'#FFE08A':btFill(bm,q,'#C9A55C');
     beams.push(`<rect data-bm="${bi}" data-sq="${q}" x="${x}" y="${-top}" width="${wd}" height="${sp.h}" fill="${c}" fill-opacity="${f.rb?0.12:sel?0.5:0.25}" stroke="${c}" stroke-width="${r*(sel?0.1:0.05)}" style="cursor:pointer"/>`);
-    if(f.lab!==false)labs.push(`<text x="${x+wd/2}" y="${-top-fs*0.35}" fill="${sel?'#FFE08A':'#E2C584'}" font-size="${fs*0.62}" text-anchor="middle" pointer-events="none">${esc(btLabel(bm,q))}</text>`);ext(x,top-sp.h);ext(x+wd,top)}}
+    if(f.lab!==false){const g0=grpOf(bm),k=g0?g0.uid:bm.uid,o0=LBM.get(k)||{x0:1e18,x1:-1e18,top:-1e18,sel:false,t:btLabel(bm,q)};o0.x0=Math.min(o0.x0,x);o0.x1=Math.max(o0.x1,x+wd);o0.top=Math.max(o0.top,top);o0.sel=o0.sel||sel;LBM.set(k,o0)}ext(x,top-sp.h);ext(x+wd,top)}}
   else{pathX(L.geo,pa.geo).forEach(X=>{const s=pa.proj(X).s,sq=spanAtS(bm,s);if(!sq)return;const q=sq.q,key='b:'+bm.uid+':'+q;if(!on(key))return;const sp=bm.spans[q],u=L.u(X),top=lz+(+sp.lvl||0)*1000,t=pa.at(s),sn=Math.max(0.2,Math.abs(t.tx*L.ty-t.ty*L.tx)),wd=sp.b/sn,sel=PMS.some(z=>z.i===bi&&z.q===q);
     cuts.push(`<g data-bm="${bi}" data-sq="${q}" style="cursor:pointer"><rect x="${u-wd/2}" y="${-top}" width="${wd}" height="${sp.h}" fill="${sel?'#5a4a22':'#2a2d33'}" stroke="${sel?'#FFE08A':'#E6E3DC'}" stroke-width="${r*(sel?0.1:0.05)}"/><path d="M${u-wd/2} ${-top}L${u+wd/2} ${-top+sp.h}M${u+wd/2} ${-top}L${u-wd/2} ${-top+sp.h}" stroke="#6a6d73" stroke-width="${r*0.025}"/></g>`);
-    if(f.lab!==false)labs.push(`<text x="${u}" y="${-top+sp.h+fs*0.7}" fill="#C8C5BE" font-size="${fs*0.5}" text-anchor="middle" pointer-events="none">${esc(bm.id)}</text>`);ext(u-wd/2,top-sp.h);ext(u+wd/2,top)})}});
+    if(f.lab!==false)labs.push(`<text x="${u}" y="${-top+sp.h+fs*0.7}" fill="#C8C5BE" font-size="${fs*0.5}" text-anchor="middle" pointer-events="none">${esc(btLabel(bm,q))}</text>`);ext(u-wd/2,top-sp.h);ext(u+wd/2,top)})}});
  // rebar (beams on this line; groups as one continuous line)
  if(f.rb){const draw=(src,pas,lzs)=>{let m;try{m=build(src)}catch(_){return}const D=m.D,off=[];let a=0;pas.forEach(q=>{off.push(a);a+=q.len});const U=(x,z)=>{let k=0;while(k<pas.length-1&&x>off[k]+pas[k].len)k++;return[L.u(pas[k].at(Math.max(0,Math.min(pas[k].len,x-off[k])))),lzs[k]+z]};
    m.P.forEach(pc=>{const c=pieceCol(pc,true);try{const pts=barPath(D,m,pc,0).map(v=>U(v[0],v[2]));bars.push(`<polyline points="${pts.map(q=>q[0].toFixed(0)+','+(-q[1]).toFixed(0)).join(' ')}" fill="none" stroke="${c}" stroke-width="${Math.max(r*0.06,pc.d||16)}" stroke-linejoin="round" pointer-events="none"/>`)}catch(_){}});
-   m.ST.forEach(stp=>{const sc=stp.sec,zb=D.zb[stp.si],z1=zb+sc.cb,z2=zb+sc.h-sc.ct;stp.xs.forEach(x=>{const p1=U(x,z1),p2=U(x,z2);bars.push(`<line x1="${p1[0]}" y1="${-p1[1]}" x2="${p2[0]}" y2="${-p2[1]}" stroke="#A8884A" stroke-width="${Math.max(r*0.03,BARS[sc.sb]||9)}" pointer-events="none"/>`)})})};
+   if(f.st!==false)m.ST.forEach(stp=>{const sc=stp.sec,zb=D.zb[stp.si],z1=zb+sc.cb,z2=zb+sc.h-sc.ct;stp.xs.forEach(x=>{const p1=U(x,z1),p2=U(x,z2);bars.push(`<line x1="${p1[0]}" y1="${-p1[1]}" x2="${p2[0]}" y2="${-p2[1]}" stroke="#A8884A" stroke-width="${Math.max(r*0.03,BARS[sc.sb]||9)}" pointer-events="none"/>`)})})};
   const done=new Set();drawn.forEach(bm=>{const g=grpOf(bm);if(g){if(done.has(g))return;done.add(g);const ms=grpMembers(g);if(ms.every(x=>drawn.has(x)))draw(g,ms.map(beamPathAny),ms.map(x=>(lvOf(x.link.lv)||{z:0}).z*1000));return}draw(bm,[beamPathAny(bm)],[(lvOf(bm.link.lv)||{z:0}).z*1000])})}
  if(umin>umax){umin=0;umax=10000}lvs.forEach(l=>{ext(umin,l.z*1000);});if(zmin>zmax){zmin=0;zmax=3000}
  // grids crossing
@@ -3232,6 +3262,7 @@ function elevSVG(w){const p=P(),L=elLine(w.src),f=w.f||{},on=k=>{if(w.hide&&w.hi
  lvs.forEach(l=>{const z=l.z*1000,dim=f.lv&&f.lv!=='all'&&f.lv!==l.id;o+=`<line x1="${u0}" y1="${-z}" x2="${u1}" y2="${-z}" stroke="${l.ref?'#E8963A':'#6F737A'}" stroke-width="${r*0.03}" stroke-dasharray="${r*0.4} ${r*0.2}" opacity="${dim?0.35:1}"/><text x="${u1+r*0.3}" y="${-z+fs*0.2}" fill="${l.ref?'#F2C38A':'#C8C5BE'}" font-size="${fs*0.6}" opacity="${dim?0.45:1}">${esc(l.n)} ${(l.z>=0?'+':'')+l.z.toFixed(2)}</text>`});
  gl.forEach(g=>{o+=`<g data-elg="${g.k}" style="cursor:pointer"><line x1="${g.u}" y1="${-zt+r}" x2="${g.u}" y2="${-zmin+r}" stroke="${g.aux?'#6FA8DC':'#55585E'}" stroke-width="${r*0.03}" stroke-dasharray="${r*0.5} ${r*0.25}"/><circle cx="${g.u}" cy="${-zt}" r="${r*0.9}" fill="#0E0F12" stroke="${g.aux?'#6FA8DC':'#C9A55C'}" stroke-width="${r*0.07}"/><text x="${g.u}" y="${-zt+fs*0.32}" fill="${g.aux?'#9cc6ee':'#E2C584'}" font-size="${fs*0.85}" text-anchor="middle">${esc(g.n)}</text></g>`});
  const sg=[...gl].sort((a,b)=>a.u-b.u);for(let k=0;k<sg.length-1;k++){const a=sg[k].u,b=sg[k+1].u;if(b-a<50)continue;o+=`<line x1="${a}" y1="${-zt+r*1.6}" x2="${b}" y2="${-zt+r*1.6}" stroke="#D9705E" stroke-width="${r*0.03}"/><text x="${(a+b)/2}" y="${-zt+r*1.45}" fill="#D9705E" font-size="${fs*0.5}" text-anchor="middle">${((b-a)/1000).toFixed(2)}</text>`}
+ LBM.forEach(L0=>{if(L0.t)labs.push(`<text x="${(L0.x0+L0.x1)/2}" y="${-L0.top-fs*0.3}" fill="${L0.sel?'#FFE08A':'#E2C584'}" font-size="${fs*0.62}" text-anchor="middle" pointer-events="none">${esc(L0.t)}</text>`)});
  o+=cols.join('')+beams.join('')+cuts.join('')+bars.join('')+labs.join('');
  return{s:o,bb:[u0-r*2,-zt-r*2,(u1+r*8)-(u0-r*2),(zt+r*2)-(zmin-r*3)]}}
 /* ---------- window frames ---------- */
@@ -3240,12 +3271,26 @@ function winHead(w,i){const p=P(),src=elSources(),ty=`<select class="chip" data-
  else if(w.t==='elev')mid=`<select class="chip" data-we="${i}" aria-label="แนวรูปด้าน" style="max-width:170px">${src.map(s=>`<option value="${s.k}"${w.src===s.k?' selected':''}>${esc(s.n)}</option>`).join('')}</select><button class="chip" data-wn="${i}:-1" aria-label="แนวก่อนหน้า">◀</button><button class="chip" data-wn="${i}:1" aria-label="แนวถัดไป">▶</button>`;
  const iso=(w.iso&&w.iso.length)||(w.hide&&w.hide.length);
  return`<span class="wn">${i+1}</span>${ty}${mid}<span style="flex:1"></span>${w.t!=='3d'?`<button class="chip" data-wf="${i}" aria-label="ตัวเลือกการแสดง">แสดง ▾</button>`:''}<button class="chip" data-wh="${i}:iso" title="แยกดูเฉพาะที่เลือก (HI)">HI</button><button class="chip" data-wh="${i}:hide" title="ซ่อนที่เลือก (HH)">HH</button>${iso||w.t==='3d'?`<button class="chip" data-wh="${i}:reset" title="แสดงทั้งหมด">↺</button>`:''}<button class="chip" data-wm="${i}" title="ขยายเต็ม / คืน" aria-label="ขยายหน้าต่าง">⤢</button>`}
+
+/* ---------- View Control Bar แบบ Revit (มาตราส่วน · Detail Level · Visual Style) ---------- */
+const VSCL=[10,20,25,50,75,100,150,200,250,500];
+function vcbHTML(w,i){if(!w||w.t==='detail')return'';const sc=+w.sc||100,f=w.f||{},W3=w.t==='3d'?WSS():null;
+ const dl=w.t==='elev'?(f.rb?(f.st===false?'m':'f'):'c'):W3?(W3.vis.rebar==='off'?'c':W3.vis.rebar==='sel'?'m':'f'):'';
+ let h=`<div class="wvb" data-vb="${i}">`;
+ if(w.t!=='3d')h+=`<select data-vsc="${i}" title="มาตราส่วนมุมมอง (ขนาดตัวอักษร/สัญลักษณ์ตามมาตราส่วนเหมือน Revit)">${VSCL.concat(VSCL.includes(sc)?[]:[sc]).sort((a,b)=>a-b).map(v=>`<option value="${v}"${v===sc?' selected':''}>1 : ${v}</option>`).join('')}<option value="custom">กำหนดเอง…</option></select>`;
+ if(w.t!=='plan')h+=`<select data-vdl="${i}" title="Detail Level"><option value="c"${dl==='c'?' selected':''}>▭ Coarse</option><option value="m"${dl==='m'?' selected':''}>▤ Medium</option><option value="f"${dl==='f'?' selected':''}>▦ Fine</option></select>`;
+ if(W3)h+=`<select data-vvs="${i}" title="Visual Style">${[['wire','Wireframe'],['hidden','Hidden Line'],['shade','Shaded'],['cons','Consistent Colors'],['real','Realistic'],['xray','X-ray']].map(([a,b])=>`<option value="${a}"${W3.mode===a?' selected':''}>${b}</option>`).join('')}</select>`;
+ return h+`<span class="vbn">${w.t==='plan'?'แปลน':w.t==='elev'?'รูปด้าน':'3D'}</span></div>`}
+document.addEventListener('change',e=>{const t=e.target;if(!t.closest||!t.closest('.wvb'))return;const W=WINS(),i=+(t.dataset.vsc||t.dataset.vdl||t.dataset.vvs),w=W.w[i];if(!w)return;
+ if(t.dataset.vsc!=null){let v=t.value;if(v==='custom'){v=prompt('มาตราส่วน 1 : ',w.sc||100);if(!v||!(+v>0)){winRender();return}}w.sc=Math.round(+v);save();if(i===WLIVE)drawPlan();else winSync();toast('มาตราส่วน 1:'+w.sc)}
+ else if(t.dataset.vdl!=null){const v=t.value;if(w.t==='elev'){w.f=w.f||{};w.f.rb=v!=='c';w.f.st=v==='f';save();winSync()}else if(w.t==='3d'){WSS().vis.rebar=v==='c'?'off':v==='m'?'sel':'all';save();try{renderWSTools();renderWSLeft();wsRebuild()}catch(_){}}}
+ else if(t.dataset.vvs!=null){WSS().mode=t.value;save();try{renderWSTools();wsDraw()}catch(_){}}});
 function winRender(){const W=WINS(),grid=$('#winGrid'),park=$('#plPark'),svg=$('#plSvg');if(!grid)return;grpSync();
  const n=W.max!=null?1:WLN[W.lay];while(W.w.length<WLN[W.lay])W.w.push(winDef(W.w.length));
  if(W.w.filter((w,i)=>i<WLN[W.lay]&&w.t==='3d').length>1)W.w.forEach((w,i)=>{if(w.t==='3d'&&i!==W.w.findIndex(x=>x.t==='3d'))Object.assign(w,{t:'elev',src:(elSources()[0]||{}).k})});
  park.appendChild(svg);const w3=$('#ws3');if(w3)park.appendChild(w3);if(document.querySelector('.wb #v-beam'))fwPark('beam');
  const idx=W.max!=null?[W.max]:[...Array(WLN[W.lay]).keys()];
- grid.className='wgrid L'+(W.max!=null?'1':W.lay);grid.innerHTML=idx.map(i=>`<div class="win${i===W.act?' act':''}" data-win="${i}"><div class="wh">${winHead(W.w[i],i)}</div><div class="wb" id="wb${i}"></div></div>`).join('');
+ grid.className='wgrid L'+(W.max!=null?'1':W.lay);grid.innerHTML=idx.map(i=>`<div class="win${i===W.act?' act':''}" data-win="${i}"><div class="wh">${winHead(W.w[i],i)}</div><div class="wb" id="wb${i}"></div>${vcbHTML(W.w[i],i)}</div>`).join('');
  let live=-1;if(idx.includes(W.act)&&W.w[W.act].t==='plan')live=W.act;else if(WLIVE>=0&&idx.includes(WLIVE)&&W.w[WLIVE].t==='plan')live=WLIVE;else live=idx.find(i=>W.w[i].t==='plan');if(live==null)live=-1;
  if(live>=0){const w=W.w[live];if(WLIVE!==live){if(WLIVE>=0&&W.w[WLIVE]&&PV)W.w[WLIVE].pv=cl(PV);PV=w.pv?cl(w.pv):null}if(w.lv&&lvOf(w.lv))P().lv=w.lv;else w.lv=P().lv;$('#wb'+live).appendChild(svg)}WLIVE=live;
  const i3=idx.find(i=>W.w[i].t==='3d');if(i3!=null)ws3Mount($('#wb'+i3));const iD=idx.find(i=>W.w[i].t==='detail');if(iD!=null)detailMount($('#wb'+iD));
@@ -3907,12 +3952,21 @@ function colName(D,j){const raw=S.beams.find(b=>b.id===D.id);if(raw&&raw.grids[j
 function dimV(x,y0,y1,txt,u,col){const D=DRF().dim,fs=D.txt*u,s=D.asz*u;let o=`<line data-ly="DIM" x1="${x}" y1="${y0}" x2="${x}" y2="${y1}" stroke="${col}"/>`;
  const ar=(y,dir)=>D.arrow==='tick'||D.arrow==='arch'?`<line data-ly="DIM" x1="${x-s*0.35}" y1="${y+s*0.35}" x2="${x+s*0.35}" y2="${y-s*0.35}" stroke="${col}"/>`:D.arrow==='none'?'':`<polygon data-ly="DIM" points="${x},${y} ${x-s/6},${y+dir*s} ${x+s/6},${y+dir*s}" fill="${D.arrow==='blank'?'none':col}" stroke="${col}"/>`;
  return o+ar(y0,1)+ar(y1,-1)+`<text data-ly="DIM" x="${x-D.off*u}" y="${(y0+y1)/2}" fill="${col}" font-size="${fs.toFixed(2)}" text-anchor="middle" transform="rotate(-90 ${x-D.off*u} ${(y0+y1)/2})">${esc(txt)}</text>`}
+
+/* ข้อความใต้ช่วง: 1 บรรทัด → 2 บรรทัด → ย่อ → เหลือขนาด (ชี้ดูเต็ม) */
+function fitTxt(x,y,w,parts,fs,col){const est=(t,f)=>String(t).length*f*0.56,full=parts.join(' · ');
+ if(est(full,fs)<=w)return`<text x="${x}" y="${y}" fill="${col}" font-size="${fs}" text-anchor="middle">${esc(full)}</text>`;
+ const f2=Math.max(9,Math.min(fs,w/(Math.max(...parts.map(p=>String(p).length))*0.56)));
+ if(parts.every(p=>est(p,f2)<=w+1))return parts.map((p,k)=>`<text x="${x}" y="${y+k*(f2+2)}" fill="${col}" font-size="${f2.toFixed(1)}" text-anchor="middle">${esc(p)}</text>`).join('');
+ const f3=Math.max(8,Math.min(fs,w/(String(parts[0]).length*0.56)));return`<text x="${x}" y="${y}" fill="${col}" font-size="${f3.toFixed(1)}" text-anchor="middle"><title>${esc(full)}</title>${esc(parts[0])}</text>`}
 function dimChain(xs,y,labels,u,col,opt){opt=opt||{};const D=DRF().dim,fs=D.txt*u,o=[];if(xs.length<2)return'';const ly=opt.ly||'DIM';
  o.push(`<line data-ly="${ly}" x1="${xs[0]}" y1="${y}" x2="${xs[xs.length-1]}" y2="${y}" stroke="${col}"/>`);
  if(opt.ext)xs.forEach(x=>o.push(`<line data-ly="${ly}" x1="${x}" y1="${y-opt.ext}" x2="${x}" y2="${y+opt.ext*0.4}" stroke="${col}"/>`));
  xs.forEach((x,i)=>{if(i>0)o.push(arrowSVG(x,y,-1,u,col,ly));if(i<xs.length-1)o.push(arrowSVG(x,y,1,u,col,ly))});
- labels.forEach((t0,i)=>{if(t0==null||t0==='')return;const t=typeof t0==='object'?t0.t:t0,a=xs[i],b=xs[i+1],w=b-a,len=String(t).length*fs*0.52,small=len>w*0.95,f=small?Math.max(fs*0.62,Math.min(fs,w/(String(t).length*0.52))):fs;
-  o.push(`<text data-ly="${ly}" ${t0&&t0.a||''} x="${(a+b)/2}" y="${y-D.off*u}" fill="${col}" font-size="${f.toFixed(2)}" text-anchor="middle">${esc(String(t))}</text>`)});return o.join('')}
+ const LV=[];labels.forEach((t0,i)=>{if(t0==null||t0==='')return;const t=typeof t0==='object'?t0.t:t0,a=xs[i],b=xs[i+1],w=b-a,n=String(t).length,f=Math.max(fs*0.7,Math.min(fs,w*0.95/(n*0.52))),tw=n*f*0.52,cx=(a+b)/2;
+  let lv=tw<=w*1.02?0:1;while(LV[lv]!=null&&LV[lv]>cx-tw/2-f*0.3)lv++;if(lv===0&&LV[0]!=null&&LV[0]>cx-tw/2){lv=1;while(LV[lv]!=null&&LV[lv]>cx-tw/2-f*0.3)lv++}LV[lv]=cx+tw/2;const ty=y-D.off*u-lv*f*1.15;
+  if(lv>0)o.push(`<line data-ly="${ly}" x1="${cx}" y1="${y-D.off*u*0.5}" x2="${cx}" y2="${ty+f*0.25}" stroke="${col}" stroke-width="${(u*0.12).toFixed(2)}" opacity=".6"/>`);
+  o.push(`<text data-ly="${ly}" ${t0&&t0.a||''} x="${cx}" y="${ty}" fill="${col}" font-size="${f.toFixed(2)}" text-anchor="middle">${esc(String(t))}</text>`)});return o.join('')}
 // rows of dimensions along a beam: lap/cut zones, stirrup zones, Ln  →  [{t:title,xs,labels}]
 function dimRowsOf(D,m){const g=m.g,R=DRF().dimRows,rows=[],n=D.spans.length,act=[];for(let i=0;i<n;i++)if(!D.grids[i].free&&!D.grids[i+1].free)act.push(i);
  if(R.lap){const X2=[],L2=[];act.forEach(i=>{const a=endE(D,g,i,'a'),b=endE(D,g,i,'b'),ra=D.grids[i].rr||0.25,rb2=D.grids[i+1].rl||0.25,big=x=>D.lap.seis&&x>2*secOf(D,i).h-1;
