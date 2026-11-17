@@ -273,7 +273,7 @@ body.sb-off :is(.sb,.sbb,#sbBtn){display:none}.sbb{display:none}
 .cstrip{display:none}.etb.noex .exw>.cstrip,.etb.nopr .rcol>.cstrip{display:flex;align-items:flex-start;justify-content:center;width:100%;height:100%;background:var(--p0);border:0;color:var(--au2);cursor:pointer;padding:10px 0;font:600 10.5px Cinzel,serif;letter-spacing:2px}
 .cstrip span{writing-mode:vertical-rl}.cstrip:hover{background:var(--aud)}
 .exh{display:flex;align-items:center;gap:4px}.czb{margin-left:auto;background:none;border:1px solid var(--ln2);color:var(--mu);cursor:pointer;padding:0 6px;font-size:12px;line-height:1.4}.rcol .exh .czb{margin-left:0;margin-right:4px}.czb:hover{color:var(--au2);border-color:var(--au)}.czall{margin-left:auto;display:flex;gap:3px}
-.spl{position:absolute;width:8px;cursor:col-resize;z-index:3}.spl:hover,.spl:active{background:var(--au);opacity:.45}
+.espl{position:absolute;width:8px;cursor:col-resize;z-index:3}.espl:hover,.espl:active{background:var(--au);opacity:.45}
 .czbx>.sh:first-child{cursor:pointer;user-select:none}.czi{display:inline-block;width:14px;color:var(--mu);transition:transform .15s}.czbx.cz>.sh:first-child .czi{transform:rotate(-90deg)}.czbx.cz>*:not(:first-child){display:none!important}.czbx.cz>.sh:first-child{margin-bottom:0}
 .win.act{border:2px solid var(--act)!important;box-shadow:0 0 0 1px var(--act),0 0 18px color-mix(in srgb,var(--act) 35%,transparent)!important}.win .wh{background:var(--p1)}.win.act .wh{background:color-mix(in srgb,var(--act) 16%,var(--p0))}
 .win.act .wh::before{content:'● กำลังทำงาน';color:var(--act);font-size:11px;font-weight:600;padding:0 6px 0 2px;white-space:nowrap}.win:not(.act){opacity:.93}
@@ -287,6 +287,19 @@ body.sb-off :is(.sb,.sbb,#sbBtn){display:none}.sbb{display:none}
 body.thpk button:hover,body.thpk .chip:hover,body.thpk .pbtn:hover,body.thpk .mnb:hover{outline:2px dashed var(--au);outline-offset:1px;cursor:copy!important}
 [data-v2d=light] svg#v2,[data-v2d=light] #secv>svg{filter:invert(1) hue-rotate(180deg)}
 [data-theme=light] .fwin{box-shadow:0 14px 40px #0003}
+.tbic .icb{padding:4px 6px!important;min-width:32px;display:inline-flex;align-items:center;justify-content:center;gap:5px}.tbic .icb .tbi{flex:none}.tbl{font-size:12px}
+#tipC{position:fixed;z-index:260;display:none;max-width:300px;background:var(--p1);border:1px solid var(--au);box-shadow:0 10px 30px #0007;padding:9px 11px;font-size:12.5px;color:var(--tx);pointer-events:none}#tipC b{color:var(--au2);font-size:13px}#tipC kbd{float:right;margin-left:8px;border:1px solid var(--ln2);padding:0 5px;font:11px ui-monospace,monospace;color:var(--mu)}#tipC div{margin-top:3px;color:var(--tx2)}#tipC ol{margin:5px 0 0;padding-left:18px;color:var(--mu)}#tipC li{margin:1px 0}
+.snb{display:inline-flex;gap:3px}.stk{background:none;border:1px solid var(--ln2);color:var(--dim);font:600 10.5px ui-monospace,monospace;padding:1px 6px;cursor:pointer;letter-spacing:.5px}.stk.on{color:var(--au2);border-color:var(--au);background:var(--aud)}
+#dynIn{position:fixed;z-index:120;display:none;gap:8px;align-items:center;background:var(--p1);border:1px solid var(--au);padding:4px 8px;font-size:12px;color:var(--tx2);box-shadow:0 6px 18px #0006;pointer-events:auto}#dynIn input{width:62px;background:var(--bg);border:1px solid var(--ln2);color:var(--au2);padding:1px 4px;font:12px ui-monospace,monospace}#dynIn input:focus{border-color:var(--au);outline:0}#dynIn .dih{color:var(--dim);font-size:10.5px}
+#setNav{display:none}
+@media(min-width:1001px){
+ html:has(body>#v-plan.on),html:has(body>#v-beam.on),html:has(body>#v-cut.on),html:has(body>#v-settings.on){overflow:hidden}
+ body>#v-plan.on .etb{height:calc(100vh - var(--toph,55px))!important}
+ body>#v-beam.on{display:flex!important;flex-direction:column;height:calc(100vh - var(--toph,55px))}body>#v-beam.on .kn{flex:1;min-height:0}body>#v-beam .cen{overflow:auto;min-height:0;scrollbar-gutter:stable}body>#v-beam .cen .docs{padding:6px 0 24px}body>#v-beam .side{top:0;max-height:none;overflow:auto}body>#v-beam .rail{top:0;height:auto}
+ body>#v-cut.on .bc{height:calc(100vh - var(--toph,55px));max-width:none}body>#v-cut .bc>.bcl,body>#v-cut .bc>.bcr{overflow:auto;min-height:0;max-height:none;position:static}
+ body>#v-settings.on{display:flex!important;height:calc(100vh - var(--toph,55px))}body>#v-settings #setNav{display:flex;flex-direction:column;gap:1px;width:200px;flex:none;overflow:auto;border-right:1px solid var(--ln);padding:12px 6px;background:var(--p0)}#setNav button{background:none;border:0;border-left:2px solid transparent;color:var(--mu);text-align:left;padding:5px 9px;cursor:pointer;font-size:12.5px}#setNav button:hover{color:var(--tx)}#setNav button.on{color:var(--au2);border-left-color:var(--au);background:var(--aud)}body>#v-settings #setForm{flex:1;overflow:auto;margin:0;max-width:none;padding:16px 24px}
+}
+@media(min-width:1001px) and (max-height:960px){.sbi{padding-top:5px!important;padding-bottom:5px!important}}
 .chip.pk{border-color:#C58AE8;background:#2a1d33}
 .plsb{position:absolute;left:8px;right:8px;bottom:40px;display:none;gap:6px;align-items:center;flex-wrap:wrap;background:color-mix(in srgb,var(--p2) 93%,transparent);border:1px solid var(--au);padding:6px 8px;z-index:5}.plsbt{flex:1;min-width:120px;font-size:12px;color:var(--au2)}.plsbd{border-color:#E8604E!important;color:#F29A8C!important}
 .plgp{position:absolute;left:8px;top:52px;width:min(320px,calc(100% - 16px));max-height:60%;overflow:auto;display:none;background:color-mix(in srgb,var(--p2) 95%,transparent);border:1px solid var(--ln2);padding:8px;z-index:6}
@@ -1618,7 +1631,7 @@ function renderSet(){const st=S.settings;
  <div class="h">เส้นผ่านศูนย์กลางงอด้านในขั้นต่ำ (× db) · ACI 318</div>
  <div class="g4">${fld('ปลอก ≤ 16 มม.','bend.stir',st.bend.stir)}${fld('หลัก ≤ DB25','bend.m25',st.bend.m25)}${fld('DB28–DB36','bend.m36',st.bend.m36)}${fld('> DB36','bend.big',st.bend.big)}</div>
  <div id="thmSet"></div><div id="dspSet"></div><div id="keySet"></div><div id="draftSet"></div><div id="dxSet"></div><div id="schSet"></div>
- <div style="margin-top:16px"><button class="ib" id="rsSet">คืนค่าเริ่มต้น</button></div>`;renderDraftUI();renderDxSet();renderSchSet();{const t0=$('#thmSet');if(t0){t0.innerHTML=thSetHTML();thBind(t0)}const a=$('#dspSet'),b=$('#keySet');if(a){a.innerHTML=dispSetHTML();dispBind(a)}if(b){b.innerHTML=keysSetHTML();dispBind(b)}}
+ <div style="margin-top:16px"><button class="ib" id="rsSet">คืนค่าเริ่มต้น</button></div>`;renderDraftUI();renderDxSet();renderSchSet();{const t0=$('#thmSet');if(t0){t0.innerHTML=thSetHTML();thBind(t0)}setTimeout(()=>{try{setNav()}catch(e){}},0);const a=$('#dspSet'),b=$('#keySet');if(a){a.innerHTML=dispSetHTML();dispBind(a)}if(b){b.innerHTML=keysSetHTML();dispBind(b)}}
  $('#setForm').querySelectorAll('[data-p]').forEach(el=>el.addEventListener('change',e=>{setP(st,e.target.dataset.p,e.target.value);st.stock=+st.stock;st.round=Math.max(10,st.round);save();toast('บันทึกแล้ว')}));
  $('#setForm').querySelectorAll('[data-fwm]').forEach(el=>el.onchange=()=>{(st.fw=st.fw||{})[el.dataset.fwm]=el.value;save();toast('บันทึกแล้ว')});
  $('#stepStd').onclick=()=>{Object.assign(st,{stepCrank:75,stepSlope:6,stepExt:'ld'});save();renderSet();toast('คืนค่ามาตรฐานจุดต่อต่างระดับแล้ว')};
@@ -1946,11 +1959,11 @@ function selPanel(){const p=P();if(!PSEL)return`<div class="note" style="padding
 function renderPlanTools(){const T=[['sel','เลือก'],['col','วางเสา'],['beam','วาดคานต่อเนื่อง'],['span','วาดคานทีละช่วง'],['fbeam','คานอิสระ / คานฝาก'],['gline','กริดช่วย เส้น'],['garc','กริดช่วย โค้ง']];
  $('#plTools').innerHTML=T.map(([k,t])=>`<button class="ib${PT===k?' on':''}" data-pt="${k}">${t}</button>`).join('')+`<span class="sep"></span>
  ${PT==='col'?`<select class="chip" id="plCt">${P().ctypes.map(t=>`<option value="${esc(t.id)}"${P().ct===t.id?' selected':''}>${esc(t.id)} · ${t.shape==='round'?'Ø'+m2(t.bx):m2(t.bx)+'×'+m2(t.by)}</option>`).join('')}<option value="__new">+ สร้างหน้าตัดใหม่…</option></select><button class="chip" data-pa="allCols">วางทุกจุดตัด</button><button class="chip" data-pa="clrCols">ลบเสาทั้งชั้น</button><span class="sep"></span>`:''}
- ${['beam','span','fbeam'].includes(PT)?`<select class="chip" id="plBt" title="ประเภทคานที่จะวาด" aria-label="ประเภทคานที่จะวาด"><option value="">ประเภท: ตามคานเดิม</option>${BT().map(t=>`<option value="${t.id}"${P().btCur===t.id?' selected':''}>ประเภท ${esc(t.n)} · ${m2(t.b)}×${m2(t.h)}</option>`).join('')}<option value="__new">+ สร้างหน้าตัดใหม่…</option></select><button class="chip" data-pa="btLib">คลัง…</button>`:''}${PT==='sel'?plSelTools():''}${PT==='sel'?`<select class="chip" id="plLab" aria-label="ป้ายคานในแปลน"><option value="type"${(P().lab||'type')==='type'?' selected':''}>ป้าย: ชื่อประเภท</option><option value="beam"${P().lab==='beam'?' selected':''}>ป้าย: ชื่อคาน</option><option value="both"${P().lab==='both'?' selected':''}>ป้าย: ประเภท · ชื่อคาน</option></select>`:''}${PT==='fbeam'||PT==='gline'?`<input class="chip" id="plLen" type="number" step="any" min="0" placeholder="ยาว ม." value="${esc(PLEN)}" style="width:84px" aria-label="ความยาว ม."><input class="chip" id="plAng" type="number" step="any" placeholder="มุม °" value="${esc(PANG)}" style="width:74px" aria-label="มุม องศา">`:''}${PT==='fbeam'||PT==='garc'?`<label class="ck"><input type="checkbox" id="plCCW"${PCCW?' checked':''}> โค้งทวนเข็ม</label>`:''}${PDRAW?'<button class="chip" data-pa="cancelDraw">ยกเลิก (Esc)</button>':''}${['fbeam','gline','garc'].includes(PT)?'<span class="sep"></span>':''}
+ ${['beam','span','fbeam'].includes(PT)?`<select class="chip" id="plBt" title="ประเภทคานที่จะวาด" aria-label="ประเภทคานที่จะวาด"><option value="">ประเภท: ตามคานเดิม</option>${BT().map(t=>`<option value="${t.id}"${P().btCur===t.id?' selected':''}>ประเภท ${esc(t.n)} · ${m2(t.b)}×${m2(t.h)}</option>`).join('')}<option value="__new">+ สร้างหน้าตัดใหม่…</option></select><button class="chip" data-pa="btLib">คลัง…</button>`:''}${PT==='sel'?plSelTools():''}${PT==='sel'?`<select class="chip" id="plLab" aria-label="ป้ายคานในแปลน">${[['beam','ป้าย: ชื่อคาน'],['beamsz','ป้าย: ชื่อคาน + ขนาด'],['type','ป้าย: ชื่อประเภท'],['both','ป้าย: ประเภท · ชื่อคาน'],['none','ป้าย: ไม่แสดง']].map(([v,t])=>`<option value="${v}"${(P().lab||'beam')===v?' selected':''}>${t}</option>`).join('')}</select>`:''}${PT==='fbeam'||PT==='gline'?`<input class="chip" id="plLen" type="number" step="any" min="0" placeholder="ยาว ม." value="${esc(PLEN)}" style="width:84px" aria-label="ความยาว ม."><input class="chip" id="plAng" type="number" step="any" placeholder="มุม °" value="${esc(PANG)}" style="width:74px" aria-label="มุม องศา">`:''}${PT==='fbeam'||PT==='garc'?`<label class="ck"><input type="checkbox" id="plCCW"${PCCW?' checked':''}> โค้งทวนเข็ม</label>`:''}${PDRAW?'<button class="chip" data-pa="cancelDraw">ยกเลิก (Esc)</button>':''}${['fbeam','gline','garc'].includes(PT)?'<span class="sep"></span>':''}
  <button class="chip" data-pa="zin" aria-label="ซูมเข้า">＋</button><button class="chip" data-pa="zout" aria-label="ซูมออก">－</button><button class="chip" data-pa="fit">พอดีจอ</button><span class="sep"></span><button class="chip" data-pdf="1">PDF</button><button class="chip" data-pdf="go">ส่งไปจัดหน้า</button><span class="sep"></span><button class="chip" data-dxo="1" title="ส่งออกแปลนชั้นนี้เป็น DXF (มาตราส่วนจริง มม.)">DXF</button>${dxVerSel('dxVerP')}<button class="chip" data-dxi="1">นำเข้าจาก AutoCAD</button>`;
  bindDxVer('dxVerP');$('#plTools').querySelector('[data-dxi]').onclick=openDxfIn;$('#plTools').querySelector('[data-dxo]').onclick=()=>{if(typeof canExp==='function'&&!canExp())return;const lv=P().lv;saveFile(dxfName('แปลน-'+((lvOf(lv)||{}).n||lv)),dxfBytes(dxfPlan(lv,100)),'application/dxf');toast('ส่งออกแปลนเป็น '+dxVerName(DXV().ver))};
  $('#plTools').querySelectorAll('[data-pdf]').forEach(b=>b.onclick=()=>b.dataset.pdf==='go'?toLayout('plan',P().lv):quickPDF('plan',P().lv));
- $('#plHint').textContent=PT==='fbeam'?(PDRAW?'แตะจุดปลายคาน · ใส่ "ยาว" และ "มุม" เพื่อกำหนดเอง · ปลายที่ไม่แตะเสา/คาน = ปลายยื่น':'แตะจุดเริ่มคาน (จุดตัดกริด กริดช่วย เสา หรือบนแนวคาน) · ถ้าทั้งสองปลายอยู่บนกริดโค้งจะได้คานโค้ง'):PT==='gline'?(PDRAW?'แตะจุดปลายเส้น · ใส่ "ยาว" และ "มุม" ได้ (0° = ขวา, 90° = ขึ้น)':'แตะจุดเริ่มกริดช่วย · ดูดเข้าจุดตัดและเส้นที่มีอยู่'):PT==='garc'?(!PDRAW?'แตะจุดศูนย์กลางกริดโค้ง':PDRAW.pts.length===1?'แตะจุดเริ่มโค้ง (กำหนดรัศมี)':'แตะจุดจบโค้ง'):PT==='span'?'แตะช่วงกริดที่ต้องการวางคาน (เส้นประระหว่างจุดตัด) · คานจะสร้างทีละช่วง':PT==='beam'?(PBEAM?'แตะจุดจบบนแนวเดียวกับ '+ixName(PBEAM.i,PBEAM.j)+' · แตะจุดเดิมเพื่อยกเลิก':'แตะจุดตัดกริดจุดเริ่มของคาน'):PT==='col'?'แตะจุดตัดกริดหรือจุดบนกริดช่วยเพื่อวางเสา '+P().ct+' · แตะเสาเดิมเพื่อเอาออก':(matchMedia('(pointer:coarse)').matches?'แตะเลือก · ดับเบิลแตะคานเพื่อแก้ไข · ลากกริดที่เลือกเพื่อย้าย · ปุ่ม 🗑 ลบ':'คลิกเลือก (Shift = หลายชิ้น) · ลากกรอบ ซ้าย→ขวา = ในกรอบ / ขวา→ซ้าย = แตะกรอบ · ดับเบิลคลิกคาน = แก้ไข · Delete = ลบ · ลากกริดที่เลือกเพื่อย้าย · คลิกขวาลาก = เลื่อน')}
+ tbIcon($('#plTools'));$('#plHint').textContent=PT==='fbeam'?(PDRAW?'แตะจุดปลายคาน · ใส่ "ยาว" และ "มุม" เพื่อกำหนดเอง · ปลายที่ไม่แตะเสา/คาน = ปลายยื่น':'แตะจุดเริ่มคาน (จุดตัดกริด กริดช่วย เสา หรือบนแนวคาน) · ถ้าทั้งสองปลายอยู่บนกริดโค้งจะได้คานโค้ง'):PT==='gline'?(PDRAW?'แตะจุดปลายเส้น · ใส่ "ยาว" และ "มุม" ได้ (0° = ขวา, 90° = ขึ้น)':'แตะจุดเริ่มกริดช่วย · ดูดเข้าจุดตัดและเส้นที่มีอยู่'):PT==='garc'?(!PDRAW?'แตะจุดศูนย์กลางกริดโค้ง':PDRAW.pts.length===1?'แตะจุดเริ่มโค้ง (กำหนดรัศมี)':'แตะจุดจบโค้ง'):PT==='span'?'แตะช่วงกริดที่ต้องการวางคาน (เส้นประระหว่างจุดตัด) · คานจะสร้างทีละช่วง':PT==='beam'?(PBEAM?'แตะจุดจบบนแนวเดียวกับ '+ixName(PBEAM.i,PBEAM.j)+' · แตะจุดเดิมเพื่อยกเลิก':'แตะจุดตัดกริดจุดเริ่มของคาน'):PT==='col'?'แตะจุดตัดกริดหรือจุดบนกริดช่วยเพื่อวางเสา '+P().ct+' · แตะเสาเดิมเพื่อเอาออก':(matchMedia('(pointer:coarse)').matches?'แตะเลือก · ดับเบิลแตะคานเพื่อแก้ไข · ลากกริดที่เลือกเพื่อย้าย · ปุ่ม 🗑 ลบ':'คลิกเลือก (Shift = หลายชิ้น) · ลากกรอบ ซ้าย→ขวา = ในกรอบ / ขวา→ซ้าย = แตะกรอบ · ดับเบิลคลิกคาน = แก้ไข · Delete = ลบ · ลากกริดที่เลือกเพื่อย้าย · คลิกขวาลาก = เลื่อน')}
 function planExt(){const X=gpos('gx'),Y=gpos('gy');return{w:X[X.length-1],h:Y[Y.length-1],X,Y}}
 function fitPV(){const e=planExt(),m=Math.max(e.w,e.h)*0.14+1600;PV={x:-m,y:-m,w:e.w+2*m,h:e.h+2*m}}
 function drawPlan(){const p=P(),e=planExt(),lv=p.lv,svg=PLT||$('#plSvg');if(!PLT)PLW=(WINS().w[WLIVE])||null;if(!PV)fitPV();
@@ -2259,8 +2272,8 @@ function btUses(id){let n=0,o=0;S.beams.forEach(b=>b.spans.forEach(s=>{if(s.bt==
 /* change a type and push to every span that followed it */
 function btEdit(t,fn){const old=cl(t);fn(t);const ch=[];S.beams.forEach(b=>b.spans.forEach((s,q)=>{if(s.bt!==t.id)return;if(BTALL||btMatch(s,old)){btApply(b,q,t);ch.push(b.id)}}));try{syncAll()}catch(e){}save();return[...new Set(ch)].length}
 function btSpanName(bm,q){const t=btOf(bm.spans[q]&&bm.spans[q].bt);return t?t.n:''}
-function btLabel(bm,q){const mode=P().lab||'type',t=btOf(bm.spans[q]&&bm.spans[q].bt),s=bm.spans[q]||{};const sz=`(${m2(s.b||0)}×${m2(s.h||0)})`;
- if(!t||mode==='beam')return bm.id+' '+sz;const ov=btMatch(s,t)?'':'*';if(mode==='type')return t.n+ov;return t.n+ov+' · '+bm.id}
+function btLabel(bm,q){const mode=P().lab||'beam',t=btOf(bm.spans[q]&&bm.spans[q].bt),s=bm.spans[q]||{},sz=`(${m2(s.b||0)}×${m2(s.h||0)})`,g=bm.inGrp?grpOf(bm):null,nm=g?g.id:bm.id;
+ if(mode==='none')return'';if(mode==='beamsz')return nm+' '+sz;if(mode==='type')return t?t.n:nm;if(mode==='both')return(t?t.n+' · ':'')+nm;return nm}
 function btFill(bm,q,c){const t=btOf(bm.spans[q]&&bm.spans[q].bt);return t&&P().btCol!==false?t.col:c}
 /* section preview */
 function btPrev(t,W){W=W||170;const H=W*1.25,k=Math.min((W-50)/t.b,(H-46)/t.h),bw=t.b*k,hh=t.h*k,x0=(W-bw)/2,y0=14,cv=40*k,ds=(BARS[t.st.bar]||9)*k,dot=(bar,n,top)=>{const d=Math.max(3,(BARS[bar]||16)*k),y=top?y0+cv+ds+d/2:y0+hh-cv-ds-d/2,a=x0+cv+ds+d/2,b2=x0+bw-cv-ds-d/2;let o='';for(let i=0;i<n;i++){const x=n===1?(a+b2)/2:a+(b2-a)*i/(n-1);o+=`<circle cx="${x}" cy="${y}" r="${d/2}" fill="${t.col}"/>`}return o};
@@ -3087,7 +3100,7 @@ function grpSync(){if(!S||!S.beams)return;const seen=new Set();
   if(ms.length<2){c._dead=1;ms.forEach(b=>delete b.inGrp);return}
   G.m=ms.map(b=>b.uid);ms.forEach(b=>b.inGrp=c.uid);
   const sp=[],gr=[],own=[];ms.forEach((b,k)=>{gr.push(...(k?b.grids.slice(1):b.grids));sp.push(...b.spans);b.spans.forEach(()=>own.push(b.id))});c.spans=sp;c.grids=gr;Object.defineProperty(c,'_own',{value:own,enumerable:false,configurable:true,writable:true});
-  const want=G.disp==='list'?ms.map(b=>b.id).join('+'):G.disp==='custom'&&G.cu?G.cu:(G.nm||'กลุ่ม');
+  const ordB=(G.ord||[]).map(u=>by.get(u)).filter(b=>b&&ms.includes(b));ms.forEach(b=>{if(!ordB.includes(b))ordB.push(b)});G.ord=ordB.map(b=>b.uid);const want=G.disp==='list'?ordB.map(b=>b.id).join('+'):G.disp==='custom'&&G.cu?G.cu:(G.nm||'กลุ่ม');
   if(G._last!=null&&c.id!==G._last&&c.id){G.disp='custom';G.cu=c.id}else{let id=want;while(S.beams.some(x=>x!==c&&x.id===id))id+="'";c.id=id}G._last=c.id;
   c.floor=ms[0].floor;c.line=(ms[0].line||'')+' · '+ms.map(b=>b.id).join('+');c.manual=false});
  if(S.beams.some(b=>b._dead)){S.beams=S.beams.filter(b=>!b._dead);S.cur=Math.max(0,Math.min(S.cur,S.beams.length-1))}
@@ -3101,10 +3114,14 @@ function grpChain(list){const P2=list.map(b=>{const pa=beamPathAny(b);if(!pa)ret
  while(out.length<P2.length){const cur=out[out.length-1],nx=P2.filter(y=>!out.includes(y)&&near(cur.z,y.a));if(nx.length!==1)return{err:'คานต้องต่อกันเป็นแนวเดียว (ขาดช่วงหรือแยกทางที่ปลาย '+cur.b.id+')'};out.push(nx[0])}
  for(let k=0;k<out.length-1;k++){const A=out[k].b,B2=out[k+1].b;if(A.grids[A.grids.length-1].free||B2.grids[0].free)return{err:'รอยต่อ '+A.id+'–'+B2.id+' เป็นปลายยื่น · ต้องต่อกันที่เสาหรือคาน'}}
  return{ok:out.map(x=>x.b)}}
-function grpMake(list,nm){list=[...new Set(list)];if(list.length<2){toast('เลือกคานอย่างน้อย 2 ตัว');return null}const r=grpChain(list);if(r.err){plMsg('จัดกลุ่มไม่ได้',esc(r.err));return null}
- grpSync();const ms=r.ok,m1=ms[0];let n=nm||ms.map(b=>b.id).join('+');while(S.beams.some(b=>b.id===n))n+="'";
- const c=newBeam(n);c.uid=ruid();c.grp={m:ms.map(b=>b.uid),nm:n,disp:nm?'name':'list',show:true};['cov','fc','grade','lap','leg','stagger'].forEach(k=>{if(m1[k]!==undefined)c[k]=cl(m1[k])});c.qty=1;
- S.beams.push(c);ms.forEach(b=>b.inGrp=c.uid);grpSync();save();toast('สร้างกลุ่ม '+c.id+' ('+ms.map(b=>b.id).join('+')+') · จัดเหล็กรวมได้ที่หน้า Detail');return c}
+function grpMake(list,nm){list=[...new Set(list)];const gs=[...new Set(list.map(b=>b.inGrp).filter(Boolean))];
+ if(gs.length===1&&!nm){const c0=S.beams.find(c=>c.grp&&c.uid===gs[0]);if(c0){const old=grpMembers(c0),add=list.filter(b=>!old.includes(b));if(!add.length){toast('คานที่เลือกอยู่ในกลุ่ม '+c0.id+' แล้ว');return null}const r0=grpChain(old.concat(add));if(r0.err){plMsg('เพิ่มเข้ากลุ่มไม่ได้',esc(r0.err));return null}
+  const G=c0.grp,ord=(G.ord||G.m).concat(add.map(b=>b.uid));G.m=r0.ok.map(b=>b.uid);G.ord=ord;if(G.disp==='name'&&G.auto){G.disp='list'}add.forEach(b=>b.inGrp=c0.uid);c0.manual=false;grpSync();save();toast('เพิ่ม '+add.map(b=>b.id).join(', ')+' เข้ากลุ่ม → '+c0.id);return c0}}
+ if(gs.length>1){toast('เลือกคานจากหลายกลุ่ม · ยกเลิกกลุ่มเดิมก่อน');return null}
+ if(list.length<2){toast('เลือกคานอย่างน้อย 2 ตัว');return null}const r=grpChain(list);if(r.err){plMsg('จัดกลุ่มไม่ได้',esc(r.err));return null}
+ grpSync();const ms=r.ok,m1=ms[0];let n=nm||list.map(b=>b.id).join('+');while(S.beams.some(b=>b.id===n))n+="'";
+ const c=newBeam(n);c.uid=ruid();c.grp={m:ms.map(b=>b.uid),ord:list.map(b=>b.uid),nm:n,disp:nm?'name':'list',show:true};['cov','fc','grade','lap','leg','stagger'].forEach(k=>{if(m1[k]!==undefined)c[k]=cl(m1[k])});c.qty=1;
+ S.beams.push(c);ms.forEach(b=>b.inGrp=c.uid);grpSync();save();toast('สร้างกลุ่ม '+c.id+' · จัดเหล็กรวมได้ที่หน้า Detail');return c}
 function grpUngroup(c){confirmBox('ยกเลิกกลุ่ม <b>'+esc(c.id)+'</b>?<br>เหล็กที่จัดไว้ในกลุ่มจะถูกล้าง · คาน '+grpMembers(c).map(b=>esc(b.id)).join(', ')+' กลับไปจัดเหล็กของตัวเอง · กด Undo ย้อนได้',()=>{grpMembers(c).forEach(b=>delete b.inGrp);S.beams=S.beams.filter(b=>b!==c);S.cur=Math.max(0,Math.min(S.cur,S.beams.length-1));grpSync();save();grpRefreshUI();toast('ยกเลิกกลุ่มแล้ว')})}
 function grpOpen(c){grpSync();S.cur=S.beams.indexOf(c);SEL=null;BSEL=[];UI={t:'span',i:c.grids[0].free&&c.spans.length>1?1:0};save();if(isV('beam')){renderTop();renderPanel();renderAll()}else goOut('beam')}
 function grpRefreshUI(){const h=location.hash;if(h==='#plan'){syncAll();plRefresh&&plRefresh()}else if(isV('beam')){renderTop();renderPanel();renderAll()}else if(wsLive())wsRebuild();const m=document.getElementById('grMod');if(m&&m.style.display==='flex')grpDlg()}
@@ -3260,7 +3277,7 @@ function wsToPlanSel(el){if(location.hash!=='#plan')return;plSelClear();if(el){i
 function winEnsure3D(){const W=WINS(),n=WLN[W.lay];W.max=null;let i=W.w.slice(0,n).findIndex(w=>w.t==='3d');if(i<0){if(W.lay==='1'){W.lay='2v';while(W.w.length<2)W.w.push(winDef(W.w.length));W.w[1]={t:'3d',f:{}};i=1}else{i=n-1;W.w[i]={t:'3d',f:{}}}}W.act=i;save()}
 /* ---------- bars: layout + explorer ---------- */
 function renderWinBar(){const W=WINS(),b=$('#winBar');if(!b)return;const L=[['1','▢','1 หน้าต่าง'],['2v','◫','2 แนวตั้ง'],['2h','⬓','2 แนวนอน'],['3','◰','3 หน้าต่าง'],['4','⊞','4 หน้าต่าง']];
- b.innerHTML=`<button class="chip wmob" data-wx="L">☰ Model</button>${L.map(([k,ic,t])=>`<button class="chip${W.lay===k&&W.max==null?' on':''} wlay" data-wlay="${k}" title="${t}" aria-label="${t}">${ic}</button>`).join('')}<span class="wtabs">${W.w.slice(0,WLN[W.lay]).map((w,i)=>`<button class="chip${i===W.act?' on':''}" data-wtab="${i}">${i+1}. ${esc(w.t==='plan'?'แปลน '+((lvOf(w.lv)||{}).n||''):w.t==='3d'?'3D':elTitle(w.src))}</button>`).join('')}</span><span style="flex:1"></span><button class="chip" data-wo="beam" title="รายละเอียดคาน / แผ่นงาน">📄 คาน</button><button class="chip" data-wo="bend">ตารางดัด</button><button class="chip" data-wo="cut">✂ Bar Cut</button><button class="chip" data-wo="pdf">🖨 จัดหน้า</button><button class="chip wmob" data-wx="R">ⓘ Properties</button>`}
+ b.innerHTML=`<button class="chip wmob" data-wx="L">☰ Model</button>${L.map(([k,ic,t])=>`<button class="chip${W.lay===k&&W.max==null?' on':''} wlay" data-wlay="${k}" title="${t}" aria-label="${t}">${ic}</button>`).join('')}<span class="wtabs">${W.w.slice(0,WLN[W.lay]).map((w,i)=>`<button class="chip${i===W.act?' on':''}" data-wtab="${i}">${i+1}. ${esc(w.t==='plan'?'แปลน '+((lvOf(w.lv)||{}).n||''):w.t==='3d'?'3D':elTitle(w.src))}</button>`).join('')}</span><span style="flex:1"></span><button class="chip" data-wo="beam" title="รายละเอียดคาน / แผ่นงาน">📄 คาน</button><button class="chip" data-wo="bend">ตารางดัด</button><button class="chip" data-wo="cut">✂ Bar Cut</button><button class="chip" data-wo="pdf">🖨 จัดหน้า</button><button class="chip wmob" data-wx="R">ⓘ Properties</button>`;tbIcon(b)}
 function renderExplorer(){const ex=$('#exBody');if(!ex)return;const p=P(),W=WINS(),aw=W.w[W.act]||{},src=elSources(),G=GRPS();
  ex.innerHTML=`<details open><summary>แปลน (ชั้น)</summary>${p.levels.slice().sort((a,b)=>b.z-a.z).map(l=>`<button class="exi${aw.t==='plan'&&aw.lv===l.id?' on':''}" data-xo="plan:${l.id}">${esc(l.n)} <span>${(l.z>=0?'+':'')+(+l.z).toFixed(2)}${l.ref?' · อ้างอิง':''}</span></button>`).join('')}</details>
  <details open><summary>รูปด้าน (ตามกริด)</summary><div class="exs">${src.map(s=>`<button class="exi${aw.t==='elev'&&aw.src===s.k?' on':''}" data-xo="elev:${s.k}">${esc(s.n)}</button>`).join('')}</div></details>
@@ -3454,13 +3471,13 @@ const SZC={RB6:'#6D4C41',RB9:'#8D6E63',DB10:'#7CB342',DB12:'#2E7D32',DB16:'#C628
 const rbHex=(bar,def)=>{const D=DSP();if(D.rb==='size')return SZC[bar]||'#B03030';if(D.rb==='one')return D.rbOne;return def};
 const isLightBg=()=>{const h=DSP().bg.replace('#','');const v=parseInt(h,16);return((v>>16)*0.3+((v>>8)&255)*0.59+(v&255)*0.11)>140||DSP().bgm==='sky'};
 /* ---------- shortcuts ---------- */
-const KCMD=[['iso','แยกดูเฉพาะที่เลือก','HI'],['hide','ซ่อนที่เลือก','HH'],['reset','แสดงทั้งหมด','HR'],['wf','Wireframe','WF'],['hl','Hidden Line','HL'],['sd','Shaded','SD'],['cc','Consistent Colors','CC'],['rl','Realistic','RL'],['pp','สลับ Perspective / Parallel','PP'],['ze','พอดีจอ','ZE'],['bx','Section Box เปิด/ปิด','BX'],['md','เครื่องมือเลือก','MD'],['cl','วางเสา','CL'],['bm','วาดคานต่อเนื่อง','BM'],['bs','วาดคานทีละช่วง','BS'],['bf','คานอิสระ / คานฝาก','BF'],['gr','+ กริดหลัก','GR'],['ga','กริดช่วย เส้น','GA'],['de','ลบที่เลือก','DE'],['v3','หน้าต่างนี้ → 3D','3D'],['pl','หน้าต่างนี้ → แปลน','PL'],['el','หน้าต่างนี้ → รูปด้าน','EL'],['up','ชั้นบน / แนวถัดไป','PageUp'],['dn','ชั้นล่าง / แนวก่อนหน้า','PageDown'],['dt','รายละเอียดคาน','DT'],['ct','Bar Cut','CT'],['pd','จัดหน้า PDF','PD'],['lp','แสดง/ซ่อนระยะทาบ','LP'],['tex','ยุบ/ขยาย Model Explorer','F3'],['tpr','ยุบ/ขยาย Properties','F4'],['thm','สลับธีม สว่าง/มืด/ตามเครื่อง','TT']];
+const KCMD=[['iso','แยกดูเฉพาะที่เลือก','HI'],['hide','ซ่อนที่เลือก','HH'],['reset','แสดงทั้งหมด','HR'],['wf','Wireframe','WF'],['hl','Hidden Line','HL'],['sd','Shaded','SD'],['cc','Consistent Colors','CC'],['rl','Realistic','RL'],['pp','สลับ Perspective / Parallel','PP'],['ze','พอดีจอ','ZE'],['bx','Section Box เปิด/ปิด','BX'],['md','เครื่องมือเลือก','MD'],['cl','วางเสา','CL'],['bm','วาดคานต่อเนื่อง','BM'],['bs','วาดคานทีละช่วง','BS'],['bf','คานอิสระ / คานฝาก','BF'],['gr','+ กริดหลัก','GR'],['ga','กริดช่วย เส้น','GA'],['de','ลบที่เลือก','DE'],['v3','หน้าต่างนี้ → 3D','3D'],['pl','หน้าต่างนี้ → แปลน','PL'],['el','หน้าต่างนี้ → รูปด้าน','EL'],['up','ชั้นบน / แนวถัดไป','PageUp'],['dn','ชั้นล่าง / แนวก่อนหน้า','PageDown'],['dt','รายละเอียดคาน','DT'],['ct','Bar Cut','CT'],['pd','จัดหน้า PDF','PD'],['lp','แสดง/ซ่อนระยะทาบ','LP'],['orth','ORTHO ล็อกแนวฉาก','F8'],['osnap','OSNAP snap จุด','F3'],['polar','POLAR ล็อกมุม','F10'],['tex','ยุบ/ขยาย Model Explorer',''],['tpr','ยุบ/ขยาย Properties',''],['thm','สลับธีม สว่าง/มืด/ตามเครื่อง','TT']];
 function KEYS(){const st=S.settings,o=st.keys||{},m={};KCMD.forEach(([k,,d])=>m[k]=(o[k]!=null?o[k]:d).toUpperCase());return m}
 let KBUF='',KT=0;
 document.addEventListener('keydown',e=>{if(location.hash!=='#plan')return;const t=e.target;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.tagName==='SELECT'||t.isContentEditable))return;if(e.ctrlKey||e.metaKey||e.altKey)return;if(document.querySelector('.modal,.bpm[style*="flex"]'))return;
- const K=KEYS();let key=e.key;if(key.length===1)key=key.toUpperCase();else{const hit=Object.entries(K).find(([c,v])=>v===key.toUpperCase());if(hit){e.preventDefault();kRun(hit[0])}return}
+ const K=KEYS();let key=e.key;if(key.length===1)key=key.toUpperCase();else{const hit=Object.entries(K).find(([c,v])=>v&&v===key.toUpperCase());if(hit){e.preventDefault();kRun(hit[0])}return}
  if(!/^[A-Z0-9]$/.test(key))return;clearTimeout(KT);KBUF=(KBUF+key).slice(-3);KT=setTimeout(()=>KBUF='',1300);
- const hit=Object.entries(K).filter(([c,v])=>v.length>1&&KBUF.endsWith(v)).sort((a,b)=>b[1].length-a[1].length)[0];if(hit){KBUF='';e.preventDefault();kRun(hit[0]);toast('⌨ '+hit[1]+' · '+KCMD.find(x=>x[0]===hit[0])[1])}});
+ const hit=Object.entries(K).filter(([c,v])=>v.length>1&&!/^F\d/.test(v)&&KBUF.endsWith(v)).sort((a,b)=>b[1].length-a[1].length)[0];if(hit){KBUF='';e.preventDefault();kRun(hit[0]);toast('⌨ '+hit[1]+' · '+KCMD.find(x=>x[0]===hit[0])[1])}});
 function kRun(c){const W=WINS(),a=W.act,w=W.w[a]||{},WS=typeof WSS==='function'?WSS():null,clk=s=>{const b=document.querySelector(s);if(b)b.click();return!!b};
  const mode=m=>{if(!WS)return;WS.mode=m;save();if(wsLive()){renderWSTools();wsRebuild()}else toast('ตั้งรูปแบบ 3D แล้ว (มีผลในหน้าต่าง 3D)')};
  if(c==='iso'||c==='hide'||c==='reset')clk(`[data-wh="${a}:${c}"]`)||(c==='reset'&&w.t!=='3d'?null:null);
@@ -3472,7 +3489,7 @@ function kRun(c){const W=WINS(),a=W.act,w=W.w[a]||{},WS=typeof WSS==='function'?
  else if(c==='v3'||c==='pl'||c==='el'){const t=c==='v3'?'3d':c==='pl'?'plan':'elev';if(t==='3d')W.w.forEach((x,j)=>{if(j!==a&&x.t==='3d'){x.t='elev';x.src=x.src||(elSources()[0]||{}).k}});w.t=t;if(t==='plan')w.lv=w.lv||P().lv;if(t==='elev'){w.src=PGS.length?PGS[0].ax+':'+PGS[0].i:(w.src||(elSources()[0]||{}).k);w.vb=null}save();winRender()}
  else if(c==='up')clk(`[data-wn="${a}:1"]`);else if(c==='dn')clk(`[data-wn="${a}:-1"]`);
  else if(c==='dt')etAct('oBeam');else if(c==='ct')etAct('oCut');else if(c==='pd')etAct('oPdf');
- else if(c==='tex')etAct('tgEx');else if(c==='tpr')etAct('tgPr');else if(c==='thm'){const b=$('#thmBtn');if(b)b.click()}
+ else if(c==='orth')snToggle('orth');else if(c==='osnap')snToggle('os');else if(c==='polar')snToggle('pol');else if(c==='tex')etAct('tgEx');else if(c==='tpr')etAct('tgPr');else if(c==='thm'){const b=$('#thmBtn');if(b)b.click()}
  else if(c==='lp'){const R=DRF().dimRows;R.splice=R.splice===false;save();if(isV('beam'))renderAll();toast('ระยะทาบ: '+(R.splice!==false?'แสดง':'ซ่อน'))}}
 function kTips(){const K=KEYS(),M={sel:'md',col:'cl',beam:'bm',span:'bs',fbeam:'bf',gline:'ga'};document.querySelectorAll('#plTools [data-pt]').forEach(b=>{const c=M[b.dataset.pt];if(c)b.title='Shortcut: '+K[c]});
  document.querySelectorAll('[data-wh]').forEach(b=>{const c=b.dataset.wh.split(':')[1];if(K[c])b.title=b.title.replace(/ · ⌨.*$/,'')+' · ⌨ '+K[c]})}
@@ -3566,9 +3583,9 @@ function thSetHTML(){const t=TH(),m=thMode(),T=thTok(m),G=t.grp[m],ML=m==='light
  const hidOff=Object.entries(t.hide).filter(([k])=>!bl.includes(`data-thh="${esc(k)}"`));
  const own=[...new Set([...Object.keys(t.btn.dark),...Object.keys(t.btn.light)])];
  return`<div class="h">ธีมโปรแกรม (ของผู้ใช้แต่ละคน)</div>
- <div class="g4"><div class="f"><label>โหมด</label><select data-thm="mode">${[['system','ตามเครื่อง'],['light','สว่าง'],['dark','มืด']].map(([a,b])=>`<option value="${a}"${t.mode===a?' selected':''}>${b}</option>`).join('')}</select></div>
+ <div class="g3"><div class="f"><label>โหมด</label><select data-thm="mode">${[['system','ตามเครื่อง'],['light','สว่าง'],['dark','มืด']].map(([a,b])=>`<option value="${a}"${t.mode===a?' selected':''}>${b}</option>`).join('')}</select></div>
  <div class="f"><label>ขนาดแถบเมนู/ปุ่ม (${t.ui.fs||100}%)</label><input type="range" min="85" max="130" step="5" data-thu="fs" value="${t.ui.fs||100}"></div><div class="f"><label>ความโค้งมุมปุ่ม (${t.ui.rad||0}px)</label><input type="range" min="0" max="12" data-thu="rad" value="${t.ui.rad||0}"></div>
- <div class="f"><label>ปรับทีละปุ่มบนหน้าจอ</label><button class="gold" id="thPickBtn" style="padding:6px">🎨 โหมดปรับหน้าจอ</button></div></div>
+ <div class="f"><label>ปุ่มแถบเครื่องมือ</label><select data-thu2="tb">${[['icon','ไอคอน (ชี้เพื่อดูคำอธิบาย)'],['both','ไอคอน + ข้อความ'],['text','ข้อความ']].map(([a,b])=>`<option value="${a}"${(t.ui.tb||'icon')===a?' selected':''}>${b}</option>`).join('')}</select></div><div class="f"><label>ปรับทีละปุ่มบนหน้าจอ</label><button class="gold" id="thPickBtn" style="padding:6px">🎨 โหมดปรับหน้าจอ</button></div></div>
  <div class="note">กำลังแก้สีของโหมด<b>${ML}</b> (โหมดที่แสดงอยู่) · ถ้าต้องการแก้อีกโหมด ให้สลับโหมดก่อน</div>
  <div class="sh">สีหลักของโหมด${ML}</div><div class="thg">${TOKS.map(([k,l])=>`<label class="thf"><span>${l}</span><input type="color" data-tk="${k}" value="${T[k]}">${t.tok[m][k]?`<button class="pbtn" data-tkc="${k}" title="คืนค่า">↺</button>`:''}</label>`).join('')}</div>
  <div class="sh">สีแยกตามส่วน (ตั้งแยกได้ทุกส่วน · ช่องเทาประ = ใช้สีหลัก)</div>
@@ -3581,6 +3598,7 @@ function thSetHTML(){const t=TH(),m=thMode(),T=thTok(m),G=t.grp[m],ML=m==='light
 function thBind(r){const t=TH(),m=thMode(),re=()=>{save();thApply();renderSet()};
  r.querySelector('[data-thm]').onchange=e=>{t.mode=e.target.value;re()};
  r.querySelectorAll('[data-thu]').forEach(i=>{i.oninput=()=>{t.ui[i.dataset.thu]=+i.value;save();thApply()};i.onchange=re});
+ r.querySelectorAll('[data-thu2]').forEach(i=>i.onchange=()=>{t.ui[i.dataset.thu2]=i.value;save();try{renderPlanTools();renderWinBar()}catch(e){}re()});
  r.querySelector('#thPickBtn').onclick=()=>{if(typeof fwClose==='function'&&document.getElementById('fw_set'))fwClose('set');else if(location.hash!=='#plan')location.hash='plan';setTimeout(()=>thPickOn(true),150)};
  r.querySelectorAll('[data-tk]').forEach(i=>{i.oninput=()=>{t.tok[m][i.dataset.tk]=i.value;save();thApply()};i.onchange=re});
  r.querySelectorAll('[data-tkc]').forEach(b=>b.onclick=()=>{delete t.tok[m][b.dataset.tkc];re()});
@@ -3600,16 +3618,16 @@ function thBind(r){const t=TH(),m=thMode(),re=()=>{save();thApply();renderSet()}
 /* ---------- ยุบแผง Explorer / Properties + ปรับความกว้าง ---------- */
 function etbUI(){const etb=document.querySelector('#v-plan .etb');if(!etb||etb.dataset.cz)return;etb.dataset.cz=1;const u=TH().ui;
  const mk=(host,cls,lab,tg)=>{const s=document.createElement('button');s.className='cstrip';s.innerHTML=`<span>${lab}</span>`;s.title='ขยาย '+lab;s.onclick=()=>etAct(tg);host.prepend(s);
-  const h=host.querySelector('.exh');if(h&&!h.querySelector('.czb')){const b=document.createElement('button');b.className='czb';b.textContent=cls==='ex'?'«':'»';b.title='ยุบ '+lab+' ('+(KEYS()[cls==='ex'?'tex':'tpr'])+')';b.onclick=()=>etAct(tg);if(cls==='ex')h.appendChild(b);else h.prepend(b)}};
+  const h=host.querySelector('.exh');if(h&&!h.querySelector('.czb')){const b=document.createElement('button');b.className='czb';b.textContent=cls==='ex'?'«':'»';b.title='ยุบ '+lab+(KEYS()[cls==='ex'?'tex':'tpr']?' ('+KEYS()[cls==='ex'?'tex':'tpr']+')':'');b.onclick=()=>etAct(tg);if(cls==='ex')h.appendChild(b);else h.prepend(b)}};
  mk(etb.querySelector('.exw'),'ex','MODEL EXPLORER','tgEx');mk(etb.querySelector('.rcol'),'pr','PROPERTIES','tgPr');
  const ph=etb.querySelector('.rcol .exh');if(ph&&!ph.querySelector('.czall')){const a=document.createElement('span');a.className='czall';a.innerHTML='<button class="pbtn" data-cza="0" title="ยุบทุกหมวด">⊟</button><button class="pbtn" data-cza="1" title="ขยายทุกหมวด">⊞</button>';ph.appendChild(a);a.onclick=e=>{const b=e.target.closest('[data-cza]');if(b)pczAll(b.dataset.cza==='1')}}
  if(u.exw)etb.style.setProperty('--exw',u.exw+'px');if(u.prw)etb.style.setProperty('--prw',u.prw+'px');if(u.noex)etb.classList.add('noex');if(u.nopr)etb.classList.add('nopr');
- ['ex','pr'].forEach(k=>{const d=document.createElement('div');d.className='spl spl-'+k;d.title='ลากเพื่อปรับความกว้าง';etb.appendChild(d);
+ ['ex','pr'].forEach(k=>{const d=document.createElement('div');d.className='espl espl-'+k;d.title='ลากเพื่อปรับความกว้าง';etb.appendChild(d);
   d.addEventListener('pointerdown',e=>{e.preventDefault();d.setPointerCapture(e.pointerId);const x0=e.clientX,w0=k==='ex'?etb.querySelector('.exw').offsetWidth:etb.querySelector('.rcol').offsetWidth;
    const mv=ev=>{const w=Math.max(170,Math.min(560,w0+(k==='ex'?1:-1)*(ev.clientX-x0)));etb.style.setProperty(k==='ex'?'--exw':'--prw',w+'px');TH().ui[k==='ex'?'exw':'prw']=w;splPos()};
    const up=()=>{d.removeEventListener('pointermove',mv);d.removeEventListener('pointerup',up);save();try{drawPlan();winSync()}catch(_){};if(typeof WSG!=='undefined'&&WSG)try{wsDraw()}catch(_){}};d.addEventListener('pointermove',mv);d.addEventListener('pointerup',up)})});
  window.addEventListener('resize',splPos);new ResizeObserver(splPos).observe(etb);splPos()}
-function splPos(){const etb=document.querySelector('#v-plan .etb');if(!etb)return;const ex=etb.querySelector('.exw'),pr=etb.querySelector('.rcol'),a=etb.querySelector('.spl-ex'),b=etb.querySelector('.spl-pr');
+function splPos(){const etb=document.querySelector('#v-plan .etb');if(!etb)return;const ex=etb.querySelector('.exw'),pr=etb.querySelector('.rcol'),a=etb.querySelector('.espl-ex'),b=etb.querySelector('.espl-pr');
  if(a){a.style.left=(ex.offsetLeft+ex.offsetWidth)+'px';a.style.top=ex.offsetTop+'px';a.style.height=ex.offsetHeight+'px';a.style.display=etb.classList.contains('noex')?'none':''}
  if(b){b.style.left=(pr.offsetLeft-8)+'px';b.style.top=pr.offsetTop+'px';b.style.height=pr.offsetHeight+'px';b.style.display=etb.classList.contains('nopr')?'none':''}}
 /* ---------- Properties: ยุบได้ทีละหมวด ---------- */
@@ -3624,6 +3642,107 @@ function pczAll(open){const u=TH().ui;u.pcz=u.pcz||{};document.querySelectorAll(
 document.addEventListener('pointerdown',e=>{const w=e.target.closest&&e.target.closest('.fwin');document.querySelectorAll('.fwin.act').forEach(x=>{if(x!==w)x.classList.remove('act')});if(w)w.classList.add('act')},true);
 
 setTimeout(()=>{try{thApply()}catch(e){console.error(e)}},0);
+
+/* ===== ไอคอนแถบเครื่องมือ · การ์ดคำอธิบาย · ORTHO/OSNAP/POLAR · Dynamic Input · พอดีจอ ===== */
+const IC=d=>`<svg class="tbi" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+const ICO={
+ 'pt:sel':IC('<path d="M5 3l12 8-6 1.5L8.5 19z"/>'),
+ 'pt:col':IC('<rect x="7" y="7" width="10" height="10"/><path d="M7 7l10 10M17 7L7 17"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke-dasharray="1 1.5"/>'),
+ 'pt:beam':IC('<rect x="2" y="9.5" width="20" height="5"/><rect x="2" y="8" width="3" height="8" fill="currentColor"/><rect x="10.5" y="8" width="3" height="8" fill="currentColor"/><rect x="19" y="8" width="3" height="8" fill="currentColor"/>'),
+ 'pt:span':IC('<rect x="5" y="9.5" width="14" height="5"/><rect x="3" y="8" width="3" height="8" fill="currentColor"/><rect x="18" y="8" width="3" height="8" fill="currentColor"/><path d="M5 5h14M5 3.5v3M19 3.5v3"/>'),
+ 'pt:fbeam':IC('<path d="M4 18L18 6"/><path d="M6 20L20 8"/><rect x="2" y="16" width="4" height="4" fill="currentColor"/><path d="M19 6l2-2" stroke-dasharray="1.5 1.5"/>'),
+ 'pt:gline':IC('<circle cx="5" cy="5" r="3"/><path d="M7.2 7.2L21 21" stroke-dasharray="3 2"/>'),
+ 'pt:garc':IC('<circle cx="5" cy="5" r="3"/><path d="M5 8c0 7 5 12 13 13" stroke-dasharray="3 2"/>'),
+ 'ge:grp':IC('<rect x="3" y="7" width="9" height="4"/><rect x="12" y="7" width="9" height="4"/><path d="M3 15h18M3 13v4M21 13v4"/>'),
+ 'ge:gadd':IC('<circle cx="6" cy="5" r="3"/><path d="M6 8v13" stroke-dasharray="3 2"/><path d="M14 14h7M17.5 10.5v7"/>'),
+ 'ge:gpick':IC('<circle cx="6" cy="5" r="3"/><path d="M6 8v13" stroke-dasharray="3 2"/><path d="M12 11l7 4.5-3.2.8-1.4 3.2z"/>'),
+ 'ge:multi':IC('<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M15 15l5 3-2.2.6-1 2.2z"/>'),
+ 'pa:zin':IC('<circle cx="10" cy="10" r="6"/><path d="M14.5 14.5L20 20M7.5 10h5M10 7.5v5"/>'),
+ 'pa:zout':IC('<circle cx="10" cy="10" r="6"/><path d="M14.5 14.5L20 20M7.5 10h5"/>'),
+ 'pa:fit':IC('<path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/><rect x="8" y="8" width="8" height="8"/>'),
+ 'pa:allCols':IC('<rect x="3" y="3" width="4" height="4"/><rect x="10" y="3" width="4" height="4"/><rect x="17" y="3" width="4" height="4"/><rect x="3" y="17" width="4" height="4"/><rect x="10" y="17" width="4" height="4"/><rect x="17" y="17" width="4" height="4"/>'),
+ 'pa:clrCols':IC('<rect x="4" y="4" width="7" height="7"/><path d="M14 14l6 6M20 14l-6 6"/>'),
+ 'pa:btLib':IC('<path d="M4 4h4v16H4zM10 4h4v16h-4z"/><path d="M16 5l3.5-1 3 15.5-3.5 1z"/>'),
+ 'pa:cancelDraw':IC('<path d="M6 6l12 12M18 6L6 18"/>'),
+ 'pdf:1':IC('<path d="M6 2h9l4 4v16H6z"/><path d="M14 2v5h5"/><text x="12.5" y="17" font-size="6" text-anchor="middle" fill="currentColor" stroke="none" font-weight="700">PDF</text>'),
+ 'pdf:go':IC('<rect x="3" y="4" width="13" height="16"/><path d="M13 12h8M18 9l3 3-3 3"/>'),
+ 'dxo':IC('<path d="M5 2h9l4 4v8"/><path d="M5 2v20h7"/><path d="M17 15v7M14 19l3 3 3-3"/><text x="10" y="13" font-size="5.5" text-anchor="middle" fill="currentColor" stroke="none" font-weight="700">DXF</text>'),
+ 'dxi':IC('<path d="M5 2h9l4 4v6"/><path d="M5 2v20h7"/><path d="M17 22v-7M14 18l3-3 3 3"/><text x="10" y="13" font-size="5.5" text-anchor="middle" fill="currentColor" stroke="none" font-weight="700">CAD</text>'),
+ 'wo:beam':IC('<path d="M5 2h10l4 4v16H5z"/><rect x="8" y="10" width="8" height="3"/><path d="M8 16h8"/>'),
+ 'wo:bend':IC('<rect x="3" y="4" width="18" height="16"/><path d="M3 9h18M3 14h18M9 4v16"/>'),
+ 'wo:cut':IC('<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.5 7.5L20 18M8.5 16.5L20 6"/>'),
+ 'wo:pdf':IC('<path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8"/><path d="M6 14h12v7H6z"/>')};
+const TIPS={
+ 'pt:sel':['เลือก','เลือกเสา คาน กริด เพื่อดูและแก้ไขใน Properties',['คลิกชิ้นที่ต้องการ','Shift+คลิก = เลือกเพิ่ม (ลำดับที่คลิกใช้ตั้งชื่อกลุ่ม)','ลากกรอบซ้าย→ขวา = ในกรอบ · ขวา→ซ้าย = แตะกรอบ','ดับเบิลคลิกคาน = เลือกทั้งคาน'],'md'],
+ 'pt:col':['วางเสา','วาง/ลบเสาที่จุดตัดกริดหรือกริดช่วย ตามชนิดเสาที่เลือก',['เลือกชนิดเสาในช่องข้างปุ่ม','คลิกจุดตัดกริด = วาง · คลิกซ้ำ = ลบ','"วางทุกจุดตัด" = วางครบทั้งชั้น'],'cl'],
+ 'pt:beam':['วาดคานต่อเนื่อง','สร้างคานหลายช่วงตามแนวกริดในคลิกเดียว',['คลิกจุดตัดกริดจุดเริ่ม','คลิกจุดตัดกริดจุดจบบนแนวเดียวกัน','ได้คาน 1 ตัวที่มีหลายช่วงตามเสาที่ผ่าน'],'bm'],
+ 'pt:span':['วาดคานทีละช่วง','สร้างคานทีละช่วงระหว่างจุดตัดกริดติดกัน',['คลิกเส้นกริดระหว่างจุดตัด 2 จุด','แต่ละคลิก = คาน 1 ช่วง'],'bs'],
+ 'pt:fbeam':['คานอิสระ / คานฝาก','วาดคานที่ไม่อยู่บนกริดหลัก เช่นคานฝาก คานเอียง คานยื่น',['คลิกจุดเริ่ม (snap จุดตัด เสา หรือแนวคาน)','คลิกจุดปลาย หรือพิมพ์ความยาวแล้ว Enter','F8 = ล็อกแนวฉาก · F10 = ล็อกมุม · Shift ค้าง = สลับชั่วคราว'],'bf'],
+ 'pt:gline':['กริดช่วย เส้น','เพิ่มเส้นกริดช่วยเฉพาะชั้น ใช้วางเสาหรือคานนอกกริดหลัก',['คลิกจุดเริ่ม','คลิกจุดปลาย หรือพิมพ์ความยาว/มุมแล้ว Enter','F8 = ล็อกแนวฉาก'],'ga'],
+ 'pt:garc':['กริดช่วย โค้ง','เพิ่มกริดโค้งสำหรับคานโค้ง',['คลิกจุดศูนย์กลาง','คลิกจุดเริ่มโค้ง (กำหนดรัศมี)','คลิกจุดจบโค้ง · ติ๊ก "โค้งทวนเข็ม" เพื่อกลับทิศ'],''],
+ 'ge:grp':['กลุ่มคาน','จัดคานที่ต่อกันเป็นแนวเดียวให้จัดเหล็กรวมกัน',['Shift+คลิกเลือกคานตามลำดับ เช่น B2 แล้ว B1','กด "จัดกลุ่มคาน" ที่แถบด้านล่าง → ชื่อ B2+B1','เลือกกลุ่ม + คานใหม่ แล้วจัดกลุ่ม = ต่อท้ายชื่อกลุ่ม'],''],
+ 'ge:gadd':['+ กริด','เพิ่มเส้นกริดหลัก (แนวตั้งหรือแนวนอน)',['กดปุ่ม แล้วเลือกแนวและระยะ','กริดใหม่ใช้ร่วมทุกชั้น'],'gr'],
+ 'ge:gpick':['เลือกกริด','เลือกเส้นกริดหลักเพื่อย้าย แก้ระยะ หรือลบ',['กดปุ่ม แล้วคลิกหัวกริด','ลากเพื่อย้าย หรือพิมพ์ระยะใน Properties'],''],
+ 'ge:multi':['เลือกหลายชิ้น','โหมดเลือกต่อเนื่องสำหรับมือถือ (แทน Shift)',['เปิดโหมด แล้วแตะทีละชิ้น','แตะซ้ำ = เอาออก'],''],
+ 'pa:zin':['ซูมเข้า','ขยายมุมมอง',['หรือหมุนล้อเมาส์'],''],'pa:zout':['ซูมออก','ย่อมุมมอง',['หรือหมุนล้อเมาส์'],''],
+ 'pa:fit':['พอดีจอ','แสดงทั้งแปลนพอดีหน้าต่าง',[],'ze'],
+ 'pa:allCols':['วางทุกจุดตัด','วางเสาชนิดที่เลือกทุกจุดตัดกริดในชั้นนี้',[],''],'pa:clrCols':['ลบเสาทั้งชั้น','ลบเสาทั้งหมดในชั้นนี้ (Undo ได้)',[],''],
+ 'pa:btLib':['คลังประเภทคาน','สร้าง/แก้ประเภทคาน (ขนาด เหล็ก ปลอก)',[],''],'pa:cancelDraw':['ยกเลิกการวาด','ยกเลิกเส้นที่กำลังวาด',[],''],
+ 'pdf:1':['PDF แปลน','ดาวน์โหลดแปลนชั้นนี้เป็น PDF เวกเตอร์',[],''],'pdf:go':['ส่งไปจัดหน้า','ส่งแปลนชั้นนี้ไปวางในหน้าจัดหน้า PDF',[],''],
+ 'dxo':['ส่งออก DXF','ส่งออกแปลนชั้นนี้เป็น DXF (มาตราส่วนจริง มม.) เปิดใน AutoCAD ได้',['เลือกรุ่น DXF ในช่องข้างปุ่ม'],''],
+ 'dxi':['นำเข้าจาก AutoCAD','อ่านกริด เสา คาน จากไฟล์ DXF',[],''],
+ 'wo:beam':['รายละเอียดคาน','เปิดหน้าจัดเหล็กคานที่เลือก / แผ่นงาน',[],'dt'],'wo:bend':['ตารางดัด','ตารางดัดเหล็กและรูปดัด',[],''],
+ 'wo:cut':['Bar Cut','คำนวณตัดเหล็กเศษน้อยสุด',[],'ct'],'wo:pdf':['จัดหน้า','จัดหน้ากระดาษและพิมพ์ PDF',[],'pd']};
+function tbKey(el){const d=el.dataset;if(d.pt)return'pt:'+d.pt;if(d.ge)return'ge:'+d.ge;if(d.pa)return'pa:'+d.pa;if(d.pdf)return'pdf:'+d.pdf;if(d.dxo!=null)return'dxo';if(d.dxi!=null)return'dxi';if(d.wo)return'wo:'+d.wo;return''}
+function tbIcon(box){if(!box)return;const md=TH().ui.tb||'icon';box.classList.toggle('tbic',md!=='text');
+ box.querySelectorAll('button').forEach(b=>{const k=tbKey(b);if(!k)return;const tp=TIPS[k];if(tp){b.dataset.tip=k;if(b.title){b.dataset.ttl=b.title;b.removeAttribute('title')}}const ic=ICO[k];if(!ic||md==='text')return;
+  const lb=b.dataset.lb||b.textContent.trim().replace(/^[⧉+✂📄🖨]\s*/,'');b.dataset.lb=lb;b.setAttribute('aria-label',(tp&&tp[0])||lb);b.classList.add('icb');b.innerHTML=ic+(md==='both'?`<span class="tbl">${esc(lb.replace(/\s*▾$/,''))}</span>`:'')})}
+/* rich tooltip */
+let TPT=0,TPE=null;
+function tipShow(el){const k=el.dataset.tip,t=TIPS[k];if(!t)return;let c=$('#tipC');if(!c){c=document.createElement('div');c.id='tipC';document.body.appendChild(c)}
+ const K=t[3]?KEYS()[t[3]]:'';c.innerHTML=`<b>${esc(t[0])}</b>${K?`<kbd>${esc(K)}</kbd>`:''}<div>${esc(t[1])}</div>${t[2].length?`<ol>${t[2].map(x=>`<li>${esc(x)}</li>`).join('')}</ol>`:''}`;c.style.display='block';
+ const r=el.getBoundingClientRect(),w=c.offsetWidth,h=c.offsetHeight;c.style.left=Math.max(4,Math.min(innerWidth-w-4,r.left))+'px';c.style.top=(r.bottom+h+8>innerHeight?r.top-h-6:r.bottom+6)+'px'}
+const tipHide=()=>{clearTimeout(TPT);TPE=null;const c=$('#tipC');if(c)c.style.display='none'};
+document.addEventListener('mouseover',e=>{const el=e.target.closest&&e.target.closest('[data-tip]');if(el===TPE)return;tipHide();if(!el||THPK)return;TPE=el;TPT=setTimeout(()=>tipShow(el),380)});
+document.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'){const el=e.target.closest&&e.target.closest('[data-tip]');tipHide();if(el){TPE=el;TPT=setTimeout(()=>tipShow(el),520)}}else tipHide()},true);
+document.addEventListener('pointerup',e=>{if(e.pointerType==='touch')setTimeout(tipHide,1800)},true);
+/* ---------- ORTHO / OSNAP / POLAR ---------- */
+function SNP(){const st=S.settings;st.snap=Object.assign({orth:false,os:true,pol:false,pa:45},st.snap||{});return st.snap}
+let KSHIFT=false;document.addEventListener('keydown',e=>{if(e.key==='Shift'&&!KSHIFT){KSHIFT=true;if(PDRAW&&PHQ)planHover(PHQ)}});document.addEventListener('keyup',e=>{if(e.key==='Shift'){KSHIFT=false;if(PDRAW&&PHQ)planHover(PHQ)}});
+function snCon(a,q){const s=SNP(),orth=s.orth!==KSHIFT,dx=q.x-a.x,dy=q.y-a.y;if(Math.hypot(dx,dy)<1)return q;
+ if(orth)return Math.abs(dx)>=Math.abs(dy)?{x:q.x,y:a.y,k:'orth'}:{x:a.x,y:q.y,k:'orth'};
+ if(s.pol){const st=(+s.pa||45)*D2R,an=Math.atan2(dy,dx),a2=Math.round(an/st)*st;if(Math.abs(an-a2)<6*D2R){const L=dx*Math.cos(a2)+dy*Math.sin(a2);return{x:a.x+L*Math.cos(a2),y:a.y+L*Math.sin(a2),k:'polar'}}}return q}
+const _typedEnd=typedEnd;typedEnd=function(a,q){const L=parseFloat(PLEN);return L>0?_typedEnd(a,snCon(a,q)):snCon(a,q)};
+const _snapAt=snapAt;snapAt=function(q,tol){if(!SNP().os&&['fbeam','gline','garc'].includes(PT))return{x:Math.round(q.x/10)*10,y:Math.round(q.y/10)*10,k:'raw'};return _snapAt(q,tol)};
+function snToggle(k){const s=SNP();s[k]=!s[k];if(k==='orth'&&s.orth)s.pol=false;if(k==='pol'&&s.pol)s.orth=false;save();toast({orth:'ORTHO',os:'OSNAP',pol:'POLAR '+s.pa+'°'}[k]+(s[k]?' เปิด':' ปิด'));try{renderStatus()}catch(e){}if(PDRAW&&PHQ)planHover(PHQ)}
+const _renderStatus=renderStatus;renderStatus=function(){_renderStatus.apply(this,arguments);const el=$('#stBar');if(!el||el.querySelector('.snb'))return;const s=SNP(),K=KEYS(),w=document.createElement('span');w.className='snb';
+ w.innerHTML=[['orth','ORTHO','orth'],['os','OSNAP','osnap'],['pol','POLAR','polar']].map(([k,t,c])=>`<button class="stk${s[k]?' on':''}" data-snp="${k}" title="${t} (${K[c]})${k==='pol'?' · คลิกขวาเปลี่ยนมุม':''}">${t}${k==='pol'?' '+s.pa+'°':''}</button>`).join('');
+ const sp=el.querySelector('span[style*="flex:1"]');if(sp)el.insertBefore(w,sp);else el.appendChild(w);
+ w.onclick=e=>{const b=e.target.closest('[data-snp]');if(b)snToggle(b.dataset.snp)};w.oncontextmenu=e=>{const b=e.target.closest('[data-snp="pol"]');if(!b)return;e.preventDefault();const L=[15,30,45,90],s2=SNP();s2.pa=L[(L.indexOf(+s2.pa)+1)%L.length];s2.pol=true;s2.orth=false;save();renderStatus()}};
+/* ---------- Dynamic Input ---------- */
+let PHQ=null,PHC=null;
+function diOn(){return PDRAW&&['fbeam','gline'].includes(PT)&&location.hash==='#plan'}
+function diSync(){let d=$('#dynIn');if(!diOn()||!PHC){if(d)d.style.display='none';return}
+ if(!d){d=document.createElement('div');d.id='dynIn';d.innerHTML='<label>ยาว <input id="diL" inputmode="decimal" autocomplete="off"> ม.</label><label>มุม <input id="diA" inputmode="decimal" autocomplete="off">°</label><span class="dih">Enter ยืนยัน · Tab สลับ · Esc ยกเลิก</span>';document.body.appendChild(d);
+  d.addEventListener('keydown',e=>{e.stopPropagation();if(e.key==='Tab'){e.preventDefault();(document.activeElement.id==='diL'?$('#diA'):$('#diL')).focus()}else if(e.key==='Enter'){e.preventDefault();diCommit()}else if(e.key==='Escape'){e.preventDefault();diClear(true)}})}
+ d.style.display='flex';d.style.left=Math.min(innerWidth-300,PHC.x+18)+'px';d.style.top=Math.min(innerHeight-60,PHC.y+18)+'px';
+ const a=PDRAW.a,b=typedEnd(a,snapAt(PHQ,planSym()*1.1)),L=Math.hypot(b.x-a.x,b.y-a.y)/1000,A=(Math.atan2(-(b.y-a.y),b.x-a.x)/D2R+360)%360;
+ const iL=$('#diL'),iA=$('#diA');if(document.activeElement!==iL&&!iL.dataset.t)iL.value=L.toFixed(2);if(document.activeElement!==iA&&!iA.dataset.t)iA.value=A.toFixed(1)}
+function diClear(cancel){const d=$('#dynIn');if(d){d.querySelectorAll('input').forEach(i=>{i.value='';delete i.dataset.t;i.blur()});d.style.display='none'}if(cancel&&PDRAW){PDRAW=null;renderPlanTools();drawPlan()}}
+function diCommit(){if(!diOn()||!PHQ)return;const iL=$('#diL'),iA=$('#diA'),L=parseFloat(iL.value),A=iA.dataset.t?parseFloat(iA.value):NaN;if(!(L>0)){toast('ใส่ความยาว (ม.)');return}
+ const o=[PLEN,PANG];PLEN=String(L);PANG=isFinite(A)?String(A):'';try{planDrawClick(PHQ)}finally{PLEN=o[0];PANG=o[1]}diClear(false);setTimeout(()=>{if(diOn())diSync()},30)}
+document.addEventListener('pointermove',e=>{const sv=e.target.closest&&e.target.closest('#plSvg');if(!sv)return;const m=sv.getScreenCTM();if(!m)return;const p=sv.createSVGPoint();p.x=e.clientX;p.y=e.clientY;const q=p.matrixTransform(m.inverse());PHQ={x:q.x,y:q.y};PHC={x:e.clientX,y:e.clientY};diSync()},true);
+document.addEventListener('keydown',e=>{if(!diOn())return;const t=e.target;if(t&&(t.tagName==='INPUT'||t.tagName==='SELECT'||t.tagName==='TEXTAREA'))return;if(e.ctrlKey||e.metaKey||e.altKey)return;
+ if(/^[0-9.\-]$/.test(e.key)){e.preventDefault();e.stopImmediatePropagation();diSync();const i=$('#diL');if(!i)return;i.value=e.key;i.dataset.t=1;i.focus();KBUF=''}},true);
+document.addEventListener('input',e=>{if(e.target.id==='diL'||e.target.id==='diA')e.target.dataset.t=1});
+/* ---------- หน้าตั้งค่า: เมนูกระโดดด้านซ้าย ---------- */
+function setNav(){const f=$('#setForm');if(!f)return;let nv=$('#setNav');const hs=[...f.querySelectorAll('.h')];if(!nv){nv=document.createElement('nav');nv.id='setNav';f.parentNode.insertBefore(nv,f)}
+ nv.innerHTML=hs.map((h,i)=>{h.id='sh'+i;return`<button data-sj="${i}">${esc(h.textContent.replace(/\s*[·(].*$/,'').trim())}</button>`}).join('');
+ nv.onclick=e=>{const b=e.target.closest('[data-sj]');if(!b)return;const h=$('#sh'+b.dataset.sj);if(h)h.scrollIntoView({block:'start',behavior:'smooth'})};
+ f.onscroll=()=>{let k=0;const top=f.getBoundingClientRect().top+30;hs.forEach((h,i)=>{if(h.getBoundingClientRect().top<=top)k=i});nv.querySelectorAll('button').forEach((b,i)=>b.classList.toggle('on',i===k))};f.onscroll()}
+/* ---------- หน้า Detail: เลื่อนเฉพาะในแผง ---------- */
+function beamFit(){const c=document.querySelector('#v-beam .cen'),d=document.querySelector('#v-beam .docs');if(c&&d&&d.parentNode!==c){c.appendChild(d)}}
+setTimeout(beamFit,0);
 
 function renderPlan(){P();syncAll();try{etbUI()}catch(e){console.error(e)}winBind();winRender();renderMenu();renderStatus();stBindXY();{const g=$('#winGrid');if(g)g.classList.toggle('lightv',DSP().view2d==='light')}try{kTips()}catch(e){}}
 function planChanged(full){syncAll();save();if(full)renderPlanPanel();drawPlan()}
