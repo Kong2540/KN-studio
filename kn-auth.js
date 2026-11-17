@@ -41,7 +41,7 @@ function permOf(p){const R=K.set.roles||{},base=Object.assign({},R[p.role]||R.vi
  if(p.role==='admin')PK.forEach(([k,,t])=>{out[k]=t==='lvl'?'edit':true});return out}
 K.can=(k,lv)=>{const v=K.perm[k];if(v===true||v===false)return v;return lv==='edit'?v==='edit':v==='edit'||v==='view'};
 K.isAdmin=()=>!!(K.prof&&K.prof.role==='admin'&&!K.offline);
-K.guard=name=>{if(!K.ready)return null;const m={beam:'beam',detail:'beam',plan:'beam',pdf:'beam',cut:'cut',settings:'settings'}[name];if(m&&!K.can(m))return'home';return name};
+K.guard=name=>{if(!K.ready)return null;const m={beam:'beam',detail:'beam',plan:'beam',pdf:'beam',ws:'beam',cut:'cut',settings:'settings'}[name];if(m&&!K.can(m))return'home';return name};
 function applyPerms(){const b=document.body;['beam','cut','settings'].forEach(k=>{b.classList.toggle('ro-'+k,K.can(k)&&!K.can(k,'edit'))});
  const hideGo=(sel,k)=>document.querySelectorAll(sel).forEach(el=>{el.style.display=K.can(k)?'':'none'});
  hideGo('[data-go="detail"],[data-go="beam"]','beam');hideGo('[data-go="cut"]','cut');hideGo('[data-go="settings"]','settings');renderUserBtn()}
