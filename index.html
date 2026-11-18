@@ -296,7 +296,7 @@ body.thpk button:hover,body.thpk .chip:hover,body.thpk .pbtn:hover,body.thpk .mn
  html:has(body>#v-plan.on),html:has(body>#v-beam.on),html:has(body>#v-cut.on),html:has(body>#v-settings.on){overflow:hidden}
  body>#v-plan.on .etb{height:calc(100vh - var(--toph,55px))!important}
  body>#v-beam.on{display:flex!important;flex-direction:column;height:calc(100vh - var(--toph,55px))}body>#v-beam.on .kn{flex:1;min-height:0}body>#v-beam .cen{overflow:auto;min-height:0;scrollbar-gutter:stable}body>#v-beam .cen .docs{padding:6px 0 24px}body>#v-beam .side{top:0;max-height:none;overflow:auto}body>#v-beam .rail{top:0;height:auto}
- body>#v-cut.on .bc{height:calc(100vh - var(--toph,55px));max-width:none}body>#v-cut .bc>.bcl,body>#v-cut .bc>.bcr{overflow:auto;min-height:0;max-height:none;position:static}
+ body>#v-cut.on .bc{height:calc(100vh - var(--toph,55px));max-width:none;grid-template-rows:minmax(0,1fr);overflow:hidden;box-sizing:border-box}body>#v-cut .bc>.bcl,body>#v-cut .bc>.bcr{overflow:auto;min-height:0;max-height:none;position:static;align-self:stretch;height:100%}
  body>#v-settings.on{display:flex!important;height:calc(100vh - var(--toph,55px))}body>#v-settings #setNav{display:flex;flex-direction:column;gap:1px;width:200px;flex:none;overflow:auto;border-right:1px solid var(--ln);padding:12px 6px;background:var(--p0)}#setNav button{background:none;border:0;border-left:2px solid transparent;color:var(--mu);text-align:left;padding:5px 9px;cursor:pointer;font-size:12.5px}#setNav button:hover{color:var(--tx)}#setNav button.on{color:var(--au2);border-left-color:var(--au);background:var(--aud)}body>#v-settings #setForm{flex:1;overflow:auto;margin:0;max-width:none;padding:16px 24px}
 }
 @media(min-width:1001px) and (max-height:960px){.sbi{padding-top:5px!important;padding-bottom:5px!important}}
@@ -354,7 +354,7 @@ body.thpk button:hover,body.thpk .chip:hover,body.thpk .pbtn:hover,body.thpk .mn
 #svFull{position:fixed;inset:0;z-index:300;background:#3c4043;display:flex}#svFull .svw{height:100%;width:100%}
 .svpop{position:fixed;z-index:310;width:min(720px,94vw);max-height:80vh;overflow:auto;background:var(--p1);border:1px solid var(--au);box-shadow:0 12px 40px #0008;padding:10px}
 #xh{position:fixed;inset:0;pointer-events:none;z-index:90;display:none}#xh i{position:fixed;display:block}#xh .xh-h{height:1px}#xh .xh-v{width:1px}#xh .xh-b{border:1px solid;background:transparent!important}
-body.xhon #plSvg,body.xhon #plSvg *,body.xhon .wb svg.wel,body.xhon .wb svg.wel *,body.xhon .wb svg.wst,body.xhon .wb svg.wst *{cursor:none!important}
+body.xhon #plSvg,body.xhon #plSvg *,body.xhon .wb svg.wel,body.xhon .wb svg.wel *,body.xhon .wb svg.wst,body.xhon .wb svg.wst *,body.xhon #v2,body.xhon #v2 *{cursor:none!important}
 #rcM{position:fixed;z-index:400;min-width:200px;background:var(--p1);border:1px solid var(--ln2);box-shadow:0 10px 30px #0007;padding:4px;display:flex;flex-direction:column}#rcM button{background:none;border:0;color:var(--tx);text-align:left;padding:6px 10px;cursor:pointer;font-size:12.5px}#rcM button:hover{background:var(--aud);color:var(--au2)}#rcM hr{border:0;border-top:1px solid var(--ln);margin:3px 0}
 .chip.pk{border-color:#C58AE8;background:#2a1d33}
 .plsb{position:absolute;left:8px;right:8px;bottom:40px;display:none;gap:6px;align-items:center;flex-wrap:wrap;background:color-mix(in srgb,var(--p2) 93%,transparent);border:1px solid var(--au);padding:6px 8px;z-index:5}.plsbt{flex:1;min-width:120px;font-size:12px;color:var(--au2)}.plsbd{border-color:#E8604E!important;color:#F29A8C!important}
@@ -420,6 +420,12 @@ body.xhon #plSvg,body.xhon #plSvg *,body.xhon .wb svg.wel,body.xhon .wb svg.wel 
 }
 #v2.vdm{cursor:crosshair}
 .vdpb .g2{gap:6px}
+
+.bctop{position:sticky;top:0;z-index:6;display:flex;gap:10px;align-items:center;background:var(--bg);padding:2px 0 10px}
+.bctop .gold{padding:10px 18px;font-weight:600}
+.snm{display:inline-flex;gap:1px;flex-wrap:nowrap;margin-left:4px;flex:0 1 auto;min-width:60px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;white-space:nowrap}.snm::-webkit-scrollbar{display:none}#stBar{flex-wrap:nowrap!important;overflow:hidden}#stBar>*{flex-shrink:0}#stBar>.snm{flex-shrink:1}.snm .stk{font-size:10px;padding:2px 5px}.snm.off .stk.on{opacity:.45}
+.r8vb{display:inline-flex;gap:3px;align-items:center;flex-wrap:wrap}.r8vb select.pbtn{max-width:150px}.r8vb .sep{width:1px;height:16px;background:var(--ln2);margin:0 4px}
+#status .snb,#status .snm{display:inline-flex;gap:2px}
 </style>
 <meta name="theme-color" content="#0B0B0D">
 <link rel="manifest" href="manifest.json">
@@ -524,7 +530,7 @@ body.xhon #plSvg,body.xhon #plSvg *,body.xhon .wb svg.wel,body.xhon .wb svg.wel 
 </section>
 
 <section class="view" id="v-cut"><div class="bc">
-  <div class="bcl">
+  <div class="bcl"><div class="bctop"><button class="gold" id="bcRunTop">▶ คำนวณการตัด</button><span class="note" style="margin:0">ตรวจรายการและสต็อกด้านล่าง แล้วกดคำนวณ</span></div>
     <div class="pnl"><div class="ph"><span>1 · รายการตัด</span><span class="phr" id="bcSum"></span></div><div class="pb" id="bcItems"></div></div>
     <div class="pnl"><div class="ph"><span>2 · สต็อกเหล็ก</span></div><div class="pb" id="bcStock"></div></div>
     <div class="pnl"><div class="ph"><span>3 · การคำนวณ</span></div><div class="pb" id="bcCfg"></div></div>
@@ -1289,8 +1295,8 @@ document.addEventListener('input',e=>{const k=e.target.dataset&&e.target.dataset
 /* ===== 2D editor ===== */
 function extRange(m){let lo=m.g.xl,hi=m.g.xr;m.P.forEach(p=>{lo=Math.min(lo,p.x0);hi=Math.max(hi,p.x1)});return[lo,hi]}
 function render2D(){if(M&&(CUT.x==null||CUT.bid!==M.D.id)){const D0=M.D,i=D0.grids[0].free&&D0.spans.length>1?1:0;CUT={x:(M.g.fa[i]+M.g.fb[i])/2,bid:D0.id}}const bm=B(),D=M.D,g=M.g,n=D.spans.length,[lo,hi]=FROZ||extRange(M),W=Math.max(1100,n*210),mx=46,sx=(W-2*mx)/(hi-lo),X=x=>mx+(x-lo)*sx;
- const top=i=>D.zb[i]+secOf(D,i).h,zmax=Math.max(...D.zb.map((_,i)=>top(i))),zmin=Math.min(...D.zb),sy=Math.min(0.2,96/(zmax-zmin)),y0=64,Y=z=>y0+(zmax-z)*sy,yb=Y(zmin),DRW=M?dimRowsOf(D,M):[],H=yb+78+DRW.length*30+(DRW.length?8:0),anyLvl=bm.spans.some(s=>s.lvl!==0);
- M2={lo,hi,sx,mx};const el=$('#v2');el.setAttribute('viewBox',`0 0 ${W} ${H}`);el.style.minWidth=(document.querySelector('#v-beam.fitv')?0:typeof LAYO!=='undefined'&&LAYO.mode==='duo'&&!document.querySelector('#pnl2.max')?340:Math.max(340,n*185))+'px';
+ const top=i=>D.zb[i]+secOf(D,i).h,zmax=Math.max(...D.zb.map((_,i)=>top(i))),zmin=Math.min(...D.zb),sy=r8Sy(sx,zmax,zmin),y0=64,Y=z=>y0+(zmax-z)*sy,yb=Y(zmin),DRW=M?dimRowsOf(D,M):[],H=yb+78+DRW.length*30+(DRW.length?8:0),anyLvl=bm.spans.some(s=>s.lvl!==0);
+ M2={lo,hi,sx,mx,sy,W,H};const el=$('#v2');el.setAttribute('viewBox',`0 0 ${W} ${H}`);el.style.minWidth=(document.querySelector('#v-beam.fitv')?0:typeof LAYO!=='undefined'&&LAYO.mode==='duo'&&!document.querySelector('#pnl2.max')?340:Math.max(340,n*185))+'px';
  let o=`<defs><clipPath id="c2in"><rect x="${X(g.xl)}" y="0" width="${(g.xr-g.xl)*sx}" height="${H}"/></clipPath><clipPath id="c2out"><rect x="0" y="0" width="${X(g.xl)}" height="${H}"/><rect x="${X(g.xr)}" y="0" width="${W}" height="${H}"/></clipPath></defs>`;
  D.grids.forEach((gr,j)=>{if(gr.free)return;const x=X(g.X[j]),on=UI.t==='grid'&&UI.i===j,adj=[j-1,j].filter(i=>i>=0&&i<n),ct=Math.max(...adj.map(top)),J=D.joints&&D.joints[j];
   o+=`<g data-g="${j}" style="cursor:pointer">${gr.nocol?(()=>{const sh=+gr.sh||0,xl=X(g.X[j]-g.w[j]/2),wd=Math.max(4,g.w[j]*sx),yt=Y(ct),hh=Math.max(6,sh*sy);return sh>0?`<rect data-ly="CONC" x="${xl}" y="${yt}" width="${wd}" height="${hh}" fill="${on?'#2A2416':'#202227'}" stroke="${on?'#C9A55C':'#8A8E95'}"/><path d="M${xl} ${yt}L${xl+wd} ${yt+hh}M${xl+wd} ${yt}L${xl} ${yt+hh}" stroke="#55585E" stroke-width="0.8"/><title>ไม่มีเสา · รองรับด้วยคานตั้งฉาก ลึก ${m2(sh)} ม.</title>`:`<rect x="${xl}" y="${yt}" width="${wd}" height="${yb-yt}" fill="none" stroke="#55585E" stroke-dasharray="3 3"/><title>ไม่มีเสา</title>`})():`<rect data-ly="COL" x="${X(g.X[j]-g.w[j]/2)}" y="${Y(ct)-12}" width="${Math.max(4,g.w[j]*sx)}" height="${yb-Y(ct)+12+40}" fill="${on?'#2A2416':'#1A1B1F'}" stroke="${on?'#C9A55C':'#55585E'}"/>`}<line data-ly="GRID" x1="${x}" y1="38" x2="${x}" y2="${Y(ct)-12}" stroke="#3A3D43" stroke-dasharray="4 3"/><circle cx="${x}" cy="22" r="15" fill="${on?'#1C1810':'#0E0F12'}" stroke="${on?'#C9A55C':'#8A8E95'}" stroke-width="${on?2:1}"/><text x="${x}" y="27.5" fill="${on?'#E2C584':'#C8C5BE'}" font-size="16" text-anchor="middle">${esc(gr.n)}</text>`;
@@ -1997,7 +2003,7 @@ function cutSheetHTML(){const css='body{font-family:Tahoma,Arial,sans-serif;marg
   else if(t.closest('#nlAdd'))st.newL.push({L:6000,on:true});
   else if(t.closest('#mAdd')){const L=Math.round(parseFloat($('#mL').value)*1000),q=parseInt($('#mQ').value);if(!(L>0&&q>0)){toast('กรอกความยาวและจำนวน');return}S.manual.push({bar:$('#mBar').value,L,qty:q,mark:$('#mMk').value.trim()})}
   else if(t.closest('#lAdd')){const L=Math.round(parseFloat($('#lL').value)*1000),q=parseInt($('#lQ').value);if(!(L>0&&q>0)){toast('กรอกความยาวและจำนวน');return}st.left.push({bar:$('#lBar').value,L,qty:q,note:'เพิ่มเอง'})}
-  else if(t.closest('#bcRun')){if(BCBUSY)return;BCBUSY=true;renderCutCfg();setTimeout(()=>{try{RES=runCut()}catch(err){toast('คำนวณไม่สำเร็จ: '+err.message)}BCBUSY=false;renderCutCfg();renderCutRes();$('#bcRes').scrollIntoView({behavior:'smooth',block:'start'})},40);return}
+  else if(t.closest('#bcRun')){if(BCBUSY)return;BCBUSY=true;renderCutCfg();setTimeout(()=>{try{RES=runCut()}catch(err){toast('คำนวณไม่สำเร็จ: '+err.message)}BCBUSY=false;renderCutCfg();renderCutRes();r8ScrollRes()},40);return}
   else return;
   save();RES=null;renderCut()});
  v.addEventListener('change',e=>{const t=e.target,cfg=S.cutCfg,st=S.stock;const d=t.dataset;
@@ -4165,7 +4171,7 @@ document.addEventListener('click',e=>{const a=e.target.closest('[data-snma]');if
 document.addEventListener('contextmenu',e=>{const b=e.target.closest&&e.target.closest('[data-snp="os"]');if(!b)return;e.preventDefault();snPop(e.clientX,e.clientY)});
 /* ---------- crosshair + pickbox (screen overlay) ---------- */
 let XHE=null;function xhEl(){if(XHE)return XHE;XHE=document.createElement('div');XHE.id='xh';XHE.innerHTML='<i class="xh-h"></i><i class="xh-v"></i><i class="xh-b"></i>';document.body.appendChild(XHE);return XHE}
-document.addEventListener('pointermove',e=>{const m=MSE(),wb=e.target.closest&&(e.target.closest('#plSvg')||e.target.closest('.wb svg.wel,.wb svg.wst'));const x=xhEl();if(!m.xh||!wb||e.pointerType==='touch'||(typeof THPK!=='undefined'&&THPK)){x.style.display='none';document.body.classList.remove('xhon');return}
+document.addEventListener('pointermove',e=>{const m=MSE(),wb=e.target.closest&&(e.target.closest('#plSvg')||e.target.closest('.wb svg.wel,.wb svg.wst,#v2'));const x=xhEl();if(!m.xh||!wb||e.pointerType==='touch'||(typeof THPK!=='undefined'&&THPK)){x.style.display='none';document.body.classList.remove('xhon');return}
  const R=wb.getBoundingClientRect(),sz=Math.max(5,Math.min(100,+m.xs||100))/100,hw=R.width*sz/2,hh=R.height*sz/2,col=m.xc||(DSP().view2d==='light'?'#222':'#e6e6e6'),pb=+m.pb||7;document.body.classList.add('xhon');x.style.display='block';
  const h=x.children[0],v=x.children[1],b=x.children[2];h.style.cssText=`left:${Math.max(R.left,e.clientX-hw)}px;width:${Math.min(R.right,e.clientX+hw)-Math.max(R.left,e.clientX-hw)}px;top:${e.clientY}px;background:${col}`;
  v.style.cssText=`top:${Math.max(R.top,e.clientY-hh)}px;height:${Math.min(R.bottom,e.clientY+hh)-Math.max(R.top,e.clientY-hh)}px;left:${e.clientX}px;background:${col}`;b.style.cssText=`left:${e.clientX-pb}px;top:${e.clientY-pb}px;width:${pb*2}px;height:${pb*2}px;border-color:${col}`},true);
@@ -4354,7 +4360,7 @@ wsBindCanvas=function(){const cv=$('#wsCv');let dr=null;const T=new Map();let pi
   if(!dr.mv){ws3Hover(px,py);ws3Ov();return}dr.x=e.clientX;dr.y=e.clientY;
   if(dr.k==='orbit'){WSC.yaw+=dx*0.008;WSC.pitch+=dy*0.008;wsDraw();return}if(dr.k==='pan'){wsPan(dx,dy);return}
   if(dr.k==='box'){dr.cx=px;dr.cy=py;ws3Ov();return}
-  if(dr.k==='grip'||dr.k==='move'){const h=ws3Hit(px,py,dr.z);if(h){let q=ws3Snap(h,dr.lv,dr.z);const base=dr.k==='grip'?dr.g.o:dr.base;if(base&&['raw','on','cl','edge'].includes(q.k))q=snCon(base,q);dr.q=q;W3.hv={q,z:dr.z,lv:dr.lv}}ws3Ov();return}
+  if(dr.k==='grip'||dr.k==='move'){const h=ws3Hit(px,py,dr.z);if(h){let q=ws3Snap(h,dr.lv,dr.z);const base=dr.k==='grip'?dr.g.o:dr.base;if(base&&['raw','on','cl','edge'].includes(q.k))q=snCon(base,q);if(dr.k==='grip'&&!e.ctrlKey){const ax=r8Ax(S.beams[dr.g.bi],dr.g.end);if(ax)q=axSnap(ax.a,ax.u,h,(+MSE().ap||12)*ws3MmPx(h,dr.z),dr.lv,dr.g.bi)}dr.q=q;W3.hv={q,z:dr.z,lv:dr.lv}}ws3Ov();return}
   ws3Hover(px,py);ws3Ov()});
  const up=e=>{if(e.pointerType==='touch')T.delete(e.pointerId);if(T.size<2)pin=null;const d=dr;dr=null;W3.dr=null;if(!d){ws3Ov();return}const[px,py]=loc(e),add=d.ctrl||d.shift;
   if(d.k==='box'){if(d.mv){const r={x0:Math.min(d.px,d.cx),x1:Math.max(d.px,d.cx),y0:Math.min(d.py,d.cy),y1:Math.max(d.py,d.cy)};const n=ws3BoxSel(r,d.cx<d.px,add?'add':'set');toast('เลือก '+n+' ชิ้น'+(d.cx<d.px?' (Crossing)':' (Window)'))}
@@ -4393,7 +4399,7 @@ document.addEventListener('change',e=>{const k=e.target.dataset&&e.target.datase
 
 /* ===== รอบ 6B: Profile · ลาก/กรอกจุดตัดเหล็กเสริม · ลาก/กรอกจุดทาบ (เฉพาะคานที่เลือก) ===== */
 let R6H={xh:[],laps:[]},R6D=null;
-function r6Map(){const D=M.D,top=i=>D.zb[i]+secOf(D,i).h,zmax=Math.max(...D.zb.map((_,i)=>top(i))),zmin=Math.min(...D.zb),sy=Math.min(0.2,96/Math.max(1,zmax-zmin));return{X:x=>M2.mx+(x-M2.lo)*M2.sx,Y:z=>64+(zmax-z)*sy}}
+function r6Map(){const D=M.D,top=i=>D.zb[i]+secOf(D,i).h,zmax=Math.max(...D.zb.map((_,i)=>top(i))),zmin=Math.min(...D.zb),sy=(M2&&M2.sy)||Math.min(0.2,96/Math.max(1,zmax-zmin));return{X:x=>M2.mx+(x-M2.lo)*M2.sx,Y:z=>64+(zmax-z)*sy}}
 function r6XH(){const D=M.D,g=M.g,out=[];D.runs.forEach(r=>{const id=String(r.id||'');let m;
   if((m=/^XT(\d+)([CLR])$/.exec(id))){const j=+m[1],e=runExt(D,g,r);if(m[2]!=='R'&&r.ea==='straight')out.push({rid:id,end:'a',x:e.xs,kind:'t',j,f:'rl'});if(m[2]!=='L'&&r.eb==='straight')out.push({rid:id,end:'b',x:e.xe,kind:'t',j,f:'rr'})}
   else if((m=/^XB(\d+)$/.exec(id))){const i=+m[1],e=runExt(D,g,r);out.push({rid:id,end:'a',x:e.xs,kind:'b',i},{rid:id,end:'b',x:e.xe,kind:'b',i})}});
@@ -4496,7 +4502,7 @@ document.addEventListener('pointerdown',e=>{if(e.button!==0)return;const sv=e.ta
  const bg=e.target.closest('[data-bm]');if(!bg||e.shiftKey||e.ctrlKey||e.metaKey||e.target.closest('[data-dim],[data-vd]'))return;const bi=+bg.dataset.bm;if(!PMS.some(o=>o.i===bi)||!S.beams[bi]||S.beams[bi].pin)return;
  e.stopImmediatePropagation();PMOV=0;R7P={k:'mv',sv,x0:e.clientX,y0:e.clientY,mv:false,base:snapAt(pt,planSym()*1.1)};try{sv.setPointerCapture(e.pointerId)}catch(_){}},true);
 document.addEventListener('pointermove',e=>{if(!R7P)return;if(!R7P.mv&&Math.hypot(e.clientX-R7P.x0,e.clientY-R7P.y0)<4)return;R7P.mv=true;const sv=R7P.sv,pt=r7SvPt(sv,e);if(!pt)return;let q=snapAt(pt,planSym()*1.1);
- const base=R7P.k==='grip'?(R7P.end==='a'?R7P.o.s.z:R7P.o.s.a):R7P.base;if(base&&['raw','on','cl','edge'].includes(q.k))q=Object.assign(snCon(base,q),{k:q.k==='raw'?'raw':q.k});R7P.q=q;
+ const base=R7P.k==='grip'?(R7P.end==='a'?R7P.o.s.z:R7P.o.s.a):R7P.base;if(base&&['raw','on','cl','edge'].includes(q.k))q=Object.assign(snCon(base,q),{k:q.k==='raw'?'raw':q.k});if(R7P.k==='grip'&&!e.ctrlKey){const ax=r8Ax(R7P.o.bm,R7P.end);if(ax)q=axSnap(ax.a,ax.u,pt,snapTolW(planSym()*1.1),P().lv,R7P.o.bi)}R7P.q=q;
  const r=planSym(),C='#4FC3F7',g=sv.querySelector('#plSnapG');let o='';
  if(R7P.k==='grip'){const bw=(R7P.o.bm.spans[0]||{b:200}).b;o+=`<line x1="${base.x}" y1="${base.y}" x2="${q.x}" y2="${q.y}" stroke="${C}" stroke-width="${bw}" stroke-opacity=".35"/><text x="${(base.x+q.x)/2}" y="${(base.y+q.y)/2-r*0.5}" fill="${C}" font-size="${r*0.6}" text-anchor="middle" paint-order="stroke" stroke="#0E0F12" stroke-width="${r*0.12}">${(Math.hypot(q.x-base.x,q.y-base.y)/1000).toFixed(2)} ม.</text>`}
  else{const d={x:q.x-base.x,y:q.y-base.y};new Set(PMS.map(x=>x.i)).forEach(bi=>{const s=r7Seg(S.beams[bi]);if(s)o+=`<line x1="${s.a.x+d.x}" y1="${s.a.y+d.y}" x2="${s.z.x+d.x}" y2="${s.z.y+d.y}" stroke="${C}" stroke-width="${(S.beams[bi].spans[0]||{b:200}).b}" stroke-opacity=".35"/>`});
@@ -4518,7 +4524,7 @@ function r7ElBind(sv,i){const W=()=>WINS().w[i];let D=null;
   if(gr){const o=r7Sel1(false);if(!o)return;e.stopImmediatePropagation();e.preventDefault();winActivate(i);D={k:'grip',end:gr.dataset.pgr,o,L,x0:e.clientX,y0:e.clientY,mv:false};try{sv.setPointerCapture(e.pointerId)}catch(_){}return}
   if(bg&&!e.shiftKey&&!e.ctrlKey){const bi=+bg.dataset.bm,b=S.beams[bi];if(!PMS.some(o=>o.i===bi)||!b||b.pin)return;const s=r7Seg(b);if(!s||L.d(s.a)>60||L.d(s.z)>60)return;e.stopImmediatePropagation();winActivate(i);
    D={k:'mv',L,lv:b.link.lv,x0:e.clientX,y0:e.clientY,mv:false,base:r7ElSnapPlan(sv,L,pt,b.link.lv),bi,sq:+bg.dataset.sq};try{sv.setPointerCapture(e.pointerId)}catch(_){}}},true);
- sv.addEventListener('pointermove',e=>{if(!D)return;e.stopImmediatePropagation();if(!D.mv&&Math.hypot(e.clientX-D.x0,e.clientY-D.y0)<4)return;D.mv=true;const pt=r7SvPt(sv,e);if(!pt)return;const lv=D.k==='grip'?D.o.bm.link.lv:D.lv,q=r7ElSnapPlan(sv,D.L,pt,lv);D.q=q;
+ sv.addEventListener('pointermove',e=>{if(!D)return;e.stopImmediatePropagation();if(!D.mv&&Math.hypot(e.clientX-D.x0,e.clientY-D.y0)<4)return;D.mv=true;const pt=r7SvPt(sv,e);if(!pt)return;const lv=D.k==='grip'?D.o.bm.link.lv:D.lv;let q=r7ElSnapPlan(sv,D.L,pt,lv);if(D.k==='grip'){const ax=r8Ax(D.o.bm,D.end);if(ax){const rr=axSnap(ax.a,ax.u,r7ElPlan(D.L,pt.x),(+MSE().ap||12)*r7K(sv),lv,D.o.bi);q=Object.assign(rr,{u:D.L.u(rr)})}}D.q=q;
   let g=sv.querySelector('#r7elp');if(!g){sv.insertAdjacentHTML('beforeend','<g id="r7elp" pointer-events="none"></g>');g=sv.querySelector('#r7elp')}const r=r7ElR(W()),C='#4FC3F7',y=pt.y;
   const base=D.k==='grip'?(D.end==='a'?D.o.s.z:D.o.s.a):D.base,ub=D.L.u(base);g.innerHTML=`<line x1="${ub}" y1="${y}" x2="${q.u}" y2="${y}" stroke="${C}" stroke-width="${r*0.05}" stroke-dasharray="${r*0.3} ${r*0.15}"/><line x1="${q.u}" y1="${y-r}" x2="${q.u}" y2="${y+r}" stroke="${C}" stroke-width="${r*0.06}"/><text x="${(ub+q.u)/2}" y="${y-r*0.5}" fill="${C}" font-size="${r*0.6}" text-anchor="middle" paint-order="stroke" stroke="#0E0F12" stroke-width="${r*0.12}">${(Math.abs(q.u-ub)/1000).toFixed(2)} ม.${q.k&&q.k!=='raw'?' · '+((typeof SNL!=='undefined'&&SNL[q.k])||q.k):''}</text>`;
   const gg=sv.querySelector('#r7egr');if(gg)gg.style.display='none'},true);
@@ -4539,7 +4545,7 @@ function r7ElTool(sv,i){const W=()=>WINS().w[i];let dn=null;
   const sa=snapAt,p=P(),l0=p.lv;snapAt=v=>({x:v.x,y:v.y,k:v.k||'raw'});p.lv=lv;try{modClick({target:fake,shiftKey:e.shiftKey},{x:q.x,y:q.y,k:q.k})}catch(er){console.error(er)}finally{snapAt=sa;p.lv=l0}setTimeout(()=>{try{winRender()}catch(_){}},30)},true);
  sv.addEventListener('pointermove',e=>{if(!(typeof MOD!=='undefined'&&MOD)||(MOD.t!=='di'&&MOD.t!=='me'))return;const pt=r7SvPt(sv,e);if(pt)vdElHover(sv,W(),pt)})}
 /* ---------- Profile (หน้ารายละเอียดคาน) ---------- */
-function r7PM(){const D=M.D,top=i=>D.zb[i]+secOf(D,i).h,zmax=Math.max(...D.zb.map((_,i)=>top(i))),zmin=Math.min(...D.zb),sy=Math.min(0.2,96/Math.max(1,zmax-zmin));
+function r7PM(){const D=M.D,top=i=>D.zb[i]+secOf(D,i).h,zmax=Math.max(...D.zb.map((_,i)=>top(i))),zmin=Math.min(...D.zb),sy=(M2&&M2.sy)||Math.min(0.2,96/Math.max(1,zmax-zmin));
  return{f:p=>({x:M2.mx+(p.x-M2.lo)*M2.sx,y:64+(zmax-p.y)*sy}),inv:p=>({x:(p.x-M2.mx)/M2.sx+M2.lo,y:zmax-(p.y-64)/sy}),top}}
 function r7ProfBeam(){const b=B();if(!b||!b.link||b.linkBad||b.grp||b.pin)return null;const s=r7Seg(b);if(!s)return null;const L=Math.hypot(s.z.x-s.a.x,s.z.y-s.a.y)||1;return{b,s,ux:(s.z.x-s.a.x)/L,uy:(s.z.y-s.a.y)/L,L}}
 function r7ProfGrips(){if(TOOL!=='sel'||!M||!M2)return'';const o=r7ProfBeam();if(!o)return'';const g=M.g,D=M.D,pm=r7PM(),n=D.spans.length,y0=pm.f({x:0,y:D.zb[0]+secOf(D,0).h/2}).y,y1=pm.f({x:0,y:D.zb[n-1]+secOf(D,n-1).h/2}).y;
@@ -4549,8 +4555,9 @@ let R7F=null;
  sv.addEventListener('pointerdown',e=>{if(e.button!==0||TOOL!=='sel'||!M2)return;const gr=e.target.closest('#r7pgr [data-pgr]'),sp=e.target.closest('[data-s]');if(!gr&&!sp)return;if(e.target.closest('[data-h],[data-xh],[data-lh],[data-cut],[data-endz],[data-vd]'))return;const o=r7ProfBeam();if(!o)return;
   if(gr){e.stopPropagation();e.preventDefault()}R7F={k:gr?'grip':'mv',end:gr?gr.dataset.pgr:null,o,x0:e.clientX,y0:e.clientY,mv:false,px:r7PM().inv(svgPt(sv,e)).x};try{sv.setPointerCapture(e.pointerId)}catch(_){}},true);
  sv.addEventListener('pointermove',e=>{if(!R7F)return;if(!R7F.mv&&Math.hypot(e.clientX-R7F.x0,e.clientY-R7F.y0)<5)return;R7F.mv=true;e.stopPropagation();const pm=r7PM(),pt=svgPt(sv,e),x=pm.inv(pt).x,o=R7F.o,g=M.g,n=M.D.spans.length;
-  const pl=xx=>({x:o.s.a.x+o.ux*xx,y:o.s.a.y+o.uy*xx}),tol=(+MSE().ap||12)/Math.max(1e-6,M2.sx);let xx=R7F.k==='grip'?x:g.X[0]+(x-R7F.px);const q=r7SnapLv(pl(R7F.k==='grip'?x:x),o.b.link.lv,tol);let sn='';
-  if(q.k!=='raw'){const t=(q.x-o.s.a.x)*o.ux+(q.y-o.s.a.y)*o.uy;if(R7F.k==='grip')xx=t;else xx=g.X[0]+(t-R7F.px);sn=(typeof SNL!=='undefined'&&SNL[q.k])||q.k}else if(!e.shiftKey)xx=Math.round(xx/10)*10;R7F.x=xx;
+  const pl=xx=>({x:o.s.a.x+o.ux*xx,y:o.s.a.y+o.uy*xx}),tol=(+MSE().ap||12)/Math.max(1e-6,M2.sx);let xx=R7F.k==='grip'?x:g.X[0]+(x-R7F.px);let q=r7SnapLv(pl(R7F.k==='grip'?x:x),o.b.link.lv,tol);let sn='';
+  if(R7F.k==='grip'&&!e.ctrlKey){const ax=r8Ax(o.b,R7F.end);if(ax){const rr=axSnap(ax.a,ax.u,pl(x),tol,o.b.link.lv,S.beams.indexOf(o.b));xx=R7F.end==='z'?rr.t:o.L-rr.t;sn=rr.k!=='raw'?((typeof SNL!=='undefined'&&SNL[rr.k])||rr.k):'';q={k:'skip'}}}
+  if(q.k==='skip'){}else if(q.k!=='raw'){const t=(q.x-o.s.a.x)*o.ux+(q.y-o.s.a.y)*o.uy;if(R7F.k==='grip')xx=t;else xx=g.X[0]+(t-R7F.px);sn=(typeof SNL!=='undefined'&&SNL[q.k])||q.k}else if(!e.shiftKey)xx=Math.round(xx/10)*10;R7F.x=xx;
   let gl=sv.querySelector('#r7pp');if(!gl){sv.insertAdjacentHTML('beforeend','<g id="r7pp" pointer-events="none"></g>');gl=sv.querySelector('#r7pp')}const C='#4FC3F7',yy=pt.y;
   if(R7F.k==='grip'){const ox=R7F.end==='a'?g.X[n]:g.X[0],a=pm.f({x:ox,y:0}).x,b=pm.f({x:xx,y:0}).x;gl.innerHTML=`<line x1="${a}" y1="${yy}" x2="${b}" y2="${yy}" stroke="${C}" stroke-width="2"/><line x1="${b}" y1="${yy-40}" x2="${b}" y2="${yy+40}" stroke="${C}"/><text x="${(a+b)/2}" y="${yy-8}" fill="${C}" font-size="12" text-anchor="middle" paint-order="stroke" stroke="#0E0F12" stroke-width="3">${(Math.abs(xx-ox)/1000).toFixed(2)} ม.${sn?' · '+sn:''}</text>`}
   else{const d=xx-g.X[0],a=pm.f({x:g.xl+d,y:0}).x,b=pm.f({x:g.xr+d,y:0}).x;gl.innerHTML=`<rect x="${Math.min(a,b)}" y="${yy-14}" width="${Math.abs(b-a)}" height="28" fill="${C}" fill-opacity=".15" stroke="${C}" stroke-dasharray="4 3"/><text x="${(a+b)/2}" y="${yy-18}" fill="${C}" font-size="12" text-anchor="middle" paint-order="stroke" stroke="#0E0F12" stroke-width="3">ย้าย ${(d/1000).toFixed(2)} ม.${sn?' · '+sn:''}</text>`}},true);
@@ -4739,6 +4746,90 @@ function dkZone(z,R,orc){let el=document.getElementById('dkZ');if(!z){if(el)el.r
 window.addEventListener('resize',()=>{clearTimeout(dkApply.t);dkApply.t=setTimeout(()=>{try{const etb=document.querySelector('#v-plan .etb');if(!etb)return;if(!DKON())dkOff(etb);else if(!etb.classList.contains('dk'))dkApply(true)}catch(_){}},150)});
 function dkVis(){try{document.body.classList.toggle('dkoff',!isV('plan'))}catch(_){}}
 window.addEventListener('hashchange',dkVis);setTimeout(dkVis,0);
+
+/* ===== รอบ 8: Bar Cut เลื่อนจอ · Snap แบบ ETABS · ยืด/หดตามแนวคาน · Profile ซูม/สเกล · ตัวเลือกแสดงระยะทาบ ===== */
+/* ---------- 1. Bar Cut ---------- */
+function r8ScrollRes(){const el=$('#bcRes');if(!el)return;const c=el.closest('.bcr');if(c&&c.scrollHeight>c.clientHeight+2&&getComputedStyle(c).overflowY!=='visible'){c.scrollTo({top:0,behavior:'smooth'})}
+ else{const h=document.documentElement;if(getComputedStyle(h).overflowY!=='hidden')window.scrollTo({top:el.getBoundingClientRect().top+scrollY-70,behavior:'smooth'})}}
+window.addEventListener('scroll',()=>{const h=document.documentElement;if(scrollY>0&&getComputedStyle(h).overflowY==='hidden')window.scrollTo(0,0)});
+document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#bcRunTop')){const b=$('#bcRun');if(b)b.click()}});
+{const _rc=renderCutCfg;renderCutCfg=function(){const r=_rc.apply(this,arguments);const b=$('#bcRunTop');if(b){b.textContent=BCBUSY?'กำลังคำนวณ…':'▶ คำนวณการตัด';b.disabled=!!BCBUSY}return r}}
+/* ---------- 2. Snap แบบ ETABS (ปุ่มแยกในแถบสถานะ) ---------- */
+const SNB=[['ix','จุดตัด','จุดตัดกริด / กริดช่วย'],['near','กริด','บนเส้นกริดไลน์ (ตลอดเส้น)'],['col','ศูนย์เสา','ศูนย์กลางเสา'],['colc','มุมเสา','มุมเสา'],['cf','หน้าเสา','ขอบ/หน้าเสา'],['cl','กลางคาน','แนวกึ่งกลางคาน'],['edge','ขอบคาน','ขอบคาน 2 ข้าง'],['end','ปลาย','ปลายคาน'],['mid','กึ่งกลาง','กึ่งกลางความยาวคาน'],['perp','ตั้งฉาก','ตั้งฉาก (Perpendicular)']];
+{const m0=SNMOD();if(m0.cf===undefined)m0.cf=true}
+SNM.length=0;SNB.forEach(([k,,t])=>SNM.push([k,t]));SNL.cf='หน้าเสา';SNL.on='กริด';
+function snStrip(){const m=SNMOD(),os=SNP().os,all=SNB.every(([k])=>m[k]);return`<span class="snm${os?'':' off'}" title="Snap แบบ ETABS · คลิกเปิด/ปิดทีละแบบ · ติ๊กหลายแบบ = snap ทุกแบบที่เปิด">${SNB.map(([k,t,d])=>`<button class="stk${m[k]?' on':''}" data-snt="${k}" title="${d}">${t}</button>`).join('')}<button class="stk${all?' on':''}" data-snt="*" title="เปิด/ปิดทั้งหมด">ทั้งหมด</button></span>`}
+function snStripSync(){document.querySelectorAll('.snm').forEach(s=>{const n=document.createElement('span');n.innerHTML=snStrip();s.replaceWith(n.firstChild)})}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-snt]');if(!b)return;const m=SNMOD(),k=b.dataset.snt;if(k==='*'){const on=!SNB.every(([q])=>m[q]);SNB.forEach(([q])=>m[q]=on)}else m[k]=!m[k];if(!SNP().os&&k!=='*'&&m[k]){SNP().os=true}save();snStripSync();try{renderStatus()}catch(_){}document.querySelectorAll('[data-snm]').forEach(c=>c.checked=!!m[c.dataset.snm])});
+{const _rs=renderStatus;renderStatus=function(){const r=_rs.apply(this,arguments);try{const el=$('#stBar');if(el){const o=el.querySelector('.snm');if(o)o.remove();const sb=el.querySelector('.snb');if(sb)sb.insertAdjacentHTML('afterend',snStrip());else el.insertAdjacentHTML('beforeend',snStrip())}r8BeamStatus()}catch(e){}return r}}
+function r8BeamStatus(){const el=$('#status');if(!el||!M||!isV('beam'))return;const D=M.D,g=M.g,ref=g.X[Math.max(0,D.grids.findIndex(x=>!x.free))],s=SNP();
+ el.innerHTML=`<span>เครื่องมือ: <b>${{sel:'เลือก',cut:'ตัดหน้าตัด',dim:'เส้นบอกระยะ',me:'วัดระยะ'}[TOOL]||TOOL}</b></span><span>ตัดที่ ${CUT.x!=null?m2(CUT.x-ref)+' ม.':'—'}</span><span class="snb">${[['orth','ORTHO'],['os','OSNAP']].map(([k,t])=>`<button class="stk${s[k]?' on':''}" data-snp="${k}">${t}</button>`).join('')}</span>${snStrip()}<span>${esc(D.id)} · ${D.spans.length} ช่วง</span><span class="${M.W.length?'bad':'ok'}" style="margin-left:auto">${M.W.length?'คำเตือน '+M.W.length:'ผ่านเกณฑ์'}</span>`}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#status [data-snp]');if(b){snToggle(b.dataset.snp);r8BeamStatus()}});
+/* หน้าเสา (cf) เพิ่มใน snapAt */
+{const _sa=snapAt;snapAt=function(q,tol){const r=_sa.apply(this,arguments);try{const m=SNMOD();if(!m.cf||!SNP().os||!(r.k==='raw'||r.k==='on'||r.k==='cl'))return r;const T=snapTolW(tol);let best=null,bd=r.k==='raw'?T:Math.min(T,Math.hypot(r.x-q.x,r.y-q.y)+1e-6);
+ allCols(P().lv).forEach(c=>{const d=c.d||{};if(d.round)return;const hx=(d.bx||200)/2,hy=(d.by||200)/2,sg=[[[-hx,-hy],[hx,-hy]],[[hx,-hy],[hx,hy]],[[hx,hy],[-hx,hy]],[[-hx,hy],[-hx,-hy]]];sg.forEach(([p,q2])=>{const p1={x:c.x+p[0],y:c.y+p[1]},p2={x:c.x+q2[0],y:c.y+q2[1]},pr=segProj({a:p1,z:p2},q);if(pr.d<bd){bd=pr.d;best={x:pr.x,y:pr.y,k:'cf'}}})});return best||r}catch(e){return r}}}
+/* ยืด/หดตามแนวแกนคาน: หยุดที่จุดตัดกับกริด · แนว/ขอบคาน · หน้า/ศูนย์เสา */
+function axSnap(a,u,q,tol,lv,bi){const m=SNMOD(),tc=(q.x-a.x)*u.x+(q.y-a.y)*u.y,P0=t=>({x:a.x+u.x*t,y:a.y+u.y*t});if(!SNP().os){const t=Math.round(tc/10)*10;return Object.assign(P0(t),{k:'raw',t})}
+ let best=null,bd=tol;const cand=(t,k)=>{if(!isFinite(t)||t<150)return;const d=Math.abs(t-tc);if(d<bd){bd=d;best={t,k}}};
+ const X2=(p1,p2,k,seg)=>{const dx=p2.x-p1.x,dy=p2.y-p1.y,den=u.x*dy-u.y*dx;if(Math.abs(den)<1e-9)return;const wx=p1.x-a.x,wy=p1.y-a.y,t=(wx*dy-wy*dx)/den,s=(wx*u.y-wy*u.x)/den;if(seg&&(s<-0.02||s>1.02))return;cand(t,k)};
+ if(m.near||m.ix){const e=planExt();e.X.forEach(x=>X2({x,y:0},{x,y:1},'on'));e.Y.forEach(y=>X2({x:0,y},{x:1,y},'on'));try{AG().filter(g=>g.lv===lv&&g.k!=='arc').forEach(g=>{const G=agGeom(g);X2({x:G.x1,y:G.y1},{x:G.x2,y:G.y2},'on')})}catch(_){}}
+ beamGeoms(lv).forEach(g=>{if(g.bi===bi)return;if(m.cl)X2(g.a,g.z,'cl',true);if(m.edge)[1,-1].forEach(sg=>{const o={x:g.nl[0]*g.w*sg,y:g.nl[1]*g.w*sg};X2({x:g.a.x+o.x,y:g.a.y+o.y},{x:g.z.x+o.x,y:g.z.y+o.y},'edge',true)});
+  if(m.end)[g.a,g.z].forEach(p=>{const dd=Math.abs((p.x-a.x)*u.y-(p.y-a.y)*u.x);if(dd<tol)cand((p.x-a.x)*u.x+(p.y-a.y)*u.y,'end')})});
+ allCols(lv).forEach(c=>{const d=c.d||{},hx=(d.round?d.bx:(d.bx||200))/2,hy=(d.round?d.bx:(d.by||200))/2,pd=Math.abs((c.x-a.x)*u.y-(c.y-a.y)*u.x);if(m.col&&pd<Math.max(hx,hy)+tol)cand((c.x-a.x)*u.x+(c.y-a.y)*u.y,'col');
+  if(m.cf&&!d.round)[[[-hx,-hy],[hx,-hy]],[[hx,-hy],[hx,hy]],[[hx,hy],[-hx,hy]],[[-hx,hy],[-hx,-hy]]].forEach(([p,q2])=>X2({x:c.x+p[0],y:c.y+p[1]},{x:c.x+q2[0],y:c.y+q2[1]},'cf',true))});
+ if(best)return Object.assign(P0(best.t),{k:best.k,t:best.t});const t=Math.round(tc/10)*10;return Object.assign(P0(t),{k:'raw',t})}
+function r8Ax(bm,end){const s=r7Seg(bm);if(!s)return null;const a=end==='a'?s.z:s.a,b=end==='a'?s.a:s.z,L=Math.hypot(b.x-a.x,b.y-a.y)||1;return{a,u:{x:(b.x-a.x)/L,y:(b.y-a.y)/L}}}
+/* ---------- 3. Profile: ซูม · เลื่อน · สเกล · แนวดิ่งจริง/ขยาย ---------- */
+let PV2=null;
+const r8Sy=(sx,zmax,zmin)=>DRF().pTrue?sx:Math.min(0.2,96/Math.max(1,zmax-zmin));
+function r8ApplyVB(){const el=$('#v2');if(!el||!M2||!M2.W)return;el.style.minWidth='0';if(!PV2||PV2.bid!==M.D.id){el.setAttribute('viewBox',`0 0 ${M2.W} ${M2.H}`);return}const w=M2.W/PV2.z,h=M2.H/PV2.z;el.setAttribute('viewBox',`${PV2.cx*M2.W-w/2} ${PV2.cy*M2.H-h/2} ${w} ${h}`)}
+{const _r2=render2D;render2D=function(){const r=_r2.apply(this,arguments);try{r8ApplyVB();r8VB()}catch(e){console.error(e)}return r}}
+function r8Zoom(f,px,py){if(!M2)return;const el=$('#v2'),vb=el.getAttribute('viewBox').split(/\s+/).map(Number),z0=PV2&&PV2.bid===M.D.id?PV2.z:1,z=Math.max(1,Math.min(40,z0*f));
+ const fx=px==null?0.5:px,fy=py==null?0.5:py,mx=vb[0]+vb[2]*fx,my=vb[1]+vb[3]*fy,w=M2.W/z,h=M2.H/z,x=mx-w*fx,y=my-h*fy;PV2=z<=1.0001?null:{bid:M.D.id,z,cx:(x+w/2)/M2.W,cy:(y+h/2)/M2.H};r8ApplyVB();r8VBsync()}
+function r8Scale(S0){const el=$('#v2');if(!el||!M2)return;if(!S0){PV2=null;r8ApplyVB();r8VBsync();return}const cw=el.clientWidth||800,pxmm=3.78/S0,vbW=M2.sx*cw/pxmm,z=Math.max(1,M2.W/vbW),vb=el.getAttribute('viewBox').split(/\s+/).map(Number);
+ PV2={bid:M.D.id,z,cx:(vb[0]+vb[2]/2)/M2.W,cy:(vb[1]+vb[3]/2)/M2.H};r8ApplyVB();r8VBsync()}
+function r8CurScale(){const el=$('#v2');if(!el||!M2)return 0;const vb=el.getAttribute('viewBox').split(/\s+/).map(Number),px=M2.sx*(el.clientWidth||1)/vb[2];return 3.78/px}
+{const sv=$('#v2');
+ sv.addEventListener('wheel',e=>{if(!M2)return;e.preventDefault();const R=sv.getBoundingClientRect();r8Zoom(1/MZF(e.deltaY),(e.clientX-R.left)/R.width,(e.clientY-R.top)/R.height)},{passive:false});
+ let pn=null;const T=new Map();let pin=null;
+ sv.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'){T.set(e.pointerId,[e.clientX,e.clientY]);if(T.size===2){const[a,b]=[...T.values()];pin={d:Math.hypot(a[0]-b[0],a[1]-b[1])}}return}
+  const empty=e.button===0&&TOOL==='sel'&&(e.target===sv||e.target.closest('#r7pv')||(e.target.tagName==='rect'&&!e.target.closest('[data-s],[data-g],[data-k],[data-h],[data-vd],[data-pgr],[data-xh],[data-lh],[data-cut],[data-endz]')&&!e.target.getAttribute('data-ly')));
+  if(e.button===1||empty){e.preventDefault();pn={x:e.clientX,y:e.clientY,vb:sv.getAttribute('viewBox').split(/\s+/).map(Number),mv:false,mid:e.button===1};try{sv.setPointerCapture(e.pointerId)}catch(_){}}},true);
+ sv.addEventListener('pointermove',e=>{if(e.pointerType==='touch'&&T.has(e.pointerId)){T.set(e.pointerId,[e.clientX,e.clientY]);if(T.size===2&&pin){const[a,b]=[...T.values()],d=Math.hypot(a[0]-b[0],a[1]-b[1]);r8Zoom(d/pin.d);pin={d};e.preventDefault()}return}
+  if(!pn)return;const dx=e.clientX-pn.x,dy=e.clientY-pn.y;if(!pn.mv&&Math.hypot(dx,dy)<4)return;pn.mv=true;e.stopPropagation();const R=sv.getBoundingClientRect(),k=Math.max(pn.vb[2]/R.width,pn.vb[3]/R.height),x=pn.vb[0]-dx*k,y=pn.vb[1]-dy*k;
+  const z=M2.W/pn.vb[2];PV2={bid:M.D.id,z:Math.max(1.0001,z),cx:(x+pn.vb[2]/2)/M2.W,cy:(y+pn.vb[3]/2)/M2.H};sv.setAttribute('viewBox',`${x} ${y} ${pn.vb[2]} ${pn.vb[3]}`)},true);
+ const up=e=>{if(e.pointerType==='touch'){T.delete(e.pointerId);if(T.size<2)pin=null}if(pn){if(pn.mv)DRAGGED=Date.now();pn=null}};sv.addEventListener('pointerup',up,true);sv.addEventListener('pointercancel',up,true);
+ sv.addEventListener('dblclick',e=>{if(e.target===sv||e.button===1){PV2=null;r8ApplyVB();r8VBsync()}})}
+const R8SC=[[0,'พอดีจอ'],[10,'1:10'],[20,'1:20'],[25,'1:25'],[50,'1:50'],[75,'1:75'],[100,'1:100'],[200,'1:200']];
+function r8VBHTML(){const D=DRF(),cs=r8CurScale(),near=R8SC.find(([s])=>s&&Math.abs(s-cs)/s<0.04);return`<span class="r8vb"><span class="sep"></span><button class="pbtn" data-r8="fit" title="พอดีจอ (ZE) · ดับเบิลคลิกที่ว่าง">⤢</button><button class="pbtn" data-r8="zin" title="ซูมเข้า (ล้อเมาส์)">＋</button><button class="pbtn" data-r8="zout" title="ซูมออก">－</button>
+ <select class="pbtn" data-r8s="1" title="มาตราส่วนบนจอ">${R8SC.map(([s,t])=>`<option value="${s}"${(PV2?(near&&near[0]===s):s===0)?' selected':''}>${t}</option>`).join('')}${PV2&&!near?`<option selected>1:${Math.round(cs)}</option>`:''}</select>
+ <select class="pbtn" data-r8v="1" title="สัดส่วนแนวดิ่ง"><option value="0"${D.pTrue?'':' selected'}>แนวดิ่ง: ขยายพอดีจอ</option><option value="1"${D.pTrue?' selected':''}>แนวดิ่ง: สเกลจริง</option></select>
+ <button class="pbtn${D.thin?' on':''}" data-r8="thin" title="เส้นบาง (Thin Lines)">เส้นบาง</button><button class="pbtn" data-r8="lap" title="ตั้งค่าการแสดงระยะทาบ (Detail / PDF)">ทาบ…</button></span>`}
+function r8VB(){const el=$('#drT');if(!el)return;const o=el.querySelector('.r8vb');if(o)o.remove();el.insertAdjacentHTML('beforeend',r8VBHTML())}
+function r8VBsync(){try{r8VB()}catch(_){}}
+{const _rd=renderDrT;renderDrT=function(){const r=_rd.apply(this,arguments);try{r8VB()}catch(_){}return r}}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-r8]');if(!b)return;const k=b.dataset.r8;
+ if(k==='fit'){PV2=null;r8ApplyVB();r8VBsync()}else if(k==='zin')r8Zoom(1.25);else if(k==='zout')r8Zoom(0.8);
+ else if(k==='thin'){const d=DRF();d.thin=!d.thin;save();try{thinSync()}catch(_){}render2D();toast(d.thin?'เส้นบาง':'เส้นหนาตามเลเยอร์')}else if(k==='lap')r8LapPop(b)});
+document.addEventListener('change',e=>{const t=e.target;if(t.dataset&&t.dataset.r8s){const v=+t.value;r8Scale(v||0)}else if(t.dataset&&t.dataset.r8v){DRF().pTrue=t.value==='1';PV2=null;save();render2D()}});
+/* ---------- 4. แสดงระยะทาบ: เลือกได้แยก Detail / PDF ---------- */
+const LSK=[['len','ความยาวทาบ (ทาบ 0.66 ม.)'],['xd','จำนวนเท่า d (41d)'],['pos','ตำแหน่งเริ่มทาบ จากกริด (@ 3.45)'],['zone','แถบโซนทาบ / โซนห้ามทาบ'],['top','เหล็กบน'],['bot','เหล็กล่าง']];
+function LSH(){const d=DRF();if(!d.lapShow)d.lapShow={det:{len:true,xd:true,pos:false,zone:d.dimRows&&d.dimRows.lz!==false,top:true,bot:true},pdf:{len:true,xd:true,pos:false,zone:false,top:true,bot:true}};return d.lapShow}
+function r8LapPop(anchor){let m=$('#r8Lap');if(m){m.remove();return}const L=LSH();m=document.createElement('div');m.id='r8Lap';m.className='svpop';m.style.width='330px';
+ m.innerHTML=`<b>แสดงระยะทาบ</b><table style="width:100%;margin-top:6px;border-collapse:collapse"><tr><th style="text-align:left;font-weight:400;color:var(--mu)">รายการ</th><th style="font-weight:400;color:var(--mu)">Detail</th><th style="font-weight:400;color:var(--mu)">PDF</th></tr>${LSK.map(([k,t])=>`<tr><td style="padding:3px 0">${t}</td><td style="text-align:center"><input type="checkbox" data-lsh="det:${k}"${L.det[k]?' checked':''}></td><td style="text-align:center"><input type="checkbox" data-lsh="pdf:${k}"${L.pdf[k]?' checked':''}></td></tr>`).join('')}</table>
+ <div class="note" style="margin-top:6px">ปุ่ม "ระยะทาบ" บนแถบยังเปิด/ปิดทั้งหมดได้ · ตำแหน่งวัดจากกริดแรกของคาน</div><div class="chips" style="margin-top:6px"><button class="chip" data-lshx="1">ปิด</button></div>`;
+ document.body.appendChild(m);const r=anchor.getBoundingClientRect();m.style.left=Math.max(6,Math.min(innerWidth-340,r.left-150))+'px';m.style.top=(r.bottom+6)+'px'}
+document.addEventListener('change',e=>{const k=e.target.dataset&&e.target.dataset.lsh;if(!k)return;const[c,f]=k.split(':'),L=LSH();L[c][f]=e.target.checked;if(c==='det'&&f==='zone'){const R=DRF().dimRows;R.lz=e.target.checked;try{renderDrT()}catch(_){}}save();try{render2D()}catch(_){}try{if(S.tab==='sheet')renderOut()}catch(_){}});
+document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('[data-lshx]')){const m=$('#r8Lap');if(m)m.remove()}else if(!(e.target.closest&&e.target.closest('#r8Lap,[data-r8="lap"]'))){const m=$('#r8Lap');if(m)m.remove()}});
+lapSVG=function(m,X,Y,o){o=o||{};const R=DRF().dimRows;if(R.splice===false)return'';const ctx=o.ctx||(o.halo==='#fff'?'pdf':'det'),C=LSH()[ctx];let s='';const okC=o.ok||'#1E88E5',bad=o.bad||'#E8963A',fs=o.fs||12;
+ const zoneOn=ctx==='det'?R.lz!==false&&C.zone!==false:!!C.zone;
+ if(zoneOn){const D=m.D,g=m.g,zT=Math.max(...D.zb.map((z,i)=>z+secOf(D,i).h)),zB=Math.min(...D.zb),band=(Z,y,c)=>Z.forEach(([a,b])=>{s+=`<rect x="${X(a)}" y="${y}" width="${Math.max(0,X(b)-X(a))}" height="${o.bh||5}" fill="${c}" fill-opacity="0.35" pointer-events="none"/>`});
+  try{if(C.top)band(lapZones(D,g,true),Y(zT)-(o.bo||16),o.zc||'#43A047');if(C.bot)band(lapZones(D,g,false),Y(zB)+(o.bo2||11),o.zc||'#43A047')}catch(e){}}
+ const g=m.g,D=m.D,ref=g.X[Math.max(0,D.grids.findIndex(x=>!x.free))];const LV={t:[],b:[]},parts=L=>{const a=[];if(C.len)a.push('ทาบ '+m2(L.len));else if(C.xd||C.pos)a.push('ทาบ');if(C.xd&&!o.noD)a.push('('+Math.round(L.len/L.d)+'d)');if(C.pos)a.push('@'+m2(L.x0-ref));return a.join(' ')};
+ const tw=fs*(4+(C.len?3:0)+(C.xd?2.5:0)+(C.pos?3:0));
+ lapList(m).sort((p,q)=>p.x0-q.x0).forEach(L=>{if(L.z==null||(L.top&&!C.top)||(!L.top&&!C.bot))return;const c=L.ok?okC:bad,a=X(L.x0),b=X(L.x1),y=Y(L.z),dy=L.top?-1:1,ar=LV[L.top?'t':'b'],xm=(a+b)/2;let lv=0;while(ar[lv]!=null&&ar[lv]>xm-tw/2)lv++;ar[lv]=xm+tw/2;const yy=y+dy*(o.off||7)+dy*lv*(o.step||fs*1.25),t=parts(L);
+  s+=`<g pointer-events="none"><path d="M${a} ${y}V${yy}H${b}V${y}" fill="none" stroke="${c}" stroke-width="${o.lw||1.3}"/>${t||!L.ok?`<text x="${(a+b)/2}" y="${yy+dy*(fs*0.35)+(dy>0?fs*0.75:0)}" fill="${c}" font-size="${fs}" text-anchor="middle"${o.halo?` paint-order="stroke" stroke="${o.halo}" stroke-width="3"`:''}>${esc(t)}${L.ok?'':' ⚠'}</text>`:''}</g>`});
+ return s};
 
 function renderPlan(){P();syncAll();try{etbUI();modBarInit()}catch(e){console.error(e)}winBind();winRender();renderMenu();renderStatus();stBindXY();{const g=$('#winGrid');if(g)g.classList.toggle('lightv',DSP().view2d==='light')}try{kTips()}catch(e){}}
 function planChanged(full){syncAll();save();if(full)renderPlanPanel();drawPlan()}
